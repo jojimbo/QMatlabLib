@@ -1,0 +1,92 @@
+Description:
+As an STS user,
+I want given a dataset of FX implied vol data, the system should load the FX implied vol data to value FX implied vol sensitive instruments in STS. The name of the data file is: fx_implied_volatilityYYYYMMDD.csv
+
+Criteria:
+Given that I want to be able to calculate the value of FX vol sensitive instruments in STS,
+When STS can load FX implied vol data,
+Then I am able to calculate the value of FX implied vol sensitive instruments in STS. The data is in the standard ALGO fomat available on the sharepoint site and should be tested with a flexible number of currencies, tenors and option maturities and tested for at least 2 data sets. The system should create a warning if the loaded data is negative. The data per currency is 2 dimensional. The system should read the header files so that the system is not impacted by changes in the columns of the data files. 
+
+Test plan:
+For:
+-fx_implied_volatility20111230.csv
+-fx_implied_volatility20120629.csv
+
+Expected results:
+The system should successfully load these sets without any error.
+
+For:
+-fx_implied_volatility20111230_flexNrCurr.csv
+the following currencies are removed:EUR/ZEU_Volatility_Surface and EUR/UVR_Volatility_Surface
+
+-fx_implied_volatility20120629_flexNrCurr.csv
+A new currency has been added:EUR/CR1_Volatility_Surface
+
+Expected results:
+The system should successfully load the data according to the specifications, without any error.
+
+For:
+-fx_implied_volatility20111230_flexNrTenorOptionMaturities.csv
+for EUR/ZEU_Volatility_Surface: 9 rows are added with tenor 0.5.
+for EUR/UVR_Volatility_Surface: the following are added under tenor 0.8 between maturities 365 and 1095:
+0.8	366	0.153203306
+0.8	401	0.154438168
+0.8	405	0.155051912
+0.8	499	0.155418995
+0.8	500	0.155663235
+0.8	555	0.155837459
+0.8	666	0.155967999
+0.8	700	0.153203306
+-fx_implied_volatility20120629_flexNrTenorOptionMaturities.csv
+for EUR/AUD_Volatility_Surface: all tenors of 0.8 are removed and for tenor 1.2 all rows are removed except maturity 90.
+
+Expected results:
+Both sets should run without any error, the loading should be according to the above specification.
+
+For:
+-fx_implied_volatility20110629_negativeValues.csv
+row 1250 has a negative maturity
+and row 2508 has a negative index
+-fx_implied_volatility20120629_negativeValues.csv
+row 1096 has a negative tenor
+
+Expected results:
+For both run, it is expected that the system outputs a warning about the negative values.
+
+For:
+-fx_implied_volatility20111230_headerChanged.csv
+-IDEAL_header_headerChanged.csv
+
+Changes are:
+
+For Volatility - Moneyness/TermSPEC:
+CurveFUNC:C
+StateProcFUNC:D	
+GnVolMnyTrmSfFLAG:E	
+GnVolMTSfExt1FLAG:F	
+GnVolMTSfExt0FLAG:G	
+GnVolMnyTrmSf0SIN:H	
+GnVolMnyTrmSf1SIN:I	
+TimeEvolutionFUNC:J	
+CurveUnitUNIT:K
+CurveUnitPERD:L
+CurveUnitDAYC:M
+RelativeCurveFLAG:N	
+DatumDATE:O
+IDENTIFIER:P	
+NAME:Q
+TYPE:R
+OBJECT:S
+
+For Volatility - Moneyness/TermSPEC : Generic Volatility Moneyness Term Surface:
+GnVolMnyTrmSfNODE:C	
+GnVolMnyTrmSf1AXS:D	
+GnVolMnyTrmSf0AXS:E	
+OBJECT:F
+ATTRIBUTE:G
+
+Expected results:
+Load according to the specification above.
+
+
+

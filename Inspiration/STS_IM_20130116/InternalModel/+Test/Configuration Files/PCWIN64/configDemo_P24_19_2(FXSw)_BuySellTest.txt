@@ -1,0 +1,36 @@
+%% ConfigDemo
+% Configuration File  
+
+% Input Files 
+headerFile           = \MasterInputFiles\data_STS_testCases\IDEAL_header.csv
+portFile             = \MasterInputFiles\Portfolio Files\P24_19_2(FXSw)\portfolio.xml
+
+corrMatFile          = \MasterInputFiles\data_STS_testCases\corr_matrix.csv
+riskTypeFile         = \MasterInputFiles\data_STS_testCases\mapping_RT.csv
+baseEntityFile       = \MasterInputFiles\data_STS_testCases\mapping_BE.csv
+instFile             = \MasterInputFiles\data_STS_testCases\Instrument Files\P24_19_2(FXSw)\instruments_buy_sell_test.csv
+scenFile             = \MasterInputFiles\data_STS_testCases\MC_SHRD_MKT.csv
+pcaFile              = \MasterInputFiles\data_STS_testCases\matrix_parameter_curve.csv
+irCurveFile          = \MasterInputFiles\data_STS_testCases\ir_swap_zero_curve.csv
+forexFile            = \MasterInputFiles\data_STS_testCases\fx_foreign_exchange.csv
+fxImpVolData	     = \MasterInputFiles\data_STS_testCases\fx_implied_volatility.csv
+creditSpreadFile     = \MasterInputFiles\data_STS_testCases\ir_credit_spread.csv
+eqIndFile            = \MasterInputFiles\data_STS_testCases\equity_imp_vol_surface.csv
+equityReFile 	     = \MasterInputFiles\data_STS_testCases\equity_real_estate_index_curve.csv
+swaptionImpVolFile   = \MasterInputFiles\data_STS_testCases\swaption_implied_volatility.csv
+
+bfVolVolFile         = \MasterInputFiles\data_STS_testCases\BF_vol_vol_factor.csv
+eqVolVolFile         = \MasterInputFiles\data_STS_testCases\EQ_vol_vol_factor.csv
+reVolVolFile         = \MasterInputFiles\data_STS_testCases\RE_vol_vol_factor.csv
+irVolVolFile         = \MasterInputFiles\data_STS_testCases\IR_vol_vol_factor.csv
+fxVolVolFile         = \MasterInputFiles\data_STS_testCases\FX_vol_vol_factor.csv
+volatilityCapFile    = \MasterInputFiles\data_STS_testCases\volatility_cap.csv
+% Output File
+outputFile           = E:\MasterInputFilesIM\STSOutput\OutputP24-19-2_BuySellTest\ReportP24-19-2.csv
+
+% Confidence Level
+confidenceLvl        = 0.90
+valuationDate        = 2012/12/31
+
+% Reporting Currency
+reportingCurrency    = EUR

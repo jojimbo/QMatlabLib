@@ -1,0 +1,80 @@
+Description:
+As a STS user,
+I want given a dataset of equity indices, the system should load the equity data to value equity sensitive instruments in STS. The name of the data file is: equity_real_estate_index_curveYYYYMMDD.csv
+
+Criteria:
+Given that I want to be able to calculate the value of equity sensitive instruments in STS,
+When STS can load equity data,
+Then I am able to calculate the value of equity sensitive instruments in STS. The data is in the standard ALGO fomat available on the sharepoint site and should be tested with a flexible number of indices in different currencies and tested for at least 2 data sets. The system should create a warning if the loaded equity data is negative. The system should store the currency of the equity index, because this is used in the system. The system should read the header files so that the system is not impacted by changes in the columns of the data files.
+
+Test plan:
+
+For:
+-equity_real_estate_index_curve20111230.csv
+-equity_real_estate_index_curve20120629.csv
+
+Expected results:
+These are the base input files, it is expected that these data is loaded correctly and successfully.
+
+For:
+-equity_real_estate_index_curve20111230_flexNrOfIndicesAndCurr.csv
+the following indices with currencies are removed:
+.BETI-Index Curve	.BETI-Index Curve	RON
+0	0	4336.95
+.BSESN-Index Curve	.BSESN-Index Curve	INR
+0	0	15454.92
+.BUX-Index Curve	.BUX-Index Curve	HUF
+0	0	16974.24
+.BVSP-Index Curve	.BVSP-Index Curve	BRL
+0	0	56754.08
+.CEMU=USD-Index Curve	.CEMU=USD-Index Curve	USD
+0	0	134.155
+.CIEU-Index Curve	.CIEU-Index Curve	EUR
+
+-equity_real_estate_index_curve20120629_flexNrOfIndicesAndCurr.csv
+The following indices have been added:
+.INDC1-Index Curve	INDC1-Index Curve	CNY
+0	0	2225.4305
+.INDC2-Index Curve	.INDC2-Index Curve	EUR
+0	0	2264.72
+
+
+Expected results:
+For the first set, it is expected to successfully load the data excepts for the removed indices.
+The second set should load all data including the .INDC1 and .INDC2 indices.
+
+For:
+-equity_real_estate_index_curve20111230_negativeData.csv
+row 108 and 276 have negative indices. 
+-equity_real_estate_index_curve20120629_negativeData.csv
+rows: 2, 4, 6, 8, 10, 12, and 64 have negative indices.
+
+Expected results:
+For both sets, it is expected that the system should throw a warning that there are negative indices in the data.
+
+For:
+-equity_real_estate_index_curve20111230_headerChanged.csv
+-IDEAL_header_headerChanged.csv
+
+Changes are:
+
+For Index CurveSPEC:
+
+TimeEvolutionFUNC:C
+RelativeCurveFLAG:D
+DatumDATE:E
+CurveUnitUNIT:F
+IDENTIFIER:G
+NAME:H
+TYPE:I
+OBJECT:J
+
+For Index CurveSPEC : Generic Index Surface:
+GeneIndxSufNODE:C
+GeneIndxSuf1AXS:D
+GeneIndxSuf0AXS:E	
+OBJECT:F
+ATTRIBUTE:G
+
+Expected results:
+Load data according to the specification above.

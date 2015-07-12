@@ -1,0 +1,10 @@
+BAS,Index CurveSPEC,@Sliding Axis 2,TRUE,0,USD,.4GSPC-Index Curve,.4GSPC-Index Curve,Index Curve,Index CurveSPEC
+rm_ro,Index CurveSPEC : Generic Index Surface,879.08,0,0,Index CurveSPEC,Generic Index Surface,,,
+BAS,Index CurveSPEC,@Sliding Axis 2,TRUE,0,EUR,.AEX-Index Curve,.AEX-Index Curve,Index Curve,Index CurveSPEC
+rm_ro,Index CurveSPEC : Generic Index Surface,312.47,0,0,Index CurveSPEC,Generic Index Surface,,,
+BAS,Index CurveSPEC,@Sliding Axis 2,TRUE,0,EUR,.AMX-Index Curve,.AMX-Index Curve,Index Curve,Index CurveSPEC
+rm_ro,Index CurveSPEC : Generic Index Surface,467.91,0,0,Index CurveSPEC,Generic Index Surface,,,
+BAS,Index CurveSPEC,@Sliding Axis 2,TRUE,0,EUR,.ASCX-Index Curve,.ASCX-Index Curve,Index Curve,Index CurveSPEC
+rm_ro,Index CurveSPEC : Generic Index Surface,384.29,0,0,Index CurveSPEC,Generic Index Surface,,,
+BAS,Index CurveSPEC,@Sliding Axis 2,TRUE,0,RON,.BETFI-Index Curve,.BETFI-Index Curve,Index Curve,Index CurveSPEC
+rm_ro,Index CurveSPEC : Generic Index Surface,19341.5,0,0,Index CurveSPEC,Generic Index Surface,,,

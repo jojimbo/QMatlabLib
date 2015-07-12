@@ -1,0 +1,306 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Configuration</title><meta name="generator" content="MATLAB 7.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-11-21"><meta name="DC.source" content="Configuration.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Configuration</a></li><li><a href="#2">Properties</a></li><li><a href="#3">Methods</a></li><li><a href="#4">Configuration <i>constructor</i></a></li><li><a href="#6">Interest Rate Curve</a></li><li><a href="#8">Real Estate Equity Data</a></li><li><a href="#10">Foreign Exchange Data</a></li><li><a href="#12">Swaption Interest Rate Implied Volatility Data</a></li><li><a href="#14">Equity Implied Volatility Data</a></li></ul></div><h2>Configuration<a name="1"></a></h2><p>This class represents the STS - IM calculation configuration</p><h2>Properties<a name="2"></a></h2><div><ul><li><tt>sourceFileName</tt>    <i>Char</i></li><li><tt>headerFileName</tt>    <i>Char</i></li><li><tt>headerSpecs</tt>       <i>Cell</i></li><li><tt>identifierColId</tt>   <i>Double</i></li><li><tt>csvFileNames</tt>      <i>Cell</i></li><li><tt>csvFileContents</tt>   <i>Struct</i></li></ul></div><h2>Methods<a name="3"></a></h2><div><ul><li><tt>obj = Configuration(configFile)</tt>   <i>constructor</i></li></ul></div><h2>Configuration <i>constructor</i><a name="4"></a></h2><p><tt>obj = Configuration(calcObj)</tt></p><p>Input:</p><div><ul><li><tt>calcObj</tt>    <i>Calculation</i></li></ul></div><h2>Interest Rate Curve<a name="6"></a></h2><p>User Story: P19-1 +. Collect Files Contents and Enumerators:</p><h2>Real Estate Equity Data<a name="8"></a></h2><p>User Story: P19-3 +. Collect Files Contents and Enumerators:</p><h2>Foreign Exchange Data<a name="10"></a></h2><p>User Story: P19-4 +. Collect Files Contents and Enumerators:</p><h2>Swaption Interest Rate Implied Volatility Data<a name="12"></a></h2><p>User Story: P19-5 +. Collect Files Contents and Enumerators:</p><h2>Equity Implied Volatility Data<a name="14"></a></h2><p>User Story: P19-6 +. Collect Files Contents and Enumerators:</p><p class="footer"><br>
+      Published with MATLAB&reg; 7.14<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Configuration
+% This class represents the STS - IM calculation configuration
+classdef Configuration < handle
+
+    %% Properties
+    % 
+    % * |sourceFileName|    _Char_
+    % * |headerFileName|    _Char_
+    % * |headerSpecs|       _Cell_
+    % * |identifierColId|   _Double_
+    % * |csvFileNames|      _Cell_
+    % * |csvFileContents|   _Struct_
+
+    properties
+
+        sourceFileName
+        headerFileName
+        headerSpecs
+        identifierColId
+        csvFileNames
+        csvFileContents
+
+    end % #Properties
+
+
+    methods
+        %% Methods
+        % 
+        % * |obj = Configuration(configFile)|   _constructor_
+
+        function obj = Configuration(calcObj)
+            %% Configuration _constructor_
+            % |obj = Configuration(calcObj)|
+            % 
+            % Input:
+            % 
+            % * |calcObj|    _Calculation_
+
+            % 1. Initialize
+            obj.sourceFileName  = calcObj.configFile;
+            obj.headerFileName  = calcObj.parameters.headerFile;
+            obj.headerSpecs     = calcObj.header;
+            obj.identifierColId = 2;
+            obj.csvFileNames    = {};
+            obj.csvFileContents = [];
+
+            % 2. Process all CSV files in configuration file
+            obj.processConfigurarion(calcObj.parameters);
+
+        end % #Constructor
+
+
+
+        function errorMsg = processConfigurarion(obj, parameters)
+            % Process all CSV files listed in the configuration file
+            errorMsg = [];
+
+            % 1. Loop over all parameter entries, process all CSV's
+            fieldNames = fieldnames(parameters);
+
+            for ii = 1:numel(fieldNames)
+                % Check if entry represents an existing CSV file
+                if      ischar(parameters.(fieldNames{ii})) && ...
+                        eq(exist(parameters.(fieldNames{ii}), 'file'), 2)
+
+                    % Configuration entry refers to an existing file
+                    [~, ~, ext] = fileparts(parameters.(fieldNames{ii}));
+
+                    % If it is a CSV file: process it...
+                    if strcmpi(ext, '.csv')
+                        obj.processCsvFile(fieldNames{ii}, parameters.(fieldNames{ii}));
+                    end
+                end
+            end
+
+        end % #processConfigurarion
+
+
+
+        function errorMsg = processCsvFile(obj, csvReference, csvFile)
+            % Process CSV file
+            idCol    = obj.identifierColId;
+            errorMsg = [];
+
+            % Switch case, processing is case-specific
+            switch csvReference
+
+                case 'irCurveFile'
+                    %% Interest Rate Curve
+                    % User Story: P19-1
+                    % +. Collect Files Contents and Enumerators:
+                    [~, ~, data]    = internalModel.Utilities.csvreadCell(csvFile);
+                    [headerRow, ~]  = find(strcmpi(obj.headerSpecs, 'ZeroSPEC'));
+                    [itemRows, ~]   = find(strcmpi(data(:, idCol),  'ZeroSPEC'));
+                    [dataRows, ~]   = find(strcmpi(data(:, idCol),  'ZeroSPEC : Generic Zero Surface'));
+
+                    IR_Header       = obj.headerSpecs(headerRow, :);
+                    IR_Items        = data(itemRows, :);
+                    IR_Data         = data(dataRows, :);
+
+                    % +. Collect Column Identifiers & Relevant Data
+                    irCurveFile.identifiers = obj.getContents(IR_Items, IR_Header,       'IDENTIFIER');
+                    irCurveFile.tenorDATA   = obj.getContents(IR_Data,  obj.headerSpecs, 'GenZeroSurface0AXS');
+                    irCurveFile.valueDATA   = obj.getContents(IR_Data,  obj.headerSpecs, 'GenZeroSurfaceNODE');
+                    irCurveFile.itemRows    = itemRows;
+                    irCurveFile.dataRows    = dataRows;
+
+                    % +. Propagate 'irCurveFile' to object member
+                    obj.csvFileNames{end+1}             = csvFile;
+                    obj.csvFileContents.('irCurveFile') = irCurveFile;
+
+
+                case 'equityReFile'
+                    %% Real Estate Equity Data
+                    % User Story: P19-3
+                    % +. Collect Files Contents and Enumerators:
+                    [~, ~, data]    = internalModel.Utilities.csvreadCell(csvFile);
+                    [headerRow, ~]  = find(strcmpi(obj.headerSpecs, 'Index CurveSPEC'));
+                    [itemRows, ~]   = find(strcmpi(data(:, idCol),  'Index CurveSPEC'));
+                    [dataRows, ~]   = find(strcmpi(data(:, idCol),  'Index CurveSPEC : Generic Index Surface'));
+
+                    EQRE_Header     = obj.headerSpecs(headerRow, :);
+                    EQRE_Items      = data(itemRows, :);
+                    EQRE_Data       = data(dataRows, :);
+
+                    % +. Collect Column Identifiers & Relevant Data
+                    equityReFile.names        = obj.getContents(EQRE_Items, EQRE_Header, 'NAME');
+                    equityReFile.identifiers  = obj.getContents(EQRE_Items, EQRE_Header, 'IDENTIFIER');
+                    equityReFile.curveUnits   = obj.getContents(EQRE_Items, EQRE_Header, 'CurveUnitUNIT');
+                    equityReFile.dates        = obj.getContents(EQRE_Items, EQRE_Header, 'DatumDATE');
+                    equityReFile.RelCurveFlag = obj.getContents(EQRE_Items, EQRE_Header, 'RelativeCurveFlag');
+
+                    equityReFile.GeneIndxSuf0AXS = obj.getContents(EQRE_Data,  obj.headerSpecs, 'GeneIndxSuf0AXS');
+                    equityReFile.GeneIndxSuf1AXS = obj.getContents(EQRE_Data,  obj.headerSpecs, 'GeneIndxSuf1AXS');
+                    equityReFile.GeneIndxSufNODE = obj.getContents(EQRE_Data,  obj.headerSpecs, 'GeneIndxSufNODE');
+                    equityReFile.itemRows        = itemRows;
+                    equityReFile.dataRows        = dataRows;
+
+                    % +. Propagate 'equityReFile' to object member
+                    obj.csvFileNames{end+1}              = csvFile;
+                    obj.csvFileContents.('equityReFile') = equityReFile;
+
+
+                case 'forexFile'
+                    %% Foreign Exchange Data
+                    % User Story: P19-4
+                    % +. Collect Files Contents and Enumerators:
+                    [~, ~, data]    = internalModel.Utilities.csvreadCell(csvFile);
+                    [headerRow, ~]  = find(strcmpi(obj.headerSpecs, 'Foreign ExchangeSPEC'));
+                    [dataRows, ~]   = find(strcmpi(data(:, idCol),  'Foreign ExchangeSPEC'));
+
+                    FX_Header       = obj.headerSpecs(headerRow, :);
+                    FX_Data         = data(dataRows, :);
+
+                    % +. Collect Column Identifiers & Relevant Data
+                    forexFile.identifiers      = obj.getContents(FX_Data, FX_Header, 'IDENTIFIER');
+                    forexFile.startCurrencies  = obj.getContents(FX_Data, FX_Header, 'CurrencyUNIT');
+                    forexFile.targetCurrencies = obj.getContents(FX_Data, FX_Header, 'NAME');
+                    forexFile.rates            = obj.getContents(FX_Data, FX_Header, 'SpotPriceVAL');
+                    forexFile.dataRows         = dataRows;
+                    forexFile.csvFileName      = csvFile;
+
+                    % +. Propagate 'forexFile' to object member
+                    obj.csvFileNames{end+1}           = csvFile;
+                    obj.csvFileContents.('forexFile') = forexFile;
+
+
+                case 'swaptionImpVolFile'
+                    %% Swaption Interest Rate Implied Volatility Data
+                    % User Story: P19-5
+                    % +. Collect Files Contents and Enumerators:
+                    [~, ~, data]    = internalModel.Utilities.csvreadCell(csvFile);
+                    [headerRow, ~]  = find(strcmpi(obj.headerSpecs, 'Volatility - Term/TermSPEC'));
+                    [itemRows, ~]   = find(strcmpi(data(:, idCol),  'Volatility - Term/TermSPEC'));
+                    [dataRows, ~]   = find(strcmpi(data(:, idCol),  'Volatility - Term/TermSPEC : Generic Volatility Term Term Surface'));
+
+                    SWAPVOL_Header  = obj.headerSpecs(headerRow, :);
+                    SWAPVOL_Items   = data(itemRows, :);
+                    SWAPVOL_Data    = data(dataRows, :);
+
+                    % +. Collect Column Identifiers & Relevant Data
+                    swaptionImpVolFile.names        = obj.getContents(SWAPVOL_Items, SWAPVOL_Header, 'NAME');
+                    swaptionImpVolFile.identifiers  = obj.getContents(SWAPVOL_Items, SWAPVOL_Header, 'IDENTIFIER');
+                    swaptionImpVolFile.dates        = obj.getContents(SWAPVOL_Items, SWAPVOL_Header, 'DatumDATE');
+
+                    swaptionImpVolFile.GenVolTrmTrmSf0AXS = obj.getContents(SWAPVOL_Data,  obj.headerSpecs, 'GenVolTrmTrmSf0AXS');
+                    swaptionImpVolFile.GenVolTrmTrmSf1AXS = obj.getContents(SWAPVOL_Data,  obj.headerSpecs, 'GenVolTrmTrmSf1AXS');
+                    swaptionImpVolFile.GenVolTrmTrmSfNODE = obj.getContents(SWAPVOL_Data,  obj.headerSpecs, 'GenVolTrmTrmSfNODE');
+                    swaptionImpVolFile.itemRows           = itemRows;
+                    swaptionImpVolFile.dataRows           = dataRows;
+
+                    % +. Propagate 'swaptionImpVolFile' to object member
+                    obj.csvFileNames{end+1}                    = csvFile;
+                    obj.csvFileContents.('swaptionImpVolFile') = swaptionImpVolFile;
+
+
+                case 'eqIndFile'
+                    %% Equity Implied Volatility Data
+                    % User Story: P19-6
+                    % +. Collect Files Contents and Enumerators:
+                    [~, ~, data]    = internalModel.Utilities.csvreadCell(csvFile);
+                    [headerRow, ~]  = find(strcmpi(obj.headerSpecs, 'Volatility - Moneyness/TermSPEC'));
+                    [itemRows, ~]   = find(strcmpi(data(:, idCol),  'Volatility - Moneyness/TermSPEC'));
+                    [dataRows, ~]   = find(strcmpi(data(:, idCol),  'Volatility - Moneyness/TermSPEC : Generic Volatility Moneyness Term Surface'));
+
+                    EQIMP_Header    = obj.headerSpecs(headerRow, :);
+                    EQIMP_Items     = data(itemRows, :);
+                    EQIMP_Data      = data(dataRows, :);
+
+                    % +. Collect Column Identifiers & Relevant Data
+                    equityImpFile.names        = obj.getContents(EQIMP_Items, EQIMP_Header, 'NAME');
+                    equityImpFile.identifiers  = obj.getContents(EQIMP_Items, EQIMP_Header, 'IDENTIFIER');
+                    equityImpFile.dates        = obj.getContents(EQIMP_Items, EQIMP_Header, 'DatumDATE');
+                    equityImpFile.RelCurveFlag = obj.getContents(EQIMP_Items, EQIMP_Header, 'RelativeCurveFlag');
+
+                    equityImpFile.GnVolMnyTrmSf0AXS = obj.getContents(EQIMP_Data,  obj.headerSpecs, 'GnVolMnyTrmSf0AXS');
+                    equityImpFile.GnVolMnyTrmSf1AXS = obj.getContents(EQIMP_Data,  obj.headerSpecs, 'GnVolMnyTrmSf1AXS');
+                    equityImpFile.GnVolMnyTrmSfNODE = obj.getContents(EQIMP_Data,  obj.headerSpecs, 'GnVolMnyTrmSfNODE');
+                    equityImpFile.itemRows          = itemRows;
+                    equityImpFile.dataRows          = dataRows;
+
+                    % +. Propagate 'eqIndFile' to object member
+                    obj.csvFileNames{end+1}           = csvFile;
+                    obj.csvFileContents.('eqIndFile') = equityImpFile;
+            end
+
+        end % #processCsvFile
+
+    end % %Methods Public
+
+
+    methods (Static)
+
+        function dataReturn = getContents(dataSet, dataHeader, enumerator)
+            % Collect contents
+            [~, identifierCOL] = find(strcmpi(dataHeader, enumerator));
+            dataReturn = dataSet(:, identifierCOL);
+
+        end % #getContents
+
+     end % #Methods Static
+
+end
+
+##### SOURCE END #####
+--></body></html>

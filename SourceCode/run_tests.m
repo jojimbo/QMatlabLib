@@ -1,0 +1,1 @@
+run(fullfile(pwd, '..', 'run_tests'));

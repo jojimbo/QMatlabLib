@@ -1,0 +1,78 @@
+Description:
+As an STS user,
+I want given a dataset ofcredit spreads, the system should load the credit spread data to value credit spread sensitive instruments in STS. The name of the data file is: ir_credit_spreadYYYYMMDD.csv
+
+Criteria:
+Given that I want to be able to calculate the value of credit spread sensitive instruments in STS,
+When STS can load credit spread data,
+Then I am able to calculate the value of credit spread sensitive instruments in STS. The data is in the standard ALGO fomat available on the sharepoint site and should be tested with a flexible number currencies, tenors, credit spread types and tested for at least 2 data sets. The system should create a warning if the loaded credit spread data is negative. The system should read the header files so that the system is not impacted by changes in the columns of the data files.
+
+Test plan:
+For:
+-ir_credit_spread20111230_flexNrOfCurr.csv
+the following currency has been added: CR1-AA-SPREAD and CR2-AA-SPREAD
+
+-ir_credit_spread20120629_flexNrOfCurr.csv
+the following currencies are removed: RUB-PLUS200-SPREAD and UVR-PLUS125-SPREAD
+
+Expected results:
+Both runs should complete successfully, for the first set, CR1-AA-SPREAD and CR2-AA-SPREAD should be loaded, for the second set, RUB-PLUS200-SPREAD and UVR-PLUS125-SPREAD should not be loaded.
+
+For:
+-ir_credit_spread20111230_flexNrOfTenors.csv
+under NOK-PLUS200-SPREAD and USD-ILLIQUIDITY-SPREAD,tenors 90 to 3650 are removed.
+
+-ir_credit_spread20120629_flexNrOfTenors.csv
+For RUB-PLUS200-SPREAD, the following tenors are added between 365 and 730
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	370	0.02
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	400	0.02
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	475	0.02
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	499	0.02
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	650	0.02
+
+Expected results:
+Both sets should be loaded successfully, the first set under NOK-PLUS200-SPREAD and USD-ILLIQUIDITY-SPREAD,tenors 90 to 3650 should not be loaded, the second set should for RUB-PLUS200-SPREAD have loaded extra tenors.
+
+For:
+-ir_credit_spread20111230_flexNrOfCS.csv
+AUD-AAA-SPREAD has been changed to just AUD, the AAA-SPREAD has been removed.
+PEN-PLUS125-SPREAD has been changed to just PEN, the PLUS125-SPREAD has been removed.
+
+-ir_credit_spread20120629_flexNrOfCS.csv
+SEK-PLUS100-SPREAD has been changed to  SEK-CREDITS1-SPREAD
+HUF-ILLIQUIDITY-SPREAD has been changed to HUF-CREDITS2-SPREAD
+
+Expected results:
+The first run should throw and error.
+The second set should load successfully the new credit spreads.
+
+For:
+-ir_credit_spread20111230_headerChanged.csv
+-IDEAL_header_headerChanged.csv
+
+Changes are:
+For ZeroSpec:
+										
+IDENTIFIER:P
+NAME:O
+CreditStateENUM:N
+CurveFUNC:M
+CurveUnitUNIT:L
+CurveUnitDAYC:K
+CurveUnitPERD:J
+DatumDATE:I
+GenZeroSfExt0FLAG:H
+GenZeroSurface0SIN:G
+TimeEvolutionFUNC:F
+StateProcFUNC:E
+
+For ZeroSPEC : Generic Zero Surface:
+OBJECT:F
+GenZeroSurface0AXS:E
+GenZeroSurfaceNODE:D
+Expected results:
+Load data according to the specification above.
+
+
+
+

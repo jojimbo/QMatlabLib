@@ -1,0 +1,37 @@
+%% ConfigDemo
+% Configuration File  
+
+% Input Files 
+headerFile           = \MasterInputFiles\data2011\IDEAL_header2.csv
+portFile             = \MasterInputFiles\Portfolio Files\P24_1(ZCB)\portfolio.xml
+
+corrMatFile          = \MasterInputFiles\data2011\corr_matrix.csv
+riskTypeFile         = \MasterInputFiles\data2011\mapping_RT.csv
+baseEntityFile       = \MasterInputFiles\data2011\mapping_BE.csv
+instFile             = \MasterInputFiles\data2011\Instrument Files\fx_forward_Q42011_pandora_14012013.csv
+scenFile             = \MasterInputFiles\ScenarioFiles100k\MC_SHRD_IR.csv
+pcaFile              = \MasterInputFiles\data2011\matrix_parameter_curve.csv
+irCurveFile          = \MasterInputFiles\data2011\ir_swap_zero_curve20111230.csv
+forexFile            = \MasterInputFiles\data2011\fx_foreign_exchange20111230.csv
+fxImpVolData	     = \MasterInputFiles\data2011\fx_implied_volatility20111230.csv
+creditSpreadFile     = \MasterInputFiles\data2011\ir_credit_spread20111230.csv
+eqIndFile            = \MasterInputFiles\data2011\equity_imp_vol_surface20111230.csv
+equityReFile 	     = \MasterInputFiles\data2011\equity_real_estate_index_curve20111230.csv
+swaptionImpVolFile   = \MasterInputFiles\data2011\swaption_implied_volatility20111230.csv
+
+bfVolVolFile         = \MasterInputFiles\data2011\BF_vol_vol_factor.csv
+eqVolVolFile         = \MasterInputFiles\data2011\EQ_vol_vol_factor.csv
+reVolVolFile         = \MasterInputFiles\data2011\RE_vol_vol_factor.csv
+irVolVolFile         = \MasterInputFiles\data2011\IR_vol_vol_factor.csv
+fxVolVolFile         = \MasterInputFiles\data2011\FX_vol_vol_factor.csv
+volatilityCapFile    = \MasterInputFiles\data2011\volatility_cap.csv
+
+% Output File
+outputFile           = E:\MasterInputFilesIM\STSOutput\OutputTest2011_FxFw_100k_IR\Report.csv
+
+% Confidence Level
+confidenceLvl        = 0.90
+valuationDate        = 2011/12/31
+
+% Reporting Currency
+reportingCurrency    = EUR

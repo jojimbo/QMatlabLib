@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Message SYSTEM "BBalgo.dtd">
+
+<Message>
+  <Response UUID="DV1BL4USIIM" RTAG="closure47">
+    <Group GID="ING_GROUP" NAME="ING Group" TYPE="SELLFIRM" NTYPE="ROOT">
+      <GroupRef GID="DV_1"/>
+    </Group>
+    <Group GID="DV_1" NAME="Insurance" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_4"/>
+    </Group>
+    <Group GID="DV_1_BL_4" NAME="USFS" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_4_USIIM"/>
+    </Group>
+    <Group GID="DV_1_BL_4_USIIM" NAME="US ING Investment Management" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_4_USIIM_PF_20315"/>
+    </Group>
+    <Group GID="DV_1_BL_4_USIIM_PF_20315" NAME="IIM 3rd Party" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_4_USIIM_PF_20315_ASSETS"/>
+      <GroupRef GID="DV_1_BL_4_USIIM_PF_20315_NONMARKETDATA"/>
+    </Group>
+    <Group GID="DV_1_BL_4_USIIM_PF_20315_ASSETS" NAME="Assets" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_4_USIIM_PF_20315_PFM_22071"/>
+      <GroupRef GID="DV_1_BL_4_USIIM_PF_20315_PFM_22072"/>
+    </Group>
+    <Group GID="DV_1_BL_4_USIIM_PF_20315_PFM_22071" NAME="Equity Risk" TYPE="BOOK">
+      <Position SEC_ID="MarketIndex_.SPX" POS_SZ="82541.998003">
+        <Property NAME="Balance Sheet" VALUE="Asset"/>
+        <Property NAME="Region" VALUE="AMERICAS"/>
+      </Position>
+    </Group>
+    <Group GID="DV_1_BL_4_USIIM_PF_20315_PFM_22072" NAME="Interest Risk" TYPE="BOOK">
+      <Position SEC_ID="MarketIndex_USAGG_USD_UNHEDG" POS_SZ="0.000006">
+        <Property NAME="Balance Sheet" VALUE="Asset"/>
+        <Property NAME="Region" VALUE="AMERICAS"/>
+      </Position>
+    </Group>
+    <Group GID="DV_1_BL_4_USIIM_PF_20315_NONMARKETDATA" NAME="Non Market Data" TYPE="BOOK">
+      <Position SEC_ID="USIIM_IIM_3rd_Party_BUS_GP_20120711191504678" POS_SZ="0.5">
+        <Property NAME="Balance Sheet" VALUE="Non-market"/>
+        <Property NAME="Region" VALUE="AMERICAS"/>
+      </Position>
+      <Position SEC_ID="USIIM_IIM_3rd_Party_OPR_GP_20120705145420952" POS_SZ="0.5">
+        <Property NAME="Balance Sheet" VALUE="Non-market"/>
+        <Property NAME="Region" VALUE="AMERICAS"/>
+      </Position>
+    </Group>
+  </Response>
+</Message>

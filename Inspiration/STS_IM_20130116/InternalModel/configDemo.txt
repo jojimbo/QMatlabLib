@@ -1,0 +1,40 @@
+%% ConfigDemo
+% Configuration File  
+
+% Input Files
+headerFile 	     = E:\MPS_RobEwalds\Development Data\_Files Maurits_Peter\IDEAL_header.csv
+portFile             = E:\MPS_RobEwalds\Development Data\_Files Maurits_Peter\portfolio.xml
+
+corrMatFile          = E:\MPS_RobEwalds\Development Data\_Files Maurits_Peter\corr_matrix.csv
+riskTypeFile         = E:\MPS_RobEwalds\Development Data\_Files Maurits_Peter\mapping_RT.csv
+baseEntityFile       = E:\MPS_RobEwalds\Development Data\_Files Maurits_Peter\mapping_BE.csv
+instFile             = E:\MPS_RobEwalds\Development Data\_Files Maurits_Peter\instruments.csv
+scenFile             = E:\MPS_RobEwalds\Development Data\_Files Maurits_Peter\ASE_dummy.csv
+pcaFile              = E:\MPS_RobEwalds\Development Data\_Files Maurits_Peter\matrix_parameter_curve.csv
+irCurveFile          = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\ir_swap_zero_curve20120629.csv
+forexFile            = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\fx_foreign_exchange20120629.csv
+fxImpVolData	     = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\fx_implied_volatility20120629.csv
+creditSpreadFile     = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\ir_credit_spread20120629.csv
+eqIndFile  	     = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\equity_imp_vol_surface20120629.csv
+equityReFile 	     = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\equity_real_estate_index_curve20120629.csv
+swaptionImpVolFile   = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\swaption_implied_volatility20120629.csv
+
+bfVolVolFile         = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\BF_vol_vol_factor.csv
+eqVolVolFile         = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\EQ_vol_vol_factor.csv
+reVolVolFile         = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\RE_vol_vol_factor.csv
+irVolVolFile         = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\IR_vol_vol_factor.csv
+fxVolVolFile         = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\FX_vol_vol_factor.csv
+volatilityCapFile    = E:\MPS_RobEwalds\Development Data\_Files Sharepoint\volatility_cap.csv
+
+% Optional Instruments
+fixedRateBondFile    = E:\MPS_RobEwalds\Development Data\_Files Maurits_Peter\FRB_2012_10_11.csv
+fixedRateBondRefDate = 18-10-2012;
+
+% Output File
+outputFile           = E:\MPS_RobEwalds\STS_Resultsasdf\Results.csv
+
+% Confidence Level
+confidenceLvl        = 0.90 0.95 0.995
+
+% Reporting Currency
+reportingCurrency    = EUR USD

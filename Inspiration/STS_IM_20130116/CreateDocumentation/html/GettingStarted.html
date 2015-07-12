@@ -1,0 +1,252 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Getting started</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-20"><meta name="DC.source" content="GettingStarted.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Getting started</h1><!--introduction--><p>Read how to invoke miniECAPSCL and what it exaclty does step-by-step.</p><p><b>[weights,theComparison, theResults] = miniECAPSCL('ConfigFile.txt')</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Read the configuration file</a></li><li><a href="#2">Define replication settings</a></li><li><a href="#3">Setup the replication portfolio</a></li><li><a href="#4">Bucketing</a></li><li><a href="#5">Replicate the portfolio</a></li><li><a href="#6">Verify the results</a></li></ul></div><h2>Read the configuration file<a name="1"></a></h2><p>The configuration file is a textfile, with a set of attributes. For example, the config file can have the fields listed below.</p><p>Please notice that there should be no space between the property and the equal sign. The path is absolute with respect to the positions where to find the data.</p><div><ul><li>DIR=C:\demos\CustomersCases\ING\miniECAPS2\trunk\Code</li><li>REQUEST_ID=126524</li><li>SCENARIO_SET=RN_R_Set_1_EUR_201108.xls</li><li>CURRENCY=EUR</li><li>SESSION_DATE=2011/08/31</li><li>OPTIM_BUCKETS=[0;20]</li><li>INTEREST_RATES_FLOORED_AT_ZERO=1</li><li>TRADE_PENALTY=0</li></ul></div><pre class="codeinput">configFile = <span class="string">'ConfigFile.txt'</span>;
+parameters = loadParamsFromConfigFile(configFile);
+<span class="comment">% Override the root directory from the config file so it works for wherever</span>
+<span class="comment">% we are installed.</span>
+parameters.parameters.dir = fileparts(pwd);
+</pre><pre class="codeoutput error">Undefined function 'loadParamsFromConfigFile' for input arguments of type 'char'.
+
+Error in GettingStarted (line 24)
+parameters = loadParamsFromConfigFile(configFile);
+</pre><h2>Define replication settings<a name="2"></a></h2><p>Not all settings are exposed to the user in the configuration file. Some settings are not visible to the end user, and defined inside the function miniECAPSCL. These parameters are required to specify how the replication is performed.</p><pre class="codeinput"><span class="comment">% Optimization boundaries</span>
+lowerBoundsPlus = 0;
+lowerBoundsMinus = 0;
+upperBoundsPlus = 1.e12;
+upperBoundsMinus = 1.e12;
+OptimBounds= [lowerBoundsPlus; <span class="keyword">...</span>
+    lowerBoundsMinus; <span class="keyword">...</span>
+    upperBoundsPlus; <span class="keyword">...</span>
+    upperBoundsMinus];
+
+<span class="comment">% Maximum term to maturity to exclude Instruments</span>
+maxTermToMaturity = 100;
+
+<span class="comment">% Scenario interpolation</span>
+scenarioInput = parameters.parameters;
+scenarioInput.interpolation = <span class="string">'constant'</span>;
+</pre><h2>Setup the replication portfolio<a name="3"></a></h2><p>Create the replication portfolio object:</p><div><ul><li>Read the scenarios</li><li>Read the cashflows liabilities and discount them</li><li>Create the instruments and exclude those that exceed maturity</li></ul></div><pre class="codeinput">rp = ing.ReplicationPortfolio(parameters.inputFiles.cashflow, <span class="keyword">...</span>
+    parameters.inputFiles.scenario, <span class="keyword">...</span>
+    scenarioInput, parameters.inputFiles.instruments, <span class="keyword">...</span>
+    parameters.inputFiles.indexcurve, parameters.parameters.bucketing, <span class="keyword">...</span>
+    maxTermToMaturity);
+</pre><h2>Bucketing<a name="4"></a></h2><p>Verify that the bucketing settings are correct. You need to specify the buckets with the suitable notation in the configuration file.</p><pre class="codeinput"><span class="keyword">if</span> ~isempty(scenarioInput.bucketing)
+    rp.Buckets = scenarioInput.bucketing;
+    <span class="keyword">if</span> numel(rp.Buckets)&lt;2
+        error(<span class="string">'miniECAPSCL:BadConfig'</span>, <span class="keyword">...</span>
+            <span class="string">'OPTIM_BUCKETS must be a vector of at least 2 elements'</span>)
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> any(rp.Buckets(1:end-1)&gt;rp.Buckets(2:end))
+        error(<span class="string">'miniECAPSCL:BadConfig'</span>, <span class="keyword">...</span>
+            <span class="string">'OPTIM_BUCKETS must be a vector of increasing years'</span>)
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><h2>Replicate the portfolio<a name="5"></a></h2><p>Run the actual optimization, currently it is using a linear optimization. First compute the present value of the discounted cashflows.</p><pre class="codeinput">[weights, relError, rp] = rp.runOptimization(OptimBounds);
+</pre><h2>Verify the results<a name="6"></a></h2><p>Verify that miniECAPS replication portfolio is in agreement with the results of the ECAPS engine.</p><pre class="codeinput"><span class="keyword">if</span> ~isempty(parameters.inputFiles.result)
+    <span class="comment">% compare the results:</span>
+    <span class="comment">% root folder for data structure</span>
+    base = scenarioInput.dir;
+    <span class="comment">% Add the Data folder base, and select the right scenario by adding the date:</span>
+    base = fullfile(base, <span class="string">'Data'</span>, datestr(scenarioInput.sessionDate, <span class="string">'yyyymm'</span>));
+    <span class="keyword">if</span> isempty(strfind(parameters.inputFiles.result,filesep))
+        resfilename = [base,filesep,<span class="string">'Scenario'</span>,filesep,parameters.inputFiles.result];
+    <span class="keyword">else</span>
+        resfilename = parameters.inputFiles.result;
+    <span class="keyword">end</span>
+    xpath = XPath(resfilename);
+    <span class="keyword">if</span> isempty(strfind(parameters.inputFiles.indexcurve,filesep))
+        eqfilename = [base,filesep,<span class="string">'Scenario'</span>,filesep,parameters.inputFiles.indexcurve];
+    <span class="keyword">else</span>
+        eqfilename = parameters.inputFiles.indexcurve;
+    <span class="keyword">end</span>
+    eqList = get_equities(eqfilename);
+    [theComparison, theResults] = <span class="keyword">...</span>
+        compareResults(rp, weights, xpath, eqList, <span class="keyword">...</span>
+        scenarioInput.tradePenalty);
+<span class="keyword">end</span>
+
+<span class="comment">% End of demo</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Getting started
+% Read how to invoke miniECAPSCL and what it exaclty does step-by-step.
+%
+% *[weights,theComparison, theResults] = miniECAPSCL('ConfigFile.txt')*
+
+%% Read the configuration file
+% The configuration file is a textfile, with a set of attributes.
+% For example, the config file can have the fields listed below.
+%
+% Please notice that there should be no space between the property and the
+% equal sign. The path is absolute with respect to the positions where to
+% find the data. 
+%
+% * DIR=C:\demos\CustomersCases\ING\miniECAPS2\trunk\Code
+% * REQUEST_ID=126524
+% * SCENARIO_SET=RN_R_Set_1_EUR_201108.xls
+% * CURRENCY=EUR
+% * SESSION_DATE=2011/08/31
+% * OPTIM_BUCKETS=[0;20]
+% * INTEREST_RATES_FLOORED_AT_ZERO=1
+% * TRADE_PENALTY=0
+
+configFile = 'ConfigFile.txt';
+parameters = loadParamsFromConfigFile(configFile);
+% Override the root directory from the config file so it works for wherever
+% we are installed.
+parameters.parameters.dir = fileparts(pwd);
+
+%% Define replication settings
+% Not all settings are exposed to the user in the configuration file. 
+% Some settings are not visible to the end user, and defined inside the 
+% function miniECAPSCL. 
+% These parameters are required to specify how the replication is performed.
+
+% Optimization boundaries
+lowerBoundsPlus = 0;
+lowerBoundsMinus = 0;
+upperBoundsPlus = 1.e12;
+upperBoundsMinus = 1.e12;
+OptimBounds= [lowerBoundsPlus; ...
+    lowerBoundsMinus; ...
+    upperBoundsPlus; ...
+    upperBoundsMinus];
+
+% Maximum term to maturity to exclude Instruments
+maxTermToMaturity = 100;
+
+% Scenario interpolation
+scenarioInput = parameters.parameters;
+scenarioInput.interpolation = 'constant';
+
+%% Setup the replication portfolio
+% Create the replication portfolio object:
+%
+% * Read the scenarios
+% * Read the cashflows liabilities and discount them 
+% * Create the instruments and exclude those that exceed maturity
+
+rp = ing.ReplicationPortfolio(parameters.inputFiles.cashflow, ...
+    parameters.inputFiles.scenario, ...
+    scenarioInput, parameters.inputFiles.instruments, ...
+    parameters.inputFiles.indexcurve, parameters.parameters.bucketing, ...
+    maxTermToMaturity);
+
+%% Bucketing
+% Verify that the bucketing settings are correct. You need to specify the
+% buckets with the suitable notation in the configuration file.
+
+if ~isempty(scenarioInput.bucketing)
+    rp.Buckets = scenarioInput.bucketing;
+    if numel(rp.Buckets)<2
+        error('miniECAPSCL:BadConfig', ...
+            'OPTIM_BUCKETS must be a vector of at least 2 elements')
+    end
+    if any(rp.Buckets(1:end-1)>rp.Buckets(2:end))
+        error('miniECAPSCL:BadConfig', ...
+            'OPTIM_BUCKETS must be a vector of increasing years')
+    end
+end
+
+%% Replicate the portfolio
+% Run the actual optimization, currently it is using a linear optimization.
+% First compute the present value of the discounted cashflows.
+[weights, relError, rp] = rp.runOptimization(OptimBounds);
+
+%% Verify the results
+% Verify that miniECAPS replication portfolio is in agreement with the 
+% results of the ECAPS engine.
+
+if ~isempty(parameters.inputFiles.result)
+    % compare the results:
+    % root folder for data structure
+    base = scenarioInput.dir;
+    % Add the Data folder base, and select the right scenario by adding the date:
+    base = fullfile(base, 'Data', datestr(scenarioInput.sessionDate, 'yyyymm'));
+    if isempty(strfind(parameters.inputFiles.result,filesep))
+        resfilename = [base,filesep,'Scenario',filesep,parameters.inputFiles.result];
+    else
+        resfilename = parameters.inputFiles.result;
+    end
+    xpath = XPath(resfilename);
+    if isempty(strfind(parameters.inputFiles.indexcurve,filesep))
+        eqfilename = [base,filesep,'Scenario',filesep,parameters.inputFiles.indexcurve];
+    else
+        eqfilename = parameters.inputFiles.indexcurve;
+    end
+    eqList = get_equities(eqfilename);
+    [theComparison, theResults] = ...
+        compareResults(rp, weights, xpath, eqList, ...
+        scenarioInput.tradePenalty);
+end
+
+% End of demo
+
+##### SOURCE END #####
+--></body></html>

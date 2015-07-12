@@ -1,0 +1,41 @@
+Description:
+As an STS user,
+I want given a dataset of PCA factors, the system to load the PCA factors in STS,
+So that I am able to shock interest rates under different scenarios.
+The name of the data file is: matrix_parameter_curve.csv
+
+Criteria:
+Given a dataset of PCA factors,
+When STS can load the base PCA factor data,
+Then I am able to shock interest rates and interest rate sensitive instruments in STS. 
+The data is in the standard ALGO fomat available on the sharepoint site and should be tested with a flexible number of currencies and flexible number of PCA factors per currency and tested for at least 2 data sets. The data can be negative or zero. The system should read the IDEAL_header.csv file so that the system is not impacted by changes in the columns of the data files.
+
+Test plan:
+
+[1]
+1) matrix_parameter_curve.csv
+2) matrix_parameter_curve_flexNrOfCurr.csv
+
+The second file is the same as the first file, except that a new currency is added;"EV_CR1_SWAP".
+It is expected that STS should be able to load both files correcty, and it should be verified that for the second file the new currency should be loaded as well.
+
+[2]
+1) matrix_parameter_curve_flexNrOfPCA.csv
+
+This file has been modified, so that the following actions are performed for the currencies:
+- For EV_AUD_SWAP:
+30 day PCA vector is added.
+
+-For EV_BGN_SWAP:
+1095 day PCA vector is removed.
+
+-For EV_BRL_SWAP:
+800 and 1000 day PCA vector's are added.
+
+It is expected that STS is able to load this data accordingly. Thus, some currencies may contain more or less PCA factors.
+
+[3]
+1) IDEAL_header_headerChanged.csv
+2) matrix_parameter_curve_headerChanged.csv
+
+In both files the first two columns are left intact, while the rest of the columns are reversed in order. It is expected that STS is able to load the second file according to the first file.

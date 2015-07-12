@@ -1,0 +1,567 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>InstrumentCollection</title><meta name="generator" content="MATLAB 7.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-11-01"><meta name="DC.source" content="InstrumentCollection.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">InstrumentCollection</a></li><li><a href="#2">Properties</a></li><li><a href="#3">Methods</a></li><li><a href="#4">InstrumentCollection <i>constructor</i></a></li><li><a href="#6">value</a></li><li><a href="#8">calculateNonMarketECaggr</a></li><li><a href="#10">extractFixedRateBonds <i>private</i></a></li><li><a href="#12">extractEquityForwards <i>private</i></a></li><li><a href="#14">extractZCBs <i>private static</i></a></li><li><a href="#16">extractNonMarketRisk <i>private static</i></a></li><li><a href="#18">separateNameAndStrike <i>private static</i></a></li></ul></div><h2>InstrumentCollection<a name="1"></a></h2><p>value class Represents a collection of instruments and is constructed with an instrument file</p><h2>Properties<a name="2"></a></h2><div><ul><li><tt>Instruments</tt></li></ul></div><p><b><i>private</i></b></p><div><ul><li><tt>EquityIndex</tt></li></ul></div><h2>Methods<a name="3"></a></h2><div><ul><li><tt>obj     = InstrumentCollection(instrumentFile, eqIndFile, frbFile)</tt>        <i>constructor</i></li><li><tt>ECaggr  = calculateNonMarketECaggr(this, nmCorMat, ECmarket, ECop,             ...                                       confidenceLvl, portfolio, portfolioNode,    ...                                       forex, reportingCurrency, varargin)</tt></li><li><tt>valCube = value(this , scenarioFile)</tt></li><li><tt>ZCB     = extractZCBs(data)</tt></li><li><tt>EQfw    = extractEquityForwards(data)</tt></li><li><tt>NMR     = extractEquityForwards(data)</tt></li><li><tt>FRBs    = extractFixedRateBonds(obj, frbOpts)</tt></li><li><tt>[name, strike] = separateNameAndStrike(nameAndStrike)</tt></li></ul></div><h2>InstrumentCollection <i>constructor</i><a name="4"></a></h2><p><tt>obj = InstrumentCollection(instrumentFile, eqIndFile, frbOpts)</tt></p><p>Inputs:</p><div><ul><li><tt>instrumentFile</tt>    <i>char</i></li><li><tt>eqIndFile</tt>         <i>char</i></li><li><tt>frbFile</tt>           <i>char</i></li></ul></div><h2>value<a name="6"></a></h2><p><tt>valCube = value(obj, scenarioFile)</tt></p><p>Inputs:</p><div><ul><li><tt>scenarioFile</tt>  <i>char</i></li></ul></div><p>Outputs:</p><div><ul><li><tt>valCube</tt>       <i>double</i></li></ul></div><h2>calculateNonMarketECaggr<a name="8"></a></h2><p><tt>EGaggr = calculateNonMarketECaggr(this)</tt></p><p>Input:</p><div><ul><li><tt>this</tt>          <i>InstrumentCollection</i></li><li><tt>nmCorMat</tt>      <i>NonMarketCorrMatrix</i></li><li><tt>ECmarket</tt>      <i>double</i></li><li><tt>ECop</tt>          <i>double</i></li><li><tt>confidenceLvL</tt> <i>double</i></li><li><tt>portfolio</tt>     <i>char</i></li><li><tt>portfolioNode</tt> <i>char</i></li><li><tt>varargin</tt>      <i>cell</i> riskType 1xn</li></ul></div><p>Output:</p><div><ul><li><tt>ECaggr</tt>        <i>double</i></li></ul></div><h2>extractFixedRateBonds <i>private</i><a name="10"></a></h2><p>Inputs:</p><div><ul><li><tt>frbFlNm</tt>   <i>char</i></li></ul></div><p>Initialize</p><h2>extractEquityForwards <i>private</i><a name="12"></a></h2><p><tt>EQfw = extractEquityForwards(data)</tt></p><p>Inputs:</p><div><ul><li><tt>data</tt>  <i>cell</i></li></ul></div><p>Outputs:</p><div><ul><li><tt>EQfw</tt>  <i>EquityForward</i></li></ul></div><p>Collect members</p><h2>extractZCBs <i>private static</i><a name="14"></a></h2><p><tt>ZCB = extractZCBs(data)</tt></p><p>Inputs:</p><div><ul><li><tt>data</tt>  <i>cell</i></li></ul></div><p>Outputs:</p><div><ul><li><tt>ZCB</tt>   <i>ZeroCouponBond</i></li></ul></div><p>Collect members</p><h2>extractNonMarketRisk <i>private static</i><a name="16"></a></h2><p><tt>NMR = extractEquityForwards(data)</tt></p><p>Inputs:</p><div><ul><li><tt>data</tt>  <i>cell</i></li></ul></div><p>Outputs:</p><div><ul><li><tt>NMR</tt>   <i>NonMarketRisk</i></li></ul></div><p>Collect members</p><h2>separateNameAndStrike <i>private static</i><a name="18"></a></h2><p><tt>[name, strike] = separateNameAndStrike(nameAndStrike)</tt></p><p>Inputs:</p><div><ul><li><tt>nameAndStrike</tt> <i>char</i></li></ul></div><p>Outputs:</p><div><ul><li><tt>name</tt>          <i>char</i></li><li><tt>strike</tt>        <i>double</i></li></ul></div><p class="footer"><br>
+      Published with MATLAB&reg; 7.14<br></p></div><!--
+##### SOURCE BEGIN #####
+%% InstrumentCollection 
+% value class
+% Represents a collection of instruments and is constructed with an instrument file
+
+classdef InstrumentCollection
+
+    %% Properties
+    % 
+    % * |Instruments|
+    % 
+    % *_private_*
+    % 
+    % * |EquityIndex|
+    % 
+    properties(GetAccess = public)
+
+        Instruments
+
+    end
+
+
+    properties (GetAccess = public, SetAccess = private)
+
+        EquityIndex
+
+    end
+
+
+    %% Methods
+    % 
+    % * |obj     = InstrumentCollection(instrumentFile, eqIndFile, frbFile)|        _constructor_
+    % * |ECaggr  = calculateNonMarketECaggr(this, nmCorMat, ECmarket, ECop,             ...
+    %                                       confidenceLvl, portfolio, portfolioNode,    ... 
+    %                                       forex, reportingCurrency, varargin)|
+    % * |valCube = value(this , scenarioFile)|
+    % * |ZCB     = extractZCBs(data)|
+    % * |EQfw    = extractEquityForwards(data)|
+    % * |NMR     = extractEquityForwards(data)|
+    % * |FRBs    = extractFixedRateBonds(obj, frbOpts)|
+    % * |[name, strike] = separateNameAndStrike(nameAndStrike)|
+    % 
+    methods
+        function obj = InstrumentCollection(instrumentFile, eqIndFile, frbOpts)
+            %% InstrumentCollection _constructor_
+            % |obj = InstrumentCollection(instrumentFile, eqIndFile, frbOpts)|
+            % 
+            % Inputs:
+            % 
+            % * |instrumentFile|    _char_
+            % * |eqIndFile|         _char_
+            % * |frbFile|           _char_
+            % 
+            if nargin<1
+                % return empty object
+                return
+            end
+
+            fid  = fopen(instrumentFile);
+            data = textscan(fid, '%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %*[^\n]', 'delimiter', ',');
+            fclose(fid);
+
+            if ~isempty(eqIndFile)
+                obj.EquityIndex = internalModel.EquityIndex(eqIndFile);
+            end
+
+            % Collect Instruments, per Asset Class
+            % Zero Coupon Bonds
+            ZCB  = obj.extractZCBs(data);
+
+            % Equity Forwards
+            EQfw = obj.extractEquityForwards(data);
+
+            % Fixed-Rate Bonds
+            FRB  = obj.extractFixedRateBonds(frbOpts); %#ok<NASGU>
+
+            % Floating-Rate Nodes
+            
+
+            % Non-Market Risk
+            NMR  = obj.extractNonMarketRisk(data);
+
+            % Prepare collection
+            % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+            % DEVELOPMENT: this flag is here as long as FRB/FRN
+            % implementations are still under development
+            % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+            useFRB = false;
+
+            if useFRB
+                % Use 20 FRB instruments, for Development / Testing
+                FRBs = FRB(1:20); %#ok<UNRCH>
+            else
+                FRBs = [];
+            end
+            % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+
+            obj.Instruments = [num2cell(ZCB), num2cell(EQfw), num2cell(NMR), FRBs];
+
+        end
+
+
+        function valCube = value(obj, scenarioFile)
+            %% value
+            % |valCube = value(obj, scenarioFile)|
+            % 
+            % Inputs:
+            % 
+            % * |scenarioFile|  _char_
+            % 
+            % Outputs:
+            % 
+            % * |valCube|       _double_
+            % 
+            instruments = obj.Instruments;
+
+            for iIns=1:numel(obj.Instruments)
+                valCube(iIns, :) = instruments{iIns}.value(scenarioFile); %#ok<AGROW> size not known a priori
+            end
+
+        end
+
+
+        function ECaggr = calculateNonMarketECaggr(this, nmCorMat, ECmarket, ...
+                            ECop, confidenceLvl, portfolio, portfolioNode,   ...
+                            forex, reportingCurrency, varargin)
+            %% calculateNonMarketECaggr
+            % |EGaggr = calculateNonMarketECaggr(this)|
+            % 
+            % Input:
+            % 
+            % * |this|          _InstrumentCollection_
+            % * |nmCorMat|      _NonMarketCorrMatrix_
+            % * |ECmarket|      _double_
+            % * |ECop|          _double_
+            % * |confidenceLvL| _double_
+            % * |portfolio|     _char_
+            % * |portfolioNode| _char_
+            % * |varargin|      _cell_ riskType 1xn
+            % 
+            % Output:
+            % 
+            % * |ECaggr|        _double_
+            % 
+            if ~isempty(varargin)
+                if iscell(varargin{1})
+                    riskType = varargin{1};
+                else
+                    riskType = varargin(1);
+                end
+
+            else
+                riskType = '';
+            end
+
+            % Find NonMarketRisk objects in this
+            anomIsa = @(x)isa(x, 'internalModel.NonMarketRisk');
+            idxNMR  = cellfun(anomIsa, this.Instruments);
+
+            if ~any(idxNMR)
+                % In this case, only propagate 'ECmarket'
+                ECaggr = ECmarket;
+                return
+            end
+
+            % Collect selected instruments
+            NMRs            = this.Instruments(idxNMR);
+            nmrIdInInstCol  = cellfun(@(x)(x.Name), NMRs, 'UniformOutput', false);        
+
+            % Compare to Portfolio, from node on
+            groupsNmsNeeded = portfolio.findOffspring(portfolioNode);
+            findGID         = @(x)(x.GID);
+            allGroupNms     = cellfun(findGID, portfolio.groups);
+
+            % Find intersection of groups needed for calculation and all
+            % groups (names)
+            [~ ,~ ,idxGrNeeded] = intersect(groupsNmsNeeded, allGroupNms);            
+            groupsNeeded        = portfolio.groups(idxGrNeeded);
+
+            % Check whether 'positions' field is available
+            anomHasPos   = @(x)isfield(x, 'positions');
+            idxHasPos    = cellfun(anomHasPos, groupsNeeded);            
+            groupsHasPos = groupsNeeded(idxHasPos);
+            nmrIdsInPF   = [];
+
+            for iGroupsPos = 1:length(groupsHasPos)
+                nmrIdsInPF = [nmrIdsInPF groupsHasPos{iGroupsPos}.positions.SEC_ID]; %#ok<AGROW> size not known a priori
+            end
+
+            % Find intersection of NMR needed for calculation and all
+            % NMR in the instrumentCollection
+            [~ ,~ , InPfAndIC] = intersect(nmrIdsInPF, nmrIdInInstCol);
+
+            if ~isempty(riskType)
+                NMRsRisk            = NMRs(InPfAndIC);
+                nmrRtInInstCol      = cellfun(@(x)(x.RiskType), NMRsRisk, 'UniformOutput', false);  
+
+                [~, ~, idxRiskType] = intersect(riskType, nmrRtInInstCol);
+                NMRsToCalc          = NMRs(idxRiskType);
+
+            else
+                NMRsToCalc = NMRs(InPfAndIC);
+            end
+
+            % Calculate EC for NMR's
+            ECvector = zeros(numel(NMRsToCalc) + 1, 1);
+
+            for iNMR = 1:numel(NMRsToCalc)
+                % Correct for Reporting Currency, if required
+                instrCurr = NMRsToCalc{iNMR}.Currency;
+                rate      = 1;
+
+                if ~strcmpi(instrCurr, reportingCurrency)
+                    % Rate Conversion call: [startCurrency, TargetCurrency]
+                    rate = forex.getRate(instrCurr, reportingCurrency);
+                end
+
+                % Calculate Non-Market EC, FX corrected
+                ECvector(iNMR) = rate * NMRsToCalc{iNMR}.calculateECVector(confidenceLvl);
+            end
+
+            % Add Market EC at the end of the Vector
+            ECvector(end) = ECmarket;
+
+            % Construct correlation matrix based on current NMR's instruments
+            corrMat = zeros(length(ECvector));
+
+            for iNMR = 1:length(NMRsToCalc)
+                % Loop over rows
+                idxRow = nmCorMat.lookupBEandRT(NMRsToCalc{iNMR});
+
+                for jNMR = 1:length(NMRsToCalc)
+                    % Loop over columns
+                    idxCol  = nmCorMat.lookupBEandRT(NMRsToCalc{jNMR});
+
+                    % Fill matrix entry
+                    corrMat(iNMR, jNMR) = nmCorMat.correlationMatrix(idxRow, idxCol);
+                end
+
+                % Fill last column/row entry, reusage of idxRow for column,
+                % as they are mirrored
+                corrMat(iNMR, end) = nmCorMat.correlationMatrix(idxRow, end);
+                corrMat(end, iNMR) = nmCorMat.correlationMatrix(end, idxRow);
+            end
+
+            % Final entry
+            corrMat(end, end) = nmCorMat.correlationMatrix(end, end);
+            ECaggr = sqrt(ECvector' * corrMat * ECvector) + ECop;
+
+        end % #calculateNonMarketECaggr
+
+    end % #Methods
+
+
+    methods (Access = private)
+
+        function FRBs = extractFixedRateBonds(obj, frbOpts) %#ok<MANU>
+            %% extractFixedRateBonds _private_
+            % 
+            % Inputs:
+            % 
+            % * |frbFlNm|   _char_
+            % 
+            % Initialize
+            frbFlNm    = frbOpts.frbFile;
+            frbRefDate = frbOpts.frbRefDate;
+
+            if isempty(frbFlNm)
+                % Do nothing
+                FRBs = [];
+                return
+            end
+
+            % Check whether file exists
+            if ~exist(frbFlNm, 'file')
+                error('ing:IncorrectFile', ['File ' frbFlNm ' does not exist']);
+            end
+
+            % Define file format
+            format  = [ '%s  %*s %*s %*s %s  %s  %*s %*s %*s %*s ' ...
+                        '%*s %*s %*s %*s %s  %*s %s  %s  %*s %s '  ...
+                        '%s  %*s %s  %s  %s  %s  %s  %s  %*s  %*s '...
+                        '%*s %*s %*s %*s %*s %*s %*s %*s %*s  %*s '...
+                        '%*s %*s %*s %s  %*s %*s %[^\n]'
+                        ];
+
+            % Open file
+            fid  = fopen(frbFlNm, 'r');            
+            data = textscan(fid, format, 'Delimiter', ',');
+            fclose(fid);
+
+            % Info of this instrument in devided on 3 rows of data
+            if mod(length(data{1}), 3)
+                error('ing:IncorrectInput', 'Number of lines shoud be modulo of 3 for FRB');
+            end
+
+            % Initialize
+            iFRB = 0;
+            FRBs = {}; % NOTE: Cannot determine size upfront
+
+            for iLine = 1:3:numel(data{1})
+                % +. Collect FRB members:
+                iFRB = iFRB + 1;
+
+                % Specific FRB members
+                frbProps.notional           = str2double(data{12}{iLine});
+                frbProps.spot               = data{12}{iLine};
+                frbProps.notionalXrFixed    = data{3}{iLine + 2};
+                frbProps.term               = data{13}{iLine};
+                frbProps.termUnit           = data{14}{iLine};
+                frbProps.mvFloor            = str2double(data{15}{iLine});
+                frbProps.referenceDate      = frbRefDate;
+                frbProps.couponRate         = str2double(data{3}{iLine + 1});
+
+                % Type-cast 'maturityDate' into 'datenum' format
+                maturityDate = data{2}{iLine + 1};
+                splitStr     = regexp(maturityDate, '([/])', 'split');
+
+                % First validate Maturity Date 'splitStr'
+                if ~numel(splitStr, 3)
+                    iFRB = iFRB - 1;
+                    continue
+                end
+
+                % Year entry is specified by 4 characters, month entry is
+                % always the second element.
+                yearInd      = find(eq(cellfun(@length, splitStr), 4));
+                monthInd     = 2;
+                dayInd       = sum(~eq([1 3], yearInd) .* [1 3]);
+                maturityDate = datenum(str2num(splitStr{yearInd}),  ...   % year
+                                       str2num(splitStr{monthInd}), ...   % month
+                                       str2num(splitStr{dayInd}));        %#ok<ST2NM> % day
+
+                % +. Generic instrument members
+                instrProps.id            = data{2}{iLine};
+                instrProps.currency      = data{5}{iLine};
+                instrProps.creditSpread  = data{4}{iLine};
+
+                % Define name, used to pinpoint the correct Base Interest Map
+                name            = data{6}{iLine};
+                splitStr        = regexp(name, '-Sim', 'split');
+                instrProps.name = splitStr{1};
+
+                % Define Tenor, based on 'termUnit'
+                if strcmpi(frbProps.termUnit, 'years')
+                    % Coupon payments on a multi-year basic
+                    instrProps.tenor    = str2double(frbProps.term) * 365;
+
+                elseif strcmpi(frbProps.termUnit, 'months')
+                    % Coupon payments on n-Monthly base
+                    instrProps.tenor    = internalModel.DayCount.getDayCount(str2double(frbProps.term));
+
+                else
+                    % Error, undefined tenor
+                    error('ing:FixedRateBondError', 'Cannot determine tenor');
+                end
+
+                % +. Propagate to structure
+                frbProps.maturityDate = maturityDate;
+
+                % Create FRB Instance
+                FRBs{end+1} = internalModel.FixedRateBond(instrProps, frbProps); %#ok<AGROW>
+            end
+
+        end
+
+
+        function EQfw = extractEquityForwards(obj, data)
+            %% extractEquityForwards _private_
+            % |EQfw = extractEquityForwards(data)|
+            % 
+            % Inputs:
+            % 
+            % * |data|  _cell_
+            % 
+            % Outputs:
+            % 
+            % * |EQfw|  _EquityForward_
+            % 
+            % Collect members
+            EQfw_rows       = strcmp(data{4}, 'Equity Forward');
+            nameAndStrike   = data{5}(EQfw_rows);
+            tenor           = str2double(data{10}(EQfw_rows));
+            currency        = data{8}(EQfw_rows);
+            curveNm         = data{9}(EQfw_rows);
+            EQfw            = internalModel.EquityForward.empty(length(nameAndStrike), 0);
+            riskDriver      = regexp(data{14}(EQfw_rows), 'MarketIndex_[\.]{0,1}([A-Za-z0-9\.\_]+)', ...
+                            'tokens');
+            strike          = str2double(data{13}(EQfw_rows));
+
+            % Create instance(s)
+            for iEQfw = 1:size(EQfw, 1)
+                EQfw(iEQfw) = internalModel.EquityForward(...
+                    curveNm{iEQfw}, ...
+                    nameAndStrike{iEQfw}, ...
+                    tenor(iEQfw), ...
+                    currency{iEQfw}, ...
+                    strike(iEQfw), ...
+                    riskDriver{iEQfw}{1}{1} ...
+                    );
+            end
+
+        end
+
+    end % #Methods
+
+
+    methods (Static, Access = private)
+
+        function ZCB = extractZCBs(data)
+            %% extractZCBs _private static_
+            % |ZCB = extractZCBs(data)|
+            % 
+            % Inputs:
+            % 
+            % * |data|  _cell_
+            % 
+            % Outputs:
+            % 
+            % * |ZCB|   _ZeroCouponBond_
+            % 
+            % Collect members
+            ZCB_rows     = strcmp(data{4}, 'Zero Coupon Bond');
+            underlying   = data{10}(ZCB_rows);
+            tenor        = str2double(data{12}(ZCB_rows));
+            currency     = data{9}(ZCB_rows);
+            creditSpread = data{21}(ZCB_rows);
+            instrID      = data{5}(ZCB_rows);
+            notional     = str2double(data{14}(ZCB_rows));
+
+            % Create Instance(s)
+            ZCB = internalModel.ZeroCouponBond.empty(length(underlying), 0);
+
+            for iZCB = 1:size(ZCB, 1)
+                ZCB(iZCB) = internalModel.ZeroCouponBond(...
+                                underlying{iZCB},   ...
+                                tenor(iZCB),        ...
+                                currency{iZCB},     ...
+                                creditSpread{iZCB}, ...
+                                instrID{iZCB},      ...
+                                notional(iZCB)      ...
+                                );
+            end
+        end
+
+
+        function NMR = extractNonMarketRisk(data)
+            %% extractNonMarketRisk _private static_
+            % |NMR = extractEquityForwards(data)|
+            % 
+            % Inputs:
+            % 
+            % * |data|  _cell_
+            % 
+            % Outputs:
+            % 
+            % * |NMR|   _NonMarketRisk_
+            % 
+            % Collect members
+            NMR_rows    = strcmp(data{4}, 'Market Index')&strcmp(data{11}, 'Non Market');
+            name        = data{5}(NMR_rows);
+            currency    = data{8}(NMR_rows);
+            NMR         = internalModel.NonMarketRisk.empty(length(name), 0);
+            params      = cellfun(@str2double,data(12:17),'UniformOutput',false);
+            params      = [params{1}(NMR_rows),params{2}(NMR_rows),params{3}(NMR_rows), ...
+                            params{4}(NMR_rows),params{5}(NMR_rows), ...
+                            params{6}(NMR_rows)];
+
+            % Initialize
+            params(isnan(params)) = 0;
+
+            % Create instance(s)
+            for i = 1:size(NMR,1)
+                ecParameters = params(i,:);
+                NMR(i) = internalModel.NonMarketRisk(...
+                            name{i}, ...
+                            currency{i}, ...
+                            ecParameters ...
+                            );
+            end
+
+        end
+
+
+        function [name, strike] = separateNameAndStrike(nameAndStrike)
+            %% separateNameAndStrike _private static_
+            % |[name, strike] = separateNameAndStrike(nameAndStrike)|
+            % 
+            % Inputs:
+            % 
+            % * |nameAndStrike| _char_
+            % 
+            % Outputs:
+            % 
+            % * |name|          _char_
+            % * |strike|        _double_
+            % 
+            [~,~,~,match]   = regexp(nameAndStrike, '(?<=_Str)[0-9\.]+');
+            strike          = str2double(match);
+            [~,~,~,match]   = regexp(nameAndStrike, '(?<=EqFwd_)[\.\=A-Z0-9_]+(?=_[YM][0-9]+_Str)');
+            name            = match{1};
+        end
+
+    end % #Methods
+end
+
+##### SOURCE END #####
+--></body></html>

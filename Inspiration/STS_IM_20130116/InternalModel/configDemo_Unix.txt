@@ -1,0 +1,24 @@
+%% ConfigDemo
+% configuration file  
+
+% Files
+corrMatFile       = ~ngils/STS_IM_data/corr_matrix_NvG.csv
+riskTypeFile      = ~ngils/STS_IM_data/mapping_RT.csv
+baseEntityFile    = ~ngils/STS_IM_data/mapping_BE.csv
+instFile          = ~ngils/STS_IM_data/instruments_RE.csv
+scenFile          = ~ngils/STS_IM_data/ASE_dummy.csv
+pcaFile           = ~ngils/STS_IM_data/matrix_parameter_curve.csv
+irCurveFile       = ~ngils/STS_IM_data/ir_swap_zero_curve20120629.csv
+portFile          = ~ngils/STS_IM_data/portfolio.xml
+forexFile         = ~ngils/STS_IM_data/fx_foreign_exchange20111230.csv
+eqIndFile         = ~ngils/STS_IM_data/equity_real_estate_index_curve20111230.csv
+creditSpreadFile  = ~ngils/STS_IM_data/CreditSpreadData.csv
+
+% outputFile
+outputFile        = /home/matlab/matlab_home/shadow_model_im/output/output.csv
+
+% confidenceLevel
+confidenceLvl     = 0.995
+
+% Reporting currency
+reportingCurrency = USD

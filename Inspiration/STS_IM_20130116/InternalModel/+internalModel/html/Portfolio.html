@@ -1,0 +1,579 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Portfolio</title><meta name="generator" content="MATLAB 7.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-11-01"><meta name="DC.source" content="Portfolio.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Portfolio class definition</a></li><li><a href="#2">Properties</a></li><li><a href="#3">Methods</a></li><li><a href="#4">Portfolio <i>constructor</i></a></li><li><a href="#6">aggregateElements</a></li><li><a href="#8">findOffspring</a></li><li><a href="#10">getLegalEntities</a></li><li><a href="#12">findGroupByGID</a></li><li><a href="#14">findAncestors <i>private</i></a></li><li><a href="#16">findChildNodes <i>private</i></a></li><li><a href="#18">readGroup <i>private</i></a></li></ul></div><h2>Portfolio class definition<a name="1"></a></h2><p>handle class</p><h2>Properties<a name="2"></a></h2><div><ul><li><tt>groups</tt>        <i>cell</i></li><li><tt>groupLevel</tt>    <i>double</i></li></ul></div><p><b><i>Private properties:</i></b></p><div><ul><li><tt>groupCharAr</tt>   <i>cell</i></li></ul></div><h2>Methods<a name="3"></a></h2><div><ul><li><tt>obj       = Portfolio(flNm)</tt>               <i>constructor</i></li><li><tt>offspring = findOffspring(obj, node)</tt></li><li><tt>[unInstr, unWeight] = aggregateElements(obj, node, calcNonMarketRisk)</tt></li></ul></div><p><b><i>Private</i></b></p><div><ul><li><tt>ancestors    = findAncestors(obj, nodes)</tt></li><li><tt>exportChilds = findChildNodes(obj, nodes)</tt></li><li><tt>group        = readGroup(obj)</tt></li></ul></div><h2>Portfolio <i>constructor</i><a name="4"></a></h2><p><tt>obj = Portfolio(flNm)</tt></p><p>Construct a portfolio object from a portfolio xml file</p><p>Inputs:</p><div><ul><li><tt>flNm</tt>      <i>char</i></li></ul></div><h2>aggregateElements<a name="6"></a></h2><p><tt>[unInstr, unWeight] = aggregateElements(obj, node, calcNonMarketRisk)</tt></p><p>Aggregate the elements which are in hierarchy deeper than 'node' in the portfolio object.</p><p>The calcNonMarketRisk flag determines whether market elements <tt>false</tt>) or non market elements (<tt>true</tt>) are aggregated (default <tt>calcNonMarketRisk = false</tt>)</p><p>Inputs:</p><div><ul><li><tt>node</tt>              <i>char</i></li><li><tt>calcNonMarketRisk</tt> <i>logical</i></li></ul></div><p>Outputs:</p><div><ul><li><tt>unInstr</tt>           <i>cell</i></li><li><tt>unWeight</tt>          <i>double</i></li></ul></div><h2>findOffspring<a name="8"></a></h2><p><tt>offspring  = findOffspring(obj, node)</tt></p><p>Find all nodes in hierarchy below <tt>node</tt> (all offspring) in the portfolio object</p><p>Inputs:</p><div><ul><li><tt>node</tt>          <i>char</i> or <i>cell</i></li></ul></div><p>Outputs:</p><div><ul><li><tt>offspring</tt>     <i>cell</i></li></ul></div><h2>getLegalEntities<a name="10"></a></h2><p>Find all Legal Entities and add them to the corresponding Business Enitites and their offspring</p><h2>findGroupByGID<a name="12"></a></h2><p>Inputs:</p><div><ul><li><tt>GID</tt>   <i>char</i></li></ul></div><p>Outputs:</p><div><ul><li><tt>group</tt> <i>struct</i></li></ul></div><h2>findAncestors <i>private</i><a name="14"></a></h2><p><tt>ancestors = findAncestors(obj, nodes)</tt></p><p>Find all ancestor-nodes above <tt>nodes</tt> in the portfolio hierarchy.</p><p>Input:</p><div><ul><li>nodes        <i>char</i> or <i>cell</i></li></ul></div><p>Output:</p><div><ul><li>ancestors    <i>cell</i></li></ul></div><h2>findChildNodes <i>private</i><a name="16"></a></h2><p><tt>exportChilds = findChildNodes(obj, nodes)</tt></p><p>Find the child nodes of a cell-array of nodes</p><p>Input:</p><div><ul><li>nodes           <i>char</i> or <i>cell</i></li></ul></div><p>Output:</p><div><ul><li>exportChilds    <i>cell</i></li></ul></div><h2>readGroup <i>private</i><a name="18"></a></h2><p><tt>group = readGroup(obj)</tt></p><p>obj contains property groupCharAr for internal use. It contains a cell array including all text from a single group.</p><p>Outputs:</p><div><ul><li><tt>group</tt> <i>struct</i></li></ul></div><p class="footer"><br>
+      Published with MATLAB&reg; 7.14<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Portfolio class definition
+% handle class
+
+classdef Portfolio < handle
+
+    %% Properties
+    % 
+    % * |groups|        _cell_
+    % * |groupLevel|    _double_
+    % 
+    % *_Private properties:_*
+    % 
+    % * |groupCharAr|   _cell_
+
+    properties 
+        groups      = {}
+        groupLevel  = []
+    end
+
+
+    properties (Access = private)
+        groupCharAr = {}
+    end
+
+
+    %% Methods
+    % 
+    % * |obj       = Portfolio(flNm)|               _constructor_
+    % * |offspring = findOffspring(obj, node)|
+    % * |[unInstr, unWeight] = aggregateElements(obj, node, calcNonMarketRisk)|
+    % 
+    % *_Private_*
+    % 
+    % * |ancestors    = findAncestors(obj, nodes)|
+    % * |exportChilds = findChildNodes(obj, nodes)|
+    % * |group        = readGroup(obj)|
+
+    methods
+
+        function obj = Portfolio(flNm)
+            %% Portfolio _constructor_
+            % |obj = Portfolio(flNm)|
+            % 
+            % Construct a portfolio object from a portfolio xml file
+            % 
+            % Inputs:
+            % 
+            % * |flNm|      _char_
+
+            if ~eq(exist(flNm, 'file'), 2)
+                % file not found
+                error('ing:FileNotFound', 'File not found');
+            end
+
+            % Fetch File Identifier and start reading
+            fid  = fopen(flNm);                
+            line = fgets(fid);
+
+            while ~isempty(line) && ischar(line)
+                % Checking tag of line
+                isGroup = regexp(line, '<Group\s');
+
+                % Read whole group 
+                if isGroup
+                    obj.groupCharAr{1} = line;
+
+                    % Check whether Groups end on same line
+                    endOnSameLine = regexp(line, '.*/>', 'once');
+
+                    if isempty(endOnSameLine)
+                        line       = fgets(fid);
+                        isGroupEnd = regexp(line, '</Group\s');
+
+                        while isempty(isGroupEnd)
+                            obj.groupCharAr{end + 1, 1} = line;
+                            line       = fgets(fid);
+                            isGroupEnd = regexp(line, '</Group[\s>]');
+                        end
+
+                        % Add line includeing </Group>
+                        obj.groupCharAr{end + 1, 1} = line;
+                    end
+
+                    % Retrieve group information
+                    obj.groups{end + 1} = obj.readGroup();
+
+                    % Clear obj.groupCharAr
+                    obj.groupCharAr = {};
+                end
+
+                % Read next line, for conditional while statement
+                line = fgets(fid);
+            end
+
+            % Close file
+            fclose(fid);
+
+            % Find levels for each group
+            GIDs      = cellfun(@(x)(x.GID), obj.groups);
+            ancestors = obj.findAncestors(GIDs);
+
+            for iGroup = 1:length(obj.groups)
+                ancPerGroup            = ancestors(:, iGroup);                
+                nrOfAncestors          = sum(~cellfun(@isempty, ancPerGroup)) + 1;
+                obj.groupLevel(iGroup) = nrOfAncestors;
+            end
+
+            % Collect legal entities
+            obj.getLegalEntities();
+
+        end
+
+
+        function [unInstr, unWeight] = aggregateElements(obj, node, calcNonMarketRisk)
+            %% aggregateElements
+            % |[unInstr, unWeight] = aggregateElements(obj, node,
+            % calcNonMarketRisk)|
+            % 
+            % Aggregate the elements which are in hierarchy deeper than
+            % 'node' in the portfolio object. 
+            % 
+            % The calcNonMarketRisk flag determines whether market elements 
+            % |false|) or non market elements (|true|) are aggregated 
+            % (default |calcNonMarketRisk = false|)
+            % 
+            % Inputs:
+            % 
+            % * |node|              _char_
+            % * |calcNonMarketRisk| _logical_
+            % 
+            % Outputs:
+            % 
+            % * |unInstr|           _cell_
+            % * |unWeight|          _double_
+
+            % Check if node has a value
+            if isempty(node) || ~ischar(node)
+                warning('ing:charRequested', 'Input #1 should be a char array');
+                return
+            end
+
+            if nargin < 3
+                % nonMarketRisk is assumed false
+                calcNonMarketRisk = false;
+
+            elseif nargin == 3 && ~islogical(calcNonMarketRisk)
+                error('ing:boolRequested', 'Input #2 should be a logical');
+
+            end
+
+            % Search for all offspring
+            childNodes = obj.findOffspring(node); 
+            childNodes{end + 1} = node;
+ 
+            % ChildNodes now contains all offspring from input node.
+            % Find all positions which are in the offspring:
+            GIDs      = cellfun(@(x)(x.GID), obj.groups)';
+            positions = [];
+
+            for iChild = 1:numel(childNodes)
+                idxChilds = strcmp(childNodes{iChild}, GIDs);
+                hasPos    = isfield(obj.groups{idxChilds}, 'positions');
+
+                if hasPos
+                    positions = [positions obj.groups{idxChilds}.positions]; %#ok<AGROW> Size not known a priori
+                end
+            end
+
+            nonmarketString = 'Non-market';
+            idxNMPos        = false(length(positions), 1);
+
+            for iPos = 1:length(positions)
+                % Find all the positions propeties which are non-market
+                idxNMPos(iPos) = any(arrayfun(@(x)strcmpi(x.VALUE, nonmarketString), ...
+                                     positions(iPos).properties));
+            end
+
+            if ~calcNonMarketRisk
+                % Calculate market risk 
+                idxPosUsed = ~idxNMPos;
+            else
+                % Calculate non-market risk 
+                idxPosUsed = idxNMPos;
+            end
+
+            % Check whether any position should be used
+            if ~any(idxPosUsed)
+                unInstr  = [];
+                unWeight = [];
+                return
+            end
+
+            % Prepare output
+            instruments = [positions(idxPosUsed).SEC_ID]';
+            weight      = cellfun(@(x)str2double(x), [positions(idxPosUsed).POS_SZ])';
+
+            % Collect unique instruments
+            [unInstr, unInInput, unInOutput] = unique(instruments, 'stable');
+            unWeight = zeros(length(unInInput), 1);
+
+            if numel(unInInput) ~= numel(unInOutput)
+                % Duplicates are found, weights need to be summed
+                for iOutput = 1:numel(unInInput)
+                    unWeight(iOutput) = sum(weight(unInOutput == iOutput));
+                end
+
+            else
+                % No duplicates, so output
+                unWeight = weight;
+            end
+        end
+
+
+        function offspring = findOffspring(obj, node)
+            %% findOffspring
+            % |offspring  = findOffspring(obj, node)|
+            % 
+            % Find all nodes in hierarchy below |node| (all offspring) in
+            % the portfolio object
+            % 
+            % Inputs:
+            % 
+            % * |node|          _char_ or _cell_
+            % 
+            % Outputs:
+            % 
+            % * |offspring|     _cell_
+            newChilds = obj.findChildNodes(node);
+            offspring = newChilds(:);
+
+            while ~isempty(newChilds)
+                newChilds = obj.findChildNodes(newChilds);
+
+                for iNewChilds = 1:length(newChilds(:))
+                    offspring{end + 1} = newChilds{iNewChilds}; %#ok<AGROW> Size not known a priori
+                end
+            end
+        end
+
+
+        function getLegalEntities(obj)
+            %% getLegalEntities
+            % 
+            % Find all Legal Entities and add them to the corresponding
+            % Business Enitites and their offspring
+
+            % Only groups having the highest level can contain properties
+            maxLvl       = max(obj.groupLevel);            
+            maxLvlGroups = [obj.groups{obj.groupLevel == maxLvl}];
+            allGIDs      = cellfun(@(x)(x.GID{1}), obj.groups, 'UniformOutput', false);
+
+            for iGroup = 1:numel(maxLvlGroups)
+                % Identify Legal Entities
+                fldNms   = fieldnames(maxLvlGroups(iGroup).positions(1).properties);
+                idxName  = strcmpi('name', fldNms);                                
+                idxValue = strcmpi('value', fldNms);
+                propNms  = [maxLvlGroups(iGroup).positions(1).properties.(fldNms{idxName})];
+                idxLEcll = regexp(propNms, 'Legal Entity');
+                idxLE    = ~cellfun(@isempty, idxLEcll);
+
+                if ~any(idxLE)
+                    warning('ing:Portfolio:NoLE', 'No legal entities found in portfolio');
+                    return
+                end
+
+                leVal = maxLvlGroups(iGroup).positions(1).properties(idxLE).(fldNms{idxValue});
+                anc   = obj.findAncestors(maxLvlGroups(iGroup).GID);
+
+                % All (3-level up) ancestors (groups) and their offspring should have 
+                % the same Legal Entity, for these groups a field legalEntity is created
+                % 
+                % Three levels up REPLACE_WITH_DASH_DASH> baseEntity
+                baseEntity  = anc{3};
+                offspring   = obj.findOffspring(baseEntity);
+                offInclBase = [{baseEntity} offspring{:}];
+
+                % Search tree
+                for jOffspring = 1:numel(offInclBase)
+
+                    idxGroup = strcmp(offInclBase{jOffspring}, allGIDs);
+
+                    if any(idxGroup) 
+                        % Group found
+                        if ~isfield(obj.groups{idxGroup}, 'legalEntity') 
+                            % Add legalEntity field to structure
+                            obj.groups{idxGroup}.legalEntity = leVal{1};
+
+                        elseif ~strcmp(obj.groups{idxGroup}.legalEntity, leVal)
+                            % field legalEntity is found, however, its value is not equal to leVal
+                            error('ing:ErrorINPortfoio', 'Error in Portfolio, inconsistent legal entities');
+                        end
+
+                    else
+                        % Group not found
+                        continue
+                    end
+                end
+            end
+        end        
+    end
+
+
+    methods (Access = private)
+
+        function group = findGroupByGID(obj, GID)
+            %% findGroupByGID
+            % 
+            % Inputs:
+            % 
+            % * |GID|   _char_
+            % 
+            % Outputs:
+            % 
+            % * |group| _struct_
+            allGIDs  = cellfun(@(x)(x.GID{1}), obj.groups, 'UniformOutput', false);
+            idxGroup = strcmp(GID, allGIDs);
+
+            if any(idxGroup)
+                group = obj.groups{idxGroup};
+            else
+                group = [];
+            end
+        end
+
+
+        function ancestors = findAncestors(obj, nodes)
+            %% findAncestors _private_
+            % |ancestors = findAncestors(obj, nodes)|
+            % 
+            % Find all ancestor-nodes above |nodes| in the portfolio hierarchy.
+            % 
+            % Input:
+            % 
+            % * nodes        _char_ or _cell_
+            % 
+            % Output:
+            % 
+            % * ancestors    _cell_
+            if isempty(nodes)
+                return
+            end
+
+            if ~iscell(nodes)
+                nodes = {nodes};
+            end
+
+            GIDs      = cellfun(@(x)(x.GID), obj.groups);
+            allChilds = cell(length(obj.groups), 1);
+
+            for iGroup = 1:numel(obj.groups)
+                if isfield(obj.groups{iGroup}, 'groupRefs')
+                    allChilds{iGroup} = obj.groups{iGroup}.groupRefs;
+                end
+            end
+
+            ancestors = cell(1, numel(nodes));
+
+            for iNode = 1:numel(nodes)
+                idxAncestor = true(size(GIDs));
+                nodeToFind  = nodes{iNode};
+                iAncestor   = 0;
+
+                while any(idxAncestor)
+
+                    iAncestor   = iAncestor + 1;
+                    anomStrcmp  = @(x)strcmp(nodeToFind, x);
+                    cllAncestor = cellfun(anomStrcmp, allChilds, 'UniformOutput', false);
+                    anomAny     = @any;
+                    idxAncestor = cellfun(anomAny, cllAncestor);
+
+                    if any(idxAncestor)
+                        nodeToFind = GIDs{idxAncestor};
+                        ancestors{iAncestor, iNode} = nodeToFind;
+                    end
+                end                
+            end
+        end
+
+
+        function exportChilds = findChildNodes(obj, nodes)
+            %% findChildNodes _private_
+            % |exportChilds = findChildNodes(obj, nodes)|
+            % 
+            % Find the child nodes of a cell-array of nodes
+            % 
+            % Input:
+            % 
+            % * nodes           _char_ or _cell_
+            % 
+            % Output:
+            % 
+            % * exportChilds    _cell_
+            if isempty(nodes)
+                return
+            end
+
+            if ~iscell(nodes)
+                nodes = {nodes};
+            end
+
+            GIDs      = cellfun(@(x)(x.GID), obj.groups);            
+            allChilds = cell(numel(obj.groups), 1);
+
+            for iGroup = 1:numel(obj.groups)
+                if isfield(obj.groups{iGroup}, 'groupRefs')
+                    allChilds{iGroup} = obj.groups{iGroup}.groupRefs;
+                end
+            end
+
+            for iNode = 1:numel(nodes)
+                childs{iNode, :} = allChilds{strcmp(GIDs, nodes{iNode})}; %#ok<AGROW> size is not known a priori
+                exportChilds     = [childs{:}];
+            end
+        end
+
+
+        function group = readGroup(obj)
+            %% readGroup _private_
+            % |group = readGroup(obj)|
+            % 
+            % obj contains property groupCharAr for internal use. It
+            % contains a cell array including all text from a single group.
+            % 
+            % Outputs:
+            % 
+            % * |group| _struct_
+
+            % Check whether obj.groupCharAr is empty, if so return without
+            % taking any further action
+            if isempty(obj.groupCharAr)
+                return
+            end
+
+            % Extract data
+            GID         = regexp(obj.groupCharAr, '<Group\s.*GID="([0-9a-zA-Z_-\s]+)"', 'tokens');
+            NAME        = regexp(obj.groupCharAr, '\sNAME="([0-9a-zA-Z_-\s]+)"', 'tokens');
+            TYPE        = regexp(obj.groupCharAr, '\sTYPE="([0-9a-zA-Z_-\s]+)"', 'tokens');
+            NTYPE       = regexp(obj.groupCharAr, '\sNTYPE="([0-9a-zA-Z_-\s]+)"', 'tokens');
+
+            groupRefs   = regexp(obj.groupCharAr, '<GroupRef\sGID="([0-9a-zA-Z_-\s]+)"', 'tokens');
+            SEC_ID      = regexp(obj.groupCharAr, '<Position.+SEC_ID="([0-9a-zA-Z_-\s./=&;%]+)"', 'tokens');
+            POS_SZ      = regexp(obj.groupCharAr, '<Position.+POS_SZ="([0-9a-zA-Z_-\s./=&;%]+)"', 'tokens');
+
+            hasPos      = regexp(obj.groupCharAr, '<Position');
+            idxHasPos   = ~cellfun(@isempty, hasPos);
+            hasProp     = regexp(obj.groupCharAr, '<Property');
+            idxHasProp  = ~cellfun(@isempty, hasProp);
+            propName    = cell(length(idxHasProp), 1);
+            propValue   = cell(length(idxHasProp), 1);
+
+            if any(idxHasProp)  
+                for iHasProp = 1:length(idxHasProp)
+                    if strfind(obj.groupCharAr{iHasProp}, 'Property')
+                        propName{iHasProp}  = regexp(obj.groupCharAr(iHasProp), '([A-Z_]+)=', 'tokens');
+                        propValue{iHasProp} = regexp(obj.groupCharAr(iHasProp), '="([A-Za-z0-9-_\.\(\)\s%]+)"', 'tokens');
+                    end
+                end
+            end
+
+            % Use data to define group, properties come later
+            tableNm       = {'GID', 'NAME', 'TYPE', 'NTYPE', 'groupRefs'};
+            tableVal      = [GID NAME TYPE NTYPE groupRefs];
+            idxTableProps = ~cellfun(@isempty, tableVal);
+ 
+            for iTableProp = 1:size(idxTableProps, 2)
+
+                if any(idxTableProps(:, iTableProp))
+                    propVals                    = [tableVal{idxTableProps(:, iTableProp), iTableProp}];
+                    group.(tableNm{iTableProp}) = [propVals{:}];
+                end
+            end
+
+            if any(idxHasPos)
+                group.positions(sum(idxHasPos)) = struct('SEC_ID', [], 'POS_SZ', [], 'properties', []);
+
+                % To be copied
+                sec_ids    = [SEC_ID{idxHasPos}];
+                pos_szs    = [POS_SZ{idxHasPos}];
+                propNames  = [propName{idxHasProp}];
+                propValues = [propValue{idxHasProp}];
+
+                % Find properties belonging to this position
+                idxProps        = find(idxHasProp);
+                idxPos          = find(idxHasPos);
+                idxPos(end + 1) = length(idxHasPos);
+
+                for iPos = 1:sum(idxHasPos)
+                    group.positions(iPos).SEC_ID = sec_ids{iPos};
+                    group.positions(iPos).POS_SZ = pos_szs{iPos};
+
+                    % Only use items belonging to this position
+                    idxPropsToPos   = idxProps > idxPos(iPos) & idxProps < idxPos(iPos + 1);
+
+                    for iProperty = 1:length(idxPropsToPos)
+                        % Loop over Properties belonging to Position
+                        if idxPropsToPos(iProperty)
+                            for jProperty = 1:length(propNames{iProperty})
+
+                                propNm  = propNames{iProperty}{jProperty}{1};
+                                propVal = propValues{iProperty}{jProperty};
+
+                                % Create temp struct
+                                property(iProperty).(propNm) = propVal; %#ok<AGROW> cannot be allocated
+                            end
+                        end
+                    end
+
+                    % Add property to positions
+                    group.positions(iPos).properties = property;
+                end          
+            end            
+        end
+
+    end % #Methods
+
+end
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Message SYSTEM "BBalgo.dtd">
+
+<Message>
+  <Response UUID="INGGROUP" RTAG="closure47">
+    <Group GID="Portfolios" NAME="All Portfolios" TYPE="SELLFIRM" NTYPE="ROOT">
+      
+      <GroupRef GID="Reported_portfolio"/>
+      
+    </Group>
+    
+    <Group GID="Reported_portfolio" NAME="Reported portfolio" TYPE="SELLFIRM">
+      
+      <GroupRef GID="Reported_portfolio_ING_GROUP"/>
+    
+    </Group>
+    
+    <Group GID="Reported_portfolio_ING_GROUP" NAME="ING Group" TYPE="SELLFIRM">
+      
+     <GroupRef GID="DV_1"/>
+
+     <GroupRef GID="DV_2"/>
+    
+    </Group>
+    
+    <Group GID="DV_1" NAME="Insurance" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_1"/>
+    </Group>
+    <Group GID="DV_2" NAME="Insurance" TYPE="DEPT">
+      <GroupRef GID="DV_2_BL_1"/>
+    </Group>
+    <Group GID="DV_1_BL_1" NAME="Test Business Line" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_1_TESTA"/>
+    </Group>
+    <Group GID="DV_2_BL_1" NAME="Test Business Line" TYPE="DEPT">
+      <GroupRef GID="DV_2_BL_1_TESTA"/>
+    </Group>
+    <Group GID="DV_1_BL_1_TESTA" NAME="ING Test A" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_1_TESTA_PF_00001"/>
+    </Group>
+    <Group GID="DV_2_BL_1_TESTA" NAME="ING Test A" TYPE="DEPT">
+      <GroupRef GID="DV_2_BL_1_TESTA_PF_00001"/>
+    </Group>
+    <Group GID="DV_1_BL_1_TESTA_PF_00001" NAME="Product Family Test" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_1_TESTA_PF_00001_LIABILITIES"/>
+      <GroupRef GID="DV_1_BL_1_TESTA_PF_00001_NONMARKETDATA"/>
+    </Group>
+    <Group GID="DV_2_BL_1_TESTA_PF_00001" NAME="Product Family Test" TYPE="DEPT">
+      <GroupRef GID="DV_2_BL_1_TESTA_PF_00001_LIABILITIES"/>
+      <GroupRef GID="DV_2_BL_1_TESTA_PF_00001_NONMARKETDATA"/>
+    </Group>
+    <Group GID="DV_1_BL_1_TESTA_PF_00001_LIABILITIES" NAME="Liabilities" TYPE="DEPT">
+      <GroupRef GID="DV_1_BL_1_TESTA_PF_00001_PFM_00001"/>
+    </Group>
+    <Group GID="DV_2_BL_1_TESTA_PF_00001_LIABILITIES" NAME="Liabilities" TYPE="DEPT">
+      <GroupRef GID="DV_2_BL_1_TESTA_PF_00001_PFM_00001"/>
+    </Group>
+    <Group GID="DV_1_BL_1_TESTA_PF_00001_PFM_00001" NAME="Liabilities PFM" TYPE="BOOK">
+      <Position SEC_ID="ZCB_EUR-SWAP_M01" POS_SZ="1000">
+        <Property NAME="Balance Sheet" VALUE="Liability"/>
+        <Property NAME="Region" VALUE="EUROPE"/>
+      </Position>
+      <Position SEC_ID="ZCB_EUR-SWAP_M05" POS_SZ="2000">
+        <Property NAME="Balance Sheet" VALUE="Liability"/>
+        <Property NAME="Region" VALUE="EUROPE"/>
+      </Position>
+      <Position SEC_ID="ZCB_EUR-SWAP_Y122" POS_SZ="3000">
+        <Property NAME="Balance Sheet" VALUE="Liability"/>
+        <Property NAME="Region" VALUE="EUROPE"/>
+      </Position>
+    </Group>
+    <Group GID="DV_2_BL_1_TESTA_PF_00001_PFM_00001" NAME="Liabilities PFM" TYPE="BOOK">
+      <Position SEC_ID="ZCB_EUR-SWAP_M01" POS_SZ="1000">
+        <Property NAME="Balance Sheet" VALUE="Liability"/>
+        <Property NAME="Region" VALUE="EUROPE"/>
+      </Position>
+    </Group>
+    <Group GID="DV_1_BL_1_TESTA_PF_00001_NONMARKETDATA" NAME="Non Market Data" TYPE="BOOK">
+      <Position SEC_ID="TESTA_Product_Family_Test_MTL_ED_20120101123456781" POS_SZ="1">
+        <Property NAME="Balance Sheet" VALUE="Non-market"/>
+        <Property NAME="Region" VALUE="EUROPE"/>
+      </Position>
+      <Position SEC_ID="TESTA_Product_Family_Test_MTV_ED_20120101123456782" POS_SZ="1">
+        <Property NAME="Balance Sheet" VALUE="Non-market"/>
+        <Property NAME="Region" VALUE="EUROPE"/>
+      </Position>
+    </Group>
+    <Group GID="DV_2_BL_1_TESTA_PF_00001_NONMARKETDATA" NAME="Non Market Data" TYPE="BOOK">
+     <Position SEC_ID="TESTA_Product_Family_Test_MTT_ED_20120101123456780" POS_SZ="1">
+        <Property NAME="Balance Sheet" VALUE="Non-market"/>
+        <Property NAME="Region" VALUE="EUROPE"/>
+      </Position>
+      <Position SEC_ID="TESTA_Product_Family_Test_MTL_ED_20120101123456781" POS_SZ="1">
+        <Property NAME="Balance Sheet" VALUE="Non-market"/>
+        <Property NAME="Region" VALUE="EUROPE"/>
+      </Position>
+      <Position SEC_ID="TESTA_Product_Family_Test_PRR_ED_20120101123456782" POS_SZ="1">
+        <Property NAME="Balance Sheet" VALUE="Non-market"/>
+        <Property NAME="Region" VALUE="EUROPE"/>
+      </Position>
+    </Group>
+  </Response>
+</Message>
+

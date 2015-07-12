@@ -1,0 +1,887 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Calculate</title><meta name="generator" content="MATLAB 7.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-11-01"><meta name="DC.source" content="Calculate.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Calculate</a></li><li><a href="#2">Properties</a></li><li><a href="#3">Methods</a></li><li><a href="#4">Calculate <i>constructor</i></a></li><li><a href="#6">calcInterestRate</a></li><li><a href="#8">processConfigFile</a></li><li><a href="#10">processPcaFile</a></li><li><a href="#12">runTopLevel</a></li><li><a href="#14">run</a></li><li><a href="#16">reportTopLevel</a></li><li><a href="#18">report</a></li><li><a href="#20">calcShockedProperties</a></li><li><a href="#23">getShockedPropTable <i>static</i></a></li></ul></div><h2>Calculate<a name="1"></a></h2><p>This class performs IM Calculations and prepares reports.</p><h2>Properties<a name="2"></a></h2><div><ul><li><tt>configFile</tt>    <i>Char</i></li><li><tt>corrMat</tt>       <i>NonMarketCorrMatrix</i></li><li><tt>creditSpread</tt>  <i>Struct</i></li><li><tt>cube</tt>          <i>Cube</i></li><li><tt>forexCol</tt>      <i>ForeignExchange</i></li><li><tt>instCol</tt>       <i>InstrumentCollection</i></li><li><tt>parameters</tt>    <i>Struct</i></li><li><tt>portfolio</tt>     <i>Portfolio</i></li><li><tt>results</tt>       <i>Cell</i></li><li><tt>scenCol</tt>       <i>ScenarioCollection</i></li><li><tt>utilities</tt>     <i>Utilities</i></li></ul></div><p><b><i>private</i></b></p><div><ul><li>shockedInterestLib <i>Cell</i></li></ul></div><h2>Methods<a name="3"></a></h2><div><ul><li><tt>obj                = Calculate(configFile)</tt> <i>constructor</i></li><li><tt>obj                = calcInterestRate(obj)</tt></li><li><tt>[obj, errorMsg]    = processConfigFile(obj, varargin)</tt></li><li><tt>PCA                = processPcaFile(obj, varargin)</tt></li><li><tt>[obj, errorMsg]    = runTopLevel(obj, varargin)</tt></li><li><tt>[result, errorMsg] = run(obj, confidenceLevel, reportingCurrency, varargin)</tt></li><li><tt>errorMsg           = reportTopLevel(obj, varargin)</tt></li><li><tt>errorMsg           = report(obj, reportFlnm, result, varargin)</tt></li><li><tt>obj                = calcShockedProperties(obj)</tt></li><li><tt>table              = getShockedPropTable()</tt></li></ul></div><h2>Calculate <i>constructor</i><a name="4"></a></h2><p><tt>obj = Calculate(configFile)</tt></p><p>Input:</p><div><ul><li><tt>configFile</tt>      <i>Char</i></li></ul></div><h2>calcInterestRate<a name="6"></a></h2><p><tt>obj = calcInterestRate(obj)</tt></p><p>Interest Rates depend on a tenor and a risk-driver (optional). Therefore, Interest Rates are calculated per instrument.</p><p>Calculate Total Interest Rate:</p><p><img src="Calculate_eq11431.png" alt="$r_{tot} = (r_{base} + r_{cs}) \cdot r_{shocked}$"></p><p>with:</p><p><img src="Calculate_eq86324.png" alt="$r_{base}$"> = Base Interest Rate as function of tenor</p><p><img src="Calculate_eq39792.png" alt="$r_{cs}$"> = Credit Spread Interest Component as function of riskDriver</p><p><img src="Calculate_eq03319.png" alt="$r_{shocked}   = \exp(\sum_{i=1}^4 PCA_i * EV_i(tenor))$"></p><p>The 'shocked interest' component may be readily available for particular tenors. This library is implemented for performance purposes: 'Rshocked' is the most demanding interest component, re-using is deemed beneficial for large EC Calculations.</p><h2>processConfigFile<a name="8"></a></h2><p><tt>[obj, errorMsg] = processConfigFile(obj, varargin)</tt></p><p>Process configuration file. Should contain:</p><div><ul><li>instruments file name</li><li>scenarios file name</li><li>portfolio file name</li><li>interest rate curve file name</li><li>correlation matrix file name</li><li>mapping Base entity file name</li><li>mapping Risk type file name</li><li>pcaFile (Under Development)</li><li>foreign exchange file</li></ul></div><h2>processPcaFile<a name="10"></a></h2><p><tt>PCA = processPcaFile(obj, varargin)</tt></p><p>Process PCA file.</p><p>1. Read raw PCA data For allocating</p><h2>runTopLevel<a name="12"></a></h2><p><tt>[obj, errorMsg] = runTopLevel(obj, varargin)</tt></p><p>Top-Level IM Calculation method. In case the user requests a batch-run of multiple confidence levels, this is handled here. A results structure is build, one for each run.</p><h2>run<a name="14"></a></h2><p><tt>[result, errorMsg] = run(obj, confidenceLevel, reportingCurrency, varargin)</tt></p><p>Perform individual Internal Market Run</p><h2>reportTopLevel<a name="16"></a></h2><p><tt>errorMsg = reportTopLevel(obj, varargin)</tt></p><p>Top-Level Reporting method. Reports are generated for each confidence level, for each reporting currency.</p><h2>report<a name="18"></a></h2><p>Create individual report <tt>errorMsg = report(obj, reportFlnm, result, varargin)</tt></p><h2>calcShockedProperties<a name="20"></a></h2><p><tt>obj = calcShockedProperties(obj)</tt></p><h2>getShockedPropTable <i>static</i><a name="23"></a></h2><p><tt>table = getShockedPropTable()</tt></p><p>Table is a cell matrix with columns being:</p><div><ol><li>Instrument Class Name</li><li>Instrument Property (as defined in class)</li><li>Prefix in scenario file</li><li>Post fix</li><li>evaluation to obtain base value</li></ol></div><p class="footer"><br>
+      Published with MATLAB&reg; 7.14<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Calculate
+% This class performs IM Calculations and prepares reports.
+
+classdef Calculate
+
+    %% Properties
+    %
+    % * |configFile|    _Char_
+    % * |corrMat|       _NonMarketCorrMatrix_
+    % * |creditSpread|  _Struct_
+    % * |cube|          _Cube_
+    % * |forexCol|      _ForeignExchange_
+    % * |instCol|       _InstrumentCollection_
+    % * |parameters|    _Struct_
+    % * |portfolio|     _Portfolio_
+    % * |results|       _Cell_
+    % * |scenCol|       _ScenarioCollection_
+    % * |utilities|     _Utilities_
+    %
+    % *_private_*
+    %
+    % * shockedInterestLib _Cell_
+
+    properties
+
+        configFile
+        corrMat
+        creditSpread
+        cube
+        forexCol
+        instCol
+        parameters
+        portfolio
+        results
+        scenCol
+        utilities
+
+    end % #Properties Public
+
+
+    properties (SetAccess = private, GetAccess = public)
+
+        shockedInterestLib
+
+    end % #Properties Private
+
+
+    methods
+        %% Methods
+        % 
+        % * |obj                = Calculate(configFile)| _constructor_
+        % * |obj                = calcInterestRate(obj)|
+        % * |[obj, errorMsg]    = processConfigFile(obj, varargin)|
+        % * |PCA                = processPcaFile(obj, varargin)|
+        % * |[obj, errorMsg]    = runTopLevel(obj, varargin)|
+        % * |[result, errorMsg] = run(obj, confidenceLevel, reportingCurrency, varargin)|
+        % * |errorMsg           = reportTopLevel(obj, varargin)|
+        % * |errorMsg           = report(obj, reportFlnm, result, varargin)|
+        % * |obj                = calcShockedProperties(obj)|
+        % * |table              = getShockedPropTable()| 
+
+        function obj = Calculate(configFile)
+            %% Calculate _constructor_
+            % |obj = Calculate(configFile)|
+            %
+            % Input:
+            %
+            % * |configFile|      _Char_
+
+            % 0. Initialize
+            obj.instCol      = [];
+            obj.scenCol      = [];
+            obj.forexCol     = [];
+            obj.corrMat      = [];
+            obj.portfolio    = [];
+            obj.creditSpread = [];
+            obj.parameters   = [];
+            obj.utilities    = internalModel.Utilities();
+
+            % Configuration File must exist
+            if ~exist(configFile, 'file');
+                error('STS_CM:FileDoesNotExist', [configFile ' does not exist']);
+            end
+
+            % Set 'configFile' as a member, for reference purposes
+            obj.configFile  = configFile;
+
+            % 1. Process 'configFile' contents
+            [obj, errorMsg] = obj.processConfigFile();
+
+            if ~isempty(errorMsg)
+                error('STS_CM:ConfigFileError', [configFile '.' errorMsg]);
+            end
+
+            % 2. Perform IM Calculation. Done in two steps: the 'runTopLevel'
+            %    method checks if a batch-run is required. Subsequently, the
+            %    individual-run method 'run' is invoked
+            [obj, errorMsg] = obj.runTopLevel();
+
+            if ~isempty(errorMsg)
+                error('STS_CM:RunError', errorMsg);
+            end
+
+            % 3. Prepare IM Calculation Report. Also done two steps: in case a
+            %    batch-run of reports is required, e.g. for multiple Reporting
+            %    Currencies, it is handled by the top-level method.
+            %    Subsequently, the individual-report method 'report' is invoked
+            errorMsg = obj.reportTopLevel();
+
+            if ~isempty(errorMsg)
+                error('STS_CM:ReportError', errorMsg);
+            end
+
+        end % #Constructor
+
+
+        function obj = calcInterestRate(obj)
+            %% calcInterestRate
+            % |obj = calcInterestRate(obj)|
+            %
+            % Interest Rates depend on a tenor and a risk-driver (optional).
+            % Therefore, Interest Rates are calculated per instrument.
+            %
+            %
+            % Calculate Total Interest Rate:
+            %
+            % $r_{tot} = (r_{base} + r_{cs}) \cdot r_{shocked}$
+            %
+            % with:
+            %
+            % $r_{base}$
+            % = Base Interest Rate as function of tenor
+            %
+            % $r_{cs}$
+            % = Credit Spread Interest Component as function of riskDriver
+            %
+            % $r_{shocked}   = \exp(\sum_{i=1}^4 PCA_i * EV_i(tenor))$
+            %
+            % The 'shocked interest' component may be readily available for
+            % particular tenors. This library is implemented for performance
+            % purposes: 'Rshocked' is the most demanding interest component,
+            % re-using is deemed beneficial for large EC Calculations.
+
+            if isempty(obj.instCol) || isempty(obj.instCol.Instruments)
+                error('ing:NoInstruments', 'No instruments to calculate interest rate for');
+            end
+
+            if isempty(obj.scenCol)
+                error('ing:NoScenarios', 'No scenarios to calculate interest rate for');
+            end
+
+            % NOTE: hard-coded for now...
+            nrPrincipalComponents = 4;
+
+            % Loop over instruments
+            for iInst = 1:numel(obj.instCol.Instruments)
+
+                % 1. Skip 'NonMarketRisk' instruments
+                if isa(obj.instCol.Instruments{iInst}, 'internalModel.NonMarketRisk')
+                    % No need to calculate interestRate
+                    continue;
+                end
+
+                % _________________________________________________________
+                % 2. Determine Base Interest Component
+                curve = obj.scenCol.Curves.findCurveByName(obj.instCol.Instruments{iInst}.Name);
+                rBase = curve.interp(obj.instCol.Instruments{iInst}.Tenor);
+
+                % _________________________________________________________
+                % 3. Determine Shocked Interest Component
+                %    Check whether Name - Tenor combination is already in shockedInterestLib.
+                %    If so, re-use 'shocked' interest component
+                % 
+                for iTenor = 1:numel(obj.instCol.Instruments{iInst}.Tenor)
+                    % Collect library index for Shocked Interest, if available
+                    if ~isempty(obj.shockedInterestLib)
+                        idxInLib = strcmp(obj.shockedInterestLib(:, 1), obj.instCol.Instruments{iInst}.Name) ...
+                                        & strcmp(obj.shockedInterestLib(:, 2), obj.instCol.Instruments{iInst}.Tenor(iTenor));
+                    else
+                        idxInLib = 0;
+                    end
+
+
+                    if any(idxInLib)
+                        % Already calculated, so reuse it
+                        rShocks = obj.shockedInterestLib{idxInLib, 3};
+
+                    else
+                        % New Name - Tenor (Base - Tenor) combination
+                        idxPca = strcmp(obj.instCol.Instruments{iInst}.Currency, {obj.scenCol.PcaValues.currency});
+
+                        if ~any(idxPca)
+                            error('Calculate:IdxNotFound', ['Currency ' obj.instCol.Instruments{iInst}.Currency ...
+                                ' not found']);
+                        end
+
+                        % Interpolate PCA Eigen Vector
+                        PcaEigenVec = obj.scenCol.interpPCA(obj.scenCol.PcaValues(idxPca), ...
+                                        obj.instCol.Instruments{iInst}.Tenor);
+                        nrScen      = size(obj.scenCol.ScenarioMatrix, 1);
+                        PcaPerScen  = zeros(nrScen, nrPrincipalComponents);
+
+                        for iPca = 1:nrPrincipalComponents
+                            riskFactor  = strcat('IR_', obj.instCol.Instruments{iInst}.Currency, 'PC', num2str(iPca));
+                            idxInMatrix = strcmp(obj.scenCol.Headers, riskFactor);
+                            
+                            PcaPerScen(:, iPca) = obj.scenCol.ScenarioMatrix(:, idxInMatrix);
+                        end
+
+                        % Calculate 'shocked' interest component
+                        rShocks = exp(PcaPerScen * PcaEigenVec');
+
+                        % Store new interest rates in library for future reuse
+                        obj.shockedInterestLib{end + 1, 1} = obj.instCol.Instruments{iInst}.Name;
+                        obj.shockedInterestLib{end, 2}     = obj.instCol.Instruments{iInst}.Tenor;
+                        obj.shockedInterestLib{end, 3}     = rShocks;
+                    end
+                end
+
+                % _________________________________________________________
+                % 4. Determine Credit Spread Interest Component
+                %    (NOTE: optional component!)
+                rCS = 0;
+
+                if ~isempty(obj.creditSpread)
+                    % Define interest-rate credit-spread for this instrument:
+                    % +. Collect Instrument CSID and RiskDriver
+                    instrCS    = obj.instCol.Instruments{iInst}.CreditSpread;
+                    csidInd    = strcmpi(obj.creditSpread(:, 1), instrCS);
+                    riskDriver = obj.creditSpread(csidInd, 4);
+
+                    % +. Validate Risk Driver and calculate rCS
+                    % Only one driver is allowed
+                    if ~isempty(riskDriver) && eq(numel(riskDriver), 1)
+                        % Find scenario CS Risk Drivers
+                        idxInMatrix = strcmp(obj.scenCol.Headers, riskDriver);
+                        csrd = obj.scenCol.ScenarioMatrix(:, idxInMatrix);
+
+                        % Only one Scenario Risk Driver is allowed.
+                        % Number of elements must match 'rShocks'
+                        if eq(find(numel(idxInMatrix)), 1) && ...
+                                eq(numel(rShocks), numel(csrd))
+
+                            % Collect Credit Spread 'mean' and 'volatility'
+                            mean = obj.creditSpread{csidInd, 2};
+                            vol  = obj.creditSpread{csidInd, 3};
+
+                            % Calculate rCS
+                            rCS  = mean + csrd .* vol;
+                        end
+                    end
+                end
+
+                % _________________________________________________________
+                % 5. Calculate Total Interest
+                rTot = zeros(size(rShocks, 1), numel(rBase));
+
+                for iBase = 1:numel(rBase)
+                    rTot(:, iBase) = (rBase(iBase) + rCS) .* rShocks(:, iBase);
+                end
+
+                % Propagate total interest rate to instrument object member
+                obj.instCol.Instruments{iInst}.InterestRate = rTot;
+
+            end
+        end % #calcInterestRate
+
+
+        function [obj, errorMsg] = processConfigFile(obj, varargin)
+            %% processConfigFile
+            % |[obj, errorMsg] = processConfigFile(obj, varargin)|
+            %
+            % Process configuration file. Should contain:
+            %
+            % * instruments file name
+            % * scenarios file name
+            % * portfolio file name
+            % * interest rate curve file name
+            % * correlation matrix file name
+            % * mapping Base entity file name
+            % * mapping Risk type file name
+            % * pcaFile (Under Development)
+            % * foreign exchange file
+            errorMsg = [];
+
+            % Process Configuration File contents
+            obj.parameters = obj.utilities.loadParamsFromConfigFile(obj.configFile);
+            obj.parameters.riskDrivers = [];
+
+            % Process PCA Data
+            PCA = obj.processPcaFile();
+
+            % Try to acquire the data collections
+            try
+                % IM Collections:
+                % +. Instruments
+                % +. Scenarios
+                % +. Foreign Exchange
+                % +. Portfolio
+                % +. Non-Market
+                % +. Credit Spread
+
+                % 1. Define optional additions (derived from CONFIG file)
+                % 1.1. Equities
+                eqIndFile = '';
+                if isfield(obj.parameters, 'eqIndFile')
+                    eqIndFile = obj.parameters.eqIndFile;
+                end
+
+                % 1.2. Instruments
+                % 1.2.1 FRB - Fixed Rate Bonds
+                frbOpts.frbFile    = '';
+                frbOpts.frbRefDate = now;
+
+                if isfield(obj.parameters, 'frbFile')
+                    frbOpts.frbFile = obj.parameters.frbFile;
+                end
+
+                if isfield(obj.parameters, 'frbRefDate')
+                    % Try to derive a valid date from the user-specified entry
+                    try
+                        frbRefDate = obj.parameters.frbRefDate;
+                        splitStr   = regexp(frbRefDate, '([-])', 'split');
+                        frbRefDate = datenum(str2num(splitStr{3}), ...   % year
+                            str2num(splitStr{2}), ...   % month
+                            str2num(splitStr{1}));      %#ok<ST2NM> % day
+
+                        % Propagate to options structure
+                        frbOpts.frbRefDate = frbRefDate;
+
+                    catch ME
+                        % Invalid date specification, revert to 'now'
+                        warning('ing:FileRead', ['Invalid FRB reference date. ' ME.message]);
+                        frbOpts.frbRefDate = now;
+                    end
+                end
+
+                % 1.2.1 FRN - Floating Rate Notes
+                frnOpts.frnFile    = '';
+                frnOpts.frnRefDate = now;
+
+
+                % 2. Acquire Collections
+                obj.instCol     = internalModel.InstrumentCollection(obj.parameters.instFile, eqIndFile, frbOpts);
+                obj.scenCol     = internalModel.ScenarioCollection(obj.parameters.scenFile, PCA, ...
+                                    obj.parameters.irCurveFile, obj.parameters.riskDrivers);
+
+                obj.forexCol    = internalModel.ForeignExchange(obj.parameters.forexFile);
+                obj.corrMat     = internalModel.NonMarketCorrMatrix(obj.parameters.corrMatFile, ...
+                                    obj.parameters.baseEntityFile, obj.parameters.riskTypeFile);
+
+                obj.portfolio   = internalModel.Portfolio(obj.parameters.portFile);
+
+                % 3. Add Credit Spread, if applicable
+                if isfield(obj.parameters, 'spreadFile') && ...
+                        eq(exist(obj.parameters.spreadFile, 'file'), 2)
+
+                    % If available and properly referenced, acquire credit spread data
+                    [~, ~, obj.creditSpread] = obj.utilities.csvreadCell(obj.parameters.spreadFile);
+                end
+
+            catch ME
+                % Processing error
+                errorMsg = ME.message;
+                return
+            end
+
+            if isempty(obj.instCol) || isempty(obj.scenCol) || ...
+                    isempty(obj.forexCol) || isempty(obj.portfolio)
+
+                % Initialized have failed...
+                errorMsg = 'Non proper initialization of Collections';
+                return
+            end
+
+        end % #processConfigFile
+
+
+        function PCA = processPcaFile(obj, varargin)
+            %% processPcaFile
+            % |PCA = processPcaFile(obj, varargin)|
+            % 
+            % Process PCA file.
+            % 
+            % 1. Read raw PCA data
+            % For allocating
+            nrOfTerms = 102;
+            filename  = obj.parameters.pcaFile;
+            fid       = fopen(filename);
+
+            fgetl(fid);
+            pcaRaw = textscan(fid, '%s', 'Delimiter', '\r');
+            fclose(fid);
+
+            % 2. Create IM PCA data structure
+            PCA   = struct('currency', {}, 'EV', {}, 'Term', {});
+            term  = zeros(nrOfTerms, 1);
+            value = zeros(nrOfTerms, 4);
+            iTerm = 1;
+            iCurr = 1;
+
+            % First line contains headers
+            % Read second line
+            lineNr   = 1;
+            line     = textscan(pcaRaw{1}{lineNr}, '%s', 'Delimiter', ',');
+            temp     = textscan(line{1}{5},        '%s', 'Delimiter', '_');
+            currency = temp{1}{2};
+
+            for iLine = 2:numel(pcaRaw{1})
+                if strcmp(pcaRaw{1}{iLine}(1:3), 'BAS')
+
+                    PCA(iCurr).currency = currency;
+                    PCA(iCurr).EV       = value;
+                    PCA(iCurr).Term     = term;
+                    iCurr               = iCurr + 1;
+
+                    line        = textscan(pcaRaw{1}{iLine}, '%s', 'Delimiter', ',');
+                    temp        = textscan(line{1}{5},       '%s', 'Delimiter', '_');
+                    currency    = temp{1}{2};
+                    iTerm       = 1;
+
+                else
+
+                    line   = textscan(pcaRaw{1}{iLine}, '%s', 'Delimiter', ',');
+                    factor = str2double(line{1}{6}) + 1;
+                    value(iTerm, factor) = str2double(line{1}{7});
+
+                    if eq(factor, 4)
+                        term(iTerm) = str2double(line{1}{5});
+                        iTerm = iTerm +1;
+                    end
+                end
+            end
+
+            % Add the very last component
+            PCA(iCurr).currency = currency;
+            PCA(iCurr).EV       = value;
+            PCA(iCurr).Term     = term;
+
+        end % #processPcaFile
+
+
+        function [obj, errorMsg] = runTopLevel(obj, varargin)
+            %% runTopLevel
+            % |[obj, errorMsg] = runTopLevel(obj, varargin)|
+            %
+            % Top-Level IM Calculation method. In case the user requests a
+            % batch-run of multiple confidence levels, this is handled
+            % here. A results structure is build, one for each run.
+            errorMsg = [];
+
+            % Calculate interest rates
+            obj = obj.calcInterestRate();
+
+            % Calculate shocked properties
+            obj = obj.calcShockedProperties();
+
+            % Prepare Cube
+            cubeCurr = 'EUR';
+            obj.cube = internalModel.Cube(obj.instCol, obj.scenCol, obj.forexCol, cubeCurr);
+
+            % Collect looping variables
+            confidenceLevels    = obj.parameters.confidenceLvl;
+            reportingCurrencies = obj.parameters.reportingCurrency;
+
+            % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+            % Perform all individual calculations:
+            % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+            % Initialize results member
+            obj.results = cell(numel(confidenceLevels), numel(reportingCurrencies));
+
+            % Loop over Reporting Currencies (RC)
+            for iCL = 1:numel(confidenceLevels)
+                % Loop over Confidence Levels (CL)
+                
+                for iRC = 1:numel(reportingCurrencies)
+                    % Perform individual calculation for each currency
+                    [result, errorMsg] = obj.run(confidenceLevels(iCL), reportingCurrencies{iRC});
+
+                    % Error handling
+                    if ~isempty(errorMsg)
+                        break
+                    end
+
+                    % Propagate individual result to Results object member
+                    obj.results{iCL, iRC} = result;
+                end
+
+                % Error handling
+                if ~isempty(errorMsg)
+                    break
+                end
+            end
+
+        end % #runTopLevel
+
+
+        function [result, errorMsg] = run(obj, confidenceLevel, reportingCurrency, varargin)
+            %% run
+            % |[result, errorMsg] = run(obj, confidenceLevel, reportingCurrency, varargin)|
+            %
+            % Perform individual Internal Market Run
+            result   = [];
+            errorMsg = [];
+
+            % Both product families (PF) and product family members should be
+            % calculated. However, the level inbetween i.e. 'Liabilities' and
+            % 'Non Market Data' should not. Therefore, ignore all nodes which
+            % have a groupLevel in Portfolio of max(groupLevel) - 1
+            findGID      = @(x)(x.GID);
+            gidNms       = cellfun(findGID, obj.portfolio.groups);
+            maxLevel     = max(obj.portfolio.groupLevel);
+            idxGidNeeded = obj.portfolio.groupLevel ~= (maxLevel - 1);
+            GIDsToCalc   = gidNms(idxGidNeeded);
+
+            % Market EC
+            % Call Method Implementation: automatic all GID's
+            EC_AllGroups = obj.cube.calculateMarketEC(obj.portfolio, obj.scenCol, confidenceLevel,   ...
+                                obj.forexCol, reportingCurrency, GIDsToCalc);
+
+            % Non-Market EC
+            % ECop is left 0 for the moment
+            ECop         = 0;
+
+            % Calculate aggregated EC
+            topNodeNm    = gidNms(obj.portfolio.groupLevel ==  1);
+            idxECTopNode = strcmp(topNodeNm, EC_AllGroups.ids);
+            ECaggr       = obj.instCol.calculateNonMarketECaggr(              ...
+                obj.corrMat, EC_AllGroups.val(idxECTopNode),  ...
+                ECop, confidenceLevel, obj.portfolio,         ...
+                EC_AllGroups.ids(idxECTopNode), obj.forexCol, ...
+                reportingCurrency);
+
+            % Calculate Non-Market EC per group
+            NonMarketEC  = zeros(numel(EC_AllGroups.val), 1);
+
+            for iNMEC = 1:numel(EC_AllGroups.val)
+                NonMarketEC(iNMEC) = obj.instCol.calculateNonMarketECaggr(       ...
+                    obj.corrMat,   0, ECop, confidenceLevel, ...
+                    obj.portfolio, EC_AllGroups.ids(iNMEC),  ...
+                    obj.forexCol,  reportingCurrency);
+            end
+
+            % Prepare Results Property
+            result.confLevel    = confidenceLevel;
+            result.currency     = reportingCurrency;
+            result.IDs          = EC_AllGroups.ids;
+            result.GIDsToCalc   = GIDsToCalc;
+            result.MarketEC     = EC_AllGroups.val;
+            result.NonMarketEC  = NonMarketEC;
+            result.ECaggr       = ECaggr;
+            result.EC_AllGroups = EC_AllGroups;
+            result.ECop         = ECop;
+
+        end % #run
+
+
+        function errorMsg = reportTopLevel(obj, varargin)
+            %% reportTopLevel
+            % |errorMsg = reportTopLevel(obj, varargin)|
+            %
+            % Top-Level Reporting method. Reports are generated for each
+            % confidence level, for each reporting currency.
+            errorMsg = [];
+
+            % Collect looping variables
+            confidenceLevels    = obj.parameters.confidenceLvl;
+            reportingCurrencies = obj.parameters.reportingCurrency;
+
+            % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+            % Create all individual reports:
+            % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+            % Loop over Reporting Currencies (RC)
+            for iCL = 1:numel(confidenceLevels)
+                % Loop over Confidence Levels (CL)
+
+                for iRC = 1:numel(reportingCurrencies)
+                    % Create individual report for each currency
+                    result   = obj.results{iCL, iRC};
+                    errorMsg = obj.report(obj.parameters.outputFile, result);
+
+                    % Error handling
+                    if ~isempty(errorMsg)
+                        break
+                    end
+                end
+
+                % Error handling
+                if ~isempty(errorMsg)
+                    break
+                end
+            end
+
+        end % #reportTopLevel
+
+
+        function errorMsg = report(obj, reportFlnm, result, varargin)
+            %% report
+            % Create individual report
+            % |errorMsg = report(obj, reportFlnm, result, varargin)|
+            errorMsg = [];
+
+            % _____________________________________________________________
+            % 1. Prepare calculation results for reporting
+            %    Split per non-market risk. Entries of several non-market
+            %    risks are found in the corrMat object
+            riskTypes    = obj.corrMat.rtTable;
+
+            % First word of a risk is used to group
+            cllFirstWord = regexp(riskTypes(:, 1), '(\S+)\s*.*', 'tokens');
+            firstWords   = cellfun(@(x)(x{1}), cllFirstWord);
+            unFirstWord  = unique(firstWords, 'stable');
+            isSingle     = false(size(unFirstWord));
+
+            for iCount = 1:numel(unFirstWord)
+                isSingle(iCount) = sum(strcmp(unFirstWord{iCount}, firstWords)) < 2;
+            end
+
+            unFirstWord(isSingle) = [];
+            diverStr              = cellfun(@(x)([x ' diversification']), unFirstWord, 'UniformOutput', false);
+            riskTypeFullNm        = [riskTypes(:, 1); unFirstWord];
+            riskTypeAbbr          = riskTypes(:, 2);
+
+            for iFirstWords = 1:numel(unFirstWord)
+                idxWord               = strcmp(unFirstWord(iFirstWords), firstWords);
+                riskTypeAbbr{end + 1} = riskTypes(idxWord, 2); %#ok<AGROW> not known a priori
+            end
+
+            [unRistTypeFullNm, inIn] = unique(riskTypeFullNm, 'stable');
+            unRiskTypeAbbr           = riskTypeAbbr(inIn);
+            NonMarketEC_split        = zeros(numel(result.GIDsToCalc), size(riskTypes, 1));
+
+            for iGroup = 1:numel(result.EC_AllGroups.ids)
+                % Loop over GIDs (group id's)
+
+                for jRiskType = 1:numel(unRiskTypeAbbr)
+                    % Loop over riskTypes
+                    riskType   = unRiskTypeAbbr{jRiskType};
+                    NMEC_split = obj.instCol.calculateNonMarketECaggr(obj.corrMat,   ...
+                                    0, result.ECop, result.confLevel, obj.portfolio, ...
+                                    result.EC_AllGroups.ids(iGroup),  obj.forexCol,  ...
+                                    result.currency, riskType);
+
+                    NonMarketEC_split(iGroup, jRiskType) = NMEC_split;
+                end
+            end
+
+            unRistTypeFullNmEx   = [unRistTypeFullNm; diverStr];
+            [sortedNms, sortIdx] = sort(unRistTypeFullNmEx);
+
+            % _____________________________________________________________
+            % 2. Report Creation: CSV file creation
+            % Construct filename, based on Stem, Currency and Confidence Level
+            splitStr = regexpi(reportFlnm, '\.', 'split');
+            flNmStem = splitStr{1};
+
+            if numel(splitStr) > 1
+                flNmExt = splitStr{2};
+            else
+                flNmExt = 'csv';
+            end
+
+            % Merge the individual parts
+            reportFlnm = [flNmStem '_' result.currency '_' num2str(result.confLevel) '.' flNmExt];
+
+            if eq(exist(reportFlnm, 'file'), 2)
+                % Remove any existing instances
+                try
+                    delete(reportFlnm);
+
+                catch ME
+                    % Unable to delete legacy report files, this poses a
+                    % problem for the workflow. Warn the user and return...
+                    errorMsg = ['Cannot remove obsoleted resultfile: ' reportFlnm '. ' ME.message];
+                    return
+                end
+            end
+
+            % Start composing the result file:
+            % Create cell:
+            % 
+            % 4 more rows for:
+            %   column header
+            %   white line
+            %   EC aggregated
+            %   currency
+            % 
+            % 1 extra column  for:
+            %   row header
+            %   market risk
+            extraRows   = 4;
+            extraCols   = 3;
+            reportCell  = cell(numel(result.EC_AllGroups.ids) + extraRows, ...
+                                numel(sortedNms) + extraCols);
+
+            reportCell{1, 1} = 'Currency';
+            reportCell{1, 2} = result.currency;
+            reportCell{2, 1} = 'Aggregated EC';
+            reportCell{2, 2} = result.ECaggr;
+
+            % Fill row headers
+            reportCell((extraRows + 1):end, 1) = result.EC_AllGroups.ids;
+
+            % Fill hierarchy level
+            reportCell{extraRows, 2} = 'Portfolio Level';
+            allGIDs                  = cellfun(@(x)(x.GID{1}), obj.portfolio.groups, 'UniformOutput', false);
+            [~, ~, inSecond]         = intersect(result.EC_AllGroups.ids, allGIDs);
+            hierarchyVal             = num2cell(obj.portfolio.groupLevel(inSecond));
+
+            reportCell((extraRows + 1):end, extraCols - 1) = hierarchyVal;
+
+            % Fill column headers
+            reportCell{extraRows, extraCols}           = 'Market EC';
+            reportCell(extraRows, (extraCols + 1):end) = sortedNms;
+
+            % Fill Market EC values
+            reportCell((extraRows + 1):end, extraCols) = num2cell(result.MarketEC);
+
+            for iNode = 1:numel(result.EC_AllGroups.ids)
+
+                for jRisk = 1:numel(sortedNms)
+                    % Initialize
+                    NMEC_div = [];
+
+                    % Check if string has 'diversification' in it, if so,
+                    % do the calculation for this
+                    isDiv = ~isempty(strfind(sortedNms{jRisk}, 'diversification'));
+
+                    if isDiv
+                        % Find level name
+                        name = regexp(sortedNms{jRisk}, '(\S+)\s*.*', 'tokens');
+
+                        % Exclude both 'xx diversification' and the level name itself
+                        risksToCalc        = ~cellfun(@isempty, strfind(sortedNms, [name{1}{1} ' ']));
+                        risksToCalc(jRisk) = false;
+                        groupRisk          = strcmp(name{1}{1}, sortedNms);
+
+                        % Calculate diversification
+                        NMEC_div = NonMarketEC_split(iNode, sortIdx(groupRisk)) ...
+                                    - sum(NonMarketEC_split(iNode, sortIdx(risksToCalc)));
+                    end
+
+                    tableCol = sortIdx(jRisk);
+                    if tableCol <= numel(unRistTypeFullNm)
+
+                        reportCell{extraRows + iNode, jRisk + extraCols} = NonMarketEC_split(iNode, tableCol);
+
+                    elseif isDiv
+
+                        reportCell{extraRows + iNode, jRisk + extraCols} = NMEC_div;
+
+                    end
+                end
+            end
+
+            % Create CSV report
+            try
+                internalModel.Utilities.cell2csv(reportFlnm, reportCell, ',');
+
+            catch ME %#ok<NASGU> might be usefull later
+                warning('ing:NoFileCreated', ['Output ' reportFlnm ' has not been created']);
+            end
+
+        end % #report
+
+
+        function obj = calcShockedProperties(obj)
+            %% calcShockedProperties
+            % |obj = calcShockedProperties(obj)|
+            propTable = obj.getShockedPropTable();
+
+            for iInst = 1:numel(obj.instCol.Instruments)
+
+                iClass   = class(obj.instCol.Instruments{iInst});
+                idxTable = strcmp(iClass, propTable{:, 1});
+
+                if ~any(idxTable)
+                    % No additional shocks needed for any properties of
+                    % this instrument
+                    continue
+                end
+
+                postfix   = obj.instCol.Instruments{iInst}.(propTable{:, 4});
+                idxShocks = strcmp([propTable{idxTable, 3} postfix], obj.scenCol.Headers);
+
+                % Evaluate base value
+                base      = eval(propTable{idxTable, 5});
+
+                % Evaluate shocks
+                shocks    = obj.scenCol.ScenarioMatrix(:, idxShocks);
+                values    = base .* exp(shocks);
+
+                % Propagate shocked properties
+                obj.instCol.Instruments{iInst}.(propTable{idxTable, 2}) = values;
+
+            end
+        end
+
+    end % #methods
+
+
+    methods (Static)
+
+        function table = getShockedPropTable()
+            %% getShockedPropTable _static_
+            % |table = getShockedPropTable()| 
+            % 
+            % Table is a cell matrix with columns being:
+            % 
+            % # Instrument Class Name
+            % # Instrument Property (as defined in class)
+            % # Prefix in scenario file
+            % # Post fix
+            % # evaluation to obtain base value
+
+            table = {
+                'internalModel.EquityForward',  'Spot',     'EQ_',  'RiskDriver', ...
+                'obj.instCol.EquityIndex.findSpotByIndexName(obj.instCol.Instruments{iInst}.RiskDriver)'
+                };
+        end
+
+    end % #Methods Static
+
+end
+
+##### SOURCE END #####
+--></body></html>

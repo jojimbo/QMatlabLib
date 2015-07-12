@@ -1,0 +1,106 @@
+Description:
+As an STS user,
+I want given an instruments file, 
+the system to load the instruments file,
+So that I am able to create a cube with valued instruments under different economic scenarios in STS. 
+The name of the data file is: instruments.csv in the zip file instrument files.
+
+Criteria:
+Given an instruments file,
+When STS can load the instruments file,
+Then I am able to create a cube containing the instruments from the instruments file in STS. 
+The number of instruments should be flexible. Positions can be negative. The system should read the IDEAL_header.csv file so that the system is not impacted by changes in the columns of the data files or changes in the instrument names. The system should load all instruments (all lines starting with BAS) and give a clear error message when one of the instruments cannot be loaded. The following instrument types should be loaded:
+- ZCB without credit spread - Zero Coupon BondSPEC (read currency and tenor)
+- ZCB with credit spread - Zero Coupon BondSPEC (ignore these instruments, write instrument file names to a file of unvalued instruments)
+- Equity Index (including RE and FI indices) - Market IndexSPEC with Synthetic Model = Market Risk (read index name & currency)
+- Equity Forwards (including RE and FI indices) - Equity ForwardSPEC (read underlying index, tenor, strike, currency)
+- Equity options (including RE and FI indices) - EuropeanSPEC with 
+European Equity Model (read underlying index, tenor, strike, currency 
+and type (put or call).
+
+1a[Zero coupon bond]
+-instruments_ZCBwithoutCS.csv
+There are 10 ZCB instruments, all which do not have credit spread
+
+USD	USD-SWAP	Zero Coupon Bond	12775
+JPY	JPY-SWAP	Zero Coupon Bond	5475
+USD	USD-SWAP	Zero Coupon Bond	9125
+EUR	EUR-SWAP	Zero Coupon Bond	2920
+EUR	EUR-SWAP	Zero Coupon Bond	91
+EUR	EUR-SWAP	Zero Coupon Bond	13505
+EUR	EUR-SWAP	Zero Coupon Bond	365
+USD	USD-SWAP	Zero Coupon Bond	2190
+EUR	EUR-SWAP	Zero Coupon Bond	9125
+EUR	EUR-SWAP	Zero Coupon Bond	21900
+
+For the first ZCB, the tenor should be 12775 and the currency should be USD.
+
+1b 
+-instruments_ZCBwithCS.csv
+In column T, "TestCR_AAA" has been added as a credit spread, which replaced "swap".
+
+2 Equity Index
+-instruments_EquityIndex.csv
+
+MarketIndex_EMUMIDCAP		Market Index Model	USD
+MarketIndex_ASE_INDEX		Market Index Model	EUR
+MarketIndex_.HSI		Market Index Model	HKD
+MarketIndex_.AMX		Market Index Model	EUR
+MarketIndex_.STOXX50E		Market Index Model	EUR
+MarketIndex_.IBEX		Market Index Model	EUR
+MarketIndex_.MSCIWO		Market Index Model	USD
+MarketIndex_SPEURO_INDEX	Market Index Model	EUR
+MarketIndex_.BETI		Market Index Model	RON
+MarketIndex_.IBEX		Market Index Model	EUR
+
+There are 10 instruments, and it is expected for the first instrument to have EMUMIDCAP as the index and USD as currency.
+
+
+3 Equity Forward
+-instruments_EquityForwards.csv
+
+EqFwd_.AEX_Y12_Str0.001_EUR
+EqFwd_VAJDB_D01_Str100.000
+EqFwd_VAJCM_D01_Str100.000
+EqFwd_.MSCIWO_Y30_Str0.002_EUR
+EqFwd_.AEX_Y01_Str0.003_EUR
+EqFwd_.AEX_Y08_Str0.004_EUR
+EqFwd_.AEX_M01_Str0.005_EUR
+EqFwd_.MSCIWO_Y03_Str0.006_EUR
+EqFwd_.AEX_Y10_Str0.007_EUR
+
+There are 9 instruments, for the first instrument the following must be loaded:
+index:.AEX, tenor: 12 years (4380 days), strike: 0.001, currency: EUR
+
+4 Equity Option
+
+EqOpt_.AEX_Y25_Str754_Call_EUR		European Equity Model	TRUE	1	EUR
+EqOpt_.AEX_M06_Str300_Call_EUR		European Equity Model	TRUE	1	EUR
+EqOpt_.MSCIWO_Y03_Str1510_Call_EUR	European Equity Model	TRUE	1	USD
+EqOpt_.AEX_M01_Str300_Put_EUR		European Equity Model	FALSE	1	EUR
+EqOpt_.AEX_Y05_Str477_Call_EUR		European Equity Model	TRUE	1	EUR
+EqOpt_.AEX_Y03_Str407_Call_EUR		European Equity Model	TRUE	1	EUR
+EqOpt_.MSCIWO_Y05_Str1760_Call_EUR	European Equity Model	TRUE	1	USD
+EqOpt_.MSCIWO_Y25_Str1710_Put_EUR	European Equity Model	FALSE	1	USD
+EqOpt_.MSCIWO_Y07_Str1190_Put_EUR	European Equity Model	FALSE	1	USD
+EqOpt_.AEX_Y15_Str353_Put_EUR		European Equity Model	FALSE	1	EUR
+
+There are 10 instruments, of which the first instrument should be loaded with the following:
+index:.AEX , tenor: 25 years (9125 days), strike: 754, currency: EUR, and type: Call.
+
+5 Mix
+
+-instruments_mixed.csv
+The following instruments should be loaded, and the rest should be ignored and warning should be given for these:
+
+1)EUR	EUR-SWAP	Zero Coupon Bond	91
+2)EUR	EUR-SWAP	Zero Coupon Bond	13505
+3)EqFwd_.AEX_Y08_Str0.004_EUR
+4)EqFwd_.AEX_M01_Str0.005_EUR
+5)EqFwd_.MSCIWO_Y03_Str0.006_EUR
+6)MarketIndex_.IBEX	Market Index Model	EUR
+7)MarketIndex_.MSCIWO	Market Index Model	USD
+8)EqOpt_.MSCIWO_Y03_Str1510_Call_EUR
+9)EqOpt_.AEX_M01_Str300_Put_EUR
+
+It is expected that the other 15 rows are ignored.

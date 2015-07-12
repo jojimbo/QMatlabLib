@@ -1,0 +1,82 @@
+Description:
+As an STS user,
+I want given a dataset of interest rates, the system should load the interest rate data to value interest rate sensitive instruments in STS. The name of the data file is: ir_swap_zero_curveYYYYMMDD.csv
+
+Criteria:
+Given that I want to be able to calculate the value of interest rate sensitive instruments in STS,
+When STS can load interest rate data,
+Then I am able to calculate the value of interest rate sensitive instruments in STS. The data is in the standard ALGO fomat available on the sharepoint site and should be tested with a flexible number currencies and tenors and tested for at least 2 data sets. The system should create a warning if the loaded interest rate data is negative. The system should read the header files so that the system is not impacted by changes in the columns of the data files.
+
+Test plan:
+For:
+-ir_swap_zero_curve20111230.csv
+-ir_swap_zero_curve20120629.csv
+
+Expected results:
+These are two (base) sets of interest rate data.The loading should be completed without any warning or error.
+
+For:
+-ir_swap_zero_curve20111230_flexibleNrofCurr.csv
+	the following currencies are removed: BRL-SWAP, and JPY-SWAP.
+	the following tenors are added under CLF-SWAP between tenors 4745 and 5840:
+
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5110	0.026410951
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5475	0.026645222
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5500	0.023308533
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5550	0.023859454
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5600	0.024403357
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5650	0.024944762
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5700	0.025486778
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5725	0.025718332
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5750	0.025947796
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5775	0.026178619
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5800	0.026410951
+rm_ro	ZeroSPEC : Generic Zero Surface	Generic Zero Surface	ZeroSPEC	5823	0.026645222
+
+
+-ir_swap_zero_curve20120629_flexibleNrofCurr.csv
+	the following currencies are added: CR1-SWAP, and CR2-SWAP.
+	the following tenors are removed from MYR-SWAP: from 30 till 42705.
+
+Expected results:
+These two sets of interest rate data should load successfully, and also, for the first set it should not load BRL-SWAP and JPY-SWAP, for the second set it should also load CR1-SWAP and CR2-SWAP. Also, for the first set it should have more tenors for CLF-SWAP, and for the second set it should have less tenor for MYR-SWAP
+
+For:
+-ir_swap_zero_curve20111230_negativeCurr.csv
+	the following rows are negative: 125, 127
+-ir_swap_zero_curve20120629_negativeCurr.csv
+	the following currency is negative: TWD-SWAP
+
+Expected results:
+These two sets of interest rate data should load successfully, and also create a warning that the interest rate is negative.
+
+For:
+-ir_swap_zero_curve20111230_headerChanged.csv
+-IDEAL_header_headerChanged.csv
+
+Changes in:
+For ZeroSpec:
+										
+IDENTIFIER:P
+NAME:O
+CreditStateENUM:N
+CurveFUNC:M
+CurveUnitUNIT:L
+CurveUnitDAYC:K
+CurveUnitPERD:J
+DatumDATE:I
+GenZeroSfExt0FLAG:H
+GenZeroSurface0SIN:G
+TimeEvolutionFUNC:F
+StateProcFUNC:E
+
+For ZeroSPEC : Generic Zero Surface:
+OBJECT:F
+GenZeroSurface0AXS:E
+GenZeroSurfaceNODE:D
+
+Expected results:
+The system should load according to the IDEAL_header_headerChanged.csv successfully without any error.
+
+
+

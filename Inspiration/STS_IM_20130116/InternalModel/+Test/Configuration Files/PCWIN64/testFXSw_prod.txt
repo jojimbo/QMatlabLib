@@ -1,0 +1,41 @@
+%% ConfigDemo
+% Configuration File  
+
+% Input Files 
+headerFile           = \MasterInputFiles\IDEAL_header.csv
+portFile             = \MasterInputFiles\Portfolio Files\P24_19_2(FXSw)\portfolio.xml
+
+corrMatFile          = \MasterInputFiles\corr_matrix.csv
+riskTypeFile         = \MasterInputFiles\mapping_RT.csv
+baseEntityFile       = \MasterInputFiles\mapping_BE.csv
+instFile             = \MasterInputFiles\Instrument Files\fx_swaps.csv
+scenFile             = \MasterInputFiles\MC_SHRD_MKT.csv
+pcaFile              = \MasterInputFiles\matrix_parameter_curve.csv
+irCurveFile          = \MasterInputFiles\ir_swap_zero_curve.csv
+forexFile            = \MasterInputFiles\fx_foreign_exchange.csv
+fxImpVolData	     = \MasterInputFiles\fx_implied_volatility.csv
+creditSpreadFile     = \MasterInputFiles\ir_credit_spread.csv
+eqIndFile            = \MasterInputFiles\equity_imp_vol_surface.csv
+equityReFile 	     = \MasterInputFiles\equity_real_estate_index_curve.csv
+swaptionImpVolFile   = \MasterInputFiles\swaption_implied_volatility.csv
+
+bfVolVolFile         = \MasterInputFiles\BF_vol_vol_factor.csv
+eqVolVolFile         = \MasterInputFiles\EQ_vol_vol_factor.csv
+reVolVolFile         = \MasterInputFiles\RE_vol_vol_factor.csv
+irVolVolFile         = \MasterInputFiles\IR_vol_vol_factor.csv
+fxVolVolFile         = \MasterInputFiles\FX_vol_vol_factor.csv
+volatilityCapFile    = \MasterInputFiles\volatility_cap.csv
+
+% Optional Instruments
+fixedRateBondFile    = \MasterInputFiles\FRB.csv
+fixedRateBondRefDate = 18-10-2012;
+
+% Output File
+outputFile           = E:\MasterInputFilesIM\Output\ReportP24-19-2.csv
+
+% Confidence Level
+confidenceLvl        = 0.90
+valuationDate        = 12/31/2012
+
+% Reporting Currency
+reportingCurrency    = EUR

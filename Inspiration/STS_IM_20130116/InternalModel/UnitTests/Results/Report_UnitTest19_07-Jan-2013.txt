@@ -1,0 +1,93 @@
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',11,1)">deploy_STS_IM at 11</a>} 
+{Error using <a href="matlab:helpUtils.errorDocCallback('internalModel.CurveCollection', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m', 54)" style="font-weight:bold">internalModel.CurveCollection</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,0)">line 54</a>)
+Not enough input arguments.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1>getCsvContents', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 138)" style="font-weight:bold">Unit_Test_P19_1>getCsvContents</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,0)">line 138</a>)
+irCurves = internalModel.CurveCollection(calcObj);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 49)" style="font-weight:bold">Unit_Test_P19_1</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,0)">line 49</a>)
+[contents1_Base,        irCurve1_Base]        = getCsvContents('irCurveFile',
+irCurveFile1_Base,        headerBase);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P19', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m', 24)" style="font-weight:bold">runUT_P19</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,0)">line 24</a>)
+if Unit_Test_P19_1(testPath, codePath)
+
+Error in <a href="matlab:helpUtils.errorDocCallback('deploy_STS_IM', 'E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m', 11)" style="font-weight:bold">deploy_STS_IM</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',11,0)">line 11</a>)
+runUT_P19
+} 
+time
+{Undefined function or variable 'time'.
+} 
+now
+
+ans =
+
+   7.3524e+05
+
+num2date(now
+ num2date(now
+            |
+{Error: Expression or statement is incorrect--possibly unbalanced (, {, or [.
+} 
+num2date(now)
+{Undefined function 'num2date' for input arguments of type 'double'.
+} 
+datestr(now)
+
+ans =
+
+07-Jan-2013 17:23:55
+
+clear
+clc
+deploy_STS_IM
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',5,1)">5   </a>clc
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',8,1)">8   </a>modifiedStr = strrep(datestr(now), ' ', '_');
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',9,1)">9   </a>modifiedStr = strrep(modifiedStr, ':', '_');
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',10,1)">10  </a>modifiedStr = strrep(modifiedStr, '-', '_');
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',13,1)">13  </a>addpath(genpath('InternalModel'))
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',14,1)">14  </a>diary(['deploy_' computer '_' modifiedStr '.txt'])
+dbstep
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',19,1)">deploy_STS_IM at 19</a>} 
+{Error using <a href="matlab:helpUtils.errorDocCallback('internalModel.CurveCollection', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m', 54)" style="font-weight:bold">internalModel.CurveCollection</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,0)">line 54</a>)
+Not enough input arguments.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1>getCsvContents', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 138)" style="font-weight:bold">Unit_Test_P19_1>getCsvContents</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,0)">line 138</a>)
+irCurves = internalModel.CurveCollection(calcObj);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 49)" style="font-weight:bold">Unit_Test_P19_1</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,0)">line 49</a>)
+[contents1_Base,        irCurve1_Base]        = getCsvContents('irCurveFile',
+irCurveFile1_Base,        headerBase);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P19', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m', 24)" style="font-weight:bold">runUT_P19</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,0)">line 24</a>)
+if Unit_Test_P19_1(testPath, codePath)
+
+Error in <a href="matlab:helpUtils.errorDocCallback('deploy_STS_IM', 'E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m', 19)" style="font-weight:bold">deploy_STS_IM</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',19,0)">line 19</a>)
+runUT_P19
+} 
+diary off

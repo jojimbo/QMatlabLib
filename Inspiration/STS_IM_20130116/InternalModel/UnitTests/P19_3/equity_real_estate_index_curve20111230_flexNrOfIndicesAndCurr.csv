@@ -1,0 +1,334 @@
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.4GSPC-Index Curve,.4GSPC-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,879.08,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.AEX-Index Curve,.AEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,312.47,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.AMX-Index Curve,.AMX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,467.91,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.ASCX-Index Curve,.ASCX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,384.29,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.BETFI-Index Curve,.BETFI-Index Curve,RON,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,19341.5,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.CIJP=USD-Index Curve,.CIJP=USD-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2091.151,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.CIKK=USD-Index Curve,.CIKK=USD-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1178.22,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.CIWF=USD-Index Curve,.CIWF=USD-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,288.496,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.FTEU1-Index Curve,.FTEU1-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2100.86,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.FTSE-Index Curve,.FTSE-Index Curve,GBP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,5572.28,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.GTSX50-Index Curve,.GTSX50-Index Curve,CAD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1004.29,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.HSI-Index Curve,.HSI-Index Curve,HKD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,18434.39,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.IBEX-Index Curve,.IBEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,8566.3,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.IPSA-Index Curve,.IPSA-Index Curve,CLP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,4177.53,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.IRTS-Index Curve,.IRTS-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1380.49,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.IXIC-Index Curve,.IXIC-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2605.15,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.KLSE-Index Curve,.KLSE-Index Curve,MYR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1530.73,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.KS11-Index Curve,.KS11-Index Curve,KRW,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1825.74,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.KS200-Index Curve,.KS200-Index Curve,KRW,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,238.08,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.MCXRGBITR-Index Curve,.MCXRGBITR-Index Curve,RUB,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,272.78,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.MSCIWO-Index Curve,.MSCIWO-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1177.56,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.MSDUEAFE-Index Curve,.MSDUEAFE-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1412.554,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.MSEUEGF-Index Curve,.MSEUEGF-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,914.209,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.MXX-Index Curve,.MXX-Index Curve,MXN,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,37077.52,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.N100-Index Curve,.N100-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,592.85,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.N225-Index Curve,.N225-Index Curve,JPY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,8455.35,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.NDX-Index Curve,.NDX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2277.83,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.PX-Index Curve,.PX-Index Curve,CZK,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,911.1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.RUX-Index Curve,.RUX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,740.92,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.SAX-Index Curve,.SAX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,215.45,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.SETI-Index Curve,.SETI-Index Curve,THB,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1025.32,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.SPX-Index Curve,.SPX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1257.6,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.SSEC-Index Curve,.SSEC-Index Curve,CNY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2199.4169,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.STOXX50E-Index Curve,.STOXX50E-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2316.55,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,.WIG-Index Curve,.WIG-Index Curve,PLN,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,37588.68,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,ACMPALL_INDEX-Index Curve,ACMPALL_INDEX-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,6920.277,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,ASA52_INDEX-Index Curve,ASA52_INDEX-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,30766.57,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,ASA5PROP_INDEX-Index Curve,ASA5PROP_INDEX-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,19068.08,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,ASE_INDEX-Index Curve,ASE_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,680.42,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,AUBI_INDEX-Index Curve,AUBI_INDEX-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,7444.42024,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,AUINB_INDEX-Index Curve,AUINB_INDEX-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,5290.525,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,BANK_OF_BEIJING-Index Curve,BANK_OF_BEIJING-Index Curve,CNY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,9.28,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,BEL20_INDEX-Index Curve,BEL20_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2083.42,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,BG40IND_INDEX-Index Curve,BG40IND_INDEX-Index Curve,BGN,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,113.69,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,CECEEUR_INDEX-Index Curve,CECEEUR_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1498.73,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,DEUTSCHE_POSTBANK-Index Curve,DEUTSCHE_POSTBANK-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,24.135,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,DJAIGTR_INDEX-Index Curve,DJAIGTR_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,282.8255,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,ELHK_INDEX-Index Curve,ELHK_INDEX-Index Curve,HKD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,ELUK_INDEX-Index Curve,ELUK_INDEX-Index Curve,GBP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EPFI_INDEX-Index Curve,EPFI_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EPFR_INDEX-Index Curve,EPFR_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EPGR_INDEX-Index Curve,EPGR_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EPIT_INDEX-Index Curve,EPIT_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EPNL_INDEX-Index Curve,EPNL_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EPSP_INDEX-Index Curve,EPSP_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EUG4TR_INDEX-Index Curve,EUG4TR_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,175.625,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EURAGG_EUR_HEDG-Index Curve,EURAGG_EUR_HEDG-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,186.719425,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EURAGG_EUR_UNHEDG-Index Curve,EURAGG_EUR_UNHEDG-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,187.528347,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,FBM100_INDEX-Index Curve,FBM100_INDEX-Index Curve,MYR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,10312.74,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,FBMKLCI_INDEX-Index Curve,FBMKLCI_INDEX-Index Curve,MYR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1530.73,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,FTEWWRLD_INDEX-Index Curve,FTEWWRLD_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,305.44,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,FTMSANTR_INDEX-Index Curve,FTMSANTR_INDEX-Index Curve,GBP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,4528.3,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,FTSEM_INDEX-Index Curve,FTSEM_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,639.5,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,FUBON_INDEX-Index Curve,FUBON_INDEX-Index Curve,TWD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,32.05,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,G0PL_INDEX-Index Curve,G0PL_INDEX-Index Curve,PLN,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,429.771,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GFPL_INDEX-Index Curve,GFPL_INDEX-Index Curve,PLN,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,278.829,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GLOBAGG_AUD_HEDG-Index Curve,GLOBAGG_AUD_HEDG-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,695.89894,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GLOBCRED_AUD_HEDG-Index Curve,GLOBCRED_AUD_HEDG-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,251.519919,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GLOBTREAS_AUD_HEDG-Index Curve,GLOBTREAS_AUD_HEDG-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,663.025358,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,HFRXEWE_INDEX-Index Curve,HFRXEWE_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1036.18,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,HFRXEWG_INDEX-Index Curve,HFRXEWG_INDEX-Index Curve,GBP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2023.24,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,HFRXEWJ_INDEX-Index Curve,HFRXEWJ_INDEX-Index Curve,JPY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,97318.09,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,HFRXEW_INDEX-Index Curve,HFRXEW_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1097.44,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,HFRXGLE_INDEX-Index Curve,HFRXGLE_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1036.78,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,HSCEI_INDEX-Index Curve,HSCEI_INDEX-Index Curve,HKD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,9936.48,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,HSLIALBI_INDEX-Index Curve,HSLIALBI_INDEX-Index Curve,HKD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,239.965,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,IGBC_INDEX-Index Curve,IGBC_INDEX-Index Curve,COP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,12665.71,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,IGBVL_INDEX-Index Curve,IGBVL_INDEX-Index Curve,PEN,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,19468.23,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,INGEMMILX_INDEX-Index Curve,INGEMMILX_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,984.58,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,INGRASCLX_INDEX-Index Curve,INGRASCLX_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1357.95,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,JNEU1R3_INDEX-Index Curve,JNEU1R3_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,208.602,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,JPEIDIVR_INDEX-Index Curve,JPEIDIVR_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,584.4,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,KISKGA2Y_INDEX-Index Curve,KISKGA2Y_INDEX-Index Curve,KRW,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,190.9173,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,KISKGA3M_INDEX-Index Curve,KISKGA3M_INDEX-Index Curve,KRW,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,166.4989,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,KOCPI_INDEX-Index Curve,KOCPI_INDEX-Index Curve,KRW,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,105.2,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,KOOKMIN_BANK-Index Curve,KOOKMIN_BANK-Index Curve,KRW,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,36300,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,LPX50TR_INDEX-Index Curve,LPX50TR_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,819.12,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,LVACLC_INDEX-Index Curve,LVACLC_INDEX-Index Curve,CLP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2885.63,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,LVACLG_INDEX-Index Curve,LVACLG_INDEX-Index Curve,CLP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2168.36,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MAXIDX_INDEX-Index Curve,MAXIDX_INDEX-Index Curve,HUF,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,431.8621,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MAXRMAX_INDEX-Index Curve,MAXRMAX_INDEX-Index Curve,HUF,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,452.3432,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MICEX10_INDEX-Index Curve,MICEX10_INDEX-Index Curve,RUB,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,3213.13,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MSDLE15_INDEX-Index Curve,MSDLE15_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1026.502,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MSDLWI_INDEX-Index Curve,MSDLWI_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,829.29,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MSDLWXA_INDEX-Index Curve,MSDLWXA_INDEX-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,833.01,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MXEF_INDEX-Index Curve,MXEF_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,916.39,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MXEU_INDEX-Index Curve,MXEU_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,84.23,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MXLA_INDEX-Index Curve,MXLA_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,3602.28,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MXME_INDEX-Index Curve,MXME_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,182.07,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MXWD_INDEX-Index Curve,MXWD_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,299.51,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MXWO0IT_INDEX-Index Curve,MXWO0IT_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,86.48,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,NIFTY_INDEX-Index Curve,NIFTY_INDEX-Index Curve,INR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,4624.3,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,NZGS_INDEX-Index Curve,NZGS_INDEX-Index Curve,NZD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1311.83,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,NZSE_INDEX-Index Curve,NZSE_INDEX-Index Curve,NZD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,730.019,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,NZXB90_INDEX-Index Curve,NZXB90_INDEX-Index Curve,NZD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,596.88,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,NZXCINV_INDEX-Index Curve,NZXCINV_INDEX-Index Curve,NZD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,3879.45,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,OPALPACX_INDEX-Index Curve,OPALPACX_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,997.27,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,PANEURAGG_EUR_UNHEDG-Index Curve,PANEURAGG_EUR_UNHEDG-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,176.467645,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,PANEURHY_EUR_HEDG-Index Curve,PANEURHY_EUR_HEDG-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,208.291709,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,RAAX_INDEX-Index Curve,RAAX_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1345.6,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,RMS_INDEX-Index Curve,RMS_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1091.59,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,RUGL_INDEX-Index Curve,RUGL_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2736.64,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,SBJYL_INDEX-Index Curve,SBJYL_INDEX-Index Curve,JPY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,313.8892,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,SBWGNJYC_INDEX-Index Curve,SBWGNJYC_INDEX-Index Curve,JPY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,329.0085,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,SBWGNJYU_INDEX-Index Curve,SBWGNJYU_INDEX-Index Curve,JPY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,278.774,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,SPEURO_INDEX-Index Curve,SPEURO_INDEX-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1004.74,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,SPGCCI_INDEX-Index Curve,SPGCCI_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,644.9144,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,SPTSX_INDEX-Index Curve,SPTSX_INDEX-Index Curve,CAD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,11955.09,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,SZCOMP_INDEX-Index Curve,SZCOMP_INDEX-Index Curve,CNY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,866.6534,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,TMB_BANK-Index Curve,TMB_BANK-Index Curve,THB,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1.58,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,TPXDDVD_INDEX-Index Curve,TPXDDVD_INDEX-Index Curve,JPY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,927.37,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,TWSEDVD_INDEX-Index Curve,TWSEDVD_INDEX-Index Curve,TWD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,9783.94,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,UNUS_INDEX-Index Curve,UNUS_INDEX-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,USAGG_EUR_HEDG-Index Curve,USAGG_EUR_HEDG-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,198.668398,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,USAGG_USD_UNHEDG-Index Curve,USAGG_USD_UNHEDG-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1769.792781,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,USCORPHY_EUR_HEDG-Index Curve,USCORPHY_EUR_HEDG-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,216.37768,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,XU100_INDEX-Index Curve,XU100_INDEX-Index Curve,TRY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,51266.62,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,BCOPC3A2_INDEX-Index Curve,BCOPC3A2_INDEX-Index Curve,INR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,9.535,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,BCOPC3A8_INDEX-Index Curve,BCOPC3A8_INDEX-Index Curve,INR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,9.5663,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,SPCBCR_INDEX-Index Curve,SPCBCR_INDEX-Index Curve,CNY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1730.14,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,EMUMIDCAP-Index Curve,EMUMIDCAP-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,839.25,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,JGENVUEG-Index Curve,JGENVUEG-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,220.836,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,CRD_AM-Index Curve,CRD_AM-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,CRD_AP-Index Curve,CRD_AP-Index Curve,AUD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,CRD_EU-Index Curve,CRD_EU-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBC_AD-Index Curve,MBC_AD-Index Curve,HKD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBC_AN-Index Curve,MBC_AN-Index Curve,THB,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBC_ED-Index Curve,MBC_ED-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBC_EN-Index Curve,MBC_EN-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBC_LA-Index Curve,MBC_LA-Index Curve,CLP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBC_US-Index Curve,MBC_US-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTC_AD-Index Curve,MTC_AD-Index Curve,TWD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTC_AN-Index Curve,MTC_AN-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTC_ED-Index Curve,MTC_ED-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTC_EN-Index Curve,MTC_EN-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTC_LA-Index Curve,MTC_LA-Index Curve,CLP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTC_US-Index Curve,MTC_US-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,PCC_CA-Index Curve,PCC_CA-Index Curve,CAD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,PCC_EU-Index Curve,PCC_EU-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,PCC_LA-Index Curve,PCC_LA-Index Curve,MXN,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,OPR_GP-Index Curve,OPR_GP-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,BUS_GP-Index Curve,BUS_GP-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTN_US-Index Curve,MTN_US-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTN_LA-Index Curve,MTN_LA-Index Curve,CLP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTN_AD-Index Curve,MTN_AD-Index Curve,JPY,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTN_AN-Index Curve,MTN_AN-Index Curve,MYR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTN_ED-Index Curve,MTN_ED-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MTN_EN-Index Curve,MTN_EN-Index Curve,PLN,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBN_US-Index Curve,MBN_US-Index Curve,USD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBN_LA-Index Curve,MBN_LA-Index Curve,CLP,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBN_AD-Index Curve,MBN_AD-Index Curve,TWD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBN_AN-Index Curve,MBN_AN-Index Curve,MYR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBN_ED-Index Curve,MBN_ED-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,MBN_EN-Index Curve,MBN_EN-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,PCN_CA-Index Curve,PCN_CA-Index Curve,CAD,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,PCN_LA-Index Curve,PCN_LA-Index Curve,MXN,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,PCN_EU-Index Curve,PCN_EU-Index Curve,EUR,0,TRUE,@Sliding Axis 2
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,0,,,

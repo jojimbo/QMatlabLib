@@ -1,0 +1,245 @@
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+PASSED : Last element negative, 'BF_vol_vol_factor_negData'
+PASSED : element [115] negative, 'EQ_vol_vol_factor_negData'
+PASSED : element [201] negative, 'fxVolVol_negData'
+PASSED : element [1] negative, 'irVolVol_negData'
+PASSED : element [1] negative, 'reVolVol_negData'
+PASSED : Correct Identifiers, 'bfVolVol_headerChanged'
+PASSED : Correct Names, 'bfVolVol_headerChanged'
+PASSED : Correct Identifiers, 'eqVolVol_headerChanged'
+PASSED : Correct Names, 'eqVolVol_headerChanged'
+PASSED : Correct Identifiers, 'fxVolVol_headerChanged'
+PASSED : Correct Names, 'fxVolVol_headerChanged'
+PASSED : Correct Identifiers, 'reVolVol_headerChanged'
+PASSED : Correct Names, 'reVolVol_headerChanged'
+################# P20-3 Passed #################
+### Start Unit_Test_P20_4
+Start loading..
+Finished loading
+PASSED : Added Tenors [800, 900, 1000] for 'AEX-Volatility Cap'
+PASSED : All Tenors removed except [730] for 'USAGG_USD_UNHEDG_INDEX-Volatility Cap'
+PASSED : Removed item: 'AEX-Volatility Cap'
+PASSED : Added item: 'TEST1_USD_TEST1_INDEX-Volatility Cap', at the end
+PASSED : element [780] negative, 'volCap_negData'
+################# P20-4 Passed #################
+### Start Unit_Test_P20_5
+Finished loading
+PASSED : Benchmark Portfolio Tree is correctly loaded
+################# P20-5 Passed #################
+### Start Unit_Test_P20_7
+PASSED : Zero Coupon Bond Benchmarking of loaded Tenors and Domestic Curves
+PASSED : Zero Coupon Bond Benchmarking of Credit Spread Definition
+PASSED : Equity Forward Benchmarking of Name, Strike, Currency & Tenor
+################# P20-7 Passed #################
+ 
+ 
+ 
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',158,1)">158 </a>if b1 && b2 && b3 && b4 && b5 && b7
+b1 && b2 && b3 && b4 && b5 && b7
+
+ans =
+
+     1
+
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',159,1)">159 </a>    disp('################# Total score: Passed #################');
+dbstep
+################# Total score: Passed #################
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',164,1)">164 </a>disp(' ');
+dbstep
+ 
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',165,1)">165 </a>str = [num2str(p) ' passed, and ' num2str(f) ' failed.'];
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',167,1)">167 </a>disp(str);
+dbstep
+6 passed, and 0 failed.
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',168,1)">168 </a>disp(' ');
+dbcont
+ 
+#######################################################
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+PASSED : Last element negative, 'BF_vol_vol_factor_negData'
+PASSED : element [115] negative, 'EQ_vol_vol_factor_negData'
+PASSED : element [201] negative, 'fxVolVol_negData'
+PASSED : element [1] negative, 'irVolVol_negData'
+PASSED : element [1] negative, 'reVolVol_negData'
+PASSED : Correct Identifiers, 'bfVolVol_headerChanged'
+PASSED : Correct Names, 'bfVolVol_headerChanged'
+PASSED : Correct Identifiers, 'eqVolVol_headerChanged'
+PASSED : Correct Names, 'eqVolVol_headerChanged'
+PASSED : Correct Identifiers, 'fxVolVol_headerChanged'
+PASSED : Correct Names, 'fxVolVol_headerChanged'
+PASSED : Correct Identifiers, 'reVolVol_headerChanged'
+PASSED : Correct Names, 'reVolVol_headerChanged'
+################# P20-3 Passed #################
+### Start Unit_Test_P20_4
+Start loading..
+Finished loading
+PASSED : Added Tenors [800, 900, 1000] for 'AEX-Volatility Cap'
+PASSED : All Tenors removed except [730] for 'USAGG_USD_UNHEDG_INDEX-Volatility Cap'
+PASSED : Removed item: 'AEX-Volatility Cap'
+PASSED : Added item: 'TEST1_USD_TEST1_INDEX-Volatility Cap', at the end
+PASSED : element [780] negative, 'volCap_negData'
+################# P20-4 Passed #################
+### Start Unit_Test_P20_5
+Finished loading
+PASSED : Benchmark Portfolio Tree is correctly loaded
+################# P20-5 Passed #################
+### Start Unit_Test_P20_7
+PASSED : Zero Coupon Bond Benchmarking of loaded Tenors and Domestic Curves
+PASSED : Zero Coupon Bond Benchmarking of Credit Spread Definition
+PASSED : Equity Forward Benchmarking of Name, Strike, Currency & Tenor
+################# P20-7 Passed #################
+ 
+ 
+ 
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',158,1)">158 </a>if b1 && b2 && b3 && b4 && b5 && b7
+if system_dependent('IsDebugMode')==1, dbcont; end
+################# Total score: Passed #################
+ 
+6 passed, and 0 failed.
+ 
+#######################################################
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+PASSED : Last element negative, 'BF_vol_vol_factor_negData'
+PASSED : element [115] negative, 'EQ_vol_vol_factor_negData'
+PASSED : element [201] negative, 'fxVolVol_negData'
+PASSED : element [1] negative, 'irVolVol_negData'
+PASSED : element [1] negative, 'reVolVol_negData'
+PASSED : Correct Identifiers, 'bfVolVol_headerChanged'
+PASSED : Correct Names, 'bfVolVol_headerChanged'
+PASSED : Correct Identifiers, 'eqVolVol_headerChanged'
+PASSED : Correct Names, 'eqVolVol_headerChanged'
+PASSED : Correct Identifiers, 'fxVolVol_headerChanged'
+PASSED : Correct Names, 'fxVolVol_headerChanged'
+PASSED : Correct Identifiers, 'reVolVol_headerChanged'
+PASSED : Correct Names, 'reVolVol_headerChanged'
+################# P20-3 Passed #################
+### Start Unit_Test_P20_4
+Start loading..
+Finished loading
+PASSED : Added Tenors [800, 900, 1000] for 'AEX-Volatility Cap'
+PASSED : All Tenors removed except [730] for 'USAGG_USD_UNHEDG_INDEX-Volatility Cap'
+PASSED : Removed item: 'AEX-Volatility Cap'
+PASSED : Added item: 'TEST1_USD_TEST1_INDEX-Volatility Cap', at the end
+PASSED : element [780] negative, 'volCap_negData'
+################# P20-4 Passed #################
+### Start Unit_Test_P20_5
+Finished loading
+PASSED : Benchmark Portfolio Tree is correctly loaded
+################# P20-5 Passed #################
+### Start Unit_Test_P20_7
+PASSED : Zero Coupon Bond Benchmarking of loaded Tenors and Domestic Curves
+PASSED : Zero Coupon Bond Benchmarking of Credit Spread Definition
+PASSED : Equity Forward Benchmarking of Name, Strike, Currency & Tenor
+################# P20-7 Passed #################
+ 
+ 
+ 
+################# Total score: Passed #################
+ 
+6 passed, and 0 failed.
+ 
+#######################################################

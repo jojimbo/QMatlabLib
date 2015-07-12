@@ -1,0 +1,63 @@
+Description:
+As an STS user,
+I want given a dataset of FX rates, the system should load the equity data to value FX sensitive instruments in STS. The name of the data file is: fx_foreign_exchangeYYYYMMDD.csv
+
+Criteria:
+Given that I want to be able to calculate the value of FX sensitive instruments in STS,
+When STS can FX data,
+Then I am able to calculate the value of FX sensitive instruments in STS. The data is in the standard ALGO fomat available on the sharepoint site and should be tested with a flexible number currencies and tested for at least 2 data sets. The system should create a warning if the loaded data is negative. The system should read the header files so that the system is not impacted by changes in the columns of the data files.
+
+Test plan:
+For:
+-fx_foreign_exchange20111230.csv
+-fx_foreign_exchange20120629.csv
+
+Expected results:
+These are the base sets of fx foreign exchange indices, it is expected that these sets should be loaded successfully and correctly without any error.
+
+For:
+-fx_foreign_exchange20111230_flexNrCurr.csv
+The following currencies are removed:PEN, PLN, RON, RUB, SEK, THB, and TRY.
+
+-fx_foreign_exchange20120629_flexNrCurr.csv
+The following currencies are added:
+CR1	CR1	EUR	EUR-SWAP	CR1	CR1-SWAP	Foreign Exchange	EUR	1	Foreign Exchange Model	Spot_CR1-HistoricalRates
+CR2	CR2	EUR	EUR-SWAP	CR2	CR2-SWAP	Foreign Exchange	EUR	2	Foreign Exchange Model	Spot_CR2-HistoricalRates
+CR3	CR3	EUR	EUR-SWAP	CR3	CR3-SWAP	Foreign Exchange	EUR	3	Foreign Exchange Model	Spot_CR3-HistoricalRates
+CR4	CR4	EUR	EUR-SWAP	CR4	CR4SWAP	Foreign Exchange	EUR	4	Foreign Exchange Model	Spot_CR4-HistoricalRates
+
+Expected results:
+For the first set, it is expected that only the remaining currencies are loaded.
+For the second set, the CR* currencies should also be loaded.
+
+For:
+-fx_foreign_exchange20111230_negativeCurr.csv
+rows: 13 and 17 are negative.
+-fx_foreign_exchange20120629_negativeCurr.csv
+all rows have negative values.
+
+Expected results:
+The system should output a warning for both sets, notifying that there are negative indices.
+
+For:
+-fx_foreign_exchange20111230_headerChanged.csv
+-IDEAL_header_headerChanged.csv
+
+Changes in:
+HistoricalCrvXREF:C
+TheoModelXREF:D
+SpotPriceVAL:E
+SpotPriceUNIT:F	
+ProductTypeENUM:G	
+ForeignCurveXREF:H	
+ForeignCurrUNIT:I
+DiscountCurveXREF:J	
+CurrencyUNIT:K
+NAME:L
+IDENTIFIER:M	
+TYPE:N
+OBJECT:O
+
+
+Expected result:
+Load data according to the specification above.

@@ -1,0 +1,80 @@
+Description:
+As an STS user,
+I want given a dataset of equity implied vol data, the system should load the equity implied vol data to value equity implied vol sensitive instruments in STS. The name of the data file is: equity_imp_vol_surfaceYYYYMMDD.csv
+
+Criteria:
+Given that I want to be able to calculate the value of equity implied vol sensitive instruments in STS,
+When STS can load equity implied vol data,
+Then I am able to calculate the value of equity implied vol sensitive instruments in STS. The data is in the standard ALGO fomat available on the sharepoint site and should be tested with a flexible number indices in different currencies, flexible number of option maturities and number of moneyness  data points and tested for at least 2 data sets. The system should create a warning if the loaded data is negative. The data per currency is 2 dimensional. The system should read the header files so that the system is not impacted by changes in the columns of the data files.
+
+Test plan:
+For:
+-equity_imp_vol_surface20111230.csv
+-equity_imp_vol_surface20120629.csv
+
+Expected results:
+The system should successfully, without any error, load these sets.
+
+For:
+-equity_imp_vol_surface20111230_flexNrOfCurrMoneyMaturity.csv
+the following has been added to the end of the file: USAGG_USD_UNHEDG-Volatility Surface
+for .4GSPC-Volatility Surface: moneyness (1), maturity (777) are added.
+
+-equity_imp_vol_surface20120629_flexNrOfCurrMoneyMaturity.csv
+for .HSI-Volatility Surface: the following moneyness, maturity rows are removed:
+1.052631579	730	
+1.428571429	2555	
+0.769230769	4380	
+1.176470588	1825	
+0.869565217	547	
+1.111111111	7300	
+
+Expected results:
+Both sets should run successfully, no errors or warnings are thrown, the data is loaded as specified above.
+
+For:
+-equity_imp_vol_surface20111230_negativeVal.csv
+row 100 has negative moneyness, maturity, and index.
+
+-equity_imp_vol_surface20111230_negativeVal.csv
+TPXDDVD_INDEX-Volatility Surface: has all negative moneyness
+
+Expected results:
+For both sets, the system should output a warning saying that there are negative values.
+
+For:
+-equity_imp_vol_surface20111230_headerChanged.csv
+-IDEAL_header_headerChanged.csv
+
+Changes are:
+
+For Volatility - Moneyness/TermSPEC:
+CurveFUNC:C
+StateProcFUNC:D	
+GnVolMnyTrmSfFLAG:E	
+GnVolMTSfExt1FLAG:F	
+GnVolMTSfExt0FLAG:G	
+GnVolMnyTrmSf0SIN:H	
+GnVolMnyTrmSf1SIN:I	
+TimeEvolutionFUNC:J	
+CurveUnitUNIT:K
+CurveUnitPERD:L
+CurveUnitDAYC:M
+RelativeCurveFLAG:N	
+DatumDATE:O
+IDENTIFIER:P	
+NAME:Q
+TYPE:R
+OBJECT:S
+
+For Volatility - Moneyness/TermSPEC : Generic Volatility Moneyness Term Surface:
+GnVolMnyTrmSfNODE:C	
+GnVolMnyTrmSf1AXS:D	
+GnVolMnyTrmSf0AXS:E	
+OBJECT:F
+ATTRIBUTE:G
+
+Expected results:
+Load data according to the specification above.
+
+

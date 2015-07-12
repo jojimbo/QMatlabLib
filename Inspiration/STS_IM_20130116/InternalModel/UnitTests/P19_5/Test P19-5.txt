@@ -1,0 +1,84 @@
+Description:
+As an STS user,
+I want given a dataset of interest rate implied vol data, the system should load the interest rate implied vol data to value interest rate implied vol sensitive instruments in STS. The name of the data file is: swaption_implied_volatilityYYYYMMDD.csv
+
+Criteria:
+Given that I want to be able to calculate the value of interest rate implied vol sensitive instruments in STS,
+When STS can load interest rate implied vol data,
+Then I am able to calculate the value of interest rate implied vol sensitive instruments in STS. The data is in the standard ALGO fomat available on the sharepoint site and should be tested with a flexible number currencies, tenors, option maturities and tested for at least 2 data sets. The system should create a warning if the loaded data is negative. The data per currency is 2 dimensional meaning that vol skew is not taken into account. The system should read the header files so that the system is not impacted by changes in the columns of the data files.
+
+Test plan:
+For:
+-swaption_implied_volatility20111230.csv
+-swaption_implied_volatility20120629.csv
+
+Expected results:
+These are the base sets, and the system should correctly and successfully load these data without any error.
+
+For:
+-swaption_implied_volatility20111230_flexNrCurr.csv
+the following currency has been added: CR1_Swaption_Volatility_Surface
+
+-swaption_implied_volatility20120629_flexNrCurr.csv
+the following currency has been added: CR2_Swaption_Volatility_Surface
+and the following currency has been removed: MYR_Swaption_Volatility_Surface
+
+Expected results:
+It is expected that both sets are executed successfully, implying that, for the first set, the CR1 should be loaded, and for the second run, the CR2 should be loaded and MYR not.
+
+-swaption_implied_volatility20111230_flexNrOfTenorAndMaturity.csv
+for AUD_Swaption_Volatility_Surface: all maturity 730 rows are removed.
+for HKD_Swaption_Volatility_Surface: the tenors 1095,1460,1825,2555 are removed for maturity 1095.
+
+-swaption_implied_volatility20120629_flexNrOfTenorAndMaturity.csv
+for GBP_Swaption_Volatility_Surface: the tenors 2199,2207,2300,2400,2525 have been added to maturity 5475.
+for INR_Swaption_Volatility_Surface: a new tenor (111) maturity (11000) are added.
+
+Expected results:
+Both sets should run successfully without error, and the data should be loaded as specified above.
+
+For:
+-swaption_implied_volatility20111230_negativeVal.csv
+ZEU_Swaption_Volatility_Surface has negative values.
+-swaption_implied_volatility20120629_negativeVal.csv
+row: 101 has a negative value.
+
+Expected results:
+For both sets a warning should be outputted by the system warning about negative values.
+Note, that the base sets also include negative values, so it is expected to have a warning for all the sets in this user story.
+
+For:
+-swaption_implied_volatility20111230_headerChanged.csv
+-IDEAL_header_headerChanged.csv
+
+Changes are:
+For Volatility - Term/TermSPEC:
+CurveFUNC:C
+StateProcFUNC:D	
+GenVolTrmTrmSfFLAG:E	
+GenVolTTSfExt0FLAG:F	
+GenVolTTSfExt1FLAG:G	
+GenVolTrmTrmSf0SIN:H	
+GenVolTrmTrmSf1SIN:I	
+TimeEvolutionFUNC:J	
+CurveUnitUNIT:K
+CurveUnitPERD:L	
+CurveUnitDAYC:M
+RelativeCurveFLAG:N	
+DatumDATE:O
+IDENTIFIER:P	
+NAME:Q
+TYPE:R
+OBJECT:S
+
+For Volatility - Term/TermSPEC : Generic Volatility Term Term Surface:
+GenVolTrmTrmSfNODE:C
+GenVolTrmTrmSf1AXS:D	
+GenVolTrmTrmSf0AXS:E	
+OBJECT:F
+ATTRIBUTE:G
+
+
+
+Expected result:
+Load data according to the specification above.

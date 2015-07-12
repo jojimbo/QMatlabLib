@@ -1,0 +1,37 @@
+Description:
+As an STS user,
+I want given a dataset of ceilings factors, the system to load the ceilings factors in STS,
+So that I am able to maximize the shocked vol for equity, BF and RE in STS. The name of the data file is: volatility_cap.csv
+
+Criteria:
+Given a set of ceilings factors,
+When STS can load the ceilings factor data,
+Then I am able to maximize the shock of vol and vol sensitive instruments in STS. The number of tenors and indices should be flexible. The data cannot be negative or zero.
+
+Test plan:
+[1]
+1)volatility_cap.csv
+
+It is expected that STS is able to load this file. (base case)
+
+
+[2]
+
+1)volatility_cap_flexNrOfTenors.csv
+-Under AEX-Volatility Cap 3 tenors are added: 800,900,1000
+-Under USAGG_USD_UNHEDG_INDEX-Volatility Cap all tenors are removed, except 730.
+
+It is expected that STS is able to load this set of data eventhough the tenors have variable lengths.
+
+[3]
+1)volatility_cap_flexNrOfInd.csv
+-AEX-Volatility Cap has been removed.
+TEST1_USD_TEST1_INDEX-Volatility Cap has been added (at the end)
+
+This file should be successfully loaded into STS, meaning that STS is able to cope with flexible number of indices.
+
+[4]
+1) volatility_cap_negData.csv
+-row 846 contains a negative number.
+
+It is expected from STS to show a warning while loading this file.

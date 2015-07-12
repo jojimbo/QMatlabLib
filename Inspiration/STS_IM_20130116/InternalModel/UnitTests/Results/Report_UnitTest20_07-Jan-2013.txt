@@ -1,0 +1,1093 @@
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+{Reference to non-existent field 'GnVolMnyTrmSf1AXS'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P20_3', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m', 117)" style="font-weight:bold">Unit_Test_P20_3</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',117,0)">line 117</a>)
+tenors     = bfVolVol_flexNrOfTenors.(tenorKeyword);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P20', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m', 78)" style="font-weight:bold">runUT_P20</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',78,0)">line 78</a>)
+    if Unit_Test_P20_3(testPath, codePath)
+} 
+runUT_P20
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',117,1)">117 </a>tenors     = bfVolVol_flexNrOfTenors.(tenorKeyword);
+bfVolVol_flexNrOfTenors
+
+bfVolVol_flexNrOfTenors = 
+
+        itemLines: [20x2 double]
+      itemLineCnt: [20x1 double]
+            names: {20x1 cell}
+      identifiers: {20x1 cell}
+            dates: {20x1 cell}
+     RelCurveFlag: {20x1 cell}
+    moneynessDATA: {242x1 cell}
+         termDATA: {242x1 cell}
+        valueDATA: {242x1 cell}
+      csvFileName: [1x103 char]
+
+tenorKeyword
+
+tenorKeyword =
+
+GnVolMnyTrmSf1AXS
+
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+{Reference to non-existent field 'termDATA'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P20_3', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m', 237)" style="font-weight:bold">Unit_Test_P20_3</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',237,0)">line 237</a>)
+tenors     = irVolVol_flexNrOfTenors.(tenorKeyword);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P20', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m', 78)" style="font-weight:bold">runUT_P20</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',78,0)">line 78</a>)
+    if Unit_Test_P20_3(testPath, codePath)
+} 
+runUT_P20
+{Undefined function or variable 'runUT_P20'.
+} 
+runUT_P20
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',237,1)">237 </a>tenors     = irVolVol_flexNrOfTenors.(tenorKeyword);
+irVolVol_flexNrOfTenors
+
+irVolVol_flexNrOfTenors = 
+
+            itemLines: [30x2 double]
+          itemLineCnt: [30x1 double]
+                names: {30x1 cell}
+          identifiers: {30x1 cell}
+                dates: {30x1 cell}
+         RelCurveFlag: {30x1 cell}
+    GnVolMnyTrmSf0AXS: {482x1 cell}
+    GnVolMnyTrmSf1AXS: {482x1 cell}
+    GnVolMnyTrmSfNODE: {482x1 cell}
+          csvFileName: [1x103 char]
+
+tenorKeyword = 'GnVolMnyTrmSf1AXS';
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+{Reference to non-existent field 'GnVolMnyTrmSf1AXS'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P20_3', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m', 261)" style="font-weight:bold">Unit_Test_P20_3</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',261,0)">line 261</a>)
+tenors     = reVolVol_flexNrOfTenors.(tenorKeyword);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P20', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m', 78)" style="font-weight:bold">runUT_P20</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',78,0)">line 78</a>)
+    if Unit_Test_P20_3(testPath, codePath)
+} 
+runUT_P20
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',262,1)">262 </a>tenors     = reVolVol_flexNrOfTenors.(tenorKeyword);
+reVolVol_flexNrOfTenors
+
+reVolVol_flexNrOfTenors = 
+
+        itemLines: [5x2 double]
+      itemLineCnt: [5x1 double]
+            names: {5x1 cell}
+      identifiers: {5x1 cell}
+            dates: {5x1 cell}
+     RelCurveFlag: {5x1 cell}
+    moneynessDATA: {69x1 cell}
+         termDATA: {69x1 cell}
+        valueDATA: {69x1 cell}
+      csvFileName: [1x103 char]
+
+tenorKeyword = 'termDATA';
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+{Reference to non-existent field 'GnVolMnyTrmSfNODE'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P20_3', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m', 362)" style="font-weight:bold">Unit_Test_P20_3</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',362,0)">line 362</a>)
+if lt(bfVolVol_negData.GnVolMnyTrmSfNODE{end}, 0)
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P20', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m', 78)" style="font-weight:bold">runUT_P20</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',78,0)">line 78</a>)
+    if Unit_Test_P20_3(testPath, codePath)
+} 
+runUT_P20
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',263,1)">263 </a>tenors     = reVolVol_flexNrOfTenors.(tenorKeyword);
+dbcont
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',363,1)">363 </a>if lt(bfVolVol_negData.GnVolMnyTrmSfNODE{end}, 0)
+bfVolVol_negData
+
+bfVolVol_negData = 
+
+        itemLines: [20x2 double]
+      itemLineCnt: [20x1 double]
+            names: {20x1 cell}
+      identifiers: {20x1 cell}
+            dates: {20x1 cell}
+     RelCurveFlag: {20x1 cell}
+    moneynessDATA: {240x1 cell}
+         termDATA: {240x1 cell}
+        valueDATA: {240x1 cell}
+      csvFileName: [1x96 char]
+
+bfVolVol_negData.('valueDATA')
+
+ans = 
+
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [ 0.1000]
+    [      1]
+    [ 0.9500]
+    [ 0.8500]
+    [ 0.7000]
+    [ 0.6000]
+    [ 0.4500]
+    [ 0.3500]
+    [ 0.2500]
+    [ 0.2000]
+    [ 0.1500]
+    [ 0.1500]
+    [-0.1000]
+
+bfVolVol_negData.('valueDATA'){end}
+
+ans =
+
+   -0.1000
+
+runUT_P20
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',263,1)">263 </a>tenors     = reVolVol_flexNrOfTenors.(tenorKeyword);
+if system_dependent('IsDebugMode')==1, dbcont; end
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+lt(bfVolVol_negData.(valuesKeyword){end}, 0)
+
+ans =
+
+     1
+
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Last element negative, 'BF_vol_vol_factor_negData'
+if system_dependent('IsDebugMode')==1, dbstep; end
+eqVolVol_negData
+
+eqVolVol_negData = 
+
+        itemLines: [45x2 double]
+      itemLineCnt: [45x1 double]
+            names: {45x1 cell}
+      identifiers: {45x1 cell}
+            dates: {45x1 cell}
+     RelCurveFlag: {45x1 cell}
+    moneynessDATA: {540x1 cell}
+         termDATA: {540x1 cell}
+        valueDATA: {540x1 cell}
+      csvFileName: [1x96 char]
+
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : element [115] negative, 'EQ_vol_vol_factor_negData'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : element [201] negative, 'fxVolVol_negData'
+if system_dependent('IsDebugMode')==1, dbstep; end
+irVolVol_negData
+
+irVolVol_negData = 
+
+            itemLines: [30x2 double]
+          itemLineCnt: [30x1 double]
+                names: {30x1 cell}
+          identifiers: {30x1 cell}
+                dates: {30x1 cell}
+         RelCurveFlag: {30x1 cell}
+    GnVolMnyTrmSf0AXS: {480x1 cell}
+    GnVolMnyTrmSf1AXS: {480x1 cell}
+    GnVolMnyTrmSfNODE: {480x1 cell}
+          csvFileName: [1x96 char]
+
+valuesKeyword = 'GnVolMnyTrmSfNODE';
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : element [1] negative, 'irVolVol_negData'
+if system_dependent('IsDebugMode')==1, dbstep; end
+valuesKeyword
+
+valuesKeyword =
+
+GnVolMnyTrmSfNODE
+
+valuesKeyword = 'valueDATA';
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : element [1] negative, 'reVolVol_negData'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Correct Identifiers, 'bfVolVol_headerChanged'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Correct Names, 'bfVolVol_headerChanged'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Correct Identifiers, 'eqVolVol_headerChanged'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Correct Names, 'eqVolVol_headerChanged'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Correct Identifiers, 'fxVolVol_headerChanged'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Correct Names, 'fxVolVol_headerChanged'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Correct Identifiers, 'reVolVol_headerChanged'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Correct Names, 'reVolVol_headerChanged'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+################# P20-3 Passed #################
+### Start Unit_Test_P20_4
+Start loading..
+Finished loading
+{Reference to non-existent field 'GnVolMnyTrmSf1AXS'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P20_4', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_4\Unit_Test_P20_4.m', 64)" style="font-weight:bold">Unit_Test_P20_4</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_4\Unit_Test_P20_4.m',64,0)">line 64</a>)
+tenors     = volCap_flexNrOfTenors.(tenorKeyword);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P20', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m', 98)" style="font-weight:bold">runUT_P20</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',98,0)">line 98</a>)
+    if Unit_Test_P20_4(testPath, codePath)
+} 
+runUT_P20
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',363,1)">363 </a>if lt(bfVolVol_negData.(valuesKeyword){end}, 0)
+if system_dependent('IsDebugMode')==1, dbcont; end
+PASSED : Last element negative, 'BF_vol_vol_factor_negData'
+PASSED : element [115] negative, 'EQ_vol_vol_factor_negData'
+PASSED : element [201] negative, 'fxVolVol_negData'
+PASSED : element [1] negative, 'irVolVol_negData'
+if system_dependent('IsDebugMode')==1, dbcont; end
+PASSED : element [1] negative, 'reVolVol_negData'
+PASSED : Correct Identifiers, 'bfVolVol_headerChanged'
+PASSED : Correct Names, 'bfVolVol_headerChanged'
+PASSED : Correct Identifiers, 'eqVolVol_headerChanged'
+PASSED : Correct Names, 'eqVolVol_headerChanged'
+PASSED : Correct Identifiers, 'fxVolVol_headerChanged'
+PASSED : Correct Names, 'fxVolVol_headerChanged'
+PASSED : Correct Identifiers, 'reVolVol_headerChanged'
+PASSED : Correct Names, 'reVolVol_headerChanged'
+################# P20-3 Passed #################
+### Start Unit_Test_P20_4
+Start loading..
+Finished loading
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Added Tenors [800, 900, 1000] for 'AEX-Volatility Cap'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : All Tenors removed except [730] for 'USAGG_USD_UNHEDG_INDEX-Volatility Cap'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Removed item: 'AEX-Volatility Cap'
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+PASSED : Added item: 'TEST1_USD_TEST1_INDEX-Volatility Cap', at the end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+{Reference to non-existent field 'GnVolMnyTrmSfNODE'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P20_4', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_4\Unit_Test_P20_4.m', 126)" style="font-weight:bold">Unit_Test_P20_4</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_4\Unit_Test_P20_4.m',126,0)">line 126</a>)
+if lt(volCap_negData.GnVolMnyTrmSfNODE{780}, 0)
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P20', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m', 98)" style="font-weight:bold">runUT_P20</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',98,0)">line 98</a>)
+    if Unit_Test_P20_4(testPath, codePath)
+} 
+runUT_P20
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Couldn't open file E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\BF_vol_vol_factor_headerChanged.csv
+{Error using <a href="matlab:helpUtils.errorDocCallback('internalModel.Utilities.csvreadCell', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\Utilities.m', 44)" style="font-weight:bold">internalModel.Utilities.csvreadCell</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\Utilities.m',44,0)">line 44</a>)
+Too many open files
+
+Error in <a href="matlab:helpUtils.errorDocCallback('internalModel.Configuration/processCsvFile', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m', 439)" style="font-weight:bold">internalModel.Configuration/processCsvFile</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',439,0)">line 439</a>)
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('internalModel.Configuration/processConfigurarion', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m', 71)" style="font-weight:bold">internalModel.Configuration/processConfigurarion</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,0)">line 71</a>)
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('internalModel.Configuration', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m', 48)" style="font-weight:bold">internalModel.Configuration</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,0)">line 48</a>)
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P20_3>getCsvContents', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m', 511)" style="font-weight:bold">Unit_Test_P20_3>getCsvContents</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',511,0)">line 511</a>)
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P20_3', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m', 94)" style="font-weight:bold">Unit_Test_P20_3</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P20_3\Unit_Test_P20_3.m',94,0)">line 94</a>)
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P20', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m', 78)" style="font-weight:bold">runUT_P20</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P20.m',78,0)">line 78</a>)
+
+} 
+
+------------------------------------------------------------------------
+        Fatal Java Exception detected at Mon Jan 07 17:44:42 2013
+------------------------------------------------------------------------
+Please follow these steps in reporting this problem to MathWorks so
+that we have the best chance of correcting it:
+
+    1. Send us this crash report.  For your convenience, this information
+       has been recorded in: C:\Users\JPastor\AppData\Local\Temp\27\java.log.13636
+
+    2. Provide a brief description of what you were doing when this
+       problem occurred.
+
+    3. If possible, include MATLAB-files, MEX-files, or MDL-files that aid
+       in reproducing it.
+
+    4. E-mail or FAX this information to us at:
+                  E-mail:   support@mathworks.com
+                     FAX:   508-647-7201
+
+Thank you for your assistance.
+
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+PASSED : Last element negative, 'BF_vol_vol_factor_negData'
+PASSED : element [115] negative, 'EQ_vol_vol_factor_negData'
+PASSED : element [201] negative, 'fxVolVol_negData'
+PASSED : element [1] negative, 'irVolVol_negData'
+PASSED : element [1] negative, 'reVolVol_negData'
+PASSED : Correct Identifiers, 'bfVolVol_headerChanged'
+PASSED : Correct Names, 'bfVolVol_headerChanged'
+PASSED : Correct Identifiers, 'eqVolVol_headerChanged'
+PASSED : Correct Names, 'eqVolVol_headerChanged'
+PASSED : Correct Identifiers, 'fxVolVol_headerChanged'
+PASSED : Correct Names, 'fxVolVol_headerChanged'
+PASSED : Correct Identifiers, 'reVolVol_headerChanged'
+PASSED : Correct Names, 'reVolVol_headerChanged'
+################# P20-3 Passed #################
+### Start Unit_Test_P20_4
+Start loading..
+Finished loading
+PASSED : Added Tenors [800, 900, 1000] for 'AEX-Volatility Cap'
+PASSED : All Tenors removed except [730] for 'USAGG_USD_UNHEDG_INDEX-Volatility Cap'
+PASSED : Removed item: 'AEX-Volatility Cap'
+PASSED : Added item: 'TEST1_USD_TEST1_INDEX-Volatility Cap', at the end
+PASSED : element [780] negative, 'volCap_negData'
+################# P20-4 Passed #################
+### Start Unit_Test_P20_5
+Finished loading
+PASSED : Benchmark Portfolio Tree is correctly loaded
+################# P20-5 Passed #################
+### Start Unit_Test_P20_7
+PASSED : Zero Coupon Bond Benchmarking of loaded Tenors and Domestic Curves
+PASSED : Zero Coupon Bond Benchmarking of Credit Spread Definition
+PASSED : Equity Forward Benchmarking of Name, Strike, Currency & Tenor
+################# P20-7 Passed #################
+ 
+ 
+ 
+################# Total score: Passed #################
+ 
+6 passed, and 0 failed.
+ 
+#######################################################
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+PASSED : Last element negative, 'BF_vol_vol_factor_negData'
+PASSED : element [115] negative, 'EQ_vol_vol_factor_negData'
+PASSED : element [201] negative, 'fxVolVol_negData'
+PASSED : element [1] negative, 'irVolVol_negData'
+PASSED : element [1] negative, 'reVolVol_negData'
+PASSED : Correct Identifiers, 'bfVolVol_headerChanged'
+PASSED : Correct Names, 'bfVolVol_headerChanged'
+PASSED : Correct Identifiers, 'eqVolVol_headerChanged'
+PASSED : Correct Names, 'eqVolVol_headerChanged'
+PASSED : Correct Identifiers, 'fxVolVol_headerChanged'
+PASSED : Correct Names, 'fxVolVol_headerChanged'
+PASSED : Correct Identifiers, 'reVolVol_headerChanged'
+PASSED : Correct Names, 'reVolVol_headerChanged'
+################# P20-3 Passed #################
+### Start Unit_Test_P20_4
+Start loading..
+Finished loading
+PASSED : Added Tenors [800, 900, 1000] for 'AEX-Volatility Cap'
+PASSED : All Tenors removed except [730] for 'USAGG_USD_UNHEDG_INDEX-Volatility Cap'
+PASSED : Removed item: 'AEX-Volatility Cap'
+PASSED : Added item: 'TEST1_USD_TEST1_INDEX-Volatility Cap', at the end
+PASSED : element [780] negative, 'volCap_negData'
+################# P20-4 Passed #################
+### Start Unit_Test_P20_5
+Finished loading
+PASSED : Benchmark Portfolio Tree is correctly loaded
+################# P20-5 Passed #################
+### Start Unit_Test_P20_7
+PASSED : Zero Coupon Bond Benchmarking of loaded Tenors and Domestic Curves
+PASSED : Zero Coupon Bond Benchmarking of Credit Spread Definition
+PASSED : Equity Forward Benchmarking of Name, Strike, Currency & Tenor
+################# P20-7 Passed #################
+ 
+ 
+ 
+################# Total score: Passed #################
+ 
+6 passed, and 0 failed.
+ 
+#######################################################
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P20_1
+Start loading..
+Finished loading
+PASSED : Base Scenario Matrix
+PASSED : flexible nr of Scenario's
+PASSED : flexible nr of Risk Factors
+################# P20-1 Passed #################
+### Start Unit_Test_P20_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies
+PASSED : Adding 30 day PCA Vector (AUD)
+PASSED : Removing 1095 PCA Vector (BGN)
+PASSED : Adding 800 & 1000 day PCA Vector (BRL)
+PASSED : Changed Headerfile for PCA
+################# P20-2 Passed #################
+### Start Unit_Test_P20_3
+Start loading..
+Finished loading
+PASSED : Added Tenor [120] for 'BCOPC3A2_INDEX-Vol-Factor'
+PASSED : Removed Tenors [5475 9125] for 'BCOPC3A8_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19500 20000] for 'USAGG_USD_UNHEDG_INDEX-Vol-Factor'
+PASSED : Added Tenors [19000 19365 19730 20095 20825 21555 22650] for 'AEX-Vol-Factor'
+PASSED : Only 1 Tenor [18250] for 'KLSE-Vol-Factor'
+PASSED : Removed Tenor [5475] for 'EUR/BGN-Vol-Factor'
+PASSED : Added Tenor [18615] for 'EUR/USD-Vol-Factor'
+PASSED : Added Tenors [5500 7777] for 'AUD-Swaption-Vol-Factor'
+PASSED : Added Tenors [6000 6666] for 'ELUK_INDEX-Vol-Factor'
+PASSED : Removed Tenors [2555 : 10950] for 'RMS_INDEX-Vol-Factor'
+PASSED : Added Equity Indices 'TEST1_INDEX-Vol-Factor' and 'TEST1_INDEX-Vol-Factor'
+PASSED : Equity Index 'XU100-Vol-Factor' is the only one
+PASSED : Added Currencies 'TEST1/BGN-Vol-Factor' and 'TEST2/BRL-Vol-Factor'
+PASSED : All currencies are removed, except 'AUD-Swaption-Vol-Factor'
+PASSED : Added at the end: 'TEST1_INDEX-Vol-Factor'
+PASSED : Last element negative, 'BF_vol_vol_factor_negData'
+PASSED : element [115] negative, 'EQ_vol_vol_factor_negData'
+PASSED : element [201] negative, 'fxVolVol_negData'
+PASSED : element [1] negative, 'irVolVol_negData'
+PASSED : element [1] negative, 'reVolVol_negData'
+PASSED : Correct Identifiers, 'bfVolVol_headerChanged'
+PASSED : Correct Names, 'bfVolVol_headerChanged'
+PASSED : Correct Identifiers, 'eqVolVol_headerChanged'
+PASSED : Correct Names, 'eqVolVol_headerChanged'
+PASSED : Correct Identifiers, 'fxVolVol_headerChanged'
+PASSED : Correct Names, 'fxVolVol_headerChanged'
+PASSED : Correct Identifiers, 'reVolVol_headerChanged'
+PASSED : Correct Names, 'reVolVol_headerChanged'
+################# P20-3 Passed #################
+### Start Unit_Test_P20_4
+Start loading..
+Finished loading
+PASSED : Added Tenors [800, 900, 1000] for 'AEX-Volatility Cap'
+PASSED : All Tenors removed except [730] for 'USAGG_USD_UNHEDG_INDEX-Volatility Cap'
+PASSED : Removed item: 'AEX-Volatility Cap'
+PASSED : Added item: 'TEST1_USD_TEST1_INDEX-Volatility Cap', at the end
+PASSED : element [780] negative, 'volCap_negData'
+################# P20-4 Passed #################
+### Start Unit_Test_P20_5
+Finished loading
+PASSED : Benchmark Portfolio Tree is correctly loaded
+################# P20-5 Passed #################
+### Start Unit_Test_P20_7
+PASSED : Zero Coupon Bond Benchmarking of loaded Tenors and Domestic Curves
+PASSED : Zero Coupon Bond Benchmarking of Credit Spread Definition
+PASSED : Equity Forward Benchmarking of Name, Strike, Currency & Tenor
+################# P20-7 Passed #################
+ 
+ 
+ 
+################# Total score: Passed #################
+ 
+6 passed, and 0 failed.
+ 
+#######################################################

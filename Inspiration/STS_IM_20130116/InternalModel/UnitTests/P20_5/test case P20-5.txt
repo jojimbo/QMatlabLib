@@ -1,0 +1,44 @@
+Description:
+As an STS user,
+I want given a portfolio file, 
+the system to load the portfolio file in STS,
+So that I am able to calculate the value and EC of different portfolios.
+The information in STS should be available up to instruments level. 
+The name of the data file is: portfolio.xml
+
+Criteria:
+Given a set of portfolio files,
+When STS can load the portfolio file,
+Then I am able to load for different portfolios in STS. 
+The portfolio tree should be fully flexible with regards to hierarchy. The hierarchy has the following levels: ING Group, Division, BusinessLine, BusinessUnit, Product Family, Product Family Member, instruments. The non market instruments are defined at product family level. We assume the file to be symantically correct.
+
+Test plan:
+[1]
+1)DV1BL4USIIM.xml
+
+STS should be able to load this xml file, the tree should look like this:
+
+1)ING_GROUP
+	2)DV_1
+		3)DV_1_BL_4
+			4)DV_1_BL_4_USIIM
+				5)DV_1_BL_4_USIIM_PF_20315	
+					6)DV_1_BL_4_USIIM_PF_20315_ASSETS   
+						7)DV_1_BL_4_USIIM_PF_20315_PFM_22071	
+							8)MarketIndex_.SPX
+						7)DV_1_BL_4_USIIM_PF_20315_PFM_22072
+							8)MarketIndex_USAGG_USD_UNHEDG
+					6)DV_1_BL_4_USIIM_PF_20315_NONMARKETDATA
+						7)USIIM_IIM_3rd_Party_BUS_GP_20120711191504678
+						7)USIIM_IIM_3rd_Party_OPR_GP_20120705145420952
+
+[2] "test case poortfolio"
+
+In this directory, a test case is available from the old IM model. 
+The portfolio file is "test27-1-2_portfolio.xml".
+The instruments file is "test27-1_instruments_RE.csv".
+For mapping the non-market instruments, use "mapping_RT.csv" file.
+For mapping Business Entities, use "mapping_BE.csv" file.
+
+Eventually the "output27-1-2_EUR_0.95.csv" is the expected report in Euros and for the .95 quantile.
+

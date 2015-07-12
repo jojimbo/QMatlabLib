@@ -1,0 +1,1914 @@
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',14,1)">14  </a>codePath   = [fileparts(stsRootPath) filesep];
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',15,1)">15  </a>disp(['The path of the code is: ' codePath]);
+dbstep
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',17,1)">17  </a>p = 0;
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',18,1)">18  </a>f = 0;
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',21,1)">21  </a>testPath = [currentDir 'P19_1' filesep];
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+### Start Unit_Test_P19_1
+Start loading..
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Error using <a href="matlab:helpUtils.errorDocCallback('internalModel.CurveCollection', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m', 54)" style="font-weight:bold">internalModel.CurveCollection</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,0)">line 54</a>)
+Not enough input arguments.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1>getCsvContents', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 138)" style="font-weight:bold">Unit_Test_P19_1>getCsvContents</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,0)">line 138</a>)
+irCurves = internalModel.CurveCollection(calcObj);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 49)" style="font-weight:bold">Unit_Test_P19_1</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,0)">line 49</a>)
+[contents1_Base,        irCurve1_Base]        = getCsvContents('irCurveFile',
+irCurveFile1_Base,        headerBase);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P19', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m', 24)" style="font-weight:bold">runUT_P19</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,0)">line 24</a>)
+if Unit_Test_P19_1(testPath, codePath)
+} 
+runUT_P19
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',10,1)">10  </a>currentDir = [fileparts(stsRootPath) filesep 'UnitTests' filesep];
+dbcont
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">49  </a>[contents1_Base,        irCurve1_Base]        = getCsvContents('irCurveFile', irCurveFile1_Base,        headerBase);
+headerBase
+
+headerBase = 
+
+  Columns 1 through 5
+
+    'BAS'      'Bond ModelSPEC'         'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'      'Swap ModelSPEC'         'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'                [1x20 char]    'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'                [1x24 char]    'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'      'Synthetic ModelSPEC'    'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'FM StandardSPEC'        'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'                [1x20 char]    'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'Willow TreeSPEC'        'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'      'Schedule CurveSPEC'     'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x45 char]    'ATTRIBUTE'    'OBJECT'    'GeneScheSuf0AXS'   
+    'BAS'      'Callable BondSPEC'      'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'Market IndexSPEC'       'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'Index CurveSPEC'        'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x39 char]    'ATTRIBUTE'    'OBJECT'    'GeneIndxSuf0AXS'   
+    'BAS'      'PositionSPEC'           'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'      'SwaptionSPEC'           'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'Swap Fixed LegSPEC'     'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x38 char]    'ATTRIBUTE'    'OBJECT'    'VariabNotionalDATE'
+    'BAS'                [1x27 char]    'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x47 char]    'ATTRIBUTE'    'OBJECT'    'VariabNotionalDATE'
+    'BAS'                [1x26 char]    'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'Cap/FloorSPEC'          'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x32 char]    'ATTRIBUTE'    'OBJECT'    'CapStrikeRatesDATE'
+    'rm_ro'              [1x38 char]    'ATTRIBUTE'    'OBJECT'    'CapNotnalPrincDATE'
+    'BAS'      'Curve IndexSPEC'        'OBJECT'       'TYPE'      'NAME'              
+    'BAS'                [1x20 char]    'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'      'Exchange RateSPEC'      'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'rm_ro'              [1x49 char]    'ATTRIBUTE'    'OBJECT'    'GenExchRtSfNod0AXS'
+    'rm_ro'              [1x39 char]    'ATTRIBUTE'    'OBJECT'    'ProcedureParamXREF'
+    'BAS'      'EuropeanSPEC'           'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'Forex ForwardSPEC'      'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'ZeroSPEC'               'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'rm_ro'              [1x31 char]    'ATTRIBUTE'    'OBJECT'    'GenZeroSurface0AXS'
+    'rm_ro'              [1x30 char]    'ATTRIBUTE'    'OBJECT'    'ProcedureParamXREF'
+    'BAS'      'FX ConverterSPEC'       'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'rm_ro'              [1x30 char]    'ATTRIBUTE'    'OBJECT'    'FXConverterFrmUNIT'
+    'BAS'                [1x31 char]    'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x75 char]    'ATTRIBUTE'    'OBJECT'    'GnVolMnyTrmSf0AXS' 
+    'rm_ro'              [1x53 char]    'ATTRIBUTE'    'OBJECT'    'ProcedureParamXREF'
+    'BAS'                [1x26 char]    'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x65 char]    'ATTRIBUTE'    'OBJECT'    'GenVolTrmTrmSf0AXS'
+    'rm_ro'              [1x48 char]    'ATTRIBUTE'    'OBJECT'    'ProcedureParamXREF'
+    'BAS'      'PortfolioSPEC'          'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'Portfolio ModelSPEC'    'OBJECT'       'TYPE'      'NAME'              
+    'BAS'                [1x23 char]    'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x40 char]    'ATTRIBUTE'    'OBJECT'    'SysChildID'        
+    'BAS'      'Equity ForwardSPEC'     'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'Equity FutureSPEC'      'OBJECT'       'TYPE'      'NAME'              
+    'BAS'      'Cash InstrumentSPEC'    'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'      'Cash AccountSPEC'       'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'BAS'                [1x24 char]    'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x44 char]    'ATTRIBUTE'    'OBJECT'    'ComponentWghtVAL'  
+    'rm_ro'              [1x56 char]    'ATTRIBUTE'    'OBJECT'    'UndrFinEntitisXREF'
+    'BAS'                [1x32 char]    'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x52 char]    'ATTRIBUTE'    'OBJECT'    'ComponentWghtVAL'  
+    'rm_ro'              [1x64 char]    'ATTRIBUTE'    'OBJECT'    'UndrFinEntitisXREF'
+    'BAS'                [1x26 char]    'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x53 char]    'ATTRIBUTE'    'OBJECT'    'MatrixParmSurf0AXS'
+    'BAS'                [1x41 char]    'OBJECT'       'TYPE'      'NAME'              
+    'rm_ro'              [1x63 char]    'ATTRIBUTE'    'OBJECT'    'VoltSurfacesXREF'  
+    'BAS'                [1x20 char]    'OBJECT'       'TYPE'      'IDENTIFIER'        
+    'rm_ro'              [1x46 char]    'ATTRIBUTE'    'OBJECT'    'HistRateSurf0AXS'  
+    'rm_ro'              [1x42 char]    'ATTRIBUTE'    'OBJECT'    'ProcedureParamXREF'
+
+  Columns 6 through 8
+
+    'NAME'                  'ValueFUNC'             'PriceFUNC'         
+    'NAME'                  'ValueFUNC'             'PriceFUNC'         
+    'NAME'                  'ValueFUNC'             'PriceFUNC'         
+    'NAME'                  'ValueFUNC'             'PriceFUNC'         
+    'IDENTIFIER'            'ValueFUNC'             'PriceFUNC'         
+    'NAME'                  'ValueFUNC'             'ValueVAL'          
+    'IDENTIFIER'            'TheoModelXREF'         'CouponGenENUM'     
+    'NAME'                  'CurrencyUNIT'          'WillModelTypeENUM' 
+    'IDENTIFIER'            'DatumDATE'             'RelativeCurveFLAG' 
+    'GeneScheSuf1AXS'       'GeneScheSufNODE'       [               NaN]
+    'IDENTIFIER'            'CurrencyUNIT'          'NotionalVAL'       
+    'IDENTIFIER'            'TheoModelXREF'         'CurrencyUNIT'      
+    'IDENTIFIER'            'CurveUnitUNIT'         'DatumDATE'         
+    'GeneIndxSuf1AXS'       'GeneIndxSufNODE'       [               NaN]
+    'PortfolioXREF'         'InstrumentXREF'        'PositionUnitsVAL'  
+    'IDENTIFIER'            'TheoModelXREF'         'CallOptionFLAG'    
+    'IDENTIFIER'            'TheoModelXREF'         'CouponGenENUM'     
+    'VariabNotionalUNIT'    'VariabNotionalVAL'     [               NaN]
+    'IDENTIFIER'            'TheoModelXREF'         'CouponGenENUM'     
+    'VariabNotionalUNIT'    'VariabNotionalVAL'     [               NaN]
+    'IDENTIFIER'            'UnitDAYC'              'UnitPERD'          
+    'IDENTIFIER'            'CurrencyUNIT'          'CouponGenENUM'     
+    'CapStrikeRatesDAYC'    'CapStrikeRatesPERD'    'CapStrikeRatesUNIT'
+    'CapNotnalPrincUNIT'    'CapNotnalPrincVAL'     [               NaN]
+    'IDENTIFIER'            'CouponAccrualENUM'     'DiscountCurveXREF' 
+    'NAME'                  'CurrencyUNIT'          'DiscountCurveXREF' 
+    'NAME'                  'DatumDATE'             'GenExRatSfExt0FLAG'
+    'GenExchRtSfNodNODE'    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'IDENTIFIER'            'TheoModelXREF'         'CallOptionFLAG'    
+    'IDENTIFIER'            'TheoModelXREF'         'CurrencyUNIT'      
+    'NAME'                  'CreditStateENUM'       'CurveFUNC'         
+    'GenZeroSurfaceNODE'    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'FXConverterToUNIT'     'FXConverterXREF'       [               NaN]
+    'IDENTIFIER'            'DatumDATE'             'RelativeCurveFLAG' 
+    'GnVolMnyTrmSf1AXS'     'GnVolMnyTrmSfNODE'     [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'IDENTIFIER'            'DatumDATE'             'RelativeCurveFLAG' 
+    'GenVolTrmTrmSf1AXS'    'GenVolTrmTrmSfNODE'    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'IDENTIFIER'            'TheoModelXREF'         'CurrencyUNIT'      
+    'IDENTIFIER'            'AccruInterestFUNC'     'PriceFUNC'         
+    'IDENTIFIER'            'CATEGORY'              'AllocAttrENUM'     
+    'SysParentID'           'ChildIDENTIFIER'       'ParentIDENTIFIER'  
+    'IDENTIFIER'            'TheoModelXREF'         'CurrencyUNIT'      
+    'IDENTIFIER'            'TheoModelXREF'         'CurrencyUNIT'      
+    'NAME'                  'CurrencyUNIT'          'DiscountCurveXREF' 
+    'InstrumentXREF'        'PortfolioXREF'         'PositionUnitsVAL'  
+    'IDENTIFIER'            'CurrencyUNIT'          'TheoModelXREF'     
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'IDENTIFIER'            'TheoModelXREF'         'CurrencyUNIT'      
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'IDENTIFIER'            'DatumDATE'             'RelativeCurveFLAG' 
+    'MatrixParmSurf1AXS'    'MatrixParmSurfNODE'    [               NaN]
+    'IDENTIFIER'            'TheoModelXREF'         'CallOptionFLAG'    
+    [               NaN]    [               NaN]    [               NaN]
+    'NAME'                  'CurveFUNC'             'CurveUnitUNIT'     
+    'HistRateSurfNODE'      [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+
+  Columns 9 through 11
+
+    'YieldFUNC'             'MacaulayDuratnFUNC'    'AdjDurationFUNC'   
+    'PV01FUNC'              'DeltaFUNC'             'GammaFUNC'         
+    'DeltaFUNC'             'GammaFUNC'             'VegaFUNC'          
+    'ExposureFUNC'          'EffeDurationFUNC'      'EffeConvexityFUNC' 
+    'PV01FUNC'                       [1x22 char]    [               NaN]
+    'ExposureFUNC'          'ValueUNIT'             'PriceFUNC'         
+    'CurrencyUNIT'          'DiscountCurveXREF'     'ProductTypeENUM'   
+    'DiscountCurveXREF'     'RateVolatilityVAL'     'MeanRvrsnConstVAL' 
+    'CurveUnitUNIT'         'CurveUnitDAYC'         'CurveUnitPERD'     
+    [               NaN]    [               NaN]    [               NaN]
+    'NotionalUNIT'          'MaturityDATE'          'CouponRateVAL'     
+    'DiscountCurveXREF'     'GrowthRateXREF'        'ProductTypeENUM'   
+    'RelativeCurveFLAG'     'TimeEvolutionFUNC'     [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'CurrencyUNIT'          'DiscountCurveXREF'     'EffectiveDATE'     
+    'CouponRateDAYC'        'CouponRatePERD'        'CouponRateVAL'     
+    [               NaN]    [               NaN]    [               NaN]
+    'CouponRateDAYC'        'CouponRatePERD'        'CouponRateVAL'     
+    [               NaN]    [               NaN]    [               NaN]
+    'UnitUNIT'              'SlidingTermNB'         'SlidingTermUNIT'   
+    'TermNB'                'TermUNIT'              'CapFLAG'           
+    'CapStrikeRatesVAL'     [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'TermNB'                'TermUNIT'              'UnitDAYC'          
+    'ForeignCurrUNIT'       'ForeignCurveXREF'      'ProductTypeENUM'   
+    'GenExchRtSfNod0SIN'    'ExchForgnCrvXREF'      'TimeEvolutionFUNC' 
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'ContractSizeVAL'       'CurrencyUNIT'          'DiscountCurveXREF' 
+    'ContractSizeVAL'       'UnderlyingXREF'        'MaturityDATE'      
+    'CurveUnitUNIT'         'CurveUnitDAYC'         'CurveUnitPERD'     
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'CurveUnitDAYC'         'CurveUnitPERD'         'CurveUnitUNIT'     
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'CurveUnitDAYC'         'CurveUnitPERD'         'CurveUnitUNIT'     
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'ValueFUNC'             [               NaN]    [               NaN]
+    'AllocMethodENUM'       'DimTabName'            'DfltHierachyFLAG'  
+    'HierarchyLevelCODE'    'HierarchyLevelNB'      [               NaN]
+    'DiscountCurveXREF'     'MaturityDATE'          'ProductTypeENUM'   
+    'DiscountCurveXREF'     'MaturityDATE'          'ProductTypeENUM'   
+    'LendingCurveXREF'      'BorrowCurveXREF'       'TheoModelXREF'     
+    [               NaN]    [               NaN]    [               NaN]
+    'StateProcFUNC'         'SettlementProcFUNC'    'ProductTypeENUM'   
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'DiscountCurveXREF'     'EffectiveDATE'                  [1x24 char]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'OriginOffsetNB'        'TimeEvolutionFUNC'     'MatrixParmSurf0SIN'
+    [               NaN]    [               NaN]    [               NaN]
+    'ContractSizeVAL'       'CurrencyUNIT'          'DiscountCurveXREF' 
+    [               NaN]    [               NaN]    [               NaN]
+    'CurveUnitDAYC'         'CurveUnitPERD'         'DatumDATE'         
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+
+  Columns 12 through 14
+
+    'MonetaryDuratnFUNC'    'ConvexityFUNC'         'MonetaryCnvxtyFUNC'
+    'VegaFUNC'              'ImpliedVolFUNC'        'ExposureFUNC'      
+    'ThetaFUNC'             'ImpliedRepoRatFUNC'    'ImpliedVolFUNC'    
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'PriceVAL'              'PriceUNIT'             [               NaN]
+    'MaturityDATE'          'NotionalUNIT'          'NotionalVAL'       
+    'DaysPerTimeStepNB'     'TreeResoENUM'          [               NaN]
+    'TimeEvolutionFUNC'     [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'CouponRatePERD'        'CouponRateDAYC'        'IssueDATE'         
+    'UserDefined1NAME'      'UserDefined2NAME'      'UserDefined3NAME'  
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'MaturityDATE'          'ProductTypeENUM'       'StrikePriceDAYC'   
+    'CouponRateUNIT'        'CurrencyUNIT'          'DiscountCurveXREF' 
+    [               NaN]    [               NaN]    [               NaN]
+    'CouponRateUNIT'        'CurrencyUNIT'          'DiscountCurveXREF' 
+    [               NaN]    [               NaN]    [               NaN]
+    'TermNB'                'TermUNIT'              'DiscountCurveXREF' 
+    'EffectiveDATE'         'MaturityDATE'          'StateProcFUNC'     
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'UnitPERD'              'UnitUNIT'              [               NaN]
+    'SpotPriceUNIT'         'SpotPriceVAL'          'TheoModelXREF'     
+    'XchDomstcCrvXREF'      'StateProcFUNC'         [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'MaturityDATE'          'ProductTypeENUM'       'StrikePriceUNIT'   
+    'ProductTypeENUM'       'StrikePriceUNIT'       'StrikePriceVAL'    
+    'DatumDATE'             'GenZeroSfExt0FLAG'     'GenZeroSurface0SIN'
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'TimeEvolutionFUNC'     'GnVolMnyTrmSf1SIN'     'GnVolMnyTrmSf0SIN' 
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'TimeEvolutionFUNC'     'GenVolTrmTrmSf1SIN'    'GenVolTrmTrmSf0SIN'
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'StrikePriceUNIT'       'StrikePriceVAL'        'UnderlyingXREF'    
+    'SettlementTYPE'        'SettlementProcFUNC'    'StrikePriceUNIT'   
+    'MarketModelXREF'       'SpotPriceVAL'          'SpotPriceUNIT'     
+    [               NaN]    [               NaN]    [               NaN]
+    'INGAssTypNAME'         'INGCrdRtgNAME'         'TermLengthFUNC'    
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+             [1x26 char]    'RebalanceFLAG'                  [1x22 char]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'MatrixParmSurf1SIN'    'MatrxParSfExt0FLAG'    'MatrxParSfExt1FLAG'
+    [               NaN]    [               NaN]    [               NaN]
+    'MaturityDATE'          'StrikePriceUNIT'       'StrikePriceVAL'    
+    [               NaN]    [               NaN]    [               NaN]
+    'HistRateSfExt0FLAG'    'HistRateSurf0SIN'      'StateProcFUNC'     
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+
+  Columns 15 through 17
+
+    'PV01FUNC'              'AccruInterestFUNC'     'ExposureFUNC'      
+    'EffeDurationFUNC'      'EffeConvexityFUNC'     [               NaN]
+    'ExposureFUNC'          'EffeDurationFUNC'      'EffeConvexityFUNC' 
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'StateProcFUNC'         'SettlementProcFUNC'    'TermLengthFUNC'    
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'TermUNIT'              'TermNB'                'DiscountCurveXREF' 
+    'UserDefined4NAME'      'UserDefined5NAME'      'UserDefined6NAME'  
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'StrikePricePERD'       'StrikePriceUNIT'       'StrikePriceVAL'    
+    'EffectiveDATE'         'NotionalAtEndFLAG'     'NotionlAtStartFLAG'
+    [               NaN]    [               NaN]    [               NaN]
+    'EffectiveDATE'         'NotionalAtEndFLAG'     'NotionlAtStartFLAG'
+    [               NaN]    [               NaN]    [               NaN]
+    'RateCompositnFUNC'     'VolSurfaceXREF'        'CouponGenENUM'     
+    'SettlementProcFUNC'    'UndrCrvIndXREF'        'DiscountCurveXREF' 
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'HistoricalCrvXREF'     [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'StrikePriceVAL'        'UnderlyingXREF'        'VolatilityDAYC'    
+    'DiscountCurveXREF'     'SettlementProcFUNC'    'SettlementTYPE'    
+    'TimeEvolutionFUNC'     'StateProcFUNC'         [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'GnVolMTSfExt0FLAG'     'GnVolMTSfExt1FLAG'     'GnVolMnyTrmSfFLAG' 
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'GenVolTTSfExt1FLAG'    'GenVolTTSfExt0FLAG'    'GenVolTrmTrmSfFLAG'
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'SettlementProcFUNC'    'SettlementTYPE'        'TermLengthFUNC'    
+    'StrikePriceVAL'        'UnderlyingXREF'        'TermLengthFUNC'    
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+             [1x24 char]    'StateProcFUNC'         'INGAssTypNAME'     
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'MatrixParmSurfFLAG'    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    'UnderlyingXREF'        'VolatilitiesDAYC'      'VolatilitiesPERD'  
+    [               NaN]    [               NaN]    [               NaN]
+    'RelativeCurveFLAG'     [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+    [               NaN]    [               NaN]    [               NaN]
+
+  Columns 18 through 20
+
+    'EffeDurationFUNC'    'EffeConvexityFUNC'    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    'BorrowCurveXREF'     'LendingCurveXREF'     'INGAssTypNAME'   
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    'StateProcFUNC'       'CouponGenENUM'        'CallScheduleXREF'
+    'UserDefined7NAME'    'UserDefined8NAME'     'UserDefined9NAME'
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    'UndrFixdLegXREF'     'UnderlyingXREF'       'VolSurfaceXREF'  
+    'StateProcFUNC'       'TermNB'               'TermUNIT'        
+    [             NaN]    [              NaN]    [             NaN]
+    'ResetRuleRULE'       'ResetRuleCAL'         'StateProcFUNC'   
+    [             NaN]    [              NaN]    [             NaN]
+    'VoltMthdENUM'        'IndxModelFUNC'        [             NaN]
+    'ProductTypeENUM'     'LastResetRateVAL'     'TheoModelXREF'   
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    'VolatilityPERD'      'VolatilityUNIT'       'VolatilityFUNC'  
+    'TermLengthFUNC'      'BorrowCurveXREF'      'LendingCurveXREF'
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    'StateProcFUNC'       'CurveFUNC'            [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    'StateProcFUNC'       'CurveFUNC'            [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    'BorrowCurveXREF'     'LendingCurveXREF'     'INGAssTypNAME'   
+    'BorrowCurveXREF'     'LendingCurveXREF'     'INGAssTypNAME'   
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    'INGCrdRtgNAME'       [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    'VolatilitiesUNIT'    'VolatilitiesFUNC'     'CorrelationVAL'  
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+    [             NaN]    [              NaN]    [             NaN]
+
+  Columns 21 through 24
+
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    'INGCrdRtgNAME'         [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    'LatticeXREF'           'SettlementProcFUNC'    'TheoModelXREF'     'ProductTypeENUM'
+    'INGAssTypNAME'         'INGCrdRtgNAME'         'SpotPriceVAL'      'MarketModelXREF'
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    'VolatilityDAYC'        'VolatilityPERD'        'VolatilityUNIT'    'VolatilityFUNC' 
+    'ProductTypeENUM'       'SettlementProcFUNC'    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    'TermNB'                'TermUNIT'              'UndrCrvIndXREF'    'ProductTypeENUM'
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    'INGAssTypNAME'         'INGCrdRtgNAME'         'TermLengthFUNC'    'BorrowCurveXREF'
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    'VolSurfaceXREF'        'SettlementProcFUNC'    'SettlementTYPE'    'TermLengthFUNC' 
+    'INGAssTypNAME'         'INGCrdRtgNAME'         [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    'INGCrdRtgNAME'         [               NaN]    [           NaN]    [            NaN]
+    'INGCrdRtgNAME'         [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    'CorrelationSrfXREF'    'SettlementProcFUNC'    'SettlementTYPE'    'TermLengthFUNC' 
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+    [               NaN]    [               NaN]    [           NaN]    [            NaN]
+
+  Columns 25 through 28
+
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    'INGAssTypNAME'         'INGCrdRtgNAME'       'TermLengthFUNC'    'BorrowCurveXREF'
+    'HistoricalCrvXREF'     [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    'SettlementProcFUNC'    'SettlementTYPE'      'TermLengthFUNC'    'BorrowCurveXREF'
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    'SettlementProcFUNC'    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    'LendingCurveXREF'      [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    'BorrowCurveXREF'       'LendingCurveXREF'    'INGAssTypNAME'     'INGCrdRtgNAME'  
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    'BorrowCurveXREF'       'LendingCurveXREF'    'INGAssTypNAME'     'INGCrdRtgNAME'  
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+    [               NaN]    [             NaN]    [           NaN]    [            NaN]
+
+  Columns 29 through 31
+
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    'LendingCurveXREF'    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    'LendingCurveXREF'    'INGAssTypNAME'    'INGCrdRtgNAME'
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+    [             NaN]    [          NaN]    [          NaN]
+
+irCurveFile1_Base
+
+irCurveFile1_Base =
+
+E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv
+
+getCsvContents('irCurveFile', irCurveFile1_Base,        headerBase);
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Error using <a href="matlab:helpUtils.errorDocCallback('internalModel.CurveCollection', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m', 54)" style="font-weight:bold">internalModel.CurveCollection</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,0)">line 54</a>)
+Not enough input arguments.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1>getCsvContents', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 138)" style="font-weight:bold">Unit_Test_P19_1>getCsvContents</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,0)">line 138</a>)
+irCurves = internalModel.CurveCollection(calcObj);
+} 
+getCsvContents('irCurveFile', irCurveFile1_Base,        headerBase);
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,1)">54  </a>            irCurve = calcObj.configuration.csvFileContents.(fileName);
+fileName
+{Not enough input arguments.
+} 
+runUT_P19
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',10,1)">10  </a>currentDir = [fileparts(stsRootPath) filesep 'UnitTests' filesep];
+dbcont
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">49  </a>[contents1_Base,        irCurve1_Base]        = getCsvContents('irCurveFile', irCurveFile1_Base,        headerBase);
+getCsvContents('irCurveFile', irCurveFile1_Base,        headerBase);
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: 'E:\Jorge
+Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv'
+ exceeds MATLAB's maximum name length of 63 characters and has been truncated to
+ 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P1'.} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,1)">CurveCollection>CurveCollection.CurveCollection at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,1)">Unit_Test_P19_1>getCsvContents at 138</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Reference to non-existent field 'E:\Jorge
+Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P1'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('internalModel.CurveCollection', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m', 54)" style="font-weight:bold">internalModel.CurveCollection</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,0)">line 54</a>)
+            irCurve = calcObj.configuration.csvFileContents.(fileName);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1>getCsvContents', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 138)" style="font-weight:bold">Unit_Test_P19_1>getCsvContents</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,0)">line 138</a>)
+irCurves = internalModel.CurveCollection(calcObj, filename);
+} 
+getCsvContents('irCurveFile', irCurveFile1_Base,        headerBase);
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,1)">54  </a>            irCurve = calcObj.configuration.csvFileContents.(fileName);
+fileName
+
+fileName =
+
+E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv
+
+dbstep in
+{Warning: 'E:\Jorge
+Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv'
+ exceeds MATLAB's maximum name length of 63 characters and has been truncated to
+ 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P1'.} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,1)">CurveCollection>CurveCollection.CurveCollection at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,1)">Unit_Test_P19_1>getCsvContents at 138</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Reference to non-existent field 'E:\Jorge
+Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P1'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('internalModel.CurveCollection', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m', 54)" style="font-weight:bold">internalModel.CurveCollection</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',54,0)">line 54</a>)
+            irCurve = calcObj.configuration.csvFileContents.(fileName);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1>getCsvContents', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 138)" style="font-weight:bold">Unit_Test_P19_1>getCsvContents</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,0)">line 138</a>)
+irCurves = internalModel.CurveCollection(calcObj, filename);
+} 
+irCurveFile1_Base
+
+irCurveFile1_Base =
+
+E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv
+
+if system_dependent('IsDebugMode')==1, dbstep in; end
+filename
+
+filename =
+
+E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv
+
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+calcObj.parameters.(identifier)
+
+ans =
+
+E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv
+
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">134 </a>calcObj.configuration = internalModel.Configuration(calcObj);
+dbstep
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',135,1)">135 </a>csvContents = calcObj.configuration.csvFileContents.(identifier);
+dbstep
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,1)">138 </a>irCurves = internalModel.CurveCollection(calcObj, filename);
+filename
+
+filename =
+
+E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv
+
+calcObj
+
+calcObj = 
+
+       configFile: ''
+       parameters: [1x1 struct]
+           header: {63x31 cell}
+    configuration: [1x1 internalModel.Configuration]
+
+calcObj.parameters.irCurveFile
+
+ans =
+
+E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv
+
+if system_dependent('IsDebugMode')==1, dbstep in; end
+fileName
+
+fileName =
+
+E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv
+
+calcObj.configuration.csvFileContents
+
+ans = 
+
+    irCurveFile: [1x1 struct]
+
+calcObj.configuration.csvFileContents.(fileName)
+{Warning: 'E:\Jorge
+Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\ir_swap_zero_curve20120629.csv'
+ exceeds MATLAB's maximum name length of 63 characters and has been truncated to
+ 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P1'.} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\CurveCollection.m',45,1)">CurveCollection>CurveCollection.CurveCollection at 45</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',138,1)">Unit_Test_P19_1>getCsvContents at 138</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Reference to non-existent field 'E:\Jorge
+Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P1'.
+} 
+runUT_P19
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',10,1)">10  </a>currentDir = [fileparts(stsRootPath) filesep 'UnitTests' filesep];
+dbcont
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">49  </a>[contents1_Base,        irCurve1_Base]        = getCsvContents('irCurveFile', irCurveFile1_Base,        headerBase);
+dbstep
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',50,1)">50  </a>[contents1_FlexCurrTnr, irCurve1_FlexCurrTnr] = getCsvContents('irCurveFile', irCurveFile1_FlexCurrTnr, headerBase);
+dbstep
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',50,1)">Unit_Test_P19_1 at 50</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',51,1)">51  </a>[contents1_NegCurr,     irCurve1_NegCurr]     = getCsvContents('irCurveFile', irCurveFile1_NegCurr,     headerBase);
+dbcont
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',51,1)">Unit_Test_P19_1 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',53,1)">Unit_Test_P19_1 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',54,1)">Unit_Test_P19_1 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',56,1)">Unit_Test_P19_1 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+Finished loading
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-1 Failed #################
+### Start Unit_Test_P19_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of credit spreads (dataset 1) 
+PASSED : flexible nr of credit spreads (dataset 2) 
+PASSED : header change (dataset 2) 
+################# P19-2 Passed #################
+### Start Unit_Test_P19_3
+Start loading..
+{Warning: Negative data found in Equity RE File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',119,1)">Configuration.processCsvFile at 119</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',124,1)">Unit_Test_P19_3>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',51,1)">Unit_Test_P19_3 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',54,1)">runUT_P19 at 54</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of indices (dataset 1) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-3 Failed #################
+### Start Unit_Test_P19_4
+Start loading..
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',52,1)">Unit_Test_P19_4 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>} 
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',56,1)">Unit_Test_P19_4 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-4 Failed #################
+### Start Unit_Test_P19_5
+Start loading..
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',51,1)">Unit_Test_P19_5 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',52,1)">Unit_Test_P19_5 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',53,1)">Unit_Test_P19_5 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',54,1)">Unit_Test_P19_5 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',56,1)">Unit_Test_P19_5 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',57,1)">Unit_Test_P19_5 at 57</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',58,1)">Unit_Test_P19_5 at 58</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-5 Passed #################
+### Start Unit_Test_P19_6
+Start loading..
+{Warning: negative data found in equity Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',236,1)">Configuration.processCsvFile at 236</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',124,1)">Unit_Test_P19_6>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',51,1)">Unit_Test_P19_6 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',99,1)">runUT_P19 at 99</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-6 Passed #################
+### Start Unit_Test_P19_7
+Start loading..
+{Warning: negative data found in for ex Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',281,1)">Configuration.processCsvFile at 281</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',137,1)">Unit_Test_P19_7>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',54,1)">Unit_Test_P19_7 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',114,1)">runUT_P19 at 114</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+{Reference to non-existent field 'GnVolMnyTrmSfNODE'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_7', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m', 82)" style="font-weight:bold">Unit_Test_P19_7</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',82,0)">line 82</a>)
+if size(contents1_FlexTnr.GnVolMnyTrmSfNODE, 1) == 2446
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P19', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m', 114)" style="font-weight:bold">runUT_P19</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',114,0)">line 114</a>)
+if Unit_Test_P19_7(testPath, codePath)
+} 
+clear
+clc
+runUT_P19
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',10,1)">10  </a>currentDir = [fileparts(stsRootPath) filesep 'UnitTests' filesep];
+if system_dependent('IsDebugMode')==1, dbcont; end
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+if system_dependent('IsDebugMode')==1, dbcont; end
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',50,1)">Unit_Test_P19_1 at 50</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',51,1)">Unit_Test_P19_1 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',53,1)">Unit_Test_P19_1 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',54,1)">Unit_Test_P19_1 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',56,1)">Unit_Test_P19_1 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+Finished loading
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-1 Failed #################
+### Start Unit_Test_P19_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of credit spreads (dataset 1) 
+PASSED : flexible nr of credit spreads (dataset 2) 
+PASSED : header change (dataset 2) 
+################# P19-2 Passed #################
+### Start Unit_Test_P19_3
+Start loading..
+{Warning: Negative data found in Equity RE File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',119,1)">Configuration.processCsvFile at 119</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',124,1)">Unit_Test_P19_3>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',51,1)">Unit_Test_P19_3 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',54,1)">runUT_P19 at 54</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of indices (dataset 1) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-3 Failed #################
+### Start Unit_Test_P19_4
+Start loading..
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',52,1)">Unit_Test_P19_4 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>} 
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',56,1)">Unit_Test_P19_4 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-4 Failed #################
+### Start Unit_Test_P19_5
+Start loading..
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',51,1)">Unit_Test_P19_5 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',52,1)">Unit_Test_P19_5 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',53,1)">Unit_Test_P19_5 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',54,1)">Unit_Test_P19_5 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',56,1)">Unit_Test_P19_5 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',57,1)">Unit_Test_P19_5 at 57</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',58,1)">Unit_Test_P19_5 at 58</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-5 Passed #################
+### Start Unit_Test_P19_6
+Start loading..
+{Warning: negative data found in equity Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',236,1)">Configuration.processCsvFile at 236</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',124,1)">Unit_Test_P19_6>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',51,1)">Unit_Test_P19_6 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',99,1)">runUT_P19 at 99</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-6 Passed #################
+### Start Unit_Test_P19_7
+Start loading..
+{Warning: negative data found in for ex Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',281,1)">Configuration.processCsvFile at 281</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',137,1)">Unit_Test_P19_7>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',54,1)">Unit_Test_P19_7 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',114,1)">runUT_P19 at 114</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+contents1_FlexTnr
+
+contents1_FlexTnr = 
+
+        itemLines: [33x2 double]
+      itemLineCnt: [33x1 double]
+            names: {33x1 cell}
+      identifiers: {33x1 cell}
+            dates: {33x1 cell}
+     RelCurveFlag: {33x1 cell}
+    moneynessDATA: {2446x1 cell}
+         termDATA: {2446x1 cell}
+        valueDATA: {2446x1 cell}
+
+size(contents1_FlexTnr.(valuesKeyword), 1)
+{Undefined function or variable 'valuesKeyword'.
+} 
+valuesKeyword = 'valueDATA';
+size(contents1_FlexTnr.(valuesKeyword), 1)
+
+ans =
+
+        2446
+
+clear
+clc
+runUT_P19
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+Couldn't open file E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\IDEAL_header_headerChanged.csv
+{Error using <a href="matlab:helpUtils.errorDocCallback('internalModel.Utilities.csvreadCell', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\Utilities.m', 44)" style="font-weight:bold">internalModel.Utilities.csvreadCell</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\Utilities.m',44,0)">line 44</a>)
+Too many open files
+
+Error in <a href="matlab:helpUtils.errorDocCallback('Unit_Test_P19_1', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m', 46)" style="font-weight:bold">Unit_Test_P19_1</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',46,0)">line 46</a>)
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('runUT_P19', 'E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m', 24)" style="font-weight:bold">runUT_P19</a> (<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,0)">line 24</a>)
+
+} 
+clear
+clc
+fclose all
+
+ans =
+
+     0
+
+clear
+clc
+runUT_P19
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',50,1)">Unit_Test_P19_1 at 50</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',51,1)">Unit_Test_P19_1 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',53,1)">Unit_Test_P19_1 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',54,1)">Unit_Test_P19_1 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',56,1)">Unit_Test_P19_1 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>} 
+Finished loading
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-1 Failed #################
+### Start Unit_Test_P19_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of credit spreads (dataset 1) 
+PASSED : flexible nr of credit spreads (dataset 2) 
+PASSED : header change (dataset 2) 
+################# P19-2 Passed #################
+### Start Unit_Test_P19_3
+Start loading..
+{Warning: Negative data found in Equity RE File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',119,1)">Configuration.processCsvFile at 119</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',124,1)">Unit_Test_P19_3>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',51,1)">Unit_Test_P19_3 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',54,1)">runUT_P19 at 54</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of indices (dataset 1) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-3 Failed #################
+### Start Unit_Test_P19_4
+Start loading..
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',52,1)">Unit_Test_P19_4 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>} 
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',56,1)">Unit_Test_P19_4 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-4 Failed #################
+### Start Unit_Test_P19_5
+Start loading..
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',51,1)">Unit_Test_P19_5 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',52,1)">Unit_Test_P19_5 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',53,1)">Unit_Test_P19_5 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',54,1)">Unit_Test_P19_5 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',56,1)">Unit_Test_P19_5 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',57,1)">Unit_Test_P19_5 at 57</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',58,1)">Unit_Test_P19_5 at 58</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-5 Passed #################
+### Start Unit_Test_P19_6
+Start loading..
+{Warning: negative data found in equity Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',236,1)">Configuration.processCsvFile at 236</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',124,1)">Unit_Test_P19_6>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',51,1)">Unit_Test_P19_6 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',99,1)">runUT_P19 at 99</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-6 Passed #################
+### Start Unit_Test_P19_7
+Start loading..
+{Warning: negative data found in for ex Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',281,1)">Configuration.processCsvFile at 281</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',137,1)">Unit_Test_P19_7>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',54,1)">Unit_Test_P19_7 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',114,1)">runUT_P19 at 114</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+<a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',82,1)">82  </a>if size(contents1_FlexTnr.(valuesKeyword), 1) == 2446
+if system_dependent('IsDebugMode')==1, dbcont; end
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-7 Passed #################
+ 
+ 
+ 
+################# Total score: Failed #################
+ 
+4 passed, and 3 failed.
+ 
+#######################################################
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',50,1)">Unit_Test_P19_1 at 50</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',51,1)">Unit_Test_P19_1 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',53,1)">Unit_Test_P19_1 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',54,1)">Unit_Test_P19_1 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',56,1)">Unit_Test_P19_1 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-1 Failed #################
+### Start Unit_Test_P19_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of credit spreads (dataset 1) 
+PASSED : flexible nr of credit spreads (dataset 2) 
+PASSED : header change (dataset 2) 
+################# P19-2 Passed #################
+### Start Unit_Test_P19_3
+Start loading..
+{Warning: Negative data found in Equity RE File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',119,1)">Configuration.processCsvFile at 119</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',124,1)">Unit_Test_P19_3>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',51,1)">Unit_Test_P19_3 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',54,1)">runUT_P19 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of indices (dataset 1) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-3 Failed #################
+### Start Unit_Test_P19_4
+Start loading..
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',52,1)">Unit_Test_P19_4 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',56,1)">Unit_Test_P19_4 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-4 Failed #################
+### Start Unit_Test_P19_5
+Start loading..
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',51,1)">Unit_Test_P19_5 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',52,1)">Unit_Test_P19_5 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',53,1)">Unit_Test_P19_5 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',54,1)">Unit_Test_P19_5 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',56,1)">Unit_Test_P19_5 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',57,1)">Unit_Test_P19_5 at 57</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',58,1)">Unit_Test_P19_5 at 58</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-5 Passed #################
+### Start Unit_Test_P19_6
+Start loading..
+{Warning: negative data found in equity Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',236,1)">Configuration.processCsvFile at 236</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',124,1)">Unit_Test_P19_6>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',51,1)">Unit_Test_P19_6 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',99,1)">runUT_P19 at 99</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-6 Passed #################
+### Start Unit_Test_P19_7
+Start loading..
+{Warning: negative data found in for ex Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',281,1)">Configuration.processCsvFile at 281</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',137,1)">Unit_Test_P19_7>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',54,1)">Unit_Test_P19_7 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',114,1)">runUT_P19 at 114</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-7 Passed #################
+ 
+ 
+ 
+################# Total score: Failed #################
+ 
+4 passed, and 3 failed.
+ 
+#######################################################
+The path of the code is: E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\
+### Start Unit_Test_P19_1
+Start loading..
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',49,1)">Unit_Test_P19_1 at 49</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',50,1)">Unit_Test_P19_1 at 50</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',51,1)">Unit_Test_P19_1 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',53,1)">Unit_Test_P19_1 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',54,1)">Unit_Test_P19_1 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in IR Curve File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',46,1)">Configuration.processCsvFile at 46</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',134,1)">Unit_Test_P19_1>getCsvContents at 134</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_1\Unit_Test_P19_1.m',56,1)">Unit_Test_P19_1 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',24,1)">runUT_P19 at 24</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-1 Failed #################
+### Start Unit_Test_P19_2
+Start loading..
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : flexible nr of credit spreads (dataset 1) 
+PASSED : flexible nr of credit spreads (dataset 2) 
+PASSED : header change (dataset 2) 
+################# P19-2 Passed #################
+### Start Unit_Test_P19_3
+Start loading..
+{Warning: Negative data found in Equity RE File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',119,1)">Configuration.processCsvFile at 119</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',124,1)">Unit_Test_P19_3>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_3\Unit_Test_P19_3.m',51,1)">Unit_Test_P19_3 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',54,1)">runUT_P19 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of indices (dataset 1) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-3 Failed #################
+### Start Unit_Test_P19_4
+Start loading..
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',52,1)">Unit_Test_P19_4 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: Negative data found in FOREX File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',147,1)">Configuration.processCsvFile at 147</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',117,1)">Unit_Test_P19_4>getCsvContents at 117</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_4\Unit_Test_P19_4.m',56,1)">Unit_Test_P19_4 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',69,1)">runUT_P19 at 69</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : header change (dataset 2) 
+FAILED : detection negative data
+################# P19-4 Failed #################
+### Start Unit_Test_P19_5
+Start loading..
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',51,1)">Unit_Test_P19_5 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',52,1)">Unit_Test_P19_5 at 52</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',53,1)">Unit_Test_P19_5 at 53</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',54,1)">Unit_Test_P19_5 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',56,1)">Unit_Test_P19_5 at 56</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',57,1)">Unit_Test_P19_5 at 57</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+{Warning: negative data found in swaption Imp Vol File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',191,1)">Configuration.processCsvFile at 191</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',137,1)">Unit_Test_P19_5>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_5\Unit_Test_P19_5.m',58,1)">Unit_Test_P19_5 at 58</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',84,1)">runUT_P19 at 84</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-5 Passed #################
+### Start Unit_Test_P19_6
+Start loading..
+{Warning: negative data found in equity Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',236,1)">Configuration.processCsvFile at 236</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',124,1)">Unit_Test_P19_6>getCsvContents at 124</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_6\Unit_Test_P19_6.m',51,1)">Unit_Test_P19_6 at 51</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',99,1)">runUT_P19 at 99</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-6 Passed #################
+### Start Unit_Test_P19_7
+Start loading..
+{Warning: negative data found in for ex Imp File!} 
+{> In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\processCsvFile.m',281,1)">Configuration.processCsvFile at 281</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',71,1)">Configuration.Configuration>Configuration.processConfigurarion at 71</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\+internalModel\@Configuration\Configuration.m',48,1)">Configuration.Configuration>Configuration.Configuration at 48</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',137,1)">Unit_Test_P19_7>getCsvContents at 137</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\P19_7\Unit_Test_P19_7.m',54,1)">Unit_Test_P19_7 at 54</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\InternalModel\UnitTests\runUT_P19.m',114,1)">runUT_P19 at 114</a>
+  In <a href="matlab: opentoline('E:\Jorge Pastor\DevRelease2012_12_12\deploy_STS_IM.m',33,1)">deploy_STS_IM at 33</a>} 
+Finished loading
+PASSED : flexible nr of currencies (dataset 1) 
+PASSED : flexible nr of currencies (dataset 2) 
+PASSED : flexible nr of Tenors (dataset 1)
+PASSED : flexible nr of Tenors (dataset 2)
+PASSED : header change (dataset 2) 
+PASSED : detection negative data
+################# P19-7 Passed #################
+ 
+ 
+ 
+################# Total score: Failed #################
+ 
+4 passed, and 3 failed.
+ 
+#######################################################

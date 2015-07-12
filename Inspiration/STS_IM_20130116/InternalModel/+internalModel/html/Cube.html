@@ -1,0 +1,280 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Cube</title><meta name="generator" content="MATLAB 7.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-11-01"><meta name="DC.source" content="Cube.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Cube</a></li><li><a href="#2">Properties</a></li><li><a href="#4">Methods</a></li><li><a href="#5">Cube <i>constructor</i></a></li><li><a href="#7">calculateMarketEC</a></li></ul></div><h2>Cube<a name="1"></a></h2><p>The cube calculates the Market EC values</p><h2>Properties<a name="2"></a></h2><div><ul><li><tt>currency</tt>          <i>char</i></li><li><tt>data</tt>              <i>double</i></li><li><tt>instrumentIDs</tt>  	<i>cell</i></li><li><tt>instrumentNms</tt>  	<i>cell</i></li><li><tt>scenarioHeaders</tt>   <i>cell</i></li></ul></div><h2>Methods<a name="4"></a></h2><div><ul><li><tt>obj = Cube(instCol, scenCol, forexCol, cubeCurrency)</tt></li><li><tt>EC_GID = calculateMarketEC(obj, portfolio, scenarios, confidence, forex,   reportCurrency, varargin)</tt></li></ul></div><h2>Cube <i>constructor</i><a name="5"></a></h2><p><tt>obj = Cube(instCol, scenCol, forexCol, cubeCurrency)</tt></p><p>Input:</p><div><ul><li><tt>instCol</tt>       <i>InstrumentCollection</i></li><li><tt>scenCol</tt>       <i>ScenarioCollection</i></li><li><tt>forexCol</tt>      <i>ForeignExchangeCollection</i></li><li><tt>cubeCurrency</tt>  <i>char</i></li></ul></div><h2>calculateMarketEC<a name="7"></a></h2><p><tt>EC_GID = calculateMarketEC(obj, portfolio, scenarios, confidence, forex, reportCurrency, varargin)</tt></p><p>This method calculates the Market Economic Capital for a particular portfolio. The user may specify which GID's to included.</p><p>Inputs:</p><div><ul><li><tt>portfolio</tt>         <i>Portfolio</i></li><li><tt>scenarios</tt>         <i>ScenarioCollection</i></li><li><tt>confidence</tt>        <i>double</i></li><li><tt>forex</tt>             <i>ForeignExchange</i></li><li><tt>reportCurrency</tt>    <i>char</i></li><li><tt>varargin</tt>          <i>cell</i></li></ul></div><p class="footer"><br>
+      Published with MATLAB&reg; 7.14<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Cube
+% The cube calculates the Market EC values
+
+classdef Cube
+
+	properties
+        %% Properties
+        % 
+        % * |currency|          _char_
+        % * |data|              _double_
+        % * |instrumentIDs|  	_cell_
+        % * |instrumentNms|  	_cell_
+        % * |scenarioHeaders|   _cell_ 
+        
+        currency
+        data
+        instrumentIDs
+        instrumentNms
+        scenarioHeaders
+
+    end
+
+
+    methods
+        %% Methods
+        %
+        % * |obj = Cube(instCol, scenCol, forexCol, cubeCurrency)|
+        % * |EC_GID = calculateMarketEC(obj, portfolio, scenarios, confidence, forex,
+        %   reportCurrency, varargin)|
+
+        function obj = Cube(instCol, scenCol, forexCol, cubeCurrency)
+            %% Cube _constructor_
+            % |obj = Cube(instCol, scenCol, forexCol, cubeCurrency)|
+            % 
+            % Input:
+            % 
+            % * |instCol|       _InstrumentCollection_
+            % * |scenCol|       _ScenarioCollection_
+            % * |forexCol|      _ForeignExchangeCollection_
+            % * |cubeCurrency|  _char_
+
+            % Initialize
+            if isempty(instCol) || isempty(scenCol) || isempty(forexCol)
+                error('ing:IncorrectLoading', 'One of the input arguments is empty');
+            end
+
+            % Set Cube Currency
+            obj.currency  = cubeCurrency;
+
+            % Find all non-market instruments
+            anomIsa       = @(x)isa(x, 'internalModel.NonMarketRisk');
+            idxMarketInst = ~cellfun(anomIsa, instCol.Instruments);
+            instToValue   = instCol.Instruments(idxMarketInst);
+
+            obj.instrumentNms   = cellfun(@(x)(x.Name), instToValue, 'UniformOutput', false);
+            obj.instrumentIDs   = cellfun(@(x)(x.ID),   instToValue, 'UniformOutput', false);
+            obj.scenarioHeaders = scenCol.Headers;
+
+            % Initialize valCube [n x m] (number of Instruments x number of Scenarios
+            valCube = zeros(length(obj.instrumentNms), size(scenCol.ScenarioMatrix, 1));
+
+            for iIns = 1:numel(instToValue)
+                % Loop over instruments:
+                % Fill Cube using value method of individual instruments.
+                % Ensure all selected instruments are denominated in the Cube
+                % Currency, use rate conversion if required. Apply FX Shock
+                % if applicable
+                instrCurrency = instToValue{iIns}.Currency;
+                baseFxRate    = 1;
+
+                if ~strcmpi(instrCurrency, cubeCurrency)
+                    % Instrument Currency does not match Cube Currency, convert...
+                    % Rate Conversion call:
+                    baseFxRate = forexCol.getRate(instrCurrency, cubeCurrency);
+                end
+
+                % In case this particular Instrument FX Rate is shocked, find its 'fxrd'
+                fxrd         = zeros(size(scenCol.ScenarioMatrix, 1), 1);
+                fxRiskDriver = ['FX_' instrCurrency];
+                idxInMatrix  = strcmp(scenCol.Headers, fxRiskDriver);
+
+                if any(idxInMatrix)
+                    % FX Risk Driver found for this Instrument Currency
+                    fxrd = scenCol.ScenarioMatrix(:, idxInMatrix);
+                end
+
+                % Calculate Shocked FX Rate
+                fxRateShock = exp(fxrd);
+                fxRateTot   = baseFxRate .* fxRateShock;
+
+                % Add Instrument to Cube
+                instrValue       = instToValue{iIns}.value() .* fxRateTot;
+                valCube(iIns, :) = instrValue;
+            end
+
+            % Copy valCube to the object
+            obj.data = valCube;
+        end
+
+
+        function EC_GID = calculateMarketEC(obj, portfolio, scenarios, confidence, forex, reportCurrency, varargin)
+            %% calculateMarketEC
+            % |EC_GID = calculateMarketEC(obj, portfolio, scenarios, confidence,
+            % forex, reportCurrency, varargin)|
+            % 
+            % This method calculates the Market Economic Capital for a particular 
+            % portfolio. The user may specify which GID's to included.
+            % 
+            % Inputs:
+            % 
+            % * |portfolio|         _Portfolio_
+            % * |scenarios|         _ScenarioCollection_
+            % * |confidence|        _double_
+            % * |forex|             _ForeignExchange_
+            % * |reportCurrency|    _char_
+            % * |varargin|          _cell_
+            EC_GID  = [];
+
+            % 1. Determine Analysis GID's. In case the user does not specify
+            %    a subset of GID's, the method automatically includes all 
+            %    available GID's in the portfolio.
+            findGID = @(x)(x.GID);
+            gidAll  = cellfun(findGID, portfolio.groups);
+
+            % Process user input 
+            if ~isempty(varargin)
+                % User specified subset of GID's
+                gidSelect   = varargin{1};
+                gidAnalysis = intersect(gidSelect, gidAll);
+
+            else
+                % No guidance, just include all GID's
+                gidAnalysis = gidAll;
+            end
+
+            % Return in case no valid subset is available. This could be due to 
+            % either invalid user input, or an inviable/corrupted portfolio
+            if isempty(gidAnalysis)
+                error('ing:IncorrectLoading', 'Invalid GID selection');
+            end
+
+            % 2. Calculate Market EC
+            %    Initialize EC_GID. The structure contains both the GID ID's
+            %    and EC's (for referencing purposes).
+            EC_GID.val = zeros(numel(gidAnalysis), 1);
+            EC_GID.ids = gidAnalysis';
+
+            % Loop over each analysis GID and calculate EC
+            for GIDindex = 1:numel(gidAnalysis)
+                % 1. Try to identify unique Instrument ID's and WeightFactors 
+                %    for this particular GID
+                try
+                    % Identify instruments
+                    [unInstrIDs, uninstrWeight] = portfolio.aggregateElements(gidAnalysis{GIDindex}, false);
+
+                catch ME %#ok<NASGU>
+                    % Identification failed, continue with next portfolio GID entry
+                    %warning('ing:InvalidInput', ME.message);
+                end
+
+                % Check whether unInstrIDs is empty, if not, return
+                if isempty(unInstrIDs)
+                    return
+                end
+
+                % 2. Convert Cube to reporting currency
+                cubeCurrency = obj.currency;
+                fxRateBase   = 1;
+
+                % 2.1. Find Base Fx Rate
+                if ~strcmpi(cubeCurrency, reportCurrency)
+                    % Rate Conversion call:
+                    fxRateBase = forex.getRate(reportCurrency, cubeCurrency);
+                end
+
+                % 2.2. Find and apply Shock Fx Rate
+                fxrdReport    = zeros(size(scenarios.ScenarioMatrix, 1), 1);
+                fxrdReportIdx = strcmp(scenarios.Headers, ['FX_' reportCurrency]);
+
+                if any(fxrdReportIdx)
+                    % FX Risk Driver found for Reporting Currency
+                    fxrdReport = scenarios.ScenarioMatrix(:, fxrdReportIdx);
+                end
+
+                % 2.3. Calculate and apply Shocked FX Rate to 'cubeData'
+                fxRateTot = 1 ./ (fxRateBase .* exp(fxrdReport(:)));
+                fxRateTot = repmat(fxRateTot', size(obj.data, 1), 1);
+                cubeData  = obj.data .* fxRateTot;
+
+                % 3. Map GID's instruments to the instrument arrangement in the Cube
+                [~, selectIdxCube, selectIdxPF] = intersect(obj.instrumentIDs, unInstrIDs);
+                selInstrWeight = uninstrWeight(selectIdxPF);
+                selection      = diag(selInstrWeight) * cubeData(selectIdxCube, :);
+
+                % Select base and shocked scenarios
+                base    = selection(:, 1);
+                shocked = selection(:, 2:end);
+
+                % 4. Calculate EC Value by picking specific confidence level / quantile
+                EC_dist = sum(((base * ones(1, size(shocked, 2))) - shocked), 1);
+
+                % Store this GID EC
+                if isempty(EC_dist)
+                    % Prevent 'quantile' operation on an empty array
+                    EC_GID.val(GIDindex) = 0;
+                else
+                    % Succes scenarion, calculate quantile
+                    EC_GID.val(GIDindex) = quantile(EC_dist, confidence);
+                end
+
+            end
+
+        end % #calculateMarketEC
+
+    end % #Methods
+
+end % #Cube
+
+##### SOURCE END #####
+--></body></html>

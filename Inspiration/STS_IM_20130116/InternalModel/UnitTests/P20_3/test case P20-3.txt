@@ -1,0 +1,125 @@
+Description:
+As an STS user,
+I want given a dataset of vol factors for IR, RE, BF, Equity and FX, the system to load the vol factors to shock volatility correctly in STS,
+So that I am able to shock the vol surface correctly based on the RW scenario shocks.
+The name of the data files are:
+- IR_vol_vol_factor
+- RE_vol_vol_factor
+- EQ_vol_vol_factor
+- BF_vol_vol_factor
+- FX_vol_vol_factor
+
+Criteria:
+Given a set of vol factor data files,
+When STS can load the vol factor factor data for IR, RE, EQ, BF and FX,
+Then I am able to shock volatility and volatility sensitive instruments in STS. 
+The number of tenors for IR vol, equity vol, FX vol, BF vol, RE vol factors should be flexible. The number of currencies or equity indices should be flexible. The system should create a warning if the loaded data is negative or zero.  For IR vol it should load a variable number of option maturities and swap tenors. The system should read the IDEAL_header.csv file so that the system is not impacted by changes in the columns of the data files. 
+
+
+Test plan:
+[1]
+1)BF_vol_vol_factor.csv
+2)EQ_vol_vol_factor.csv
+3)FX_vol_vol_factor.csv
+4)IR_vol_vol_factor.csv
+5)RE_vol_vol_factor.csv
+
+It is expected that STS is able to load these data correctly.
+
+[2]
+1)BF_vol_vol_factor_flexNrOfTenors.csv
+
+For BCOPC3A2_INDEX-Vol-Factor:
+120 day tenor added.
+
+For BCOPC3A8_INDEX-Vol-Factor:
+5475, and 9125 day tenors are removed.
+RE_vol_vol_factor
+
+For USAGG_USD_UNHEDG_INDEX-Vol-Factor:
+19000, 19500, 20000 day tenors are added.
+
+2)EQ_vol_vol_factor_flexNrOfTenors.csv
+
+For AEX-Vol-Factor:
+19000, 19365, 19730, 20095, 20825, 21555, and 22650 day tenors are added.
+
+For KLSE-Vol-Factor
+all tenors are removed, except 18250 day tenor.
+
+3)FX_vol_vol_factor_flexNrOfTenors.csv
+
+For EUR/BGN-Vol-Factor:
+5475 day tenor is removed.
+
+For EUR/USD-Vol-Factor:
+18615 day tenor is added.
+
+4)IR_vol_vol_factor_flexNrOfTenors.csv
+
+For AUD-Swaption-Vol-Factor:
+5000-5500 and 7000-7777 tenors are added.
+
+For BGN-Swaption-Vol-Factor:
+1825-2555,3650-2555 tenors are removed.
+
+5)RE_vol_vol_factor_flexnrOfTenors.csv
+For ELUK_INDEX-Vol-Factor:
+6000, and 6666 tenors are added.
+
+For RMS_INDEX-Vol-Factor:
+2555 till 10950 tenors are removed.
+
+It is expected that STS is able to load these five files correctly without any error or warning. This means that STS is able to load independently of the number of tenors.
+
+[3]
+1)BF_vol_vol_factor_flexNrOfEI.csv
+TEST1_INDEX-Vol-Factor and TEST2_INDEX-Vol-Factor are added as new equity indices.
+
+2)EQ_vol_vol_factor_flexNrOfEI.csv
+All indices are removed, excepts XU100-Vol-Factor.
+
+3)FX_vol_vol_factor_flexNrOfEI.csv
+TEST1/BRL-Vol-Factor and TEST2/BRL-Vol-Factor are added as new currencies.
+
+4)IR_vol_vol_factor_flexNrOfEI.csv
+All currencies are removed, excepts AUD-Swaption-Vol-Factor
+
+5)RE_vol_vol_factor_flexNrOfEI.csv
+TEST1_INDEX-Vol-Factor is added at the end of the file.
+
+Here, it is expected that STS is able to load the data correctly, taking into account that the number of currencies/indices are variable. This shows that loading of data is flexible with regard to the number of currency/index.
+
+[4]
+1)BF_vol_vol_factor_negData.csv
+the last row contains a negative number.
+
+2)EQ_vol_vol_factor_negData.csv
+row 126 contains negative number.
+
+3)FX_vol_vol_factor_negData.csv
+row 219 contains negative number.
+
+4)IR_vol_vol_factor_negData.csv
+row 3 contains negative number.
+
+5)RE_vol_vol_factor_negData.csv
+last row (81) contains negative number.
+
+It is expected that for all these runs, STS should display a warning that there are negative numbers in the data.
+
+[5]
+1)IDEAL_header_headerChanged.csv
+
+2)BF_vol_vol_factor_headerChanged.csv
+3)EQ_vol_vol_factor_headerChanged.csv
+4)FX_vol_vol_factor_headerChanged.csv
+5)IR_vol_vol_factor_headerChanged.csv
+6)RE_vol_vol_factor_headerChanged.csv
+
+For this user story there are only two different file formats in the IDEAL_header file:
+-Volatility - Term/TermSPEC (for the IR)
+Volatility - Moneyness/TermSPEC (for the rest)
+
+In IDEAL_header_headerChanged.csv the columns belonging to the above identifiers are reversed starting at the third column. The data files are then rearranged according to this file. It is expected that STS is able to load these files according to the header file.
+
