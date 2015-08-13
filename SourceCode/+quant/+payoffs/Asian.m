@@ -27,7 +27,7 @@ function P = Asian(OptionType, Strike)
 %   [None]
 %
 %% Function Asian for Asian_Option instrument
-% Copyright 1994-2016 Riskcare Ltd.
+% Copyright 2015 Jorge Pastor Trapero.
 %
 
 switch upper(OptionType)

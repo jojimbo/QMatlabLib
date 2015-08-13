@@ -27,7 +27,7 @@ function P = Vanilla(OptionType, Strike)
 %   [None]
 %
 %% Function Vanilla (payoff) for Vanilla option instruments (European, American, other)
-% Copyright 1994-2016 Riskcare Ltd.
+% Copyright 2015 Jorge Pastor Trapero.
 %
 
 switch upper(OptionType)
