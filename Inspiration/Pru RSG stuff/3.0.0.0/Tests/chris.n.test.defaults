@@ -1,0 +1,18 @@
+% Allowed values are as follows.
+%
+% Case is important as is the space around the equals sign
+
+Pillar1_checkpoint = P1_BL4_1_0_13_Revision_1.20
+IRSG_Baseline_Version = 2.7.0
+
+% Scenario data base connection details
+DEV_DBNAME = RSG01A
+DEV_DBUSERNAME = dev2_rsg_owner
+DEV_DBPASSWORD = dev2_rsg_owner
+
+% Market  data database connection details
+MDS_DBNAME = RSG01A
+MDS_DBUSERNAME = dev2_mdm_owner
+MDS_DBPASSWORD = dev2_mdm_owner
+
+

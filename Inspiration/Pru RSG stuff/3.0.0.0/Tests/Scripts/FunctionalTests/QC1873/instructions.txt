@@ -1,0 +1,22 @@
+SETUP
+-----
+
+1)	cd to the iRSG/tests directory and follow the instructions for setting up
+	the functional tests. This will configure the test for execution.
+	There are no test specific manual setup steps required.
+	
+TO RUN TESTS
+------------
+
+* To run a particular test execute
+
+runtests.sh [cl|ide]'NAME OF TEST'
+
+* To run all tests execute
+
+runtests [cl|ide]
+
+In order to run the tests against the MDS the data series need to be imported.
+execute ./mds_import.sh whcih will import all data series in ./BoostrapInputs
+into the MDS
+

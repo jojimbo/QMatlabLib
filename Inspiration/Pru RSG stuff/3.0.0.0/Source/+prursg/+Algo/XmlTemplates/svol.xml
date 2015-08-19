@@ -1,0 +1,17 @@
+<RISKFACTOR NAME="USD_NYC_Swaption_IV_default_sto_100" ATTRIBUTE="" SCENARIOTYPE="absolute">
+  <PROPERTIES ENTRIES="2">
+   <PROPERTY NAME="FactorGroup" TYPE="string" VALUE="aux_values"/>
+   <PROPERTY NAME="Name" TYPE="string" VALUE="USD_NYC_Swaption_IV_default_sto_100"/>
+  </PROPERTIES>
+  <AXISLIST ENTRIES="2">
+   <AXIS COUNT="0" NAME="Underlying Term" SYMBOL="U" TYPE="int">
+    <AXISVALUES ENTRIES="3">1825,3650,7300</AXISVALUES>
+   </AXIS>
+   <AXIS COUNT="1" NAME="Option Term" SYMBOL="O" TYPE="int">
+    <AXISVALUES ENTRIES="3">3650,7300,10950</AXISVALUES>
+   </AXIS>
+  </AXISLIST>
+  <VALUELIST ENTRIES="1">
+   <VALUE COUNT="1" NAME="value" TYPE="double"/>
+  </VALUELIST>
+</RISKFACTOR>

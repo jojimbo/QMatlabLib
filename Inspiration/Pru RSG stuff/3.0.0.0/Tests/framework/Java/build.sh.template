@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+DISTNAME=JTestUtility
+PROJECTNAME=JTestUtil
+
+mkdir -p $PROJECTNAME/generated/JavaBuilder/src
+mcc \
+-W java:JTestUtility,JTestUtility \
+-T link:lib \
+-d {IRSG_TESTS}/framework/Java/JTestUtil/generated/JavaBuilder/src \
+-p database -p distcomp -p optim -p stats \
+-N -w enable:specified_file_mismatch -w enable:repeated_file -w enable:switch_ignored -w enable:missing_lib_sentinel -w enable:demo_license \
+-v 'class{JTestUtility:{IRSG_TESTS}/framework/Java/JTestUtil/ml_wrappers/CompareDirs.m,{IRSG_TESTS}/framework/Java/JTestUtil/ml_wrappers/CompareFiles.m,{IRSG_TESTS}/framework/Java/JTestUtil/ml_wrappers/GenerateFiles.m,{IRSG_TESTS}/framework/Java/JTestUtil/ml_wrappers/GetConfigValue.m,{IRSG_TESTS}/framework/Java/JTestUtil/ml_wrappers/RebuildScenarioDB.m}' \
+-a {IRSG_SOURCE}/+prursg/+Db/+Relational/create_schema.sql \
+-a {IRSG_SOURCE}/+prursg/+Db/+Relational/drop_schema.sql \
+-a {IRSG_SOURCE}/+prursg/+Db/+Relational/MDS.sql \
+-I {IRSG_SOURCE} \
+-I {IRSG_TESTS}/Externals/xunit \
+-I {IRSG_TESTS}/framework
+
+deploytool -build $PROJECTNAME
+
+# Builds a java runner for java distributable
+OUTDIR=./$PROJECTNAME/generated
+
+JDK=/apps/jdk1.6.0_20/bin/
+JAVABUILDER=/apps/MATLAB/R2010b/toolbox/javabuilder/jar/javabuilder.jar
+
+DIST=$OUTDIR/JavaBuilder/src/$DISTNAME.jar
+if [ ! -e "$DIST" ] ; then
+	echo "Java distributable $DIST does not exist"
+	exit 1
+fi
+
+UTIL=./$PROJECTNAME/$PROJECTNAME.java
+if [ ! -f "$UTIL" ] ; then
+	echo "Source file $UTIL does not exist"
+	exit 1
+fi
+
+PATH=$JDK:$PATH
+#JAVAC=javac $2  -Xlint:unchecked 
+JAVAC=javac $2
+ 
+echo "$JAVAC -d $OUTDIR -classpath $DIST:$JAVABUILDER $UTIL"
+$JAVAC -d $OUTDIR -classpath $DIST:$JAVABUILDER $UTIL
+
+
+

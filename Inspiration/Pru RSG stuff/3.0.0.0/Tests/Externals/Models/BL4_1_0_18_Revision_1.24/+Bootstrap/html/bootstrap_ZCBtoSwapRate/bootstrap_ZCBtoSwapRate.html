@@ -1,0 +1,775 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Zero Coupon Bond to Swap Rate</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-04-25"><meta name="DC.source" content="bootstrap_ZCBtoSwapRate.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Zero Coupon Bond to Swap Rate</h1><!--introduction--><p><b>The class takes an input data series object containing a set of zero coupon bonds and outputs a two dimesional data series object of equilibrium swap (par) rates with axes corresponding to maturity and tenor of swap contract.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">How to use the class</a></li><li><a href="#4">Properties</a></li><li><a href="#6">List of Methods</a></li><li><a href="#10">Details of Methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_ZCBtoSwapRate &lt; prursg.Bootstrap.BaseBootstrapAlgorithm
+</pre><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>How to use the class<a name="3"></a></h2><p>There are two ways to use this class:</p><div><ol><li>To calculate a two dimensional data series object of equilibrium forward swap (par) rates with axes corresponding to maturity and tenor using <b><tt>[[bootstrap_ZCBtoSwapRate()]</tt></b>.</li></ol></div><div><ol><li>To calculate a forward starting swap rate and/or a forward starting annuity.</li></ol></div><h2>Properties<a name="4"></a></h2><p><b><tt>[outputfreq]</tt></b> : A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data type : string</pre><p><b><tt>[compoundingfrequency]</tt></b> : The annual frequency, <img src="bootstrap_ZCBtoSwapRate_eq85998.png" alt="$f$">, at which the output yield curve is compounded e.g. "2" for semi-annually.</p><pre>Data type : double</pre><p><b><tt>[swaptenors]</tt></b> : The length of the swap contracts, <img src="bootstrap_ZCBtoSwapRate_eq89224.png" alt="$\tau$">.</p><pre>Data type : string</pre><p><b><tt>[ZCBPRICES]</tt></b> : The price of a zero coupon bond, <img src="bootstrap_ZCBtoSwapRate_eq73735.png" alt="$B(t,T)$">, at present time, <img src="bootstrap_ZCBtoSwapRate_eq07064.png" alt="$t$">, which pays 1 at maturity, <img src="bootstrap_ZCBtoSwapRate_eq46221.png" alt="$t=T$">.</p><pre>Data type : data series, doubles</pre><p><b><tt>[ZCBMaturities]</tt></b> : Times, <img src="bootstrap_ZCBtoSwapRate_eq57315.png" alt="$T$">, when the zero coupon bonds mature.</p><pre>Data type : data series, doubles</pre><p><b><tt>[SwaptionMaturities]</tt></b> : Times when the swaptions expire. These are also the times when the swap contracts begin, <img src="bootstrap_ZCBtoSwapRate_eq63384.png" alt="$T_{Start}$">.</p><pre>Data type : data series, doubles</pre><p><b><tt>[newDataSeriesObject]</tt></b> : New data series object, setup to store results</p><pre>Data Type: data series</pre><p><b><tt>[TimeTolerance]</tt></b> : Tolerance value used to help identify the time indices of a swap contract.</p><p>Data Type: double</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+    properties
+
+        outputfreq ;
+        compoundingfrequency;
+        swaptenors ;
+
+        ZCBPRICES ;
+        ZCBMaturities ;
+        SwaptionMaturities
+
+        <span class="comment">% Set-Up data series object to store results</span>
+        newDataSeriesObject
+        <span class="comment">% TimeTolerance within one business day</span>
+        TimeTolerance = 1/250;
+
+    <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="6"></a></h2><p><b><tt>1) |[bootstrap_ZCBtoSwapRate()]</tt></b> : Function returns a two dimensional data series object of equilibrium swap (par) rates with axes corresponding to maturity and tenor of swap contract.</p><p><b><tt>2) |[createArrayfromCSVstring()]</tt></b> : Function returns an array containing doubles from an input string.</p><p><b><tt>3) |[EQFORWARDSWAPRATE()]</tt></b> : Function returns a forward starting annuity factor and the corresponding equilibrium forward swap rate calculated from zero coupon bond (ZCB) inputs.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+
+        <span class="keyword">function</span> obj = bootstrap_ZCBtoSwapRate()
+                 obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+        <span class="keyword">end</span>
+
+       <span class="keyword">function</span> results = Bootstrap(obj,DataSeriesIn)
+</pre><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>Details of Methods<a name="10"></a></h2><p><b>1) <tt>[bootstrap_ZCBtoSwapRate()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function uses <b><tt>[EQFORWARDSWAPRATE()]</tt></b> to return a two dimensional data series object of forward starting equilibrium swap (par) rates with axes corresponding to maturity and tenor of the swap contracts.</p><p><b><i>Inputs</i></b></p><p><b><tt>[outputfreq]</tt></b> - A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data type : string</pre><p><b><tt>[compoundingfrequency]</tt></b> : - The annual frequency, <img src="bootstrap_ZCBtoSwapRate_eq85998.png" alt="$f$">, at which the output yield curve is compounded e.g. "2" for semi-annually.</p><pre>Data type : double</pre><p><b><tt>[swaptenors]</tt></b> : The length of the swap contracts, <img src="bootstrap_ZCBtoSwapRate_eq89224.png" alt="$\tau$">.</p><pre>Data type : string</pre><p><b><tt>[ZCBPRICES]</tt></b> : The price of a zero coupon bond, <img src="bootstrap_ZCBtoSwapRate_eq73735.png" alt="$B(t,T)$">, at present time, <img src="bootstrap_ZCBtoSwapRate_eq07064.png" alt="$t$">, which pays 1 at maturity, <img src="bootstrap_ZCBtoSwapRate_eq46221.png" alt="$t=T$">.</p><pre>Data type : data series, doubles</pre><p><b><tt>[ZCBMaturities]</tt></b> : Times, <img src="bootstrap_ZCBtoSwapRate_eq57315.png" alt="$T$">, when the zero coupon bonds mature.</p><pre>Data type : data series, doubles</pre><p><b><tt>[SwaptionMaturities]</tt></b> : Times when swaptions expire. This are also the times when the swap contracts begin.</p><pre>Data type : data series, doubles</pre><p><b><tt>[newDataSeriesObject]</tt></b> : New data series object, setup to store results.</p><pre>Data Type: data series</pre><p><b><i>Outputs</i></b></p><p>Two dimensional data series object of equilibrium forward starting swap (par) rates with axes corresponding to maturity and tenor or swap contract.</p><p><b><i>Calculations</i></b></p><p>Initially the ZCB data is sorted and cloned. Then the output frequency profile is identified and set up, this specifies the frequency of outputs e.g. monthly, quarterly or annually etc.</p><p>Using <b><tt>[EQFORWARDSWAPRATE()]</tt></b>, looped over by swap start dates and swap tenors, the two dimensional swap rate data series objects are created for each date that is required.</p><p>The output data series properties are then updated.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+            <span class="comment">% Step 1. Sort and clone ZCB data</span>
+
+            newSortDataSeries=Bootstrap.BsSort();
+
+            obj.newDataSeriesObject =newSortDataSeries.SortDataSeries<span class="keyword">...</span>
+                (DataSeriesIn(1).Clone);
+
+             inumberOfDates =  size(DataSeriesIn(1).dates,1);
+
+            obj.ZCBPRICES = obj.newDataSeriesObject.values;
+
+            obj.ZCBMaturities  =<span class="keyword">...</span>
+                cell2mat(obj.newDataSeriesObject.axes(1).values);
+
+            swaptenors = obj.createArrayfromCSVstring(obj.swaptenors);
+            <span class="comment">% obj.SwaptionMaturities = obj.createArrayfromCSVstring...</span>
+            <span class="comment">%(obj.SwaptionMaturities);</span>
+
+
+            <span class="comment">% Step 2. Get OutPutFreqProfile</span>
+
+             maxTerm = obj.newDataSeriesObject.axes(1).values{1, end};
+             BsfrequencyprofileObject =<span class="keyword">...</span>
+                 Bootstrap.Bsfrequencyprofile(obj.outputfreq,maxTerm);
+             outputfreqProfile = <span class="keyword">...</span>
+                 BsfrequencyprofileObject.AdjustedIntervalArray;
+             outputfreqProfile = [ 0 ; outputfreqProfile] ;
+             <span class="comment">% The Inclusion of zero gives us the initial par rates</span>
+
+            <span class="comment">% Step 3 :: Set-Up data series object to store</span>
+            <span class="comment">% results :: use existing raw data series object to achieve this</span>
+
+            obj.newDataSeriesObject.axes(1).values= <span class="keyword">...</span>
+                num2cell(outputfreqProfile');
+            obj.newDataSeriesObject.axes(2).values = num2cell(swaptenors);
+
+            SWAPRATETENOR = 1/ obj.compoundingfrequency;
+            NumOFSwapTenors =size(obj.newDataSeriesObject.axes(2).values,2);
+            NumOFSwaptionMaturity =<span class="keyword">...</span>
+                size(obj.newDataSeriesObject.axes(1).values,2);
+            Results = zeros(NumOFSwapTenors,NumOFSwaptionMaturity );
+            <span class="comment">% allocate storage space</span>
+
+               <span class="keyword">for</span> i= 1 : inumberOfDates
+                   <span class="keyword">for</span> j = 1 : NumOFSwapTenors
+                       SwapTenor = obj.newDataSeriesObject.axes(2).values{j};
+                       <span class="keyword">for</span> k = 1 : NumOFSwaptionMaturity
+                           SwaptionMaturity = <span class="keyword">...</span>
+                               obj.newDataSeriesObject.axes(1).values{k};
+                           [SwapRate AnnuityFactor] = <span class="keyword">...</span>
+                               obj.EQFORWARDSWAPRATE(obj.ZCBPRICES{i},<span class="keyword">...</span>
+                               obj.ZCBMaturities, SwaptionMaturity, <span class="keyword">...</span>
+                               SwapTenor, SWAPRATETENOR);
+                           Results(j,k) = SwapRate;
+                       <span class="keyword">end</span>
+                   <span class="keyword">end</span>
+
+                   obj.newDataSeriesObject.values{i} =Results';
+               <span class="keyword">end</span>
+
+           <span class="comment">% Step4. Return data series object</span>
+           results = obj.newDataSeriesObject;
+
+           <span class="comment">% Step 5. Update Data-Series Properties</span>
+
+
+           obj.newDataSeriesObject.axes(1).title = <span class="string">'Swaption Maturity'</span>;
+           obj.newDataSeriesObject.axes(2).title =  <span class="string">'Swap Tenor'</span>;
+           obj.newDataSeriesObject.description = <span class="keyword">...</span>
+           <span class="string">'derived (equilibrium) swap rates using bootstrap_ZCBtoSwapRate'</span>;
+           obj.newDataSeriesObject.source = <span class="string">'iMDP'</span>;
+           obj.newDataSeriesObject.ratetype = <span class="string">'swap'</span>;
+           obj.newDataSeriesObject.compounding =<span class="string">'ann'</span>;
+           obj.newDataSeriesObject.compoundingfrequency = <span class="keyword">...</span>
+               num2str(obj.compoundingfrequency);
+           obj.newDataSeriesObject.daycount =<span class="string">'na'</span>;
+           obj.newDataSeriesObject.units =<span class="string">'absolute'</span>;
+</pre><pre class="codeinput">       <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">
+ans = 
+
+  Bootstrap.bootstrap_ZCBtoSwapRate handle
+  Package: Bootstrap
+
+  Properties:
+              outputfreq: []
+    compoundingfrequency: []
+              swaptenors: []
+               ZCBPRICES: []
+           ZCBMaturities: []
+      SwaptionMaturities: []
+     newDataSeriesObject: []
+           TimeTolerance: 0.0040
+
+
+</pre><p><b>3) <tt>[EQFORWARDSWAPRATE()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>The function returns equilibrium foward swap rates and an annuity factor based on a set of ZCB Prices, . It assumes that the ZCB maturity values are evenly spaced and that swap payments coincide with a ZCB maturity.</p><p><b><i>Inputs</i></b></p><p><b><tt>[ZCBPRICES]</tt></b> : The price of a zero coupon bond, <img src="bootstrap_ZCBtoSwapRate_eq73735.png" alt="$B(t,T)$">, at present time, <img src="bootstrap_ZCBtoSwapRate_eq07064.png" alt="$t$">, which pays 1 at maturity, <img src="bootstrap_ZCBtoSwapRate_eq46221.png" alt="$t=T$">.</p><pre>Data Type : data series, doubles</pre><p><b><tt>[ZCBMaturities]</tt></b> : Times, <img src="bootstrap_ZCBtoSwapRate_eq57315.png" alt="$T$">, when the zero coupon bonds mature.</p><pre>Data Type : data series, doubles</pre><p><b><tt>[SWAPSTART]</tt></b> : Time at which the swap contract begins, <img src="bootstrap_ZCBtoSwapRate_eq63384.png" alt="$T_{Start}$">.</p><pre>Data Type : double</pre><p><b><tt>[SWAPTENOR]</tt></b> : Duration of the swap contract, in years.</p><pre>Data Type : double</pre><p><b><tt>[SWAPRATETENOR]</tt></b> : Time period between swap payments, in years.</p><pre>Data Type : double</pre><p><b><i>Outputs</i></b></p><p><b><tt>[SwapRate]</tt></b> : Equilibrium forward swap rate, <img src="bootstrap_ZCBtoSwapRate_eq14458.png" alt="$R(t)$">, at present time <img src="bootstrap_ZCBtoSwapRate_eq07064.png" alt="$t$">.</p><pre>Data Type : double</pre><p><b><tt>[AnnuityFactor]</tt></b> : Annuity factor.</p><pre>Data Type : double</pre><p><b><i>Calculations</i></b></p><p><b>Calculation of Annuity Factor</b></p><p>To calculate the annuity factor the following formula is used:</p><p><img src="bootstrap_ZCBtoSwapRate_eq72390.png" alt="$$ A(t,T_{Start},T_{End})=\frac{1}{f}\sum_{i=1}^{f\tau}&#xA;B\left(t, T_{Start}+\frac{i}{f}\right) $$"></p><p>where,</p><p><img src="bootstrap_ZCBtoSwapRate_eq70763.png" alt="$A(t,T_{Start},T_{End})$"> : The value of an annuity factor at time, <img src="bootstrap_ZCBtoSwapRate_eq07064.png" alt="$t$">, for an annuity starting at <img src="bootstrap_ZCBtoSwapRate_eq63384.png" alt="$T_{Start}$"> and finishing at <img src="bootstrap_ZCBtoSwapRate_eq30867.png" alt="$T_{End}$">.</p><p><img src="bootstrap_ZCBtoSwapRate_eq85998.png" alt="$f$"> : Compounding frequency; the reciprocal of the time between swap payments.</p><p><img src="bootstrap_ZCBtoSwapRate_eq63384.png" alt="$T_{Start}$"> : Start time of the swap</p><p><img src="bootstrap_ZCBtoSwapRate_eq97856.png" alt="$\tau=T_{End}-T_{Start}$"> : Swap tenor</p><p><b>Calculation of Swap Rate</b></p><p>To calculate the swap rate we use:</p><p>a) If <img src="bootstrap_ZCBtoSwapRate_eq54162.png" alt="$,\,T_{Start}=0$">,</p><p><img src="bootstrap_ZCBtoSwapRate_eq68857.png" alt="$$ R(t)=\frac{1-B(t,T_{End})}{A(t,T_{Start},T_{End})} $$"></p><p>b) Otherwise,</p><p><img src="bootstrap_ZCBtoSwapRate_eq36682.png" alt="$$ R(t)=\frac{B(t,T_{Start}+\frac{1}{f})-B(t,T_{End})}{A(t,T_{Start},T_{End})} $$"></p><p>where,</p><p><img src="bootstrap_ZCBtoSwapRate_eq14458.png" alt="$R(t)$"> : Present value, at <img src="bootstrap_ZCBtoSwapRate_eq07064.png" alt="$t$">, of <img src="bootstrap_ZCBtoSwapRate_eq89224.png" alt="$\tau$"> -year swap starting at time, <img src="bootstrap_ZCBtoSwapRate_eq63384.png" alt="$T_{Start}$">.</p><p><img src="bootstrap_ZCBtoSwapRate_eq73735.png" alt="$B(t,T)$"> : Price of zero coupon bond with maturity, <img src="bootstrap_ZCBtoSwapRate_eq57315.png" alt="$T$">.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    <span class="keyword">function</span> [SwapRate AnnuityFactor]=<span class="keyword">...</span>
+            EQFORWARDSWAPRATE(obj,ZCBPRICES,ZCBMaturities, SWAPSTART, <span class="keyword">...</span>
+            SWAPTENOR, SWAPRATETENOR)
+
+        NumberOfBonds=size(ZCBPRICES,2);
+        TenorMaturityRatio = floor(SWAPRATETENOR/ZCBMaturities(1,1));
+
+
+       <span class="comment">%  assert ( ZCBMaturities( 1, end) &gt; (SWAPSTART + SWAPTENOR), ...</span>
+       <span class="comment">%'Swaption terms are greator than the length of the yield curve')</span>
+
+       <span class="keyword">if</span> ZCBMaturities( 1, end) &lt; (SWAPSTART + SWAPTENOR)
+            SwapRate =0;
+            AnnuityFactor=0;
+            <span class="keyword">return</span>
+        <span class="keyword">end</span>
+
+
+        <span class="comment">% Find Position of the first Bond required to Calculate the Forward</span>
+        <span class="comment">% Starting annuity factor</span>
+        <span class="keyword">for</span> i = 1:1:NumberOfBonds
+            <span class="keyword">if</span>  (abs(SWAPSTART) &lt; obj.TimeTolerance)
+                SWAPSTARTINDEX = 0;
+            <span class="keyword">elseif</span>    (abs(ZCBMaturities(1,i) - SWAPSTART)&lt;<span class="keyword">...</span>
+                    obj.TimeTolerance)
+                SWAPSTARTINDEX = i;
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> abs(ZCBMaturities(1,i) -( SWAPSTART +SWAPTENOR)) &lt; <span class="keyword">...</span>
+                    obj.TimeTolerance
+                SWAPSENDINDEX = i;
+                <span class="keyword">break</span> <span class="comment">% Exit the For Loop</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        <span class="comment">% Calculate Annuity Factor</span>
+        AnnuityFactor = 0;
+        <span class="keyword">for</span> i = (SWAPSTARTINDEX +<span class="keyword">...</span>
+                TenorMaturityRatio):TenorMaturityRatio:SWAPSENDINDEX
+            AnnuityFactor =AnnuityFactor +SWAPRATETENOR*ZCBPRICES(1,i);
+        <span class="keyword">end</span>
+
+        <span class="comment">%Calculate the equilibrium spot rate</span>
+
+        <span class="keyword">if</span> SWAPSTART == 0
+            SwapRate = (1 - ZCBPRICES(SWAPSENDINDEX))/AnnuityFactor;
+        <span class="keyword">else</span>
+            SwapRate = (ZCBPRICES(SWAPSTARTINDEX) - <span class="keyword">...</span>
+                ZCBPRICES(SWAPSENDINDEX))/AnnuityFactor;
+        <span class="keyword">end</span>
+        <span class="comment">%y = [SwapRate AnnuityFactor];</span>
+        <span class="keyword">return</span>
+
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><b>4) <tt>[createArrayfromCSVstring()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns an array of doubles from an input csv string.</p><p><b><i>Inputs</i></b></p><p><b><tt>[stringParameter]</tt></b> : A series of numbers separated by commas, expressed as a csv string.</p><pre>Data type : String</pre><p><b><i>Outputs</i></b></p><p>An array whose elements are the numbers previously recorded in the input csv string.</p><pre>Data type : Data series</pre><p><b><i>Calculations</i></b></p><p>Function identifies the position of commas within the input string. Using these positions the numbers between the commas are allocated to elements of an array.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    <span class="keyword">function</span> y = createArrayfromCSVstring(obj, stringParameter)
+         pos = findstr( stringParameter, <span class="string">','</span>);
+
+         <span class="keyword">if</span> length(pos) == 0
+             y = str2num(stringParameter);
+         <span class="keyword">else</span>
+             y = zeros ( 1, length(pos)+1); <span class="comment">% Allocate storage space</span>
+                 y(1, 1) = str2num(stringParameter(1 :pos(1) -1));
+             <span class="keyword">for</span> i = 2 : length( pos)
+                 y(1, i) = str2num(stringParameter(pos(i-1)+1 :pos(i) -1));
+             <span class="keyword">end</span>
+                 y(1, length(pos)+1) = <span class="keyword">...</span>
+                     str2num(stringParameter(pos(length(pos))+1 :end));
+         <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="comment">%  Function is not called anywhere in the class</span>
+<span class="comment">%    function [axis1values, axis2values] = ...</span>
+<span class="comment">%            createaxisdata (obj, array1, array2)</span>
+<span class="comment">%</span>
+<span class="comment">%         len1 = size(array1, 2);</span>
+<span class="comment">%         len2 = size(array2, 2);</span>
+<span class="comment">%</span>
+<span class="comment">%         axis1values = repmat(array1, 1, len2);</span>
+<span class="comment">%         axis2values = zeros(size(axis1values));</span>
+<span class="comment">%</span>
+<span class="comment">%         for i= 1 : len2</span>
+<span class="comment">%            axis2values((i-1)*len1 +1 : i*len1) = ...</span>
+<span class="comment">%                repmat( array2(1,i) ,1, len1);</span>
+<span class="comment">%</span>
+<span class="comment">%        end</span>
+<span class="comment">%</span>
+<span class="comment">%    end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Zero Coupon Bond to Swap Rate
+% 
+% *The class takes an input data series object containing a set of
+% zero coupon bonds and outputs a two dimesional data series object
+% of equilibrium swap (par) rates with axes corresponding to maturity
+% and tenor of swap contract.*
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_ZCBtoSwapRate < prursg.Bootstrap.BaseBootstrapAlgorithm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% How to use the class
+% There are two ways to use this class:
+%
+% # To calculate a two dimensional data series object of equilibrium 
+% forward swap (par) rates with axes corresponding to maturity and tenor 
+% using *|[[bootstrap_ZCBtoSwapRate()]|*.
+%
+% # To calculate a forward starting swap rate and/or a forward starting
+% annuity.
+%
+%% Properties
+%
+% *|[outputfreq]|* : A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data type : string  
+%
+% *|[compoundingfrequency]|* : The annual frequency, $f$, at which 
+% the output yield curve is compounded e.g. "2" for semi-annually.
+%
+%  Data type : double
+%
+% *|[swaptenors]|* : The length of the swap contracts, $\tau$.
+% 
+%  Data type : string
+%
+% *|[ZCBPRICES]|* : The price of a zero coupon bond, $B(t,T)$,
+% at present time, $t$, which pays 1 at maturity, $t=T$.
+%
+%  Data type : data series, doubles
+%
+% *|[ZCBMaturities]|* : Times, $T$, when the zero coupon bonds mature.
+%
+%  Data type : data series, doubles
+%
+% *|[SwaptionMaturities]|* : Times when the swaptions expire. These are 
+% also the times when the swap contracts begin, $T_{Start}$.
+%
+%  Data type : data series, doubles
+%
+%
+% *|[newDataSeriesObject]|* : New data series object, setup to store 
+% results
+%
+%  Data Type: data series
+%
+%
+% *|[TimeTolerance]|* : Tolerance value used to help identify the time 
+% indices of a swap contract.
+%
+% Data Type: double
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    properties
+        
+        outputfreq ; 
+        compoundingfrequency;  
+        swaptenors ;
+        
+        ZCBPRICES ;
+        ZCBMaturities ;          
+        SwaptionMaturities
+              
+        % Set-Up data series object to store results
+        newDataSeriesObject
+        % TimeTolerance within one business day
+        TimeTolerance = 1/250; 
+        
+    end
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%% List of Methods
+%
+% *|1) |[bootstrap_ZCBtoSwapRate()]|* : Function returns a two dimensional
+% data series object of equilibrium swap (par) rates with axes
+% corresponding to maturity and tenor of swap contract.
+%
+% *|2) |[createArrayfromCSVstring()]|* : Function returns an array
+% containing doubles from an input string.
+%
+% *|3) |[EQFORWARDSWAPRATE()]|* : Function returns a forward starting 
+% annuity factor and the corresponding equilibrium forward swap rate 
+% calculated from zero coupon bond (ZCB) inputs.
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+    methods  
+        
+    % Constructor
+    
+        function obj = bootstrap_ZCBtoSwapRate()
+                 obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm(); 
+        end
+    
+       function results = Bootstrap(obj,DataSeriesIn)
+           
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% Details of Methods
+% *1) |[bootstrap_ZCBtoSwapRate()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function uses *|[EQFORWARDSWAPRATE()]|* to return a two dimensional
+% data series object of forward starting equilibrium swap (par) rates with
+% axes corresponding to maturity and tenor of the swap contracts.
+%
+% *_Inputs_*
+%
+% *|[outputfreq]|* - A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data type : string  
+%
+% *|[compoundingfrequency]|* : - The annual frequency, $f$, at which 
+% the output yield curve is compounded e.g. "2" for semi-annually.
+%
+%  Data type : double
+%
+% *|[swaptenors]|* : The length of the swap contracts, $\tau$.
+% 
+%  Data type : string
+%
+% *|[ZCBPRICES]|* : The price of a zero coupon bond, $B(t,T)$,
+% at present time, $t$, which pays 1 at maturity, $t=T$.
+%
+%  Data type : data series, doubles
+%
+% *|[ZCBMaturities]|* : Times, $T$, when the zero coupon bonds mature.
+%
+%  Data type : data series, doubles
+%
+% *|[SwaptionMaturities]|* : Times when swaptions expire. This are also the
+% times when the swap contracts begin.
+%
+%  Data type : data series, doubles
+%
+% *|[newDataSeriesObject]|* : New data series object, setup to store 
+% results.
+%
+%  Data Type: data series
+%
+% *_Outputs_*
+%
+% Two dimensional data series object of equilibrium forward starting swap
+% (par) rates with axes corresponding to maturity and tenor or swap 
+% contract.
+%
+% *_Calculations_*
+%
+% Initially the ZCB data is sorted and cloned. Then the output frequency
+% profile is identified and set up, this specifies the frequency of 
+% outputs e.g. monthly, quarterly or annually etc.
+%
+% Using *|[EQFORWARDSWAPRATE()]|*, looped over by swap start dates and
+% swap tenors, the two dimensional swap rate data series objects are created
+% for each date that is required.
+%
+% The output data series properties are then updated.
+%% 
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+            % Step 1. Sort and clone ZCB data     
+            
+            newSortDataSeries=Bootstrap.BsSort(); 
+            
+            obj.newDataSeriesObject =newSortDataSeries.SortDataSeries...
+                (DataSeriesIn(1).Clone);  
+              
+             inumberOfDates =  size(DataSeriesIn(1).dates,1);             
+             
+            obj.ZCBPRICES = obj.newDataSeriesObject.values;
+            
+            obj.ZCBMaturities  =...
+                cell2mat(obj.newDataSeriesObject.axes(1).values);
+            
+            swaptenors = obj.createArrayfromCSVstring(obj.swaptenors);        
+            % obj.SwaptionMaturities = obj.createArrayfromCSVstring...
+            %(obj.SwaptionMaturities); 
+            
+            
+            % Step 2. Get OutPutFreqProfile            
+            
+             maxTerm = obj.newDataSeriesObject.axes(1).values{1, end}; 
+             BsfrequencyprofileObject =...
+                 Bootstrap.Bsfrequencyprofile(obj.outputfreq,maxTerm);
+             outputfreqProfile = ...
+                 BsfrequencyprofileObject.AdjustedIntervalArray;            
+             outputfreqProfile = [ 0 ; outputfreqProfile] ; 
+             % The Inclusion of zero gives us the initial par rates
+             
+            % Step 3 :: Set-Up data series object to store 
+            % results :: use existing raw data series object to achieve this
+            
+            obj.newDataSeriesObject.axes(1).values= ...
+                num2cell(outputfreqProfile');
+            obj.newDataSeriesObject.axes(2).values = num2cell(swaptenors);
+            
+            SWAPRATETENOR = 1/ obj.compoundingfrequency;
+            NumOFSwapTenors =size(obj.newDataSeriesObject.axes(2).values,2);
+            NumOFSwaptionMaturity =...
+                size(obj.newDataSeriesObject.axes(1).values,2);
+            Results = zeros(NumOFSwapTenors,NumOFSwaptionMaturity );  
+            % allocate storage space
+          
+               for i= 1 : inumberOfDates                  
+                   for j = 1 : NumOFSwapTenors
+                       SwapTenor = obj.newDataSeriesObject.axes(2).values{j};
+                       for k = 1 : NumOFSwaptionMaturity 
+                           SwaptionMaturity = ...
+                               obj.newDataSeriesObject.axes(1).values{k};
+                           [SwapRate AnnuityFactor] = ...
+                               obj.EQFORWARDSWAPRATE(obj.ZCBPRICES{i},...
+                               obj.ZCBMaturities, SwaptionMaturity, ...
+                               SwapTenor, SWAPRATETENOR);
+                           Results(j,k) = SwapRate;
+                       end
+                   end  
+                    
+                   obj.newDataSeriesObject.values{i} =Results';
+               end 
+            
+           % Step4. Return data series object
+           results = obj.newDataSeriesObject;
+           
+           % Step 5. Update Data-Series Properties
+           
+           
+           obj.newDataSeriesObject.axes(1).title = 'Swaption Maturity';
+           obj.newDataSeriesObject.axes(2).title =  'Swap Tenor';
+           obj.newDataSeriesObject.description = ...
+           'derived (equilibrium) swap rates using bootstrap_ZCBtoSwapRate';
+           obj.newDataSeriesObject.source = 'iMDP';
+           obj.newDataSeriesObject.ratetype = 'swap';
+           obj.newDataSeriesObject.compounding ='ann';
+           obj.newDataSeriesObject.compoundingfrequency = ...
+               num2str(obj.compoundingfrequency);
+           obj.newDataSeriesObject.daycount ='na';
+           obj.newDataSeriesObject.units ='absolute';
+           
+       end
+         
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% *3) |[EQFORWARDSWAPRATE()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% The function returns equilibrium foward swap rates and an annuity factor
+% based on a set of ZCB Prices, . It assumes that the ZCB maturity values
+% are evenly spaced and that swap payments coincide with a ZCB maturity.
+%
+% *_Inputs_*
+%
+% *|[ZCBPRICES]|* : The price of a zero coupon bond, $B(t,T)$,
+% at present time, $t$, which pays 1 at maturity, $t=T$.
+%
+%  Data Type : data series, doubles
+%
+% *|[ZCBMaturities]|* : Times, $T$, when the zero coupon bonds mature.
+%
+%  Data Type : data series, doubles
+%
+% *|[SWAPSTART]|* : Time at which the swap contract begins, $T_{Start}$.
+%
+%  Data Type : double
+%
+% *|[SWAPTENOR]|* : Duration of the swap contract, in years.
+%
+%  Data Type : double
+%
+% *|[SWAPRATETENOR]|* : Time period between swap payments, in years.
+%
+%  Data Type : double
+%
+% *_Outputs_*
+%
+% *|[SwapRate]|* : Equilibrium forward swap rate, $R(t)$, at present time $t$.
+%
+%  Data Type : double
+%
+% *|[AnnuityFactor]|* : Annuity factor.
+%
+%  Data Type : double 
+%
+% *_Calculations_*
+%
+% *Calculation of Annuity Factor*
+%
+% To calculate the annuity factor the following formula is used:
+%
+% $$ A(t,T_{Start},T_{End})=\frac{1}{f}\sum_{i=1}^{f\tau}
+% B\left(t, T_{Start}+\frac{i}{f}\right) $$
+%
+% where,
+%
+% $A(t,T_{Start},T_{End})$ : The value of an annuity factor at time, $t$,
+% for an annuity starting at $T_{Start}$ and finishing at $T_{End}$.
+%
+% $f$ : Compounding frequency; the reciprocal of the time between swap
+% payments.
+%
+% $T_{Start}$ : Start time of the swap
+%
+% $\tau=T_{End}-T_{Start}$ : Swap tenor
+%
+% *Calculation of Swap Rate*
+%
+% To calculate the swap rate we use:
+%
+% a) If $,\,T_{Start}=0$,
+%
+% $$ R(t)=\frac{1-B(t,T_{End})}{A(t,T_{Start},T_{End})} $$
+%
+% b) Otherwise,
+%
+% $$ R(t)=\frac{B(t,T_{Start}+\frac{1}{f})-B(t,T_{End})}{A(t,T_{Start},T_{End})} $$
+%
+% where,
+%
+% $R(t)$ : Present value, at $t$, of $\tau$ -year swap starting at time,
+% $T_{Start}$.
+%
+% $B(t,T)$ : Price of zero coupon bond with maturity, $T$.
+%%
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+    function [SwapRate AnnuityFactor]=...
+            EQFORWARDSWAPRATE(obj,ZCBPRICES,ZCBMaturities, SWAPSTART, ...
+            SWAPTENOR, SWAPRATETENOR)        
+        
+        NumberOfBonds=size(ZCBPRICES,2);
+        TenorMaturityRatio = floor(SWAPRATETENOR/ZCBMaturities(1,1));
+        
+        
+       %  assert ( ZCBMaturities( 1, end) > (SWAPSTART + SWAPTENOR), ...
+       %'Swaption terms are greator than the length of the yield curve')
+       
+       if ZCBMaturities( 1, end) < (SWAPSTART + SWAPTENOR)
+            SwapRate =0;
+            AnnuityFactor=0;
+            return
+        end    
+        
+        
+        % Find Position of the first Bond required to Calculate the Forward
+        % Starting annuity factor
+        for i = 1:1:NumberOfBonds
+            if  (abs(SWAPSTART) < obj.TimeTolerance)
+                SWAPSTARTINDEX = 0;
+            elseif    (abs(ZCBMaturities(1,i) - SWAPSTART)<...
+                    obj.TimeTolerance)
+                SWAPSTARTINDEX = i;
+            end
+            
+            if abs(ZCBMaturities(1,i) -( SWAPSTART +SWAPTENOR)) < ...
+                    obj.TimeTolerance
+                SWAPSENDINDEX = i;
+                break % Exit the For Loop
+            end
+        end
+        
+        % Calculate Annuity Factor
+        AnnuityFactor = 0;
+        for i = (SWAPSTARTINDEX +...
+                TenorMaturityRatio):TenorMaturityRatio:SWAPSENDINDEX
+            AnnuityFactor =AnnuityFactor +SWAPRATETENOR*ZCBPRICES(1,i);
+        end
+        
+        %Calculate the equilibrium spot rate
+        
+        if SWAPSTART == 0
+            SwapRate = (1 - ZCBPRICES(SWAPSENDINDEX))/AnnuityFactor;
+        else
+            SwapRate = (ZCBPRICES(SWAPSTARTINDEX) - ...
+                ZCBPRICES(SWAPSENDINDEX))/AnnuityFactor;
+        end
+        %y = [SwapRate AnnuityFactor];
+        return
+        
+        
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% *4) |[createArrayfromCSVstring()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns an array of doubles from an input csv string. 
+%
+% *_Inputs_*
+%
+% *|[stringParameter]|* : A series of numbers separated by commas,
+% expressed as a csv string.
+%
+%  Data type : String
+%
+% *_Outputs_*
+%
+% An array whose elements are the numbers previously recorded in the input 
+% csv string.
+%
+%  Data type : Data series
+%
+% *_Calculations_*
+%
+% Function identifies the position of commas within the input string.
+% Using these positions the numbers between the commas are allocated to
+% elements of an array.
+%
+%
+%%
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+    function y = createArrayfromCSVstring(obj, stringParameter)
+         pos = findstr( stringParameter, ',');
+         
+         if length(pos) == 0
+             y = str2num(stringParameter);
+         else
+             y = zeros ( 1, length(pos)+1); % Allocate storage space
+                 y(1, 1) = str2num(stringParameter(1 :pos(1) -1));
+             for i = 2 : length( pos)
+                 y(1, i) = str2num(stringParameter(pos(i-1)+1 :pos(i) -1));
+             end    
+                 y(1, length(pos)+1) = ...
+                     str2num(stringParameter(pos(length(pos))+1 :end));
+         end
+    end    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%  Function is not called anywhere in the class
+%    function [axis1values, axis2values] = ...
+%            createaxisdata (obj, array1, array2)
+%        
+%         len1 = size(array1, 2);
+%         len2 = size(array2, 2);
+%        
+%         axis1values = repmat(array1, 1, len2);
+%         axis2values = zeros(size(axis1values));
+%       
+%         for i= 1 : len2
+%            axis2values((i-1)*len1 +1 : i*len1) = ...
+%                repmat( array2(1,i) ,1, len1);
+%            
+%        end     
+%    
+%    end
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

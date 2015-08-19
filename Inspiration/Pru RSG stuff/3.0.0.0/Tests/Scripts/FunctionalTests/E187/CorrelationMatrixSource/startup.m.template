@@ -1,0 +1,4 @@
+addpath('{IRSG_XUNIT}');
+addpath('{IRSG_SOURCE}');
+addpath('{IRSG_TESTUTIL}');
+addpath(prursg.Util.ConfigurationUtil.GetModelsPackage());

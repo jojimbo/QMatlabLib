@@ -1,0 +1,8 @@
+<Bootstrap>
+    <Item name="A" >
+        <BootstrapAlgorithm>BsValidDynaPropSet</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="GBP_EQUITYVOL_ASX" />
+        </InputData>
+    </Item>
+</Bootstrap>

@@ -1,0 +1,62 @@
+<configuration>
+    <appSettings>
+        <setting key="DefaultDB" value="DEV" />
+        <setting key="UseGrid" value="false" />                
+        <setting key="MaxSimulationSize" value = "0" />
+        <setting key="NoOfBatches" value ="1" />
+        <setting key="OverwriteOutputs" value="true" />
+
+        <setting key="OutputFolderPath" value="{RSG_CWD}/Outputs/Output" />
+        <setting key="InputFolderPath" value="{IRSG_PILLARI_CONTROLS}" />
+
+        <setting key="MarketDataInputFolderPath" value="marketData" />        
+
+        <setting key="RSGRoot" value="{IRSG_SOURCE}" />
+
+        <!-- specify the path to the +Model package directory being used for this instance of RSG -->
+        <setting key="ModelsFolder" value="{IRSG_PILLARI_MODELS}" />
+        <setting key="AllowWriteMarketData" value="true" />
+        <setting key="SaveMatFilesAsHDF5" value="true" />
+
+        <!-- Grid related settings -->
+        <setting key="SchedulerType" value="LSF" />
+        <setting key="ClusterMatlabRoot" value="/nfs/lldnfs01v/matlab/MATLAB" />
+        <setting key="DataLocation" value="/nfs/lldnfs01v/matlab/job_data/lldmat03v" />
+        <setting key="SymphonyUserId" value="[User Id]" />
+        <setting key="SymphonyPassword" value="[Password]" />
+        <setting key="SymphonyAppName" value="[App Name]" />
+        <setting key="SymphonyInMemoryProcessingAppName" value="[App Name]" />
+        <setting key="RSGSourceCodePath" value="[THE FULLY QUALIFIED PATH TO THE DEPLOYED RSG SOURCE CODE]" />
+
+        <!-- Number Formats -->
+        <setting key="HistoricalDataDaoNumberFormat" value="%.3g" />
+        <setting key="ScenarioValueNumberFormat" value="%.3g" />
+        <setting key="CalibrationNumberFormat" value="%.3g" />
+        <setting key="ScenarioValueConverterName" value="Sd2" />  
+
+    </appSettings>
+    <connectionStrings>
+        <!-- specify the database connection details including user name and password where xxx is the database name, yyyy is the port number and zzz is the database name -->
+		<dbSetting key="DEV" databaseName="{DEV_DBNAME}" userName="{DEV_DBUSERNAME}" password="{DEV_DBPASSWORD}" url="jdbc:oracle:thin:@axoradev03.hs.pru.com:1521:{DEV_DBNAME}"  />
+		<dbSetting key="MDS" databaseName="{MDS_DBNAME}" userName="{MDS_DBUSERNAME}" password="{MDS_DBPASSWORD}" url="jdbc:oracle:thin:@axoradev03.hs.pru.com:1521:{MDS_DBNAME}"/>
+    </connectionStrings>
+
+<!-- bootstrap -->
+
+    <historicalDataDaos default="XML">
+        <dao name="DB" class="prursg.HistoricalDAO.DbHistoricalDataDao">
+        </dao>
+        <dao name="XML" class="prursg.HistoricalDAO.XmlHistoricalDataDao">
+            <property name="InputDir">{RSG_CWD}/Inputs/DataSeries</property>
+            <property name="OutputDir">{RSG_CWD}/Outputs/DataSeries</property>
+        </dao>
+    </historicalDataDaos>
+    <missingDataTreatmentRules>
+        <rule name="Skip" class="prursg.HistoricalDAO.MissingDataTreatmentRule.SkipMissingDataTreatmentRule" />
+        <rule name="Exception" class="prursg.HistoricalDAO.MissingDataTreatmentRule.ExceptionMissingDataTreatmentRule" />
+        <rule name="Nil" class="prursg.HistoricalDAO.MissingDataTreatmentRule.NilMissingDataTreatmentRule" />
+        <rule name="Preceding" class="prursg.HistoricalDAO.MissingDataTreatmentRule.PrecedingMissingDataTreatmentRule" />
+        <rule name="Following" class="prursg.HistoricalDAO.MissingDataTreatmentRule.FollowingMissingDataTreatmentRule" />
+        <rule name="Interpolation" class="prursg.HistoricalDAO.MissingDataTreatmentRule.InterpolationMissingDataTreatmentRule" />
+    </missingDataTreatmentRules>
+</configuration>

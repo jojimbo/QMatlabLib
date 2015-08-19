@@ -1,0 +1,1280 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>EQUITY IMPLIED VOLATILITY</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-27"><meta name="DC.source" content="bsEquityForwardVolExtrapolation.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>EQUITY IMPLIED VOLATILITY</h1><!--introduction--><p>FORWARD VOLATILITY EXTRAPOLATION</p><p><b>The main purpose of this class is to interpolate and extrapolate a raw volatility surface using an exponential smoothing method applied to the forward volatilities, on a forward strike basis. In order to further avoid calendar arbitrage issues we ensure throughtout the precess that total variance is monotonic increasing for each strike.</b></p><p><b>Note the current method does not prevent convexity arbitrage.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">How to Use the Class</a></li><li><a href="#3">Properties</a></li><li><a href="#4">List of Methods</a></li><li><a href="#6">Details of Methods</a></li><li><a href="#7"><tt>1) [CreateExtrapolatedSurface()]</tt></a></li><li><a href="#9"><tt>2) [ExponentialExtrapolation()]</tt></a></li><li><a href="#11"><tt>3) [RawVolatilitySurfaceAdj()]</tt></a></li><li><a href="#13"><tt>4) [SplitMaturityOutputProfile()]</tt></a></li><li><a href="#15"><tt>5) [CreateFwdVolSurfaceFromSpotVolSurface()]</tt></a></li><li><a href="#17"><tt>6) [CreateSpotVolSurfaceFromFwdVolSurface()]</tt></a></li><li><a href="#19"><tt>7) [CreateSpotVolSurfaceBiLinearInterpolation()]</tt></a></li><li><a href="#21"><tt>8) [MonotonicColumnCorrection()]</tt></a></li><li><a href="#23"><tt>9) [CreateContStatsFromArithmeticStats()]</tt></a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bsEquityForwardVolExtrapolation
+</pre><h2>How to Use the Class<a name="2"></a></h2><p>Given a spot implied volatility surface, the method <tt>[CreateExtrapolatedSurface()]</tt> returns an extrapolated spot implied volatility surface.</p><p>The rest of the methods are the key steps of <tt>[CreateExtrapolatedSurface()]</tt>. Each method can be called separately, as a function call.</p><h2>Properties<a name="3"></a></h2><p>These are global parameters which are available to all methods in this class. They are all single values.</p><p><b><tt>[EquityFwdVol_LongTerm_MeanReturnTarget]</tt></b> - <img src="bsEquityForwardVolExtrapolation_eq99608.png" alt="$\mu_{LT}$">, mean of log return in the long term</p><p><b><tt>[EquityFwdVol_LongTerm_ReturnVolTarget]</tt></b> - <img src="bsEquityForwardVolExtrapolation_eq85006.png" alt="$\sigma_{LT}$">, standard deviation of log return in the long term</p><p><b><tt>[EquityFwdVol_MeanReversionSpeed]</tt></b> - <img src="bsEquityForwardVolExtrapolation_eq86607.png" alt="$k$">, represents the speed with which the standard deviation of returns reverts to its long term level. It controls the exponential decay from the last liquid point to the long-term target</p><p><b><tt>[LastLiquidMaturity]</tt></b> - <img src="bsEquityForwardVolExtrapolation_eq20220.png" alt="$T_{LLP}$"> maximum maturity at which equity volatility is liquid</p><p><b><tt>[minLiquidStrike]</tt></b> - Minimum moneyness at which equity volatility is liquid</p><p><b><tt>[maxLiquidStrike]</tt></b> - Maximum moneyness at which equity volatility is liquid</p><p><b><tt>[TimeTolerance]</tt></b> - permissible limit of variation, <img src="bsEquityForwardVolExtrapolation_eq55279.png" alt="$0.00000001$"></p><p><b><tt>[StrikeTolerance]</tt></b> - permissible limit of variation, <img src="bsEquityForwardVolExtrapolation_eq55279.png" alt="$0.00000001$"></p><p><b><tt>[IRMeanReversionSpeed]</tt></b> - Rate <img src="bsEquityForwardVolExtrapolation_eq87919.png" alt="$\alpha$"> at which the short rate reverts back to mean</p><p><b><tt>[IRVolatility]</tt></b> - Interest rate volatility <img src="bsEquityForwardVolExtrapolation_eq12538.png" alt="$\sigma_{IR}$"></p><p><b><tt>[Equity_IR_Correlation]</tt></b> - Correlation <img src="bsEquityForwardVolExtrapolation_eq20099.png" alt="$\rho$"> between equity and interest rate</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+
+        EquityFwdVol_LongTerm_MeanReturnTarget
+        EquityFwdVol_LongTerm_ReturnVolTarget
+        EquityFwdVol_MeanReversionSpeed
+        LastLiquidMaturity
+        minLiquidStrike
+        maxLiquidStrike
+        TimeTolerance = 1E-08
+        StrikeTolerance = 1E-08
+        IRMeanReversionSpeed
+        IRVolatility
+        Equity_IR_Correlation
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="4"></a></h2><p>This bootstrap class introduces the following methods:</p><p><b><tt>1) [CreateExtrapolatedSurface()]</tt></b> - Function linear interpolates all maturities less than or equal to last valid option matrurity as defined by the last market data point. For maturities above this point we extrapolate using the exponential method</p><p><b><tt>2) [ExponentialExtrapolation()]</tt></b> - Function exponentially extrapolates a set of initial values to a long term [MeanReversionLevel]</p><p><b><tt>3) [RawVolatilitySurfaceAdj()]</tt></b> - Function removes rows of the VolatilitySurface which are greater than the last market liquid point <tt>[LastLiquidMaturity]</tt></p><p><b><tt>4) [SplitMaturityOutputProfile()]</tt></b> - Function split the VolatilitySurface in two portions. One portion is below the last liquid point, the other above</p><p><b><tt>5) [CreateFwdVolSurfaceFromSpotVolSurface()]</tt></b> - Function turns a Spot Volatility Surface into a Forward Volatility Surface</p><p><b><tt>6) [CreateSpotVolSurfaceFromFwdVolSurface()]</tt></b> - Function transforms a Forward Volatility Surface into a Spot Volatility Surface</p><p><b><tt>7) [CreateSpotVolSurfaceBiLinearInterpolation()]</tt></b> - Function bi-lnearly interpolates the total spot variance surface and then converts the interpolated spot total variance surface into a spot volatility surface</p><p><b><tt>8) [MonotonicColumnCorrection()]</tt></b> - Function ensures that the columns on the matrix are montonic increasing. If an entry is found to be lower than the previous row value then it will be replaced by the previous row value. The method removes the possibility of a calendar spread arbitrage for a given strike.</p><p><b><tt>9) [CreateContStatsFromArithmeticStats]</tt></b> - Function uses a lognormal approximation to convert arithmetic return statistics to continuous (geometric) return statistics</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput"> <span class="keyword">function</span> obj = bsEquityForwardVolExtrapolation (<span class="keyword">...</span>
+   EquityReturn_ArithmeticMean,EquityReturn_ArithmeticVol, <span class="keyword">...</span>
+   EquityFwdVol_MeanReversionSpeed,LastLiquidMaturity,minLiquidStrike,<span class="keyword">...</span>
+   maxLiquidStrike,IRMeanReversionSpeed,IRVolatility,Equity_IR_Correlation)
+
+   [obj.EquityFwdVol_LongTerm_MeanReturnTarget, <span class="keyword">...</span>
+       obj.EquityFwdVol_LongTerm_ReturnVolTarget] <span class="keyword">...</span>
+   = obj.CreateContStatsFromArithmeticStats(EquityReturn_ArithmeticMean,<span class="keyword">...</span>
+   EquityReturn_ArithmeticVol);
+   obj.EquityFwdVol_MeanReversionSpeed = EquityFwdVol_MeanReversionSpeed;
+   obj.LastLiquidMaturity = LastLiquidMaturity ;
+   obj.minLiquidStrike = minLiquidStrike;
+   obj.maxLiquidStrike = maxLiquidStrike;
+   obj.IRMeanReversionSpeed =IRMeanReversionSpeed;
+   obj.IRVolatility = IRVolatility;
+   obj.Equity_IR_Correlation =Equity_IR_Correlation;
+
+ <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>Details of Methods<a name="6"></a></h2><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>1) [CreateExtrapolatedSurface()]</tt><a name="7"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function Linear interpolates all maturities less than or equal to last valid option matrurity as defined by the last market data point. For maturities above this point we extrapolate using the exponential method applied to the forward variance, i.e. (forward volatility)^2.</p><p><b><i>Inputs</i></b></p><p><tt>[VolatilitySurface]</tt> - A surface of spot implied volatilites with "maturity" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><tt>[OptionMaturities]</tt> - Input maturities of the equity options</p><p><i>Data Type</i>: 1-dim array</p><p><tt>[StrikeMoneyness]</tt> - Input equity option strikes in terms of moneyness</p><p><i>Data Type</i>: 1-dim array</p><p><tt>[OutputMaturityProfile]</tt> - Output maturities of the equity options</p><p><i>Data Type</i>: 1-dim array</p><p><tt>[OutputStrikes]</tt> - Output equity option strikes in terms of moneyness</p><p><i>Data Type</i>: 1-dim array</p><p><tt>[Truncate]</tt> - whether to truncate the volatility matrix: 'True' or 'False'</p><p><i>Data Type</i>: String</p><p><b><i>Outputs</i></b></p><p><tt>[CreateExtrapolatedSurfaceReturn]</tt> - An extrapolated spot implied volatility surface with "maturity" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calculation</i></b></p><p>STEP 1: Remove illiquid strikes and maturities using function <tt>[RawVolatilitySurfaceAdj()]</tt> to get a <tt>[ReducedVolatilitySurface]</tt>. See <tt>[RawVolatilitySurfaceAdj()]</tt> for details</p><p>STEP 2: Split Option Maturity Profile into two using the function <tt>[SplitMaturityOutputProfile()]</tt>. One portion is below the last liquid point <tt>[OutputMaturityProfileBelow]</tt>, and the other above <tt>[OutputMaturityProfileAbove]</tt>. See <tt>[SplitMaturityOutputProfile()]</tt> for details</p><p>STEP 3: Interpolate <tt>[ReducedVolatilitySurface]</tt> using a bilinear total variance rule. See <tt>[CreateSpotVolSurfaceBiLinearInterpolation()]</tt> for detailed calculation</p><p>STEP 4: Remove Stochastic Interest Rate Effect from the spot implied volatilities to get the idiosyncratic volatility surface by calling the bootstrap method <tt>[bsEquityIV_1FHW_StochRateEffect]</tt>. See the class for details</p><p>STEP 5: For maturities above the last liquid point, create the first half forward volatility surface <tt>[ForwardVolSurfaceOne</tt>] using the function <tt>[CreateFwdVolSurfaceFromSpotVolSurface()]</tt></p><p>STEP 6: Given the <tt>[ForwardVolSurfaceOne]</tt> obtained from STEP 5, for maturities below the last liquid point, creat the second half forward volatility surface <tt>[ForwardVolSurfaceTwo]</tt> by extrapolating from the last forward volatility for each strike using the exponential rule applied to the forward variance. See <tt>[ExponentialExtrapolation()]</tt> for calculation details</p><p>STEP 7: Combine the two foward volatility surfaces from STEP5 and STEP6 to give us a <tt>[CombinedForwardVolSurface]</tt></p><p>STEP 8: Convert the <tt>[CombinedForwardVolSurface]</tt> back to a spot idiosyncratic volatility surface <tt>[CombinedSpotVolSurface]</tt> using the function <tt>[CreateSpotVolSurfaceFromFwdVolSurface()]</tt></p><p>STEP 9: Finally, we call the bootstrap method <tt>[bsEquityIV_1FHW_StochRateEffect]</tt> again to create a spot implied volatility surface <tt>[CreateExtrapolatedSurfaceReturn]</tt> by adding back the stochastic interest rate effect to the <tt>[CombinedSpotVolSurface]</tt></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> CreateExtrapolatedSurfaceReturn = CreateExtrapolatedSurface<span class="keyword">...</span>
+        (obj, VolatilitySurface, OptionMaturities, StrikeMoneyness, <span class="keyword">...</span>
+        OutputMaturityProfile, OutputStrikes, Truncate)
+
+     <span class="comment">% STEP1</span>
+     [ReducedVolatilitySurface,ReducedOptionMaturities,<span class="keyword">...</span>
+         ReducedStrikeMoneyness] = obj.RawVolatilitySurfaceAdj <span class="keyword">...</span>
+         (VolatilitySurface, OptionMaturities, StrikeMoneyness);
+
+     <span class="comment">% STEP2</span>
+     [OutputMaturityProfileBelow,OutputMaturityProfileAbove] = <span class="keyword">...</span>
+         obj.SplitMaturityOutputProfile (OutputMaturityProfile);
+
+     <span class="comment">% STEP3</span>
+     InterpolatedSpotSurface = <span class="keyword">...</span>
+         obj.CreateSpotVolSurfaceBiLinearInterpolation <span class="keyword">...</span>
+         (ReducedVolatilitySurface, ReducedOptionMaturities, <span class="keyword">...</span>
+         ReducedStrikeMoneyness, OutputMaturityProfileBelow, <span class="keyword">...</span>
+         OutputStrikes, Truncate);
+
+     <span class="comment">% STEP4</span>
+     newEquityStochRates = Bootstrap.bsEquityIV_1FHW_StochRateEffect<span class="keyword">...</span>
+         (obj.IRMeanReversionSpeed, obj.IRVolatility, <span class="keyword">...</span>
+         obj.Equity_IR_Correlation);
+
+     InterpolatedSpotSurfaceNoStochIR = <span class="keyword">...</span>
+         newEquityStochRates.FindEquityVolSurface <span class="keyword">...</span>
+         (InterpolatedSpotSurface, OutputMaturityProfileBelow);
+
+     <span class="comment">% STEP5</span>
+     ForwardVolSurfaceOne = CreateFwdVolSurfaceFromSpotVolSurface <span class="keyword">...</span>
+         (obj, InterpolatedSpotSurfaceNoStochIR, <span class="keyword">...</span>
+         OutputMaturityProfileBelow) ;
+
+     <span class="comment">% STEP6</span>
+     ForwardVolSurfaceTwo = obj.ExponentialExtrapolation <span class="keyword">...</span>
+         (ForwardVolSurfaceOne(end, :).^2, <span class="keyword">...</span>
+         obj.EquityFwdVol_MeanReversionSpeed, <span class="keyword">...</span>
+         (obj.EquityFwdVol_LongTerm_ReturnVolTarget)^2, <span class="keyword">...</span>
+         (OutputMaturityProfileAbove- obj.LastLiquidMaturity)) ;
+
+     ForwardVolSurfaceTwo = ForwardVolSurfaceTwo .^ 0.5;
+
+     <span class="comment">% STEP7</span>
+     CombinedForwardVolSurface = [ForwardVolSurfaceOne; <span class="keyword">...</span>
+         ForwardVolSurfaceTwo];
+
+     <span class="comment">% STEP8</span>
+     CombinedSpotVolSurface = obj.CreateSpotVolSurfaceFromFwdVolSurface<span class="keyword">...</span>
+         (CombinedForwardVolSurface, OutputMaturityProfile);
+
+     <span class="comment">% STEP9</span>
+     CreateExtrapolatedSurfaceReturn = <span class="keyword">...</span>
+         newEquityStochRates.GetEquityImpliedVolSurface <span class="keyword">...</span>
+         (CombinedSpotVolSurface, OutputMaturityProfile);
+
+   <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>2) [ExponentialExtrapolation()]</tt><a name="9"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function Exponentially extrapolates a set of initial values to a long term <tt>[MeanReversionLevel]</tt></p><p><b><i>Inputs</i></b></p><p><tt>[InitialValues]</tt> - An array of initial values against initial maturities e.g. spot implied volatility surface with maturities from 1 to 10 year</p><p><i>Data Type</i>: 2-dim array</p><p><tt>[MeanReversionSpeed]</tt> - <img src="bsEquityForwardVolExtrapolation_eq86607.png" alt="$k$">, represents the speed with which the standard deviation of returns reverts to its long term level</p><p><i>Data Type</i>: single value</p><p><tt>[MeanReversionLevel]</tt> - <img src="bsEquityForwardVolExtrapolation_eq56515.png" alt="$\bar{x}_i$"> - Target value in the long term</p><p><i>Data Type</i>: single value</p><p><tt>[Maturities]</tt> - Output maturities</p><p><i>Data Type</i>: 1-dim array</p><p><b><i>Outputs</i></b></p><p><tt>[ExponentialExtrapolationReturn]</tt> - An array of extrapolated values against output maturities. e.g. spot imlied voaltility surface with maturities from 1 to 50 year</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calculation</i></b></p><p>Let <img src="bsEquityForwardVolExtrapolation_eq62789.png" alt="$y_{ij}$"> be the extrapolation return for the initial value <img src="bsEquityForwardVolExtrapolation_eq16502.png" alt="$x_{ij}$">, MeanReversionLevel <img src="bsEquityForwardVolExtrapolation_eq56515.png" alt="$\bar{x}_i$">, maturity <img src="bsEquityForwardVolExtrapolation_eq24859.png" alt="$T_i$"> and moneyness <img src="bsEquityForwardVolExtrapolation_eq04234.png" alt="$M_j$">, then</p><p><img src="bsEquityForwardVolExtrapolation_eq30270.png" alt="$y_{ij} = e^ {(- k \times T_i)} \times x_{ij} + (1- e^{(- k \times T_i)}) \times \bar{x}_i$"></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+  <span class="keyword">function</span> ExponentialExtrapolationReturn = ExponentialExtrapolation <span class="keyword">...</span>
+           (obj,InitialValues, MeanReversionSpeed, MeanReversionLevel, <span class="keyword">...</span>
+            Maturities)
+
+    exponentialweights = exp(-MeanReversionSpeed.*Maturities);
+
+    ExponentialExtrapolationReturn = exponentialweights'*InitialValues<span class="keyword">...</span>
+     +(1-exponentialweights)'*MeanReversionLevel*ones(size(InitialValues));
+
+  <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>3) [RawVolatilitySurfaceAdj()]</tt><a name="11"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function removes rows of the VolatilitySurface which are greater than the last market liquid point <tt>[LastLiquidMaturity]</tt></p><p><b><i>Inputs</i></b></p><p><tt>[VolatilitySurface]</tt> - A surface of volatilites with "maturity" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><tt>[OptionMaturities]</tt> - Input maturities of the equity options</p><p><i>Data Type</i>: 1-dim array</p><p><tt>[StrikeMoneyness]</tt> - Input equity option strikes in terms of moneyness</p><p><i>Data Type</i>: 1-dim array</p><p><b><i>Outputs</i></b></p><p><tt>[ReducedVolatilitySurface,ReducedOptionMaturities,ReducedStrikeMoneyness]</tt> - three arrays: <tt>[ReducedOptionMaturities]</tt> is a 1-dim array of marturies with the maturities longer than the last liquid maturity removed; <tt>[ReducedStrikeMoneyness]</tt> is a 1-dim array of strike moneyness with the strikes outside the liquid strikes removed; <tt>[ReducedVolatilitySurface]</tt> is a 2-dim array of the resulting volatility surface with reduced maturities against reduced moneyness</p><p><i>Data Type</i>: three arrays, one 2-dim and two 1-dim</p><p><b><i>Calculation</i></b></p><p>Locate the positions of the last liquid maturity and the minimum and the maximum strikes that are liquid. Remove the rows and the columns of the input volatility surface that are beyond those liquid points.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+  <span class="keyword">function</span> [ReducedVolatilitySurface,ReducedOptionMaturities, <span class="keyword">...</span>
+            ReducedStrikeMoneyness]  = RawVolatilitySurfaceAdj (obj, <span class="keyword">...</span>
+              VolatilitySurface, OptionMaturities ,StrikeMoneyness)
+
+      assert( size( VolatilitySurface ,1) == size( OptionMaturities, 2));
+      assert( size( VolatilitySurface ,2) == size( StrikeMoneyness, 2));
+
+        <span class="comment">% Remove columns which are less than or greator than</span>
+        <span class="comment">% respective last liquid point of the vol surface</span>
+
+      llpstrike_maturity_index = find ((OptionMaturities - <span class="keyword">...</span>
+          obj.LastLiquidMaturity) &gt; obj. TimeTolerance);
+
+      <span class="keyword">if</span> isempty(llpstrike_maturity_index)
+         llpstrike_maturity_index = size(OptionMaturities, 2) ;
+      <span class="keyword">else</span>
+         llpstrike_maturity_index = max(llpstrike_maturity_index(1,1)-1,0);
+      <span class="keyword">end</span>
+
+      llpstrike_min_index = find((StrikeMoneyness - obj.minLiquidStrike)<span class="keyword">...</span>
+         &lt; - obj.StrikeTolerance);
+
+      <span class="keyword">if</span> isempty(llpstrike_min_index)
+         llpstrike_min_index = 1;
+      <span class="keyword">else</span>
+         llpstrike_min_index = min(llpstrike_min_index +1, <span class="keyword">...</span>
+             size(StrikeMoneyness,2));
+      <span class="keyword">end</span>
+
+      llpstrike_max_index = find((obj.maxLiquidStrike -StrikeMoneyness)<span class="keyword">...</span>
+          &lt; -obj.StrikeTolerance);
+
+      <span class="keyword">if</span> isempty(llpstrike_max_index)
+         llpstrike_max_index = size(StrikeMoneyness, 2) ;
+      <span class="keyword">else</span>
+         llpstrike_max_index = max(llpstrike_max_index-1, 0);
+      <span class="keyword">end</span>
+
+        <span class="comment">% If the function has reached this point in the code , then</span>
+        <span class="comment">% return orginal data</span>
+      ReducedVolatilitySurface=VolatilitySurface(<span class="keyword">...</span>
+       1:llpstrike_maturity_index,llpstrike_min_index:llpstrike_max_index);
+      ReducedOptionMaturities=OptionMaturities(1:llpstrike_maturity_index); <span class="comment">% return an empty array</span>
+      ReducedStrikeMoneyness = StrikeMoneyness(llpstrike_min_index: <span class="keyword">...</span>
+         llpstrike_max_index);
+
+  <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>4) [SplitMaturityOutputProfile()]</tt><a name="13"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function splits Option Maturity Profile in two portions. One portion is below the last liquid point <tt>[OutputMaturityProfileBelow]</tt>, and the other above <tt>[OutputMaturityProfileAbove]</tt>.</p><p><b><i>Inputs</i></b></p><p><tt>[OutputProfile]</tt> - Output maturities</p><p><i>Data Type</i>: 1-dim array</p><p><b><i>Outputs</i></b></p><p><tt>[OutputProfileBelow,OutputProfileAbove]</tt> - two 1-dim arrays of maturities. One array has maturities below the last liquid point <tt>[OutputMaturityProfileBelow]</tt>. The other array has maturities above the last liquid point <tt>[OutputMaturityProfileAbove]</tt>.</p><p><i>Data Type</i>: two 1-dim arrays</p><p><b><i>Calculation</i></b></p><p>Locate the last liquid maturity. Remove the values beyond the last liquid point in the <tt>[OutputProfile]</tt> to get the array <tt>[OutputMaturityProfileBelow]</tt>. Set the values in the array <tt>[OutputMaturityProfileAbove]</tt> equal to the remaining maturities, i.e., those removed from the <tt>[OutputProfile]</tt>.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    <span class="keyword">function</span> [OutputProfileBelow,OutputProfileAbove] = <span class="keyword">...</span>
+            SplitMaturityOutputProfile (obj, OutputProfile)
+
+        <span class="keyword">for</span> i = 1 : size(OutputProfile,2)
+            <span class="keyword">if</span> (OutputProfile(1, i) - obj.LastLiquidMaturity) &gt; <span class="keyword">...</span>
+                    obj. TimeTolerance
+                OutputProfileBelow = OutputProfile( 1, 1 : i-1);
+                OutputProfileAbove = OutputProfile( 1, i : end);
+                <span class="keyword">return</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        <span class="comment">% If the function has reached this point in the code , then</span>
+        <span class="comment">% return orginal data</span>
+        OutputProfileBelow = OutputProfile;
+        OutputProfileAbove = [];  <span class="comment">% return an empty array</span>
+    <span class="keyword">end</span>
+
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>5) [CreateFwdVolSurfaceFromSpotVolSurface()]</tt><a name="15"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function turns a Spot Volatility Surface into a Forward Volatility Surface</p><p><b><i>Inputs</i></b></p><p><tt>[SpotVolatilitySurface]</tt> - A 2-dim array of spot volatilities with "maturities" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><tt>[OptionMaturities]</tt> - Input maturities of the equity options</p><p><i>Data Type</i>: 1-dim array</p><p><b><i>Outputs</i></b></p><p><tt>[CreateFwdVolSurfaceFromSpotVolSurfaceReturn]</tt> - A 2-dim array of forward volatilities with "maturities" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calculation</i></b></p><p>STEP 1: Initialise the ouput forward volatility matrix and set the first row of the matrix equal to the first row of the input spot volatility matrix</p><p>STEP 2: Calculate Total Variance Matrix and the Maturity Matrix as this forms the backbone of the calculation</p><p>Let <img src="bsEquityForwardVolExtrapolation_eq22179.png" alt="$S_{ij}$"> be the spot standard deviation with maturity <img src="bsEquityForwardVolExtrapolation_eq24859.png" alt="$T_i$"> and moneyness <img src="bsEquityForwardVolExtrapolation_eq04234.png" alt="$M_j$">, then the <img src="bsEquityForwardVolExtrapolation_eq71748.png" alt="$ij^{th}$"> entry of the <tt>[TotalVarianceSurface]</tt> is</p><p><img src="bsEquityForwardVolExtrapolation_eq59890.png" alt="$TotalVar_{ij} = (S_{ij} ^2) \times T_i$"></p><p>STEP 3: Apply a monotonic correction method on each column of <tt>[TotalVarianceSurface]</tt> so as to avoid taking the square root of a negative number in the next calculation. Further the correction ensure no calendar arbitrage.</p><p>i.e., we want to make sure that, for each column j,</p><p><img src="bsEquityForwardVolExtrapolation_eq29786.png" alt="$TotalVar_{ij} \geq TotalVar_{i-1 j}$"></p><p>STEP 4: Calculate forward volatilities from the monotonic <tt>[TotalVarianceSurface]</tt></p><p>Let <img src="bsEquityForwardVolExtrapolation_eq18529.png" alt="$F_{ij}$"> be the forward standard deviation with maturity <img src="bsEquityForwardVolExtrapolation_eq24859.png" alt="$T_i$"> and moneyness <img src="bsEquityForwardVolExtrapolation_eq04234.png" alt="$M_j$">,</p><p><img src="bsEquityForwardVolExtrapolation_eq19495.png" alt="$F_{ij} = \sqrt { \frac {TotalVar_{ij} - TotalVar_{i-1 j}} {T_i - T_{i-1}}}$"></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+    <span class="keyword">function</span> CreateFwdVolSurfaceFromSpotVolSurfaceReturn = <span class="keyword">...</span>
+            CreateFwdVolSurfaceFromSpotVolSurface(obj, <span class="keyword">...</span>
+            SpotVolatilitySurface, OptionMaturities)
+
+        <span class="comment">% STEP1</span>
+        CreateFwdVolSurfaceFromSpotVolSurfaceReturn = <span class="keyword">...</span>
+            zeros( size(SpotVolatilitySurface));
+
+        CreateFwdVolSurfaceFromSpotVolSurfaceReturn(1, 1:end) = <span class="keyword">...</span>
+            SpotVolatilitySurface(1, 1:end);
+
+        <span class="comment">% STEP2</span>
+        MaturitiesMatrix = repmat( OptionMaturities' ,1,<span class="keyword">...</span>
+            size(SpotVolatilitySurface,2) );
+        TotalVarianceSurface = (SpotVolatilitySurface .^2 ) .* <span class="keyword">...</span>
+            MaturitiesMatrix;
+
+        <span class="comment">% STEP3</span>
+        TotalVarianceSurface = obj.MonotonicColumnCorrection <span class="keyword">...</span>
+            (TotalVarianceSurface) ;
+
+        <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+        CreateFwdVolSurfaceFromSpotVolSurfaceReturn (2:end, 1:end) = <span class="keyword">...</span>
+            ((TotalVarianceSurface (2: end, 1: end) - <span class="keyword">...</span>
+                TotalVarianceSurface (1: end-1, 1: end)) <span class="keyword">...</span>
+                   ./( MaturitiesMatrix (2: end, 1: end) - <span class="keyword">...</span>
+                        MaturitiesMatrix (1: end-1, 1: end))) .^(0.5);
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>6) [CreateSpotVolSurfaceFromFwdVolSurface()]</tt><a name="17"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function turns a Forward Volatility Surface into a Spot Volatility Surface</p><p><b><i>Inputs</i></b></p><p><tt>[FwdVolatilitySurface]</tt> - A 2-dim array of forward volatilities with "maturities" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><tt>[OptionMaturities]</tt> - Input maturities of the equity options</p><p><i>Data Type</i>: 1-dim array</p><p><b><i>Outputs</i></b></p><p><tt>[CreateSpotVolSurfaceFromFwdVolSurfaceReturn]</tt> - A 2-dim array of spot volatility surface with "maturities" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calculation</i></b></p><p>STEP 1: Calculate the Forward Variance Contributions</p><p>Let <img src="bsEquityForwardVolExtrapolation_eq18529.png" alt="$F_{ij}$"> be the forward standard deviation with maturity <img src="bsEquityForwardVolExtrapolation_eq24859.png" alt="$T_i$"> and moneyness <img src="bsEquityForwardVolExtrapolation_eq04234.png" alt="$M_j$">, then the <img src="bsEquityForwardVolExtrapolation_eq71748.png" alt="$ij^{th}$"> entry of the Forward Variance Matrix is</p><p><img src="bsEquityForwardVolExtrapolation_eq18546.png" alt="$FwdVar_{ij} = F_{ij} ^ 2 \times (T_i - T_{i-1})$"></p><p>STEP 2: Calcualte Total Variance Matrix from forward variances</p><p>Set the first row of the Total Variance Matrix equal to the first row of the Forward Variance Matrix</p><p>Then the <img src="bsEquityForwardVolExtrapolation_eq79464.png" alt="$i^{th}$"> row can be derived by adding the <img src="bsEquityForwardVolExtrapolation_eq79464.png" alt="$i^{th}$"> th row of the Forward Variance Matrix to the <img src="bsEquityForwardVolExtrapolation_eq28009.png" alt="$(i-1)^{th}$"> row of the Total Variance Matrix. i.e. the <img src="bsEquityForwardVolExtrapolation_eq71748.png" alt="$ij^{th}$"> entry of the <tt>[TotalVarianceSurface]</tt> is</p><p><img src="bsEquityForwardVolExtrapolation_eq91186.png" alt="$TotalVar_{ij} = TotalVar_{i-1 j} + FwdVar_{ij}$"></p><p>STEP 3: Calculate Spot Volatility Matrix</p><p>Once we have the <tt>[TotalVarianceSurface]</tt>, the spot standard deviations <img src="bsEquityForwardVolExtrapolation_eq22179.png" alt="$S_{ij}$"> can be easily calculated</p><p><img src="bsEquityForwardVolExtrapolation_eq33728.png" alt="$S_{ij} = \sqrt {\frac {TotalVar_{ij}}{T_i}}$"></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> CreateSpotVolSurfaceFromFwdVolSurfaceReturn = <span class="keyword">...</span>
+            CreateSpotVolSurfaceFromFwdVolSurface( obj,<span class="keyword">...</span>
+            FwdVolatilitySurface,OptionMaturities)
+
+        <span class="comment">%%%STEP1</span>
+       FwdVolatilityMaturityProfile = OptionMaturities - <span class="keyword">...</span>
+            [0 OptionMaturities(1, 1 : end-1)];
+       MaturityDifferenceMatrix = repmat(FwdVolatilityMaturityProfile',<span class="keyword">...</span>
+            1, size(FwdVolatilitySurface,2));
+       FwdVarianceContributions = (FwdVolatilitySurface .^2) .* <span class="keyword">...</span>
+            MaturityDifferenceMatrix;
+
+        <span class="comment">%%%STEP2</span>
+       TotalVarianceSurface = zeros( size(FwdVolatilitySurface));
+       TotalVarianceSurface(1,1:end) = FwdVarianceContributions(1,1:end);
+       <span class="keyword">for</span> i = 2 :  size(FwdVolatilitySurface,1)
+         TotalVarianceSurface(i,1:end) = TotalVarianceSurface(i-1,1:end)<span class="keyword">...</span>
+             + FwdVarianceContributions(i, 1:end);
+       <span class="keyword">end</span>
+
+        <span class="comment">%%%STEP3</span>
+       MaturitiesMatrix = repmat( OptionMaturities', 1, <span class="keyword">...</span>
+           size(FwdVolatilitySurface,2));
+       CreateSpotVolSurfaceFromFwdVolSurfaceReturn = <span class="keyword">...</span>
+           (TotalVarianceSurface ./MaturitiesMatrix).^0.5;
+   <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>7) [CreateSpotVolSurfaceBiLinearInterpolation()]</tt><a name="19"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function bilnearly interpolates a spot volatility surface using the total variance method</p><p><b><i>Inputs</i></b></p><p><tt>[SpotVolatilitySurface]</tt> - A surface of spot implied volatilites with "maturity" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><tt>[OptionMaturities]</tt> - Input maturities of the equity options</p><p><i>Data Type</i>: 1-dim array</p><p><tt>[Strikes]</tt> - Input equity option strikes in terms of moneyness</p><p><i>Data Type</i>: 1-dim array</p><p><tt>[OutputMaturityProfile]</tt> - Output maturities of the equity options</p><p><i>Data Type</i>: 1-dim array</p><p><tt>[OutputStrikeProfile]</tt> - Output equity option strikes in terms of moneyness</p><p><i>Data Type</i>: 1-dim array</p><p><tt>[Truncate]</tt> - whether to truncate the volatility matrix: 'True' or 'False'</p><p><i>Data Type</i>: String</p><p><b><i>Outputs</i></b></p><p><tt>[CreateSpotVolSurfaceBiLinearInterpolationReturn]</tt> - A spot volatility surface with values bilinearly interpolated according to the ouput maturity and output strike profiles</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calculation</i></b></p><p>First we calculate <tt>[TotalVarianceSurface]</tt> and make it monotonic, like STEP1 and STEP2 in the method <tt>[CreateFwdVolSurfaceFromSpotVolSurface()]</tt></p><p>This is to prevent negative values in the later calculation of forward volatilities, and to ensure no calendar arbitrage.</p><p>Then given the output maturity and output strike profiles, we apply the bilinear-interpolation method to the monotonic <tt>[TotalVarianceSurface]</tt>, by calling the function <tt>[BiLinearMatrix()]</tt> in the class <tt>[bsLinearInterpolation()]</tt></p><p>Finally we convert the total variances back to the spot standard deviations <img src="bsEquityForwardVolExtrapolation_eq22179.png" alt="$S_{ij}$"></p><p><img src="bsEquityForwardVolExtrapolation_eq33728.png" alt="$S_{ij} = \sqrt {\frac {TotalVar_{ij}}{T_i}}$"></p><p>The resulting spot volarility surface is interpolated with each column monotonically increasing</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+    <span class="keyword">function</span> CreateSpotVolSurfaceBiLinearInterpolationReturn = <span class="keyword">...</span>
+            CreateSpotVolSurfaceBiLinearInterpolation(obj, <span class="keyword">...</span>
+            SpotVolatilitySurface, OptionMaturities, Strikes, <span class="keyword">...</span>
+            OutputMaturityProfile, OutputStrikeProfile, Truncate)
+
+        <span class="comment">%%%Calculate Total VarianceMake matrix monotonic</span>
+        MaturitiesMatrix = repmat(OptionMaturities',1, <span class="keyword">...</span>
+            size(SpotVolatilitySurface,2));
+        TotalVarianceSurface =(SpotVolatilitySurface.^2).*MaturitiesMatrix;
+
+        TotalVarianceSurface = obj.MonotonicColumnCorrection <span class="keyword">...</span>
+            (TotalVarianceSurface);
+
+        <span class="comment">%%%Linear interpolation</span>
+        newLinearInterp = Bootstrap.bsLinearInterpolation();
+        TotalVarianceGrid = newLinearInterp.BiLinearMatrix <span class="keyword">...</span>
+            (OutputMaturityProfile,OutputStrikeProfile,OptionMaturities,<span class="keyword">...</span>
+            Strikes,TotalVarianceSurface,Truncate);
+        MaturitiesMatrix = repmat(OutputMaturityProfile',1, <span class="keyword">...</span>
+            size(OutputStrikeProfile,2));
+
+        CreateSpotVolSurfaceBiLinearInterpolationReturn = <span class="keyword">...</span>
+            sqrt(TotalVarianceGrid ./ MaturitiesMatrix);
+
+    <span class="keyword">end</span>
+
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>8) [MonotonicColumnCorrection()]</tt><a name="21"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function ensures that the columns on the matrix are montonic increasing. If an entry is found to be lower than the previous row value then it will be replaced by the previous row value.</p><p><b><i>Inputs</i></b></p><p><tt>[Matrix]</tt> - A 2-dim array</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Outputs</i></b></p><p><tt>[MonotonicColumnCorrectionReturn]</tt> - A matrix with values in each column monotonic increasing</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calcualtions</i></b></p><p>Let <img src="bsEquityForwardVolExtrapolation_eq00619.png" alt="$E_{ij}$"> be the <img src="bsEquityForwardVolExtrapolation_eq71748.png" alt="$ij^{th}$"> entry of the input matrix, <img src="bsEquityForwardVolExtrapolation_eq44736.png" alt="$E'_{ij}$"> be the <img src="bsEquityForwardVolExtrapolation_eq71748.png" alt="$ij^{th}$"> entry of the output monotonic matrix</p><p>For each column j of the matrix, if</p><p>i) <img src="bsEquityForwardVolExtrapolation_eq15609.png" alt="$E_{ij} \geq E_{i-1 j}$">, then <img src="bsEquityForwardVolExtrapolation_eq61043.png" alt="$E'_{ij} = E_{ij}$"></p><p>ii) <img src="bsEquityForwardVolExtrapolation_eq63678.png" alt="$E_{ij} < E_{i-1 j}$">, then <img src="bsEquityForwardVolExtrapolation_eq11949.png" alt="$E'_{ij} = E_{i-1 j}$"></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> MonotonicColumnCorrectionReturn = MonotonicColumnCorrection<span class="keyword">...</span>
+            (obj,Matrix)
+
+        CorrectedMatrix = zeros(size(Matrix)); <span class="comment">% Allocate Storage Space</span>
+
+        CorrectedMatrix(1, 1:end) =Matrix (1, 1:end);
+
+        <span class="keyword">for</span> j= 1 : size(Matrix, 2) <span class="comment">% Repeat monotonic correction for each column</span>
+           <span class="keyword">for</span> i= 2 : size(Matrix, 1) <span class="comment">% Number of columns</span>
+               <span class="keyword">if</span>  CorrectedMatrix(i-1, j) &gt;  Matrix(i,j)
+                   <span class="comment">% Replace entry with previous row value</span>
+                   CorrectedMatrix(i,j) = CorrectedMatrix(i-1, j);
+               <span class="keyword">else</span>
+                   CorrectedMatrix(i,j) = Matrix(i, j);
+               <span class="keyword">end</span>
+           <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        MonotonicColumnCorrectionReturn = CorrectedMatrix;
+   <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>9) [CreateContStatsFromArithmeticStats()]</tt><a name="23"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function converts arithmetic mean return and standard deviation to continuous mean and standard deviation</p><p><b><i>Inputs</i></b></p><p><tt>[ArithmeticMean]</tt> - <img src="bsEquityForwardVolExtrapolation_eq52646.png" alt="$\mu_A$">, the arithmetic mean return in the long term</p><p><i>Data Type</i>: single value</p><p><tt>[ArithmeticVol]</tt> - <img src="bsEquityForwardVolExtrapolation_eq09589.png" alt="$\sigma_A$">, the arithmetic volatility in the long term</p><p><i>Data Type</i>: single value</p><p><b><i>Outputs</i></b></p><p><tt>[ContinuousMean,ContinuousVol]</tt> - an arrary containing two scalars, one is the continuous mean return <img src="bsEquityForwardVolExtrapolation_eq99608.png" alt="$\mu_{LT}$">, the other is the continuous volatility <img src="bsEquityForwardVolExtrapolation_eq85006.png" alt="$\sigma_{LT}$"></p><p><i>Data Type</i>: one 1-dim array</p><p><b><i>Calculations</i></b></p><p><img src="bsEquityForwardVolExtrapolation_eq45925.png" alt="$\sigma_{LT} = \sqrt {ln \Big( ( \frac{\sigma_A}{1+\sigma_A} )^2 +1 \Big)}$"></p><p><img src="bsEquityForwardVolExtrapolation_eq52470.png" alt="$\mu_{LT} = ln (1+ \mu_A) - \frac{\sigma_{LT}^2}{2}$"></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    <span class="keyword">function</span> [ContinuousMean,ContinuousVol] = <span class="keyword">...</span>
+      CreateContStatsFromArithmeticStats(obj,ArithmeticMean,ArithmeticVol)
+
+      ContinuousVol = sqrt(log((ArithmeticVol/(1+ ArithmeticMean))^2 +1));
+      ContinuousMean = log(1+ ArithmeticMean) - ContinuousVol^2 /2;
+
+
+    <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% EQUITY IMPLIED VOLATILITY
+% FORWARD VOLATILITY EXTRAPOLATION
+%
+% *The main purpose of this class is to interpolate and extrapolate a raw volatility surface 
+% using an exponential smoothing method applied to the forward
+% volatilities, on a forward strike basis. In order to further avoid
+% calendar arbitrage issues we ensure throughtout the precess that total
+% variance is monotonic increasing for each strike.*
+% 
+% *Note the current method does not prevent convexity arbitrage.*
+%
+
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bsEquityForwardVolExtrapolation
+%% How to Use the Class
+% 
+% Given a spot implied volatility surface, the method |[CreateExtrapolatedSurface()]|
+% returns an extrapolated spot implied volatility surface.
+%
+% The rest of the methods are the key steps of
+% |[CreateExtrapolatedSurface()]|.
+% Each method can be called separately, as a function call.
+% 
+
+%% Properties
+% These are global parameters which are available to all methods in
+% this class. They are all single values.
+% 
+% *|[EquityFwdVol_LongTerm_MeanReturnTarget]|* - $\mu_{LT}$, mean of log return in the long term
+%
+% *|[EquityFwdVol_LongTerm_ReturnVolTarget]|* - $\sigma_{LT}$, standard deviation 
+% of log return in the long term
+%
+% *|[EquityFwdVol_MeanReversionSpeed]|* - $k$, represents the speed with which 
+% the standard deviation of returns reverts to its long term level. It controls the exponential decay 
+% from the last liquid point to the long-term target 
+%
+% *|[LastLiquidMaturity]|* - $T_{LLP}$ maximum maturity at which equity volatility is liquid
+%
+% *|[minLiquidStrike]|* - Minimum moneyness at which equity volatility is liquid
+%
+% *|[maxLiquidStrike]|* - Maximum moneyness at which equity volatility is liquid 
+%
+% *|[TimeTolerance]|* - permissible limit of variation, $0.00000001$
+%
+% *|[StrikeTolerance]|* - permissible limit of variation, $0.00000001$
+%
+% *|[IRMeanReversionSpeed]|* - Rate $\alpha$ at which the short rate reverts back to mean 
+%
+% *|[IRVolatility]|* - Interest rate volatility $\sigma_{IR}$
+%
+% *|[Equity_IR_Correlation]|* - Correlation $\rho$ between equity and
+% interest rate
+%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+    properties
+        
+        EquityFwdVol_LongTerm_MeanReturnTarget
+        EquityFwdVol_LongTerm_ReturnVolTarget
+        EquityFwdVol_MeanReversionSpeed
+        LastLiquidMaturity 
+        minLiquidStrike
+        maxLiquidStrike
+        TimeTolerance = 1E-08
+        StrikeTolerance = 1E-08
+        IRMeanReversionSpeed
+        IRVolatility
+        Equity_IR_Correlation
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+
+%% List of Methods
+% This bootstrap class introduces the following methods:
+%
+% *|1) [CreateExtrapolatedSurface()]|* - Function linear interpolates all 
+% maturities less than or equal to last valid option matrurity as defined 
+% by the last market data point. For maturities above this point we
+% extrapolate using the exponential method
+%
+% *|2) [ExponentialExtrapolation()]|* - Function exponentially extrapolates 
+% a set of initial values to a long term [MeanReversionLevel]
+%
+% *|3) [RawVolatilitySurfaceAdj()]|* - Function removes rows of the VolatilitySurface 
+% which are greater than the last market liquid point
+% |[LastLiquidMaturity]|
+%
+% *|4) [SplitMaturityOutputProfile()]|* - Function split the VolatilitySurface 
+% in two portions. One portion is below the last liquid point, the other above
+%
+% *|5) [CreateFwdVolSurfaceFromSpotVolSurface()]|* - Function turns a Spot 
+% Volatility Surface into a Forward Volatility Surface
+%
+% *|6) [CreateSpotVolSurfaceFromFwdVolSurface()]|* - Function transforms a 
+% Forward Volatility Surface into a Spot Volatility Surface
+%
+% *|7) [CreateSpotVolSurfaceBiLinearInterpolation()]|* - Function bi-lnearly 
+% interpolates the total spot variance surface and then converts the
+% interpolated spot total variance surface into a spot volatility surface
+%
+% *|8) [MonotonicColumnCorrection()]|* - Function ensures that the columns 
+% on the matrix are montonic increasing. If an entry is found to be lower 
+% than the previous row value then it will be replaced by the previous row
+% value. The method removes the possibility of a calendar spread arbitrage
+% for a given strike.
+% 
+% *|9) [CreateContStatsFromArithmeticStats]|* - Function uses a lognormal approximation 
+% to convert arithmetic return statistics to continuous (geometric) return statistics
+
+%MATLAB CODE    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+    methods        
+ function obj = bsEquityForwardVolExtrapolation (...
+   EquityReturn_ArithmeticMean,EquityReturn_ArithmeticVol, ...
+   EquityFwdVol_MeanReversionSpeed,LastLiquidMaturity,minLiquidStrike,... 
+   maxLiquidStrike,IRMeanReversionSpeed,IRVolatility,Equity_IR_Correlation)
+
+   [obj.EquityFwdVol_LongTerm_MeanReturnTarget, ...
+       obj.EquityFwdVol_LongTerm_ReturnVolTarget] ...
+   = obj.CreateContStatsFromArithmeticStats(EquityReturn_ArithmeticMean,...
+   EquityReturn_ArithmeticVol);
+   obj.EquityFwdVol_MeanReversionSpeed = EquityFwdVol_MeanReversionSpeed;
+   obj.LastLiquidMaturity = LastLiquidMaturity ;
+   obj.minLiquidStrike = minLiquidStrike;
+   obj.maxLiquidStrike = maxLiquidStrike;
+   obj.IRMeanReversionSpeed =IRMeanReversionSpeed;
+   obj.IRVolatility = IRVolatility;
+   obj.Equity_IR_Correlation =Equity_IR_Correlation;
+
+ end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+%% Details of Methods
+% _________________________________________________________________________________________
+%
+%% |1) [CreateExtrapolatedSurface()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function Linear interpolates all maturities less than or equal to last valid option matrurity as defined 
+% by the last market data point. For maturities above this point we
+% extrapolate using the exponential method applied to the forward variance,
+% i.e. (forward volatility)^2.
+%
+% *_Inputs_*
+%
+% |[VolatilitySurface]| - A surface of spot implied volatilites with "maturity" against "moneyness"
+% 
+% _Data Type_: 2-dim array
+% 
+% |[OptionMaturities]| - Input maturities of the equity options
+%
+% _Data Type_: 1-dim array
+%
+% |[StrikeMoneyness]| - Input equity option strikes in terms of moneyness
+%
+% _Data Type_: 1-dim array
+%
+% |[OutputMaturityProfile]| - Output maturities of the equity options
+%
+% _Data Type_: 1-dim array
+%
+% |[OutputStrikes]| - Output equity option strikes in terms of moneyness
+%
+% _Data Type_: 1-dim array
+%
+% |[Truncate]| - whether to truncate the volatility matrix: 'True' or 'False' 
+%
+% _Data Type_: String
+% 
+% *_Outputs_*
+%
+% |[CreateExtrapolatedSurfaceReturn]| - An extrapolated spot implied volatility
+% surface with "maturity" against "moneyness"
+%
+% _Data Type_: 2-dim array
+%
+% *_Calculation_*
+%
+% STEP 1: Remove illiquid strikes and maturities using function |[RawVolatilitySurfaceAdj()]|
+% to get a |[ReducedVolatilitySurface]|.
+% See |[RawVolatilitySurfaceAdj()]| for details
+%
+% STEP 2: Split Option Maturity Profile into two using the function |[SplitMaturityOutputProfile()]|. 
+% One portion is below the last liquid point |[OutputMaturityProfileBelow]|,
+% and the other above |[OutputMaturityProfileAbove]|. 
+% See |[SplitMaturityOutputProfile()]| for details
+%
+% STEP 3: Interpolate |[ReducedVolatilitySurface]| using a bilinear total
+% variance rule. See |[CreateSpotVolSurfaceBiLinearInterpolation()]| for
+% detailed calculation
+% 
+% STEP 4: Remove Stochastic Interest Rate Effect from the spot implied volatilities
+% to get the idiosyncratic volatility surface by calling the bootstrap method 
+% |[bsEquityIV_1FHW_StochRateEffect]|. See the class for details
+%
+% STEP 5: For maturities above the last liquid point, create the first half forward volatility 
+% surface |[ForwardVolSurfaceOne|] using the function |[CreateFwdVolSurfaceFromSpotVolSurface()]|
+%
+% STEP 6: Given the |[ForwardVolSurfaceOne]| obtained from STEP 5, for maturities 
+% below the last liquid point, creat the second half forward volatility surface |[ForwardVolSurfaceTwo]|
+% by extrapolating from the last forward volatility for each strike using the exponential rule 
+% applied to the forward variance. See |[ExponentialExtrapolation()]| for
+% calculation details
+%
+% STEP 7: Combine the two foward volatility surfaces from STEP5 and STEP6 
+% to give us a |[CombinedForwardVolSurface]|   
+%
+% STEP 8: Convert the |[CombinedForwardVolSurface]| back to a spot idiosyncratic 
+% volatility surface |[CombinedSpotVolSurface]| using the function |[CreateSpotVolSurfaceFromFwdVolSurface()]|
+%
+% STEP 9: Finally, we call the bootstrap method |[bsEquityIV_1FHW_StochRateEffect]| again 
+% to create a spot implied volatility surface |[CreateExtrapolatedSurfaceReturn]|
+% by adding back the stochastic interest rate effect to the |[CombinedSpotVolSurface]| 
+%
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+   function CreateExtrapolatedSurfaceReturn = CreateExtrapolatedSurface...
+        (obj, VolatilitySurface, OptionMaturities, StrikeMoneyness, ...
+        OutputMaturityProfile, OutputStrikes, Truncate)
+
+     % STEP1          
+     [ReducedVolatilitySurface,ReducedOptionMaturities,...
+         ReducedStrikeMoneyness] = obj.RawVolatilitySurfaceAdj ...
+         (VolatilitySurface, OptionMaturities, StrikeMoneyness);
+
+     % STEP2              
+     [OutputMaturityProfileBelow,OutputMaturityProfileAbove] = ...
+         obj.SplitMaturityOutputProfile (OutputMaturityProfile);
+
+     % STEP3             
+     InterpolatedSpotSurface = ...
+         obj.CreateSpotVolSurfaceBiLinearInterpolation ...
+         (ReducedVolatilitySurface, ReducedOptionMaturities, ...
+         ReducedStrikeMoneyness, OutputMaturityProfileBelow, ...
+         OutputStrikes, Truncate);
+
+     % STEP4              
+     newEquityStochRates = Bootstrap.bsEquityIV_1FHW_StochRateEffect...
+         (obj.IRMeanReversionSpeed, obj.IRVolatility, ...
+         obj.Equity_IR_Correlation);
+
+     InterpolatedSpotSurfaceNoStochIR = ...
+         newEquityStochRates.FindEquityVolSurface ...
+         (InterpolatedSpotSurface, OutputMaturityProfileBelow);
+
+     % STEP5 
+     ForwardVolSurfaceOne = CreateFwdVolSurfaceFromSpotVolSurface ...
+         (obj, InterpolatedSpotSurfaceNoStochIR, ...
+         OutputMaturityProfileBelow) ;
+
+     % STEP6                   
+     ForwardVolSurfaceTwo = obj.ExponentialExtrapolation ...
+         (ForwardVolSurfaceOne(end, :).^2, ...
+         obj.EquityFwdVol_MeanReversionSpeed, ...
+         (obj.EquityFwdVol_LongTerm_ReturnVolTarget)^2, ...
+         (OutputMaturityProfileAbove- obj.LastLiquidMaturity)) ;    
+                             
+     ForwardVolSurfaceTwo = ForwardVolSurfaceTwo .^ 0.5;
+
+     % STEP7             
+     CombinedForwardVolSurface = [ForwardVolSurfaceOne; ...
+         ForwardVolSurfaceTwo];
+
+     % STEP8             
+     CombinedSpotVolSurface = obj.CreateSpotVolSurfaceFromFwdVolSurface...
+         (CombinedForwardVolSurface, OutputMaturityProfile);
+
+     % STEP9
+     CreateExtrapolatedSurfaceReturn = ...
+         newEquityStochRates.GetEquityImpliedVolSurface ...
+         (CombinedSpotVolSurface, OutputMaturityProfile);
+
+   end    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+%%
+% _________________________________________________________________________________________
+%
+%% |2) [ExponentialExtrapolation()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function Exponentially extrapolates a set of initial values to a long term |[MeanReversionLevel]|
+%
+% *_Inputs_*
+%
+% |[InitialValues]| - An array of initial values against initial maturities
+% e.g. spot implied volatility surface with maturities from 1 to 10 year
+% 
+% _Data Type_: 2-dim array
+% 
+% |[MeanReversionSpeed]| - $k$, represents the speed with which the standard 
+% deviation of returns reverts to its long term level
+%
+% _Data Type_: single value
+%
+% |[MeanReversionLevel]| - $\bar{x}_i$ - Target value in the long term
+%
+% _Data Type_: single value
+%
+% |[Maturities]| - Output maturities
+%
+% _Data Type_: 1-dim array
+% 
+% *_Outputs_*
+%
+% |[ExponentialExtrapolationReturn]| - An array of extrapolated values
+% against output maturities. e.g. spot imlied voaltility surface with
+% maturities from 1 to 50 year
+%
+% _Data Type_: 2-dim array
+%
+% *_Calculation_* 
+%
+% Let $y_{ij}$ be the extrapolation return for the initial value $x_{ij}$, 
+% MeanReversionLevel $\bar{x}_i$, maturity $T_i$ and moneyness $M_j$, then
+%
+% $y_{ij} = e^ {(- k \times T_i)} \times x_{ij} + (1- e^{(- k \times T_i)}) \times \bar{x}_i$
+%
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  function ExponentialExtrapolationReturn = ExponentialExtrapolation ...
+           (obj,InitialValues, MeanReversionSpeed, MeanReversionLevel, ...
+            Maturities)
+
+    exponentialweights = exp(-MeanReversionSpeed.*Maturities);
+
+    ExponentialExtrapolationReturn = exponentialweights'*InitialValues...
+     +(1-exponentialweights)'*MeanReversionLevel*ones(size(InitialValues));
+
+  end       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+%%
+% _________________________________________________________________________________________
+%
+%% |3) [RawVolatilitySurfaceAdj()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*        
+%   
+% Function removes rows of the VolatilitySurface 
+% which are greater than the last market liquid point |[LastLiquidMaturity]|
+%
+% *_Inputs_*
+%
+% |[VolatilitySurface]| - A surface of volatilites with "maturity" against "moneyness"
+% 
+% _Data Type_: 2-dim array
+% 
+% |[OptionMaturities]| - Input maturities of the equity options
+%
+% _Data Type_: 1-dim array
+%
+% |[StrikeMoneyness]| - Input equity option strikes in terms of moneyness
+%
+% _Data Type_: 1-dim array
+% 
+% *_Outputs_*
+%
+% |[ReducedVolatilitySurface,ReducedOptionMaturities,ReducedStrikeMoneyness]| 
+% - three arrays: |[ReducedOptionMaturities]| is a 1-dim array of marturies with
+% the maturities longer than the last liquid maturity removed; 
+% |[ReducedStrikeMoneyness]| is a 1-dim array of strike moneyness with the
+% strikes outside the liquid strikes removed;
+% |[ReducedVolatilitySurface]| is a 2-dim array of the resulting volatility surface 
+% with reduced maturities against reduced moneyness  
+%
+% _Data Type_: three arrays, one 2-dim and two 1-dim
+%
+% *_Calculation_*
+%
+% Locate the positions of the last liquid maturity and the minimum and the maximum strikes
+% that are liquid. Remove the rows and the columns of the input volatility surface
+% that are beyond those liquid points. 
+%
+     
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%         
+  function [ReducedVolatilitySurface,ReducedOptionMaturities, ...
+            ReducedStrikeMoneyness]  = RawVolatilitySurfaceAdj (obj, ...
+              VolatilitySurface, OptionMaturities ,StrikeMoneyness)
+
+      assert( size( VolatilitySurface ,1) == size( OptionMaturities, 2));   
+      assert( size( VolatilitySurface ,2) == size( StrikeMoneyness, 2));                        
+
+        % Remove columns which are less than or greator than
+        % respective last liquid point of the vol surface
+
+      llpstrike_maturity_index = find ((OptionMaturities - ...
+          obj.LastLiquidMaturity) > obj. TimeTolerance);            
+
+      if isempty(llpstrike_maturity_index)
+         llpstrike_maturity_index = size(OptionMaturities, 2) ;
+      else
+         llpstrike_maturity_index = max(llpstrike_maturity_index(1,1)-1,0);
+      end    
+
+      llpstrike_min_index = find((StrikeMoneyness - obj.minLiquidStrike)...
+         < - obj.StrikeTolerance);
+
+      if isempty(llpstrike_min_index) 
+         llpstrike_min_index = 1;
+      else
+         llpstrike_min_index = min(llpstrike_min_index +1, ...
+             size(StrikeMoneyness,2));
+      end
+
+      llpstrike_max_index = find((obj.maxLiquidStrike -StrikeMoneyness)...
+          < -obj.StrikeTolerance);
+
+      if isempty(llpstrike_max_index) 
+         llpstrike_max_index = size(StrikeMoneyness, 2) ;
+      else
+         llpstrike_max_index = max(llpstrike_max_index-1, 0);
+      end
+
+        % If the function has reached this point in the code , then
+        % return orginal data
+      ReducedVolatilitySurface=VolatilitySurface(...
+       1:llpstrike_maturity_index,llpstrike_min_index:llpstrike_max_index);
+      ReducedOptionMaturities=OptionMaturities(1:llpstrike_maturity_index); % return an empty array  
+      ReducedStrikeMoneyness = StrikeMoneyness(llpstrike_min_index: ...
+         llpstrike_max_index);
+
+  end
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+%%
+% _________________________________________________________________________________________
+%
+%% |4) [SplitMaturityOutputProfile()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*        
+%
+% Function splits Option Maturity Profile in two portions. 
+% One portion is below the last liquid point |[OutputMaturityProfileBelow]|,
+% and the other above |[OutputMaturityProfileAbove]|.
+%
+% *_Inputs_*
+%
+% |[OutputProfile]| - Output maturities
+%
+% _Data Type_: 1-dim array
+%
+% *_Outputs_*
+%
+% |[OutputProfileBelow,OutputProfileAbove]| - two 1-dim arrays of maturities.
+% One array has maturities below the last liquid point |[OutputMaturityProfileBelow]|.
+% The other array has maturities above the last liquid point |[OutputMaturityProfileAbove]|.
+%
+% _Data Type_: two 1-dim arrays
+%
+% *_Calculation_*
+%
+% Locate the last liquid maturity. Remove the values beyond the last liquid point
+% in the |[OutputProfile]| to get the array |[OutputMaturityProfileBelow]|.
+% Set the values in the array |[OutputMaturityProfileAbove]| equal to the
+% remaining maturities, i.e., those removed from the |[OutputProfile]|. 
+     
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+    function [OutputProfileBelow,OutputProfileAbove] = ...
+            SplitMaturityOutputProfile (obj, OutputProfile)
+
+        for i = 1 : size(OutputProfile,2)
+            if (OutputProfile(1, i) - obj.LastLiquidMaturity) > ...
+                    obj. TimeTolerance
+                OutputProfileBelow = OutputProfile( 1, 1 : i-1);
+                OutputProfileAbove = OutputProfile( 1, i : end);
+                return
+            end
+        end 
+
+        % If the function has reached this point in the code , then
+        % return orginal data
+        OutputProfileBelow = OutputProfile;
+        OutputProfileAbove = [];  % return an empty array
+    end
+
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+%%
+% _________________________________________________________________________________________
+%
+%% |5) [CreateFwdVolSurfaceFromSpotVolSurface()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*        
+%
+% Function turns a Spot Volatility Surface into a Forward Volatility Surface
+%
+% *_Inputs_*
+%
+% |[SpotVolatilitySurface]| - A 2-dim array of spot volatilities 
+% with "maturities" against "moneyness"
+% 
+% _Data Type_: 2-dim array
+% 
+% |[OptionMaturities]| - Input maturities of the equity options
+%
+% _Data Type_: 1-dim array
+% 
+% *_Outputs_*
+%
+% |[CreateFwdVolSurfaceFromSpotVolSurfaceReturn]| - A 2-dim array of forward
+% volatilities with "maturities" against "moneyness"
+%
+% _Data Type_: 2-dim array
+%
+% *_Calculation_*   
+%
+% STEP 1: Initialise the ouput forward volatility matrix and set the first row of the 
+% matrix equal to the first row of the input spot volatility matrix
+%
+% STEP 2: Calculate Total Variance Matrix and the Maturity Matrix as this forms the backbone of the calculation
+%
+% Let $S_{ij}$ be the spot standard deviation with maturity $T_i$ and
+% moneyness $M_j$, then the $ij^{th}$ entry of the |[TotalVarianceSurface]| is 
+%
+% $TotalVar_{ij} = (S_{ij} ^2) \times T_i$
+%
+% STEP 3: Apply a monotonic correction method on each column of
+% |[TotalVarianceSurface]| so as to avoid taking the square root of a
+% negative number in the next calculation. Further the correction ensure no
+% calendar arbitrage.
+%
+% i.e., we want to make sure that, for each column j,
+%
+% $TotalVar_{ij} \geq TotalVar_{i-1 j}$
+% 
+% STEP 4: Calculate forward volatilities from the monotonic |[TotalVarianceSurface]|
+%
+% Let $F_{ij}$ be the forward standard deviation with maturity $T_i$ and
+% moneyness $M_j$,
+%
+% $F_{ij} = \sqrt { \frac {TotalVar_{ij} - TotalVar_{i-1 j}} {T_i -
+% T_{i-1}}}$
+%
+     
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+    function CreateFwdVolSurfaceFromSpotVolSurfaceReturn = ...
+            CreateFwdVolSurfaceFromSpotVolSurface(obj, ...
+            SpotVolatilitySurface, OptionMaturities)
+
+        % STEP1
+        CreateFwdVolSurfaceFromSpotVolSurfaceReturn = ...
+            zeros( size(SpotVolatilitySurface));
+
+        CreateFwdVolSurfaceFromSpotVolSurfaceReturn(1, 1:end) = ...
+            SpotVolatilitySurface(1, 1:end);
+
+        % STEP2
+        MaturitiesMatrix = repmat( OptionMaturities' ,1,...
+            size(SpotVolatilitySurface,2) );
+        TotalVarianceSurface = (SpotVolatilitySurface .^2 ) .* ...
+            MaturitiesMatrix;
+
+        % STEP3
+        TotalVarianceSurface = obj.MonotonicColumnCorrection ...
+            (TotalVarianceSurface) ;
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+        CreateFwdVolSurfaceFromSpotVolSurfaceReturn (2:end, 1:end) = ...
+            ((TotalVarianceSurface (2: end, 1: end) - ...
+                TotalVarianceSurface (1: end-1, 1: end)) ...
+                   ./( MaturitiesMatrix (2: end, 1: end) - ...
+                        MaturitiesMatrix (1: end-1, 1: end))) .^(0.5);
+
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+%%
+% _________________________________________________________________________________________
+%
+%% |6) [CreateSpotVolSurfaceFromFwdVolSurface()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*                
+%
+% Function turns a Forward Volatility Surface into a Spot Volatility Surface
+%
+% *_Inputs_*
+%
+% |[FwdVolatilitySurface]| - A 2-dim array of forward volatilities 
+% with "maturities" against "moneyness"
+% 
+% _Data Type_: 2-dim array
+% 
+% |[OptionMaturities]| - Input maturities of the equity options
+%
+% _Data Type_: 1-dim array
+% 
+% *_Outputs_*
+%
+% |[CreateSpotVolSurfaceFromFwdVolSurfaceReturn]| - A 2-dim array of spot
+% volatility surface with "maturities" against "moneyness"
+%
+% _Data Type_: 2-dim array
+%
+% *_Calculation_*   
+%
+% STEP 1: Calculate the Forward Variance Contributions
+%
+% Let $F_{ij}$ be the forward standard deviation with maturity $T_i$ and
+% moneyness $M_j$, then the $ij^{th}$ entry of the Forward Variance Matrix is 
+%
+% $FwdVar_{ij} = F_{ij} ^ 2 \times (T_i - T_{i-1})$
+%
+% STEP 2: Calcualte Total Variance Matrix from forward variances
+%
+% Set the first row of the Total Variance Matrix equal to the first row of the Forward Variance Matrix
+%
+% Then the $i^{th}$ row can be derived by adding the $i^{th}$ th row of the Forward 
+% Variance Matrix to the $(i-1)^{th}$ row of the Total Variance Matrix. i.e. the $ij^{th}$ entry of the
+% |[TotalVarianceSurface]| is
+%
+% $TotalVar_{ij} = TotalVar_{i-1 j} + FwdVar_{ij}$
+%
+% STEP 3: Calculate Spot Volatility Matrix
+%
+% Once we have the |[TotalVarianceSurface]|, the spot standard deviations
+% $S_{ij}$ can be easily calculated
+%
+% $S_{ij} = \sqrt {\frac {TotalVar_{ij}}{T_i}}$
+%         
+        
+     
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+   function CreateSpotVolSurfaceFromFwdVolSurfaceReturn = ...
+            CreateSpotVolSurfaceFromFwdVolSurface( obj,...
+            FwdVolatilitySurface,OptionMaturities)
+
+        %%%STEP1
+       FwdVolatilityMaturityProfile = OptionMaturities - ...
+            [0 OptionMaturities(1, 1 : end-1)];
+       MaturityDifferenceMatrix = repmat(FwdVolatilityMaturityProfile',...
+            1, size(FwdVolatilitySurface,2));            
+       FwdVarianceContributions = (FwdVolatilitySurface .^2) .* ...
+            MaturityDifferenceMatrix;
+
+        %%%STEP2
+       TotalVarianceSurface = zeros( size(FwdVolatilitySurface));
+       TotalVarianceSurface(1,1:end) = FwdVarianceContributions(1,1:end);
+       for i = 2 :  size(FwdVolatilitySurface,1)
+         TotalVarianceSurface(i,1:end) = TotalVarianceSurface(i-1,1:end)...
+             + FwdVarianceContributions(i, 1:end);
+       end  
+
+        %%%STEP3
+       MaturitiesMatrix = repmat( OptionMaturities', 1, ...
+           size(FwdVolatilitySurface,2));
+       CreateSpotVolSurfaceFromFwdVolSurfaceReturn = ...
+           (TotalVarianceSurface ./MaturitiesMatrix).^0.5;
+   end
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+%%
+% _________________________________________________________________________________________
+%
+%% |7) [CreateSpotVolSurfaceBiLinearInterpolation()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*  
+%
+% Function bilnearly interpolates a spot volatility surface using the total variance method 
+%
+% *_Inputs_*
+%
+% |[SpotVolatilitySurface]| - A surface of spot implied volatilites with "maturity" against "moneyness"
+% 
+% _Data Type_: 2-dim array
+% 
+% |[OptionMaturities]| - Input maturities of the equity options
+%
+% _Data Type_: 1-dim array
+%
+% |[Strikes]| - Input equity option strikes in terms of moneyness
+%
+% _Data Type_: 1-dim array
+%
+% |[OutputMaturityProfile]| - Output maturities of the equity options
+%
+% _Data Type_: 1-dim array
+%
+% |[OutputStrikeProfile]| - Output equity option strikes in terms of moneyness
+%
+% _Data Type_: 1-dim array
+%
+% |[Truncate]| - whether to truncate the volatility matrix: 'True' or 'False' 
+%
+% _Data Type_: String
+% 
+% *_Outputs_*
+%
+% |[CreateSpotVolSurfaceBiLinearInterpolationReturn]| - A spot volatility surface with 
+% values bilinearly interpolated according to the ouput maturity and output strike
+% profiles
+%
+% _Data Type_: 2-dim array
+%
+% *_Calculation_*   
+%
+% First we calculate |[TotalVarianceSurface]| and make it monotonic, like 
+% STEP1 and STEP2 in the method |[CreateFwdVolSurfaceFromSpotVolSurface()]|
+% 
+% This is to prevent negative values in the later calculation of forward
+% volatilities, and to ensure no calendar arbitrage.
+%
+% Then given the output maturity and output strike profiles, we apply the bilinear-interpolation 
+% method to the monotonic |[TotalVarianceSurface]|, by calling the function 
+% |[BiLinearMatrix()]| in the class |[bsLinearInterpolation()]|
+%
+% Finally we convert the total variances back to the spot standard deviations $S_{ij}$
+%
+% $S_{ij} = \sqrt {\frac {TotalVar_{ij}}{T_i}}$
+%
+% The resulting spot volarility surface is interpolated with each column
+% monotonically increasing
+%
+        
+     
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+    function CreateSpotVolSurfaceBiLinearInterpolationReturn = ...
+            CreateSpotVolSurfaceBiLinearInterpolation(obj, ...
+            SpotVolatilitySurface, OptionMaturities, Strikes, ...
+            OutputMaturityProfile, OutputStrikeProfile, Truncate)          
+
+        %%%Calculate Total VarianceMake matrix monotonic
+        MaturitiesMatrix = repmat(OptionMaturities',1, ...
+            size(SpotVolatilitySurface,2));
+        TotalVarianceSurface =(SpotVolatilitySurface.^2).*MaturitiesMatrix;
+
+        TotalVarianceSurface = obj.MonotonicColumnCorrection ...
+            (TotalVarianceSurface);
+
+        %%%Linear interpolation
+        newLinearInterp = Bootstrap.bsLinearInterpolation();
+        TotalVarianceGrid = newLinearInterp.BiLinearMatrix ...
+            (OutputMaturityProfile,OutputStrikeProfile,OptionMaturities,...
+            Strikes,TotalVarianceSurface,Truncate);
+        MaturitiesMatrix = repmat(OutputMaturityProfile',1, ...
+            size(OutputStrikeProfile,2));
+
+        CreateSpotVolSurfaceBiLinearInterpolationReturn = ...
+            sqrt(TotalVarianceGrid ./ MaturitiesMatrix);
+        
+    end
+        
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+%%
+% _________________________________________________________________________________________
+%
+%% |8) [MonotonicColumnCorrection()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_* 
+%
+% Function ensures that the columns on the matrix are montonic increasing. 
+% If an entry is found to be lower than the previous row value then it will 
+% be replaced by the previous row value.
+%
+% *_Inputs_*
+%
+% |[Matrix]| - A 2-dim array
+% 
+% _Data Type_: 2-dim array
+% 
+% *_Outputs_*
+%
+% |[MonotonicColumnCorrectionReturn]| - A matrix with values in each column
+% monotonic increasing
+% 
+% _Data Type_: 2-dim array
+%
+% *_Calcualtions_*
+%
+% Let $E_{ij}$ be the $ij^{th}$ entry of the input matrix, $E'_{ij}$ be the 
+% $ij^{th}$ entry of the output monotonic matrix
+%
+% For each column j of the matrix, if
+%
+% i) $E_{ij} \geq E_{i-1 j}$, then $E'_{ij} = E_{ij}$
+% 
+% ii) $E_{ij} < E_{i-1 j}$, then $E'_{ij} = E_{i-1 j}$
+%
+%      
+     
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+   function MonotonicColumnCorrectionReturn = MonotonicColumnCorrection...
+            (obj,Matrix)
+
+        CorrectedMatrix = zeros(size(Matrix)); % Allocate Storage Space
+
+        CorrectedMatrix(1, 1:end) =Matrix (1, 1:end);
+
+        for j= 1 : size(Matrix, 2) % Repeat monotonic correction for each column              
+           for i= 2 : size(Matrix, 1) % Number of columns
+               if  CorrectedMatrix(i-1, j) >  Matrix(i,j)
+                   % Replace entry with previous row value
+                   CorrectedMatrix(i,j) = CorrectedMatrix(i-1, j);
+               else
+                   CorrectedMatrix(i,j) = Matrix(i, j);
+               end    
+           end
+        end
+
+        MonotonicColumnCorrectionReturn = CorrectedMatrix;
+   end    
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+%%
+% _________________________________________________________________________________________
+%
+%% |9) [CreateContStatsFromArithmeticStats()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*  
+%
+% Function converts arithmetic mean return and standard deviation to
+% continuous mean and standard deviation
+%
+% *_Inputs_*
+%
+% |[ArithmeticMean]| - $\mu_A$, the arithmetic mean return in the long
+% term
+% 
+% _Data Type_: single value
+% 
+% |[ArithmeticVol]| - $\sigma_A$, the arithmetic volatility in the long
+% term
+%
+% _Data Type_: single value
+% 
+% *_Outputs_*
+%
+% |[ContinuousMean,ContinuousVol]| - an arrary containing two scalars, one is
+% the continuous mean return $\mu_{LT}$, the other is the continuous volatility $\sigma_{LT}$
+%
+% _Data Type_: one 1-dim array
+%
+% *_Calculations_*
+%
+% $\sigma_{LT} = \sqrt {ln \Big( ( \frac{\sigma_A}{1+\sigma_A} )^2
+% +1 \Big)}$
+%
+% $\mu_{LT} = ln (1+ \mu_A) - \frac{\sigma_{LT}^2}{2}$
+        
+     
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    function [ContinuousMean,ContinuousVol] = ...
+      CreateContStatsFromArithmeticStats(obj,ArithmeticMean,ArithmeticVol)
+
+      ContinuousVol = sqrt(log((ArithmeticVol/(1+ ArithmeticMean))^2 +1));
+      ContinuousMean = log(1+ ArithmeticMean) - ContinuousVol^2 /2;
+      
+
+    end     
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,687 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Frequency profile</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-05-31"><meta name="DC.source" content="Bsfrequencyprofile.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Frequency profile</h1><!--introduction--><p><b>The class converts an input frequency string to a frequency profile; an array of integers which indicate the number of monthly, quarterly, semi-annual and annual intervals contained in the output data series.</b></p><p><b>The class also contains functions to:</b></p><div><ul><li><b>Extend a frequency profile up to a maximum term.</b></li><li><b>Return an array of output dates.</b></li><li><b>Crop a data series to include only certain specified elements.</b></li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">How to use the class</a></li><li><a href="#4">Properties</a></li><li><a href="#6">List of methods</a></li><li><a href="#7">Details of methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> Bsfrequencyprofile &lt; handle
+</pre><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>How to use the class<a name="3"></a></h2><p>There is are three ways to use this class:</p><div><ol><li>To produce a frequency profile from an input frequency string. This can be extended up to a maximum term if desired.</li><li>To produce an array of output maturities from a given frequency profile.</li><li>To produce a cropped data series containing only specified maturities from a larger input data series.</li></ol></div><h2>Properties<a name="4"></a></h2><p><b><tt>[interval]</tt></b> : An object set up to store the number of outputs with monthly, quarterly, semi-annual and annual separations.</p><pre>Data type : -</pre><p><b><tt>[maxterm]</tt></b> : The maximum term to be specified in the frequency profile , in years. This has a default value of 135.</p><pre>Data type : double</pre><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    <span class="comment">% Creates a frequency profile based on an string format</span>
+
+    properties
+      interval = [];
+      maxterm  = 135;  <span class="comment">% Default Value</span>
+    <span class="keyword">end</span>
+
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of methods<a name="6"></a></h2><p>The class introduces four new methods:</p><p><b><tt>1)[Bsfrequencyprofile()]</tt></b> - Function converts an input frequency string to a frequency profile; an object of integers which indicates the number of monthly, quarterly, semi-annual and annual intervals.</p><p><b><tt>2)[AdjustedIntervalArray()]</tt></b> - Function returns a data series containing the maturities as specified.</p><p><b><tt>3)[AdjustedIntervalCount()]</tt></b> - Function returns an adjusted frequency profile such that the cumulative term extends up to the <b><tt>maxterm</tt></b>.</p><p><b><tt>4)[SmallerDataSeriesObject()]</tt></b> - Function returns  a reduced data series object with only the values specified in <b><tt>AxesArraytoMatch</tt></b>.</p><h2>Details of methods<a name="7"></a></h2><p><b>1) <tt>[Bsfrequencyprofile()]</tt></b></p><p>""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>The function converts an input frequency string to a frequency profile; an object of integers which indicates the number of monthly, quarterly, semi-annual and annual intervals.</p><p><b><i>Inputs</i></b></p><p><b><tt>[frequencystring()]</tt></b> : cvs string containing the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data type : string</pre><p><b><tt>[maxterm]</tt></b> : The maximum term to be specified in the frequency profile in years. This has a default value of 135.</p><pre>Data type : double</pre><p><b><i>Outputs</i></b></p><p>An object of integers which indicates the number of monthly, quarterly, semi-annual and annual intervals. It also holds the maximum term required, which has a default of 135 years.</p><p><b><i>Calculations</i></b></p><p>The function converts the input frequency string to an object of integers which indicates the number of monthly, quarterly, semi-annual and annual intervals. The object created also holds the maximum term required, which has a default of 135 years.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">   <span class="comment">% Constructor</span>
+        <span class="keyword">function</span> obj = Bsfrequencyprofile(frequencystring,maxterm)
+            <span class="comment">% Set the frequency for each interval</span>
+            obj.interval(1,2) = 1/12;       <span class="comment">% Months</span>
+            obj.interval(2,2) = 1/4;     <span class="comment">% Quarters</span>
+            obj.interval(3,2) = 1/2;  <span class="comment">% Halfyears</span>
+            obj.interval(4,2) = 1;      <span class="comment">% Years</span>
+
+            <span class="keyword">if</span> ~isempty(frequencystring)
+             Pos = findstr(frequencystring,<span class="string">','</span>);
+            <span class="comment">% Extract M, Q, SA, &amp; A profile from string</span>
+               obj.interval(1,1) = str2num(frequencystring(1:Pos(1)-1));
+               obj.interval(2,1) = str2num(frequencystring(Pos(1)+1:Pos(2)));
+               obj.interval(3,1) = str2num(frequencystring(Pos(2)+1:Pos(3)));
+               obj.interval(4,1) = str2num(frequencystring(Pos(3)+1:<span class="keyword">...</span>
+                   length(frequencystring)));
+
+            <span class="keyword">else</span>
+               obj.interval(1,1) = 0;       <span class="comment">% Months</span>
+               obj.interval(2,1) = 0;     <span class="comment">% Quarters</span>
+               obj.interval(3,1) = 0;  <span class="comment">% Halfyears</span>
+               obj.interval(4,1) = 1;      <span class="comment">% Years</span>
+            <span class="keyword">end</span>
+           <span class="keyword">if</span> ~isempty(maxterm)
+             obj.maxterm =maxterm;
+           <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">Input argument "frequencystring" is undefined.
+
+Error in ==&gt; Bsfrequencyprofile&gt;Bsfrequencyprofile.Bsfrequencyprofile at 120
+            if ~isempty(frequencystring)            
+</pre><p><b>2) <tt>[AdjustedIntervalCount()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns an adjusted frequency profile such that the outputs extend up to the <b><tt>maxterm</tt></b>.</p><p><b><i>Inputs</i></b></p><p><b><tt>[interval]</tt></b> : An array of integers and doubles which indicates the number of outputs separated by monthly, quarterly, semi-annual and annual intervals.</p><pre>Data type : double and integer array</pre><p><b><tt>[maxterm]</tt></b> : The maximum term to be specified in the frequency profile , in years. This has  default value of 135.</p><pre>Data type : double</pre><p><b><i>Outputs</i></b></p><p>An adjusted frequency profile such that the outputs extend to the <b><tt>maxterm</tt></b>.</p><p><b><i>Calculations</i></b></p><p>If the cumulative maturity is less than the <b><tt>maxterm</tt></b>, then the number of the largest, specified (i.e. number of intervals is non-zero), interval (e.g quarterly, semi-annually etc.) is increased until the <b><tt>maxterm</tt></b> is reached.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+ <span class="comment">% Adjust intervals allowing for maxterm</span>
+
+        <span class="keyword">function</span> y = AdjustedIntervalCount(obj)
+
+                y = obj.interval;
+                 MaxMonths = ceil(obj.maxterm/y(1,2));
+
+                       <span class="keyword">for</span> i = 1 : size( obj.interval ,1)
+                           sum1 = 0;
+                         <span class="keyword">for</span> j= 1 : size( obj.interval ,1)
+                                 <span class="keyword">if</span> ne(j,i)
+                                   sum1 =  sum1 + obj.interval(j,1);
+                                 <span class="keyword">end</span>
+                         <span class="keyword">end</span>
+
+                         <span class="keyword">if</span> sum1 == 0
+                             y(i,1) = max(obj.interval(i,1), <span class="keyword">...</span>
+                                 obj.maxterm/y(i,2));
+                         <span class="keyword">else</span>
+                              sum2 = 0;
+                             <span class="keyword">for</span> j= i+1 : size( obj.interval ,1)
+                                 <span class="keyword">if</span> ne(j,i)
+                                   sum2 =  sum2 + obj.interval(j,1);
+                                 <span class="keyword">end</span>
+                              <span class="keyword">end</span>
+
+
+                              maxRemainingInterval= max(0, <span class="keyword">...</span>
+                                  MaxMonths*y(1,2)/y(i,2));
+
+                             <span class="keyword">if</span> sum2 == 0
+                                  y(i,1)=  maxRemainingInterval;
+                             <span class="keyword">else</span>
+                                  y(i,1)=  min(y(i,1), <span class="keyword">...</span>
+                                      maxRemainingInterval);
+                             <span class="keyword">end</span>
+
+                         <span class="keyword">end</span>
+                            y(i,1)= ceil(y(i,1));
+
+                            <span class="comment">% Calculate the residual number of months</span>
+                            MaxMonths = MaxMonths - y(i,1)*<span class="keyword">...</span>
+                                (y(i,2)/obj.interval(1,2));
+
+                       <span class="keyword">end</span>
+
+                <span class="keyword">return</span>
+        <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><b>1) <tt>[AdjustedIntervalArray()]</tt></b></p><p>""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns a data series containing the maturities of the required outputs.</p><p><b><i>Inputs</i></b></p><p><b><tt>[interval]</tt></b> : An array of integers which indicates the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data type : double and integer array</pre><p><b><tt>[maxterm]</tt></b> : The maximum term to be specified in the frequency profile in years. This has a default value of 135.</p><pre>Data type : double</pre><p><b><i>Outputs</i></b></p><p>An array containing output timings.</p><p><b><i>Calculations</i></b></p><p>The function, initially adjusts the input frequency profile to incorporate the maximum term using <b><tt>AdjustedIntervalCount()</tt></b>.</p><p>An array containing the output maturities is then created from the adjusted frequency profile. The timings are created in increasing size order. So for a frequency string of '1,2,4,6' (months, quarters, semi-annual, annual) the first timing would be after a month, the second after a month plus a quarter, the third after a month an two quarters and so on.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+ <span class="comment">% Interval Array</span>
+
+     <span class="keyword">function</span> z = AdjustedIntervalArray(obj)
+
+         AdjustedCounts = AdjustedIntervalCount(obj) ;
+         aux = sum(AdjustedCounts,1);
+         z = zeros (aux(1),1);
+
+          <span class="comment">% Calculate incremental profile</span>
+          count = 0;
+           <span class="keyword">for</span> i = 1 :  size(AdjustedCounts ,1)
+               <span class="keyword">for</span> j = 1 : AdjustedCounts(i,1)
+                   count = count +1;
+                  z(count) = AdjustedCounts(i,2);
+               <span class="keyword">end</span>
+           <span class="keyword">end</span>
+           <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+           <span class="comment">% Calculate cumulative profile</span>
+
+          <span class="keyword">for</span> i = 2 :  size(z ,1)
+              z(i) = z(i-1) + z(i);
+          <span class="keyword">end</span>
+
+          <span class="keyword">return</span>
+     <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><b>1) <tt>[SmallerDataSeriesObject()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns a reduced data series object with only the values specified in <b><tt>AxesArraytoMatch</tt></b>.</p><p><b><i>Inputs</i></b></p><p><b><tt>[AxesArraytoMatch]</tt></b> : Data series containing the specific maturities of the desired outputs.</p><pre>Data type : double array</pre><p><b><tt>[DataSeriesObject]</tt></b> : The original data series to be cut down to contain just the values specified in <b><tt>AxesArraytoMatch</tt></b>.</p><p><b><i>Outputs</i></b></p><p>A cut down version of the original <b><tt>DataSeriesObject</tt></b> including only the values specified in <b><tt>AxesArraytoMatch</tt></b>.</p><p><b><i>Calculations</i></b></p><p>The function searches the original data series for axis values that are within the <b><tt>SearchTolerance</tt></b> of axis values specified in <b><tt>AxesArraytoMatch</tt></b>. Axis values that adhere to this criterion are copied into an output data series.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+ <span class="comment">% Create a cut down dataseriesobjected based on the adjusted interval array</span>
+ <span class="comment">% Search is over all three axes - axes are assumed to be numeric</span>
+
+    <span class="keyword">function</span> newDataSeriesObject = SmallerDataSeriesObject(obj, <span class="keyword">...</span>
+            AxesArraytoMatch, DataSeriesObject)
+
+          <span class="comment">% Create New Dataseries object</span>
+          newDataSeriesObject = DataSeriesObject.Clone;
+
+          <span class="comment">% Calculate incremental profile</span>
+          SearchStartIndex = 1;
+          SearchTolerance = 1/250; <span class="comment">% Tolerance within one business day</span>
+
+          axisvalues = cell2mat(DataSeriesObject.axes(1).values);
+           NewValues = cell( size(DataSeriesObject.dates, 1));
+
+           <span class="keyword">for</span> i = 1 :  size(AxesArraytoMatch, 1)
+               SearchItem = AxesArraytoMatch(i , 1 : <span class="keyword">...</span>
+                   size(AxesArraytoMatch, 2));
+               <span class="comment">% SearchEndIndex = size(cell2mat(DataSeriesObject.values{1}),2);</span>
+               SearchEndIndex = size(cell2mat(DataSeriesObject.values),2);
+
+               <span class="keyword">for</span> j = SearchStartIndex : SearchEndIndex
+
+                    <span class="comment">% sum1 = sqrt(   sum((SearchItem - axisvalues(:,j)).^2) );</span>
+                    sum1 = abs(SearchItem - axisvalues(j));
+
+                  <span class="keyword">if</span> sum1 &lt; SearchTolerance
+                      SearchStartIndex= j+1;
+                      SearchEndIndex = j;
+                      <span class="keyword">for</span> k = 1 : size(DataSeriesObject.dates, 1)
+                        <span class="comment">%values = cell2mat(DataSeriesObject.values{k});</span>
+                        values = DataSeriesObject.values{k};
+                        NewValues{k}(i) = values(j);
+                      <span class="keyword">end</span>
+
+
+                 <span class="keyword">end</span>
+               <span class="keyword">end</span>
+           <span class="keyword">end</span>
+
+             <span class="keyword">for</span> k = 1 : size(DataSeriesObject.dates, 1)
+                  newDataSeriesObject.values{k} =NewValues{k} ;
+             <span class="keyword">end</span>
+
+               <span class="keyword">for</span> i = 1 : size(DataSeriesObject.axes,1)
+                newDataSeriesObject.axes(i).values = <span class="keyword">...</span>
+                    num2cell(AxesArraytoMatch(:,i)');
+               <span class="keyword">end</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">%           import prursg.Engine.*;</span>
+<span class="comment">%             allAxis = [];</span>
+<span class="comment">%            for i = 1 : size(DataSeriesObject.axes,1)</span>
+<span class="comment">%                 axis = Axis();</span>
+<span class="comment">%                 axis.title = DataSeriesObject.axes(i).title;</span>
+<span class="comment">%                 axis.values = AxesArraytoMatch(:,i);</span>
+<span class="comment">%                 allAxis = [allAxis axis];</span>
+<span class="comment">%            end</span>
+<span class="comment">%</span>
+<span class="comment">%             dataObj = DataSeries();</span>
+<span class="comment">%             dataObj.axes = allAxis;</span>
+<span class="comment">%             dataObj.values = NewValues;</span>
+<span class="comment">%             dataObj.dates = DataSeriesObject.dates;</span>
+<span class="comment">%</span>
+<span class="comment">%             z  = dataObj;</span>
+
+          <span class="keyword">return</span>
+     <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Frequency profile
+% *The class converts an input frequency string to a frequency profile; an
+% array of integers which indicate the number of monthly, quarterly,
+% semi-annual and annual intervals contained in the output data series.*
+%
+% *The class also contains functions to:*
+% 
+% * *Extend a frequency profile up to a maximum term.*
+% * *Return an array of output dates.*
+% * *Crop a data series to include only certain specified elements.*
+%
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef Bsfrequencyprofile < handle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%% How to use the class
+% There is are three ways to use this class:
+%
+% # To produce a frequency profile from an input frequency string. This can
+% be extended up to a maximum term if desired.
+% # To produce an array of output maturities from a given frequency profile.
+% # To produce a cropped data series containing only specified maturities
+% from a larger input data series.
+%
+%% Properties
+%
+% *|[interval]|* : An object set up to store the number of outputs with 
+% monthly, quarterly, semi-annual and annual separations.
+%
+%  Data type : -
+%
+% *|[maxterm]|* : The maximum term to be specified in the frequency profile
+% , in years. This has a default value of 135.
+%
+%  Data type : double
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Creates a frequency profile based on an string format
+    
+    properties
+      interval = [];  
+      maxterm  = 135;  % Default Value
+    end
+           
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% List of methods
+% The class introduces four new methods:
+%
+% *|1)[Bsfrequencyprofile()]|* - Function converts an input frequency 
+% string to a frequency profile; an object of integers which indicates the 
+% number of monthly, quarterly, semi-annual and annual intervals.
+%
+% *|2)[AdjustedIntervalArray()]|* - Function returns a data series
+% containing the maturities as specified.
+% 
+% *|3)[AdjustedIntervalCount()]|* - Function returns an adjusted
+% frequency profile such that the cumulative term extends up to the 
+% *|maxterm|*.
+% 
+% *|4)[SmallerDataSeriesObject()]|* - Function returns  a reduced data
+% series object with only the values specified in *|AxesArraytoMatch|*.
+%
+%
+%% Details of methods
+%
+% *1) |[Bsfrequencyprofile()]|*
+%
+% """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% The function converts an input frequency string to a frequency profile; 
+% an object of integers which indicates the number of monthly, quarterly,
+% semi-annual and annual intervals.
+%
+% *_Inputs_*
+%
+% *|[frequencystring()]|* : cvs string containing the number of monthly, 
+% quarterly, semi-annual and annual intervals.
+%
+%  Data type : string
+%
+% *|[maxterm]|* : The maximum term to be specified in the frequency profile
+% in years. This has a default value of 135.
+%
+%  Data type : double
+%
+% *_Outputs_*
+%
+% An object of integers which indicates the number of monthly, quarterly,
+% semi-annual and annual intervals. It also holds the maximum term 
+% required, which has a default of 135 years.
+%
+% *_Calculations_*
+%
+% The function converts the input frequency string to an object of integers
+% which indicates the number of monthly, quarterly, semi-annual and annual 
+% intervals. The object created also holds the maximum term required, which
+% has a default of 135 years.
+%
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods
+  
+   % Constructor       
+        function obj = Bsfrequencyprofile(frequencystring,maxterm)
+            % Set the frequency for each interval   
+            obj.interval(1,2) = 1/12;       % Months
+            obj.interval(2,2) = 1/4;     % Quarters
+            obj.interval(3,2) = 1/2;  % Halfyears 
+            obj.interval(4,2) = 1;      % Years 
+            
+            if ~isempty(frequencystring)            
+             Pos = findstr(frequencystring,',');            
+            % Extract M, Q, SA, & A profile from string
+               obj.interval(1,1) = str2num(frequencystring(1:Pos(1)-1));       
+               obj.interval(2,1) = str2num(frequencystring(Pos(1)+1:Pos(2)));  
+               obj.interval(3,1) = str2num(frequencystring(Pos(2)+1:Pos(3)));  
+               obj.interval(4,1) = str2num(frequencystring(Pos(3)+1:...
+                   length(frequencystring)));      
+           
+            else
+               obj.interval(1,1) = 0;       % Months
+               obj.interval(2,1) = 0;     % Quarters
+               obj.interval(3,1) = 0;  % Halfyears 
+               obj.interval(4,1) = 1;      % Years 
+            end    
+           if ~isempty(maxterm)      
+             obj.maxterm =maxterm;
+           end  
+        end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+%% 
+%
+% *2) |[AdjustedIntervalCount()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns an adjusted frequency profile such that the outputs
+% extend up to the *|maxterm|*. 
+%
+% *_Inputs_*
+%
+% *|[interval]|* : An array of integers and doubles which indicates the 
+% number of outputs separated by monthly, quarterly, semi-annual and annual 
+% intervals.  
+%
+%  Data type : double and integer array
+%
+% *|[maxterm]|* : The maximum term to be specified in the frequency profile
+% , in years. This has  default value of 135.
+%
+%  Data type : double
+%
+% *_Outputs_*
+%
+% An adjusted frequency profile such that the outputs extend to the 
+% *|maxterm|*. 
+%
+% *_Calculations_*
+%
+% If the cumulative maturity is less than the *|maxterm|*, then the number
+% of the largest, specified (i.e. number of intervals is non-zero),
+% interval (e.g quarterly, semi-annually etc.) is increased until the
+% *|maxterm|* is reached.
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Adjust intervals allowing for maxterm    
+ 
+        function y = AdjustedIntervalCount(obj)            
+                   
+                y = obj.interval;
+                 MaxMonths = ceil(obj.maxterm/y(1,2));                 
+
+                       for i = 1 : size( obj.interval ,1)
+                           sum1 = 0;
+                         for j= 1 : size( obj.interval ,1)  
+                                 if ne(j,i)
+                                   sum1 =  sum1 + obj.interval(j,1);
+                                 end
+                         end                                                   
+                         
+                         if sum1 == 0 
+                             y(i,1) = max(obj.interval(i,1), ...
+                                 obj.maxterm/y(i,2));                             
+                         else
+                              sum2 = 0;
+                             for j= i+1 : size( obj.interval ,1)  
+                                 if ne(j,i)
+                                   sum2 =  sum2 + obj.interval(j,1);
+                                 end
+                              end
+                             
+                                                          
+                              maxRemainingInterval= max(0, ...
+                                  MaxMonths*y(1,2)/y(i,2));
+                              
+                             if sum2 == 0
+                                  y(i,1)=  maxRemainingInterval;
+                             else
+                                  y(i,1)=  min(y(i,1), ...
+                                      maxRemainingInterval); 
+                             end
+                                                          
+                         end    
+                            y(i,1)= ceil(y(i,1));  
+                            
+                            % Calculate the residual number of months                            
+                            MaxMonths = MaxMonths - y(i,1)*...
+                                (y(i,2)/obj.interval(1,2));                            
+                       
+                       end
+                          
+                return 
+        end
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%%
+% *1) |[AdjustedIntervalArray()]|*
+%
+% """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns a data series containing the maturities of the required 
+% outputs.
+%
+% *_Inputs_*
+%
+% *|[interval]|* : An array of integers which indicates the number of
+% monthly, quarterly, semi-annual and annual intervals.  
+%
+%  Data type : double and integer array
+%
+% *|[maxterm]|* : The maximum term to be specified in the frequency profile
+% in years. This has a default value of 135.
+%
+%  Data type : double
+%
+% *_Outputs_*
+%
+% An array containing output timings.
+%
+% *_Calculations_*
+%
+% The function, initially adjusts the input frequency profile to
+% incorporate the maximum term using *|AdjustedIntervalCount()|*.
+% 
+% An array containing the output maturities is then created from the 
+% adjusted frequency profile. The timings are created in increasing size 
+% order. So for a frequency string of '1,2,4,6' (months, quarters, 
+% semi-annual, annual) the first timing would be after a month, the second
+% after a month plus a quarter, the third after a month an two quarters and
+% so on.
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Interval Array
+ 
+     function z = AdjustedIntervalArray(obj)
+                  
+         AdjustedCounts = AdjustedIntervalCount(obj) ;
+         aux = sum(AdjustedCounts,1);
+         z = zeros (aux(1),1);
+              
+          % Calculate incremental profile
+          count = 0;                  
+           for i = 1 :  size(AdjustedCounts ,1)
+               for j = 1 : AdjustedCounts(i,1)
+                   count = count +1;
+                  z(count) = AdjustedCounts(i,2);
+               end    
+           end
+           %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+           % Calculate cumulative profile
+            
+          for i = 2 :  size(z ,1)
+              z(i) = z(i-1) + z(i);
+          end    
+           
+          return
+     end    
+     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%%
+% *1) |[SmallerDataSeriesObject()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns a reduced data series object with only the values
+% specified in *|AxesArraytoMatch|*.
+%
+% *_Inputs_*
+%
+% *|[AxesArraytoMatch]|* : Data series containing the specific maturities
+% of the desired outputs.
+%
+%  Data type : double array
+% 
+% *|[DataSeriesObject]|* : The original data series to be cut down to
+% contain just the values specified in *|AxesArraytoMatch|*.
+%
+% *_Outputs_*
+%
+% A cut down version of the original *|DataSeriesObject|* including only
+% the values specified in *|AxesArraytoMatch|*.
+%
+% *_Calculations_*
+%
+% The function searches the original data series for axis values that are
+% within the *|SearchTolerance|* of axis values specified in 
+% *|AxesArraytoMatch|*. Axis values that adhere to this criterion are
+% copied into an output data series.
+%
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Create a cut down dataseriesobjected based on the adjusted interval array
+ % Search is over all three axes - axes are assumed to be numeric
+     
+    function newDataSeriesObject = SmallerDataSeriesObject(obj, ...
+            AxesArraytoMatch, DataSeriesObject)
+                      
+          % Create New Dataseries object
+          newDataSeriesObject = DataSeriesObject.Clone;      
+          
+          % Calculate incremental profile         
+          SearchStartIndex = 1;          
+          SearchTolerance = 1/250; % Tolerance within one business day
+          
+          axisvalues = cell2mat(DataSeriesObject.axes(1).values);
+           NewValues = cell( size(DataSeriesObject.dates, 1));
+          
+           for i = 1 :  size(AxesArraytoMatch, 1)
+               SearchItem = AxesArraytoMatch(i , 1 : ...
+                   size(AxesArraytoMatch, 2));
+               % SearchEndIndex = size(cell2mat(DataSeriesObject.values{1}),2);
+               SearchEndIndex = size(cell2mat(DataSeriesObject.values),2);
+               
+               for j = SearchStartIndex : SearchEndIndex                 
+                    
+                    % sum1 = sqrt(   sum((SearchItem - axisvalues(:,j)).^2) );
+                    sum1 = abs(SearchItem - axisvalues(j));
+                   
+                  if sum1 < SearchTolerance
+                      SearchStartIndex= j+1;
+                      SearchEndIndex = j;                         
+                      for k = 1 : size(DataSeriesObject.dates, 1)
+                        %values = cell2mat(DataSeriesObject.values{k});
+                        values = DataSeriesObject.values{k};
+                        NewValues{k}(i) = values(j); 
+                      end 
+                      
+                      
+                 end                     
+               end    
+           end
+          
+             for k = 1 : size(DataSeriesObject.dates, 1)
+                  newDataSeriesObject.values{k} =NewValues{k} ;
+             end   
+           
+               for i = 1 : size(DataSeriesObject.axes,1)
+                newDataSeriesObject.axes(i).values = ...
+                    num2cell(AxesArraytoMatch(:,i)');
+               end  
+%          
+%                     
+%           import prursg.Engine.*;
+%             allAxis = [];
+%            for i = 1 : size(DataSeriesObject.axes,1)
+%                 axis = Axis();
+%                 axis.title = DataSeriesObject.axes(i).title;
+%                 axis.values = AxesArraytoMatch(:,i);
+%                 allAxis = [allAxis axis];           
+%            end   
+%                             
+%             dataObj = DataSeries();
+%             dataObj.axes = allAxis;
+%             dataObj.values = NewValues;
+%             dataObj.dates = DataSeriesObject.dates;
+%             
+%             z  = dataObj;
+           
+          return
+     end    
+     
+     
+     
+     
+    end
+    
+end
+
+
+
+
+##### SOURCE END #####
+--></body></html>

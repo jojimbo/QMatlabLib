@@ -1,0 +1,633 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Swaption Price</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-05-24"><meta name="DC.source" content="bootstrap_SwaptionPrice.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Swaption Price</h1><!--introduction--><p><b>The class returns a three dimensional data series object of swaption prices with axes corresponding to the maturity, tenor and strike rates of the underlying swap contracts.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">How to use the class</a></li><li><a href="#4">Properties</a></li><li><a href="#6">List of Methods</a></li><li><a href="#9">Details of Methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_SwaptionPrice &lt; handle
+</pre><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>How to use the class<a name="3"></a></h2><p>There are three ways to use this class:</p><div><ol><li>To produce a three dimensional data series object of swaption prices with axes corresponding to the maturity, tenor and strike rates of the underlying swaption contracts.</li><li>To produce a three dimensional data series object of log-normal swaption volatilities with axes corresponding to the maturity, tenor and strike rates of the underlying swaption contracts.</li><li>To produce a three dimensional data series object of normal swaption volatilities with axes corresponding to the maturity, tenor and strike rates of the underlying swaption contracts.</li></ol></div><h2>Properties<a name="4"></a></h2><p><b><tt>[ZCBPRICES]</tt></b> : The price of a zero coupon bond, <img src="bootstrap_SwaptionPrice_eq73735.png" alt="$B(t,T)$">, at present time, <img src="bootstrap_SwaptionPrice_eq07064.png" alt="$t$">, which pays 1 at maturity, <img src="bootstrap_SwaptionPrice_eq46221.png" alt="$t=T$">.</p><pre>Data type : Data series, doubles</pre><p><b><tt>[ZCBMaturities]</tt></b> : Times, <img src="bootstrap_SwaptionPrice_eq57315.png" alt="$T$">, when the zero coupon bonds mature.</p><pre>Data type : Data series, doubles</pre><p><b><tt>[outputfreq]</tt></b> : A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data type : string</pre><p><b><tt>[SwapTenors]</tt></b> : The length of the swap contracts, <img src="bootstrap_SwaptionPrice_eq89224.png" alt="$\tau$">.</p><pre>Data type : string</pre><p><b><tt>[SwaptionMaturities]</tt></b> : Times when swaptions expire. This are also the times when the swap contracts begin, <img src="bootstrap_SwaptionPrice_eq63384.png" alt="$T_{Start}$">.</p><pre>Data type : string</pre><p><b><tt>[SwaptionAbsDiffStrikes]</tt></b> : Swaption strike rates, which are defined as their absolute difference above the initial forward swap rates.</p><pre>Data type : string</pre><p><b><tt>[CompoundingFrequency]</tt></b> : The annual frequency, <img src="bootstrap_SwaptionPrice_eq85998.png" alt="$f$">, at which the underlying swap contract is settled.</p><pre>Data type : double</pre><p><b><tt>[volatilityType]</tt></b> : Specifies whether the volatility is 'lognormal vol' or 'normal vol'. Please note that the ability to cope with 'normal vol' is yet to be included.</p><pre>Data type : string</pre><p><b><tt>[OptionType]</tt></b> : Specifies whether the swaption is a 'call' or a 'put'. For a call swaption the buyer has the option to receive the fixed rate and pay the floating rate. For a put option the buyer has the option to receive the floating rate and pay the fixed rate.</p><pre>Data type : string</pre><p><b><tt>[OutputType]</tt></b> :  Specifies whether the class will output swaption 'Price', 'LogNormal Vol' or 'Normal Vol'.</p><pre>Data type : string</pre><p><b><tt>[newDataSeriesObject]</tt></b> : A new  data series oject setup to store results.</p><pre>Data type : -</pre><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+
+        ZCBPRICES ;
+        ZCBMaturities ;
+        outputfreq ;
+
+        SwapTenors ;
+        SwaptionMaturities ;
+        SwaptionAbsDiffStrikes ;
+        CompoundingFrequency;
+
+        volatilityType;
+
+        OptionType
+        OutputType
+
+
+        newDataSeriesObject
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="6"></a></h2><p>The class introduces one new method:</p><p><b><tt>1)[bootstrap_SwaptionPrice()]</tt></b> : Function returns a three dimensional data series object of swaption prices, or volatilities, with axes corresponding to the maturity, tenor and strike rates of the underlying swap contracts.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+
+        <span class="keyword">function</span> obj = bootstrap_SwaptionPrice()
+
+        <span class="keyword">end</span>
+
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">
+ans = 
+
+  Bootstrap.bootstrap_SwaptionPrice handle
+  Package: Bootstrap
+
+  Properties:
+                 ZCBPRICES: []
+             ZCBMaturities: []
+                outputfreq: []
+                SwapTenors: []
+        SwaptionMaturities: []
+    SwaptionAbsDiffStrikes: []
+      CompoundingFrequency: []
+            volatilityType: []
+                OptionType: []
+                OutputType: []
+       newDataSeriesObject: []
+
+
+</pre><h2>Details of Methods<a name="9"></a></h2><div><ol><li><b><tt>[bootstrap_SwaptionPrice()]</tt></b></li></ol></div><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns a three dimensional data series object of swaption prices, or volatilities, with axes corresponding to the maturity, tenor and strike rates of the underlying swap contracts.</p><p><b><i>Inputs</i></b></p><p><b><tt>[ZCBPRICES]</tt></b> : The price of a zero coupon bond, <img src="bootstrap_SwaptionPrice_eq73735.png" alt="$B(t,T)$">, at present time, <img src="bootstrap_SwaptionPrice_eq07064.png" alt="$t$">, which pays 1 at maturity, <img src="bootstrap_SwaptionPrice_eq46221.png" alt="$t=T$">.</p><pre>Data type : Data series, doubles</pre><p><b><tt>[ZCBMaturities ]</tt></b> : Times, <img src="bootstrap_SwaptionPrice_eq57315.png" alt="$T$">, when the zero coupon bonds mature.</p><pre>Data type : Data series, doubles</pre><p><b><tt>[outputfreq]</tt></b> : A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data type : string</pre><p><b><tt>[SwapTenors]</tt></b> : The length of the swap contracts, <img src="bootstrap_SwaptionPrice_eq89224.png" alt="$\tau$">.</p><pre>Data type : string</pre><p><b><tt>[SwaptionMaturities]</tt></b> : Times when swaptions expire. This are also the times when the swap contracts begin, <img src="bootstrap_SwaptionPrice_eq63384.png" alt="$T_{Start}$">.</p><pre>Data type : string</pre><p><b><tt>[SwaptionAbsDiffStrikes]</tt></b> : Swaption strike rates, which are defined as absolute difference above forward swap rates.</p><pre>Data type : string</pre><p><b><tt>[CompoundingFrequency]</tt></b> : The annual frequency, <img src="bootstrap_SwaptionPrice_eq85998.png" alt="$f$">, at which the underlying swap contract is settled.</p><pre>Data type : double</pre><p><b><tt>[volatilityType]</tt></b> : Specifies whether the volatility is 'lognormal vol' or 'normal vol'. Please note that the ability to price with 'normal vol' is yet to be included.</p><pre>Data type : string</pre><p><b><tt>[OptionType]</tt></b> : Specifies whether the swaption is a 'call' or a 'put'. For a call swaption the buyer has the option to receive the fixed rate and pay the floating rate. For a put option the buyer has the option to receive the floating rate and pay the fixed rate.</p><pre>Data type : string</pre><p><b><tt>[OutputType]</tt></b> :  Specifies whether the class will output swaption 'Price', 'LogNormal Vol' or 'Normal Vol'</p><pre>Data type : string</pre><p><b><i>Outputs</i></b></p><p>A three dimensional data series object of  swaption prices, or volatilities, with axes corresponding to the maturity, tenor and strike rates of the underlying swap contracts.</p><p><b><i>Calculations</i></b></p><p>First, equilibrium forward swap rates and annuity factors are calculated using the <tt>EQFORWARDSWAPRATE()</tt> class (please see separate documentation for details).</p><p>To find the implied volatility (normal or lognormal) the volatility is taken from <tt>Dataseries(2)</tt> and multiplied or divided by the forward swap rate to give the implied volatility for normal or lognormal, respectively.</p><p>If the chosen output type is 'price' then swaption prices are calculated using the <tt>BlackPrice()</tt> class (please see separate documentation for details).</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+       <span class="keyword">function</span> results = bs(obj,DataSeriesIn, ParametersIn)
+</pre><pre class="codeinput">            <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+            <span class="comment">% Step 1 :: enter comma separated data into arrays</span>
+            newobject = prursg.Bootstrap.bootstrap_ZCBtoSwapRate;
+
+            obj.SwapTenors = newobject.createArrayfromCSVstring<span class="keyword">...</span>
+                (ParametersIn{1});
+            obj.SwaptionMaturities = newobject.createArrayfromCSVstring<span class="keyword">...</span>
+                (ParametersIn{2});
+            obj.SwaptionAbsDiffStrikes = newobject.createArrayfromCSVstring<span class="keyword">...</span>
+                (ParametersIn{3});
+            obj.CompoundingFrequency = ParametersIn{4};
+            obj.volatilityType =  DataSeriesIn(2).volatilityType;
+
+            obj.OutputType = ParametersIn{5};
+            obj.OptionType = ParametersIn{6};
+
+            obj.ZCBPRICES = DataSeriesIn(1).values;
+            obj.ZCBMaturities = DataSeriesIn(1).axes(1).values;
+</pre><pre class="codeinput">            <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+            <span class="comment">% Step 2 :: Set-Up data series object to store results</span>
+            <span class="comment">% :: use existing raw data series object to achieve this</span>
+
+            inumberOfDates =  size(DataSeriesIn(1),1);
+
+           obj.newDataSeriesObject = prursg.Engine.DataSeries_DynamicV3();
+           obj.newDataSeriesObject.dates = DataSeriesIn(1).dates;
+           obj.newDataSeriesObject.values = cell( inumberOfDates, 1);
+           obj.newDataSeriesObject.axes(1).values = obj.SwapTenors;
+           obj.newDataSeriesObject.axes(2).values= obj.SwaptionMaturities;
+           obj.newDataSeriesObject.axes(3).values= obj.SwaptionAbsDiffStrikes;
+           obj.newDataSeriesObject.axes(1).title = <span class="string">'Swap Tenor'</span>;
+           obj.newDataSeriesObject.axes(2).title = <span class="string">'Swaption Maturity'</span>;
+           obj.newDataSeriesObject.axes(3).title = <span class="string">'Swaption Strikes'</span>;
+            <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+           <span class="comment">% Add Dynamic properties</span>
+           obj.newDataSeriesObject.addprop(<span class="string">'description'</span>);
+           obj.newDataSeriesObject.addprop(<span class="string">'ratetype'</span>);
+           obj.newDataSeriesObject.addprop(<span class="string">'compounding'</span>);
+           obj.newDataSeriesObject.addprop( <span class="string">'compoundingfrequency'</span>);
+           obj.newDataSeriesObject.addprop(<span class="string">'daycount'</span>) ;
+           obj.newDataSeriesObject.addprop(<span class="string">'units'</span>) ;
+           obj.newDataSeriesObject.addprop(<span class="string">'optiontype'</span>);
+           obj.newDataSeriesObject.addprop(<span class="string">'volatilityType'</span>);
+           <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+           <span class="comment">% Set property values</span>
+           obj.newDataSeriesObject.description = {<span class="string">'derived swaption prices'</span>};
+           obj.newDataSeriesObject.ratetype = {<span class="string">'swap'</span>};
+           obj.newDataSeriesObject.compounding ={<span class="string">'ann'</span>};
+           obj.newDataSeriesObject.compoundingfrequency = <span class="keyword">...</span>
+               {obj.CompoundingFrequency};
+           obj.newDataSeriesObject.daycount ={<span class="string">'na'</span>};
+           obj.newDataSeriesObject.units ={<span class="string">'absolute'</span>};
+           obj.newDataSeriesObject.optiontype ={obj.OptionType};
+           obj.newDataSeriesObject.volatilityType = {obj.OutputType};
+
+           SWAPRATETENOR = 1/ obj.CompoundingFrequency;
+</pre><pre class="codeinput">           <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+            <span class="comment">% Step 3 :: Calculate Data Series Values</span>
+
+           newblackpriceObject = prursg.Bootstrap.bsBlackPrice;
+
+
+           <span class="keyword">if</span> strcmp( lower(obj.OutputType) , lower(obj.volatilityType) )
+               <span class="comment">% Simply return inputted volatility values values</span>
+               obj.newDataSeriesObject.values = DataSeriesIn(2).values ;
+           <span class="keyword">else</span>
+               <span class="keyword">for</span> i= 1 : inumberOfDates
+                   obj.newDataSeriesObject.values{i,1} = <span class="keyword">...</span>
+                       zeros(size(obj.newDataSeriesObject.axes(1).values,2)<span class="keyword">...</span>
+                       ,size(obj.newDataSeriesObject.axes(2).values,2));
+                   <span class="keyword">for</span> j = 1 : size(obj.newDataSeriesObject.axes<span class="keyword">...</span>
+                           (1).values,2)
+                       SwapTenor = obj.newDataSeriesObject.axes(1).values(j);
+                       <span class="keyword">for</span> k = 1 : size(obj.newDataSeriesObject.axes(2)<span class="keyword">...</span>
+                               .values,2)
+                           SwaptionMaturity = obj.newDataSeriesObject<span class="keyword">...</span>
+                               .axes(2).values(k);
+                           [swapRate annuityValue]= <span class="keyword">...</span>
+                               newobject.EQFORWARDSWAPRATE(obj.ZCBPRICES{1,i}<span class="keyword">...</span>
+                               ,obj.ZCBMaturities, SwaptionMaturity,<span class="keyword">...</span>
+                               SwapTenor, SWAPRATETENOR);
+                           <span class="keyword">for</span> l = 1 : size(obj.newDataSeriesObject.axes(3)<span class="keyword">...</span>
+                                   .values,2)
+                               SwaptionStrike = max(0,swapRate +<span class="keyword">...</span>
+                                   obj.newDataSeriesObject.axes(3).values(l));
+                               <span class="comment">% Get swaption implied volatility :: W expect</span>
+                               <span class="comment">% a perfect match can be found in the input</span>
+                               <span class="comment">% swaption volatility matrix</span>
+
+                               impliedVolatility =  DataSeriesIn(2)<span class="keyword">...</span>
+                                   .getDataByName(SwapTenor,SwaptionMaturity,<span class="keyword">...</span>
+                                   (SwaptionStrike -swapRate));
+
+                               <span class="keyword">switch</span> lower(obj.OutputType)
+
+                                   <span class="keyword">case</span> <span class="string">'normal vol'</span>
+                                       value = impliedVolatility*swapRate;
+                                   <span class="keyword">case</span> <span class="string">'lognormal vol'</span>
+                                       value = impliedVolatility/swapRate;
+                                   <span class="keyword">case</span> <span class="string">'price'</span>
+                                       SwaptionStrike = max(0,swapRate + <span class="keyword">...</span>
+                                           obj.newDataSeriesObject.axes(3)<span class="keyword">...</span>
+                                           .values(l));
+
+                                       <span class="keyword">switch</span> lower(obj.volatilityType)
+
+                                           <span class="keyword">case</span> <span class="string">'lognormal vol'</span>
+                                               value = newblackpriceObject<span class="keyword">...</span>
+                                                   .BlackPrice( swapRate ,<span class="keyword">...</span>
+                                                   SwaptionStrike , <span class="keyword">...</span>
+                                                   SwaptionMaturity ,<span class="keyword">...</span>
+                                                   impliedVolatility , <span class="keyword">...</span>
+                                                   annuityValue,<span class="keyword">...</span>
+                                                   obj.OptionType );
+                                           <span class="keyword">case</span> <span class="string">'normal vol'</span>
+                                               <span class="comment">% placeholder for the</span>
+                                               <span class="comment">% gaussian pricing formulae</span>
+                                       <span class="keyword">end</span>
+
+                               <span class="keyword">end</span>
+
+                               obj.newDataSeriesObject.values{i,1}(j,k, l) <span class="keyword">...</span>
+                                   = value ;
+                           <span class="keyword">end</span>
+                       <span class="keyword">end</span>
+                   <span class="keyword">end</span>
+               <span class="keyword">end</span>
+           <span class="keyword">end</span>
+</pre><pre class="codeinput">           <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+           <span class="comment">% Step4. Return data series object</span>
+           results = obj.newDataSeriesObject;
+</pre><pre class="codeinput">       <span class="keyword">end</span>
+
+    <span class="comment">% Methods and functions</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Swaption Price
+%
+% *The class returns a three dimensional data series object of swaption
+% prices with axes corresponding to the maturity, tenor and strike rates
+% of the underlying swap contracts.*
+%
+%
+%%
+%MATLAB Code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_SwaptionPrice < handle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% How to use the class  
+%
+% There are three ways to use this class:
+%
+% # To produce a three dimensional data series object of swaption prices
+% with axes corresponding to the maturity, tenor and strike rates of the
+% underlying swaption contracts.
+% # To produce a three dimensional data series object of log-normal swaption
+% volatilities with axes corresponding to the maturity, tenor and strike 
+% rates of the underlying swaption contracts.
+% # To produce a three dimensional data series object of normal swaption 
+% volatilities with axes corresponding to the maturity, tenor and strike 
+% rates of the underlying swaption contracts.
+%
+%% Properties
+%
+% *|[ZCBPRICES]|* : The price of a zero coupon bond, $B(t,T)$,
+% at present time, $t$, which pays 1 at maturity, $t=T$.
+%
+%  Data type : Data series, doubles
+%
+% *|[ZCBMaturities]|* : Times, $T$, when the zero coupon bonds mature.
+%
+%  Data type : Data series, doubles
+%       
+% *|[outputfreq]|* : A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data type : string
+%
+% *|[SwapTenors]|* : The length of the swap contracts, $\tau$.
+%
+%  Data type : string
+%
+% *|[SwaptionMaturities]|* : Times when swaptions expire. This are also the
+% times when the swap contracts begin, $T_{Start}$.
+%
+%  Data type : string
+%
+% *|[SwaptionAbsDiffStrikes]|* : Swaption strike rates, which are defined as their 
+% absolute difference above the initial forward swap rates.
+%
+%  Data type : string
+%
+% *|[CompoundingFrequency]|* : The annual frequency, $f$, at which 
+% the underlying swap contract is settled.
+%
+%  Data type : double
+%
+% *|[volatilityType]|* : Specifies whether the volatility is 'lognormal vol'
+% or 'normal vol'. Please note that the ability to cope with 'normal vol'
+% is yet to be included.
+%
+%  Data type : string
+%
+% *|[OptionType]|* : Specifies whether the swaption is a 'call' or a 'put'.
+% For a call swaption the buyer has the option to receive the fixed rate
+% and pay the floating rate. For a put option the buyer has the option to
+% receive the floating rate and pay the fixed rate.
+%
+%  Data type : string
+%
+% *|[OutputType]|* :  Specifies whether the class will output swaption
+% 'Price', 'LogNormal Vol' or 'Normal Vol'.
+%
+%  Data type : string
+%
+% *|[newDataSeriesObject]|* : A new  data series oject setup to store 
+% results.
+%
+%  Data type : -
+%
+%%
+%MATLAB Code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+    properties
+        
+        ZCBPRICES ;
+        ZCBMaturities ; 
+        outputfreq ;  
+        
+        SwapTenors ;
+        SwaptionMaturities ;
+        SwaptionAbsDiffStrikes ; 
+        CompoundingFrequency; 
+        
+        volatilityType;
+        
+        OptionType
+        OutputType
+                
+         
+        newDataSeriesObject
+        
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%% List of Methods
+% The class introduces one new method:
+%
+% *|1)[bootstrap_SwaptionPrice()]|* : Function returns a three dimensional
+% data series object of swaption prices, or volatilities, with axes 
+% corresponding to the maturity, tenor and strike rates of the underlying 
+% swap contracts.
+%
+%%
+%MATLAB Code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods
+        
+    % Constructor
+    
+        function obj = bootstrap_SwaptionPrice()
+
+        end
+        
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of Methods
+%
+% 
+% # *|[bootstrap_SwaptionPrice()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns a three dimensional data series object of 
+% swaption prices, or volatilities, with axes corresponding to the
+% maturity, tenor and strike rates of the underlying swap contracts.
+%
+% *_Inputs_*
+%
+% *|[ZCBPRICES]|* : The price of a zero coupon bond, $B(t,T)$,
+% at present time, $t$, which pays 1 at maturity, $t=T$.
+%
+%  Data type : Data series, doubles
+%
+% *|[ZCBMaturities ]|* : Times, $T$, when the zero coupon bonds mature.
+%
+%  Data type : Data series, doubles
+%       
+% *|[outputfreq]|* : A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data type : string
+%
+% *|[SwapTenors]|* : The length of the swap contracts, $\tau$.
+%
+%  Data type : string
+%
+% *|[SwaptionMaturities]|* : Times when swaptions expire. This are also the
+% times when the swap contracts begin, $T_{Start}$.
+%
+%  Data type : string
+%
+% *|[SwaptionAbsDiffStrikes]|* : Swaption strike rates, which are defined
+% as absolute difference above forward swap rates.
+%
+%  Data type : string
+%
+% *|[CompoundingFrequency]|* : The annual frequency, $f$, at which 
+% the underlying swap contract is settled.
+%
+%  Data type : double
+%
+% *|[volatilityType]|* : Specifies whether the volatility is 'lognormal vol'
+% or 'normal vol'. Please note that the ability to price with 'normal vol'
+% is yet to be included.
+%
+%  Data type : string
+%
+% *|[OptionType]|* : Specifies whether the swaption is a 'call' or a 'put'.
+% For a call swaption the buyer has the option to receive the fixed rate
+% and pay the floating rate. For a put option the buyer has the option to
+% receive the floating rate and pay the fixed rate.
+%
+%  Data type : string
+%
+% *|[OutputType]|* :  Specifies whether the class will output swaption
+% 'Price', 'LogNormal Vol' or 'Normal Vol'
+%
+%  Data type : string
+%
+% *_Outputs_*
+%
+% A three dimensional data series object of  swaption prices, or 
+% volatilities, with axes corresponding to the maturity, tenor and strike 
+% rates of the underlying swap contracts.
+%
+% *_Calculations_*
+%
+% First, equilibrium forward swap rates and annuity factors are calculated
+% using the |EQFORWARDSWAPRATE()| class (please see separate documentation 
+% for details).
+%
+% To find the implied volatility (normal or lognormal) the volatility is
+% taken from |Dataseries(2)| and multiplied or divided by 
+% the forward swap rate to give the implied volatility for normal or
+% lognormal, respectively.
+%
+% If the chosen output type is 'price' then swaption prices are calculated
+% using the |BlackPrice()| class (please see separate documentation for
+% details).
+
+%%
+%MATLAB Code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+       function results = bs(obj,DataSeriesIn, ParametersIn)
+           
+           %%
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            % Step 1 :: enter comma separated data into arrays       
+            newobject = prursg.Bootstrap.bootstrap_ZCBtoSwapRate;
+            
+            obj.SwapTenors = newobject.createArrayfromCSVstring...
+                (ParametersIn{1});        
+            obj.SwaptionMaturities = newobject.createArrayfromCSVstring...
+                (ParametersIn{2}); 
+            obj.SwaptionAbsDiffStrikes = newobject.createArrayfromCSVstring...
+                (ParametersIn{3});
+            obj.CompoundingFrequency = ParametersIn{4}; 
+            obj.volatilityType =  DataSeriesIn(2).volatilityType;
+            
+            obj.OutputType = ParametersIn{5}; 
+            obj.OptionType = ParametersIn{6};                      
+                      
+            obj.ZCBPRICES = DataSeriesIn(1).values;
+            obj.ZCBMaturities = DataSeriesIn(1).axes(1).values;    
+            %%
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            % Step 2 :: Set-Up data series object to store results
+            % :: use existing raw data series object to achieve this
+            
+            inumberOfDates =  size(DataSeriesIn(1),1); 
+                        
+           obj.newDataSeriesObject = prursg.Engine.DataSeries_DynamicV3();        
+           obj.newDataSeriesObject.dates = DataSeriesIn(1).dates;   
+           obj.newDataSeriesObject.values = cell( inumberOfDates, 1);
+           obj.newDataSeriesObject.axes(1).values = obj.SwapTenors;
+           obj.newDataSeriesObject.axes(2).values= obj.SwaptionMaturities;
+           obj.newDataSeriesObject.axes(3).values= obj.SwaptionAbsDiffStrikes;
+           obj.newDataSeriesObject.axes(1).title = 'Swap Tenor';
+           obj.newDataSeriesObject.axes(2).title = 'Swaption Maturity';
+           obj.newDataSeriesObject.axes(3).title = 'Swaption Strikes';           
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+           % Add Dynamic properties  
+           obj.newDataSeriesObject.addprop('description');
+           obj.newDataSeriesObject.addprop('ratetype');
+           obj.newDataSeriesObject.addprop('compounding');
+           obj.newDataSeriesObject.addprop( 'compoundingfrequency');
+           obj.newDataSeriesObject.addprop('daycount') ;
+           obj.newDataSeriesObject.addprop('units') ;           
+           obj.newDataSeriesObject.addprop('optiontype');          
+           obj.newDataSeriesObject.addprop('volatilityType');
+           %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+           % Set property values
+           obj.newDataSeriesObject.description = {'derived swaption prices'};
+           obj.newDataSeriesObject.ratetype = {'swap'};
+           obj.newDataSeriesObject.compounding ={'ann'};
+           obj.newDataSeriesObject.compoundingfrequency = ...
+               {obj.CompoundingFrequency};
+           obj.newDataSeriesObject.daycount ={'na'};
+           obj.newDataSeriesObject.units ={'absolute'};
+           obj.newDataSeriesObject.optiontype ={obj.OptionType};           
+           obj.newDataSeriesObject.volatilityType = {obj.OutputType};
+                                 
+           SWAPRATETENOR = 1/ obj.CompoundingFrequency;
+        %%   
+           %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            % Step 3 :: Calculate Data Series Values
+           
+           newblackpriceObject = prursg.Bootstrap.bsBlackPrice;
+                     
+               
+           if strcmp( lower(obj.OutputType) , lower(obj.volatilityType) )
+               % Simply return inputted volatility values values
+               obj.newDataSeriesObject.values = DataSeriesIn(2).values ;
+           else
+               for i= 1 : inumberOfDates
+                   obj.newDataSeriesObject.values{i,1} = ...
+                       zeros(size(obj.newDataSeriesObject.axes(1).values,2)...
+                       ,size(obj.newDataSeriesObject.axes(2).values,2)); 
+                   for j = 1 : size(obj.newDataSeriesObject.axes...
+                           (1).values,2)
+                       SwapTenor = obj.newDataSeriesObject.axes(1).values(j);
+                       for k = 1 : size(obj.newDataSeriesObject.axes(2)...
+                               .values,2)
+                           SwaptionMaturity = obj.newDataSeriesObject...
+                               .axes(2).values(k);
+                           [swapRate annuityValue]= ...
+                               newobject.EQFORWARDSWAPRATE(obj.ZCBPRICES{1,i}...
+                               ,obj.ZCBMaturities, SwaptionMaturity,...
+                               SwapTenor, SWAPRATETENOR);
+                           for l = 1 : size(obj.newDataSeriesObject.axes(3)...
+                                   .values,2)
+                               SwaptionStrike = max(0,swapRate +...
+                                   obj.newDataSeriesObject.axes(3).values(l));
+                               % Get swaption implied volatility :: W expect
+                               % a perfect match can be found in the input 
+                               % swaption volatility matrix
+                               
+                               impliedVolatility =  DataSeriesIn(2)...
+                                   .getDataByName(SwapTenor,SwaptionMaturity,...
+                                   (SwaptionStrike -swapRate));
+                               
+                               switch lower(obj.OutputType)
+                                   
+                                   case 'normal vol'
+                                       value = impliedVolatility*swapRate;
+                                   case 'lognormal vol'
+                                       value = impliedVolatility/swapRate;
+                                   case 'price'
+                                       SwaptionStrike = max(0,swapRate + ...
+                                           obj.newDataSeriesObject.axes(3)...
+                                           .values(l));
+                                       
+                                       switch lower(obj.volatilityType)
+                                           
+                                           case 'lognormal vol'
+                                               value = newblackpriceObject...
+                                                   .BlackPrice( swapRate ,...
+                                                   SwaptionStrike , ...
+                                                   SwaptionMaturity ,...
+                                                   impliedVolatility , ...
+                                                   annuityValue,...
+                                                   obj.OptionType );
+                                           case 'normal vol'
+                                               % placeholder for the
+                                               % gaussian pricing formulae
+                                       end
+                                       
+                               end
+                               
+                               obj.newDataSeriesObject.values{i,1}(j,k, l) ...
+                                   = value ;
+                           end
+                       end
+                   end
+               end
+           end
+       %%     
+           %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+           % Step4. Return data series object
+           results = obj.newDataSeriesObject;
+           
+       end
+       
+    % Methods and functions
+    
+   
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

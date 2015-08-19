@@ -1,0 +1,4 @@
+importDir='{RSG_CWD}/BootstrapInput'
+
+$(cd {IRSG_TESTS}/Externals/MDSImporter/deploy; ./run_mdsimport.sh $importDir)
+

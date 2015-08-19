@@ -1,0 +1,334 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Sub-Investment Grade Spread Valuation</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-06-12"><meta name="DC.source" content="bootstrap_subIG.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Sub-Investment Grade Spread Valuation</h1><!--introduction--><p><b>The class returns estimates of sub-investment grade bond spreads partly based on extrapolation from investment grade bond spread data.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">How to Use the Class</a></li><li><a href="#4">Properties</a></li><li><a href="#6">List of Methods</a></li><li><a href="#9">Details of Methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_subIG &lt; handle
+</pre><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>How to Use the Class<a name="3"></a></h2><p>There is one way to use this class:</p><div><ol><li>To produce a group of sub-investment grade bond spreads partly based on extrapolation from investment grade bond spread data.</li></ol></div><h2>Properties<a name="4"></a></h2><p><b><tt>[InvestmentGrade]</tt></b> : Data series containing values of investment grade spreads.</p><pre>Data type : array of doubles</pre><p><b><tt>[subIGratings]</tt></b> : List of sub-investment grade ratings required, separated by commas.</p><pre>Data type : string</pre><p><b><tt>[IndexValue]</tt></b> : Constant converting the spread value to basis points.</p><pre>Data type : integer</pre><p><b><tt>[RecoveryRate]</tt></b> : Assumed rate of return from the defaulted asset.</p><pre>Data type : double</pre><p><b><tt>[Duration]</tt></b> : Assumed default duration of the sub-investment grade bond.</p><pre>Data type : double</pre><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+     properties
+
+         <span class="comment">% Data Series</span>
+         InvestmentGrade = [];
+
+         <span class="comment">% Parameters</span>
+
+         subIGratings = [];
+         IndexValue = [];
+         RecoveryRate = [];
+         Duration = [];
+
+     <span class="keyword">end</span>
+</pre><h2>List of Methods<a name="6"></a></h2><p>The class introduces one new method:</p><p><b><tt>1) [bootstrap_subIG()]</tt></b> : The class returns estimates of sub-investment grade bond spreads partly based on extrapolation from investment grade bond spread data.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+
+       <span class="keyword">function</span> obj = bootstrap_subIG ()
+
+       <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>Details of Methods<a name="9"></a></h2><p><b>1) <tt>[bootstrap_subIG()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><tt><i>Description</i></tt></b></p><p>The class returns estimates of sub-investment grade bond spreads partly based on extrapolation from investment grade bond spread data.</p><p><b><tt><i>Inputs</i></tt></b></p><p><b><tt>[InvestmentGrade]</tt></b> : Data series containing values of investment grade spreads.</p><pre>Data type : array of doubles</pre><p><b><tt>[subIGratings]</tt></b> : List of sub-investment grade ratings required, separated by commas.</p><pre>Data type : string</pre><p><b><tt>[IndexValue]</tt></b> : Constant converting the spread value to basis points.</p><pre>Data type : integer</pre><p><b><tt>[RecoveryRate]</tt></b> : Assumed rate of return from a defaulted asset.</p><pre>Data type : double</pre><p><b><tt>[Duration]</tt></b> : Assumed default duration of the sub-investment grade bond.</p><pre>Data type : double</pre><p><b><tt><i>Outputs</i></tt></b></p><p>A group of sub-investment grade bond spreads partly based on extrapolation from investment grade bond spread data.</p><pre>Data type : array of doubles and strings.</pre><p><b><tt><i>Calculations</i></tt></b></p><p>The spread for our worst rated bonds is found using the formula;</p><p><img src="bootstrap_subIG_eq35134.png" alt="$$ Value_n= \gamma\left(R^{-1/Dur}-1\right) $$"></p><p>with,</p><p><img src="bootstrap_subIG_eq09050.png" alt="$Value_n$"> : The spread for the worst rated bond we desire, with an assumed recovery rate of  <img src="bootstrap_subIG_eq85930.png" alt="$R$"> and an assumed default duration, <img src="bootstrap_subIG_eq32608.png" alt="$Dur$">. The index , <img src="bootstrap_subIG_eq25947.png" alt="$n$">, denotes that this is the <img src="bootstrap_subIG_eq25947.png" alt="$n$"> th worst rated bond out of our <img src="bootstrap_subIG_eq25947.png" alt="$n$"> bond ratings.</p><p><img src="bootstrap_subIG_eq41477.png" alt="$\gamma$"> : Constant used to convert the spread value into basis points.</p><p><img src="bootstrap_subIG_eq85930.png" alt="$R$"> : Recovery rate; the assumed proportion of the notional/principal value of the bond received in the event of a default.</p><p><img src="bootstrap_subIG_eq32608.png" alt="$Dur$"> : Default duration; assumed duration of the bond at default.</p><p>To find the spreads for the ratings between the last rating that we have data for (the <img src="bootstrap_subIG_eq81831.png" alt="$m$"> th worst rating) and the calculated worst rating, we assume a constant rate of increase in the spread as we move down ratings. So, the sub investment grade ratings are found using the interation relation:</p><p>For <img src="bootstrap_subIG_eq87296.png" alt="$m<i<n$">,</p><p><img src="bootstrap_subIG_eq82625.png" alt="$$ Value_i= \left(\frac{Value_n}{Value_m}\right)^{1/(n-m)}Value_{i-1} $$"></p><p>with,</p><p><img src="bootstrap_subIG_eq35830.png" alt="$Value_i$"> : Value of the <img src="bootstrap_subIG_eq74232.png" alt="$ith$"> worst bond rating spread.</p><p><img src="bootstrap_subIG_eq12595.png" alt="$Value_m$"> : Value of the lowest bond rating spread that data is available for.</p><p><img src="bootstrap_subIG_eq09050.png" alt="$Value_n$"> : Value of the lowest rated bond spread that is valued here.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    <span class="comment">% Other Methods</span>
+
+        <span class="keyword">function</span> results = bs(obj, DataSeriesIn, ParametersIn)
+
+            obj.InvestmentGrade = DataSeriesIn;
+
+            obj.subIGratings = ParametersIn{1};
+            obj.IndexValue = ParametersIn{2};
+            obj.RecoveryRate = ParametersIn{3};
+            obj.Duration = ParametersIn{4};
+
+            <span class="comment">% interpolation</span>
+            D = str2num(obj.IndexValue)*(1/str2num(obj.RecoveryRate)^<span class="keyword">...</span>
+                (1/str2num(obj.Duration))-1);
+            num_subIG = size(strfind(obj.subIGratings,<span class="string">','</span>),2)+1;
+            LastIG_pos = find(obj.InvestmentGrade.values{1}&gt;0,1,<span class="string">'last'</span>);
+            delta = (D/obj.InvestmentGrade.values{1}(LastIG_pos))^<span class="keyword">...</span>
+                (1/num_subIG);
+
+            subIG(1) = obj.InvestmentGrade.values{1}(LastIG_pos)*delta;
+            <span class="keyword">for</span> i = 2:num_subIG
+                subIG(i) = subIG(i-1)*delta;
+            <span class="keyword">end</span>
+
+            results = obj.InvestmentGrade;
+            results.values{1}(1:LastIG_pos) =<span class="keyword">...</span>
+                obj.InvestmentGrade.values{1}(1:LastIG_pos);
+            results.values{1}(LastIG_pos+1:num_subIG+4) = subIG(1:num_subIG);
+
+
+        <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Sub-Investment Grade Spread Valuation
+% *The class returns estimates of sub-investment grade bond spreads partly
+% based on extrapolation from investment grade bond spread data.*
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_subIG < handle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% How to Use the Class
+% There is one way to use this class:
+%
+% # To produce a group of sub-investment grade bond spreads partly based on
+% extrapolation from investment grade bond spread data.
+%
+%
+%% Properties
+%
+% *|[InvestmentGrade]|* : Data series containing values of investment grade
+% spreads.
+%
+%  Data type : array of doubles
+%
+% *|[subIGratings]|* : List of sub-investment grade ratings required,
+% separated by commas.
+%
+%  Data type : string
+%
+% *|[IndexValue]|* : Constant converting the spread value to basis points.
+%
+%  Data type : integer
+%
+% *|[RecoveryRate]|* : Assumed rate of return from the defaulted asset.
+%
+%  Data type : double
+%
+% *|[Duration]|* : Assumed default duration of the sub-investment grade
+% bond.
+%
+%  Data type : double
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     properties
+         
+         % Data Series
+         InvestmentGrade = [];
+         
+         % Parameters
+         
+         subIGratings = [];
+         IndexValue = [];
+         RecoveryRate = [];
+         Duration = [];
+         
+     end
+%% List of Methods
+% The class introduces one new method:
+%
+% *|1) [bootstrap_subIG()]|* : The class returns estimates of 
+% sub-investment grade bond spreads partly based on extrapolation from 
+% investment grade bond spread data.
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods
+        
+    % Constructor
+    
+       function obj = bootstrap_subIG ()
+           
+       end
+            
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
+%% Details of Methods
+%
+% *1) |[bootstrap_subIG()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *|_Description_|*
+%
+% The class returns estimates of sub-investment grade bond spreads partly 
+% based on extrapolation from investment grade bond spread data.
+%
+% *|_Inputs_|*
+%
+% *|[InvestmentGrade]|* : Data series containing values of investment grade
+% spreads.
+%
+%  Data type : array of doubles
+%
+% *|[subIGratings]|* : List of sub-investment grade ratings required,
+% separated by commas.
+%
+%  Data type : string
+%
+% *|[IndexValue]|* : Constant converting the spread value to basis points.
+%
+%  Data type : integer
+%
+% *|[RecoveryRate]|* : Assumed rate of return from a defaulted asset.
+%
+%  Data type : double
+%
+% *|[Duration]|* : Assumed default duration of the sub-investment grade
+% bond.
+%
+%  Data type : double
+% 
+% *|_Outputs_|*
+% 
+% A group of sub-investment grade bond spreads partly based on
+% extrapolation from investment grade bond spread data.
+%
+%  Data type : array of doubles and strings.
+% 
+% *|_Calculations_|*
+%
+% The spread for our worst rated bonds is found using the formula;
+%
+% $$ Value_n= \gamma\left(R^{-1/Dur}-1\right) $$
+%
+% with, 
+%  
+% $Value_n$ : The spread for the worst rated bond we desire, with an 
+% assumed recovery rate of  $R$ and an assumed default duration, $Dur$. The 
+% index , $n$, denotes that this is the $n$ th worst rated bond out of our
+% $n$ bond ratings.
+%
+% $\gamma$ : Constant used to convert the spread value into basis points.
+%
+% $R$ : Recovery rate; the assumed proportion of the notional/principal
+% value of the bond received in the event of a default.
+%
+% $Dur$ : Default duration; assumed duration of the bond at default.
+%
+% To find the spreads for the ratings between the last rating that we have
+% data for (the $m$ th worst rating) and the calculated worst rating, we
+% assume a constant rate of increase in the spread as we move down ratings.
+% So, the sub investment grade ratings are found using the interation
+% relation: 
+%
+% For $m<i<n$,
+%
+% $$ Value_i= \left(\frac{Value_n}{Value_m}\right)^{1/(n-m)}Value_{i-1} $$
+%
+% with, 
+%
+% $Value_i$ : Value of the $ith$ worst bond rating spread.
+%
+% $Value_m$ : Value of the lowest bond rating spread that data is available
+% for. 
+%
+% $Value_n$ : Value of the lowest rated bond spread that is valued here.
+%
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Other Methods
+    
+        function results = bs(obj, DataSeriesIn, ParametersIn)
+            
+            obj.InvestmentGrade = DataSeriesIn;
+            
+            obj.subIGratings = ParametersIn{1};
+            obj.IndexValue = ParametersIn{2};
+            obj.RecoveryRate = ParametersIn{3};
+            obj.Duration = ParametersIn{4};            
+            
+            % interpolation
+            D = str2num(obj.IndexValue)*(1/str2num(obj.RecoveryRate)^...
+                (1/str2num(obj.Duration))-1);
+            num_subIG = size(strfind(obj.subIGratings,','),2)+1;
+            LastIG_pos = find(obj.InvestmentGrade.values{1}>0,1,'last');
+            delta = (D/obj.InvestmentGrade.values{1}(LastIG_pos))^...
+                (1/num_subIG);
+            
+            subIG(1) = obj.InvestmentGrade.values{1}(LastIG_pos)*delta;
+            for i = 2:num_subIG
+                subIG(i) = subIG(i-1)*delta;
+            end
+            
+            results = obj.InvestmentGrade;
+            results.values{1}(1:LastIG_pos) =...
+                obj.InvestmentGrade.values{1}(1:LastIG_pos);
+            results.values{1}(LastIG_pos+1:num_subIG+4) = subIG(1:num_subIG);
+
+            
+        end
+                  
+        
+
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

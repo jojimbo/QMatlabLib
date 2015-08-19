@@ -1,0 +1,34 @@
+<BootstrapValidation>
+	<ValidationReport effectiveDate="30/Nov/2011" frequency="d" toDate="21/Sep/2010" description="This is a description1" reportTemplate="newReportTemplate1" fromDate="20/Sep/2010" reportName="newReportName1" multiDateReports="Y" format="DOC" validationAlgorithm="customParametersAlgorithm">
+		<InputDataSets>
+			<DataSet name="RowDataSet">
+				<DataSeries name="TC5_3D"/>
+				<DataSeries name="TC5_2D"/>
+			</DataSet>
+			<DataSet name="BootstrappedDataSet">
+				<DataSeries name="TC5_3D"/>
+				<DataSeries name="TC5_2D"/>
+			</DataSet>
+		</InputDataSets>
+		<Params>
+			<Property name="desc" type="string">theDesc2</Property>
+			<Property name="amount" type="double">5202500.36</Property>
+		</Params>
+	</ValidationReport>
+    <ValidationReport effectiveDate="30/Nov/2011" frequency="d" toDate="21/Sep/2010" description="This is a description2" reportTemplate="newReportTemplate2" fromDate="20/Sep/2010" reportName="newReportName2" multiDateReports="Y" format="DOC" validationAlgorithm="customParametersAlgorithm">
+		<InputDataSets>
+			<DataSet name="RowDataSet">
+				<DataSeries name="TC5_3D"/>
+				<DataSeries name="TC5_2D"/>
+			</DataSet>
+			<DataSet name="BootstrappedDataSet">
+				<DataSeries name="TC5_3D"/>
+				<DataSeries name="TC5_2D"/>
+			</DataSet>
+		</InputDataSets>
+		<Params>
+			<Property name="desc" type="string">theDesc2</Property>
+			<Property name="amount" type="double">5202500.36</Property>
+		</Params>
+	</ValidationReport>
+</BootstrapValidation>

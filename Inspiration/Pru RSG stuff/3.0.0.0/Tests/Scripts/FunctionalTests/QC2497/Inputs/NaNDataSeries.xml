@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataSeriesSet name="All" date="31/Dec/2009">
+  <DataSeries name="NaN1">
+  <DynamicProperties>
+    <Property name="Currency" type="string">GBP</Property>
+    <Property name="ratetype" type="string">swap</Property>
+    <Property name="compounding" type="string">ann</Property>
+    <Property name="compoundingfrequency" type="number">2</Property>
+    <Property name="daycount" type="number">365</Property>
+    <Property name="units" type="string">percent</Property>
+  </DynamicProperties>
+    <Dates>
+      <Date effectiveDate="30/Nov/2011">31/Dec/2009</Date>
+      <Date effectiveDate="30/Dec/2011">30/Nov/2009</Date>      
+    </Dates>
+    <Axis name="term" value="1">
+        <Axis name ="tenor" value="3">            
+            <Values>
+                <V>0.00583</V>
+                <V>0.00649</V>        
+            </Values>
+        </Axis>
+    </Axis>
+    <Axis name="term" value="2">
+      <Axis name ="tenor" value="4">            
+            <Values>
+                <V>0.00583</V>
+                <V>0.00649</V>        
+            </Values>
+        </Axis>
+    </Axis>    
+  </DataSeries>  
+</DataSeriesSet>

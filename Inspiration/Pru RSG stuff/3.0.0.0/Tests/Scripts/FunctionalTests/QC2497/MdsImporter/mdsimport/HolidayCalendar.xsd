@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (x64) (http://www.altova.com) by RiskCare (RiskCare Ltd) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="StaticData">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="Calendars" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Calendar" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Dates">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Date" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="date" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

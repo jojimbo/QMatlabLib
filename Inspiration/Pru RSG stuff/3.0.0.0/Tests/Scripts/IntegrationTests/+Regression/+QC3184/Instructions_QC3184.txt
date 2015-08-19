@@ -1,0 +1,29 @@
+All paths provided below use the MKS folder structure.
+
+********* Set Up Information for QC3184 ********* 
+
+- Navigate to folder PruRSG/iRSG/Tests/IntegrationTests/QC3184 
+
+- Open the app.config file and ensure the following:
+	- The RSGRoot folder points to PruRSG/iRSG/Source/
+	- The InputFolderPath folder points to PruRSG/iRSG/Tests/IntegrationTests/+Regression/+QC3184/Inputs/
+	- The OutputFolderPath folder points to a folder where all outputs will be saved. This is a user defined folder.
+	- The ModelsFolder folder points to PruRSG/Pillar_1/Source/prursg/
+	  * The following Pillar 1 Models checkpoint should be used - MKS label: P1_BL4_1_0_13 Revision 1.20
+    - The PreviousFileOutputs folder points to a folder where output files from the currect tests will be compared against
+
+- Navigate to folder PruRSG/iRSG/Tests/IntegrationTests/
+
+- Add the xunit folder and its subfolders to path. The xunit folder can be found under PruRSG/iRSG/xunit
+
+- Execute the following command:
+	Regression.QC3184.Test_QC3184
+
+*Note that the test script clears down the database prior to its execution.
+
+*************************************************
+
+
+
+
+

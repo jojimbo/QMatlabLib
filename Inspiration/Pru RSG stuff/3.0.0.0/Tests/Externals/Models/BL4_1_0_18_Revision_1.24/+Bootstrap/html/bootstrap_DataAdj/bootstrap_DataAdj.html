@@ -1,0 +1,345 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Data Adjustment</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-27"><meta name="DC.source" content="bootstrap_DataAdj.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Data Adjustment</h1><!--introduction--><p><b>The class allows the user to perform adjustments to a data series by acting on it with an adjustment data series.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">How to Use the Class</a></li><li><a href="#3">Properties</a></li><li><a href="#5">List of Methods</a></li><li><a href="#8">Details of Methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_DataAdj &lt; prursg.Bootstrap.BaseBootstrapAlgorithm
+</pre><h2>How to Use the Class<a name="2"></a></h2><p>Given an input data series we adjust it using the values given in <b><tt>[InputAdjDataSeries]</tt></b> and the operation given in <b><tt>[operation]</tt></b>.</p><h2>Properties<a name="3"></a></h2><p><b>Input Data Series</b></p><p><b><tt>[InputAdjDataSeries]</tt></b> - Data series used to adjust the input data series.</p><pre>Data Type: data series</pre><p><b>Input Parameters</b></p><p><b><tt>[outputfreq]</tt></b> - A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data Type: string</pre><p><b><tt>[operation]</tt></b> - Operation used to make the adjustment; "+", "-", "*" or "/".</p><pre>Data Type: string</pre><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+    properties
+
+      <span class="comment">% Data Series</span>
+        InputAdjDataSeries  = [];
+
+
+      <span class="comment">% Parameters</span>
+
+        outputfreq ;
+        operation ;
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="5"></a></h2><p>This class introduces one method:</p><p><b><tt>[bootstrap_DataAdj ()]</tt></b> - Function returns an adjusted data series by acting on the input data series with an adjustment series by a simple operation specified in <b><tt>[operation]</tt></b>.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+
+       <span class="keyword">function</span> obj = bootstrap_DataAdj ()
+           obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       <span class="keyword">end</span>
+
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>Details of Methods<a name="8"></a></h2><p><b><i>Description</i></b></p><p>Function returns an adjusted data series by acting on the input data series with <b><tt>[InputAdjDataSeries]</tt></b> by a simple operation specified by <b><tt>[operation]</tt></b></p><p><b><i>Inputs</i></b></p><p><b><tt>[InputAdjDataSeries]</tt></b> - Data series used to adjust the input data series.</p><pre>Data Type: data series</pre><p><b><tt>[outputfreq]</tt></b> - Time series used to produce a frequency profile.</p><pre>Data Type: string</pre><p><b><tt>[operation]</tt></b> - Operation used to make the adjustment; "+", "-", "*" or "/".</p><pre>Data Type: string</pre><p><b><i>Outputs</i></b></p><p>Adjusted version of original data series.</p><p><b><i>Calculations</i></b></p><p>Sort and clone data.</p><p>Ensure that data series fits in with the output frequency profile.</p><p>Apply the adjustment data series with the operation specified in <b><tt>[operation]</tt></b>.</p><p>Update data series properties.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+        <span class="keyword">function</span> results = Bootstrap(obj, DataSeriesIn)
+
+             numOfDataSeries = size(DataSeriesIn,2);
+
+
+             newSortDataSeries=Bootstrap.BsSort();
+
+             obj.InputAdjDataSeries = newSortDataSeries.SortDataSeries<span class="keyword">...</span>
+                 (DataSeriesIn(1).Clone);
+            <span class="keyword">for</span> i =2 : numOfDataSeries
+                 obj.InputAdjDataSeries = <span class="keyword">...</span>
+                     [obj.InputAdjDataSeries <span class="keyword">...</span>
+                     newSortDataSeries.SortDataSeries<span class="keyword">...</span>
+                     (DataSeriesIn(i).Clone)];
+            <span class="keyword">end</span>
+
+             maxTerm = obj.InputAdjDataSeries(1).axes(1).values{1, end};
+
+             BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile<span class="keyword">...</span>
+                 (obj.outputfreq,maxTerm);
+             outputfreqProfile = <span class="keyword">...</span>
+                 BsfrequencyprofileObject.AdjustedIntervalArray;
+
+
+             <span class="keyword">for</span> storing the <span class="string">dataseries</span> <span class="string">objects</span>
+            <span class="keyword">for</span> i =1:numOfDataSeries
+                InputAdjDataSeries_Temp(i) = <span class="keyword">...</span>
+                    BsfrequencyprofileObject.SmallerDataSeriesObject<span class="keyword">...</span>
+                    (outputfreqProfile,obj.InputAdjDataSeries(1,i));
+            <span class="keyword">end</span>
+
+
+               results = InputAdjDataSeries_Temp(1) ;
+
+               <span class="keyword">for</span> i = 2 : numOfDataSeries
+                   <span class="keyword">for</span> j = 1 : size(results.dates, 1)
+
+                       <span class="keyword">if</span> strcmp(obj.operation, <span class="string">'+'</span>)
+                           results.values{j} = results.values{j} + <span class="keyword">...</span>
+                               InputAdjDataSeries_Temp(i).values{j};
+                       <span class="keyword">elseif</span> strcmp(obj.operation, <span class="string">'-'</span>)
+                           results.values{j} =  results.values{j} - <span class="keyword">...</span>
+                               InputAdjDataSeries_Temp(i).values{j};
+                       <span class="keyword">elseif</span> strcmp(obj.operation, <span class="string">'*'</span>)
+                           results.values{j} = results.values{j} .* <span class="keyword">...</span>
+                               InputAdjDataSeries_Temp(i).values{j};
+                       <span class="keyword">elseif</span> strcmp(obj.operation, <span class="string">'/'</span>)
+                           results.values{j} = results.values{j} ./ <span class="keyword">...</span>
+                               InputAdjDataSeries_Temp(i).values{j};
+                       <span class="keyword">end</span>
+                   <span class="keyword">end</span>
+               <span class="keyword">end</span>
+
+
+
+           results.Name = <span class="string">''</span>;
+           results.source =<span class="string">'iMDP'</span>;
+           results.description = <span class="string">'derived using bootstrap_DataAdj method'</span>;
+
+
+        <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Data Adjustment
+% 
+% *The class allows the user to perform adjustments to a data series by 
+% acting on it with an adjustment data series.*
+%
+
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_DataAdj < prursg.Bootstrap.BaseBootstrapAlgorithm
+%% How to Use the Class
+%
+% Given an input data series we adjust it using the values given in
+% *|[InputAdjDataSeries]|* and the operation given in *|[operation]|*.
+
+%% Properties
+% *Input Data Series*
+%
+% *|[InputAdjDataSeries]|* - Data series used to adjust the 
+% input data series.
+% 
+%  Data Type: data series
+%
+% *Input Parameters*
+%
+% *|[outputfreq]|* - A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data Type: string 
+%
+% *|[operation]|* - Operation used to make the adjustment; "+", "-", "*"
+% or "/".
+%
+%  Data Type: string
+
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    properties
+       
+      % Data Series            
+        InputAdjDataSeries  = []; 
+
+      
+      % Parameters 
+       
+        outputfreq ; 
+        operation ;  
+        
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% List of Methods
+% This class introduces one method:
+%
+% *|[bootstrap_DataAdj ()]|* - Function returns an adjusted data series by acting on the input data
+% series with an adjustment series by a simple operation specified in
+% *|[operation]|*.
+%
+
+%%
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    methods
+        
+    % Constructor
+    
+       function obj = bootstrap_DataAdj ()
+           obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       end
+                  
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of Methods
+%
+% *_Description_*
+%
+% Function returns an adjusted data series by acting on the input data
+% series with *|[InputAdjDataSeries]|* by a simple operation 
+% specified by *|[operation]|*
+%
+% *_Inputs_*
+%
+% *|[InputAdjDataSeries]|* - Data series used to adjust the 
+% input data series.
+% 
+%  Data Type: data series
+%
+% *|[outputfreq]|* - Time series used to produce a frequency profile.
+%
+%  Data Type: string 
+%
+% *|[operation]|* - Operation used to make the adjustment; "+", "-", "*"
+% or "/".
+%
+%  Data Type: string
+%
+% *_Outputs_*
+%
+% Adjusted version of original data series.
+%
+% *_Calculations_*
+%
+% Sort and clone data.
+%
+% Ensure that data series fits in with the output frequency profile.
+%
+% Apply the adjustment data series with the operation specified in *|[operation]|*.  
+%
+% Update data series properties.
+
+%% 
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+        function results = Bootstrap(obj, DataSeriesIn)                     
+             
+             numOfDataSeries = size(DataSeriesIn,2);
+           
+            
+             newSortDataSeries=Bootstrap.BsSort();         
+                         
+             obj.InputAdjDataSeries = newSortDataSeries.SortDataSeries...
+                 (DataSeriesIn(1).Clone);
+            for i =2 : numOfDataSeries
+                 obj.InputAdjDataSeries = ...
+                     [obj.InputAdjDataSeries ...
+                     newSortDataSeries.SortDataSeries...
+                     (DataSeriesIn(i).Clone)];                
+            end    
+            
+             maxTerm = obj.InputAdjDataSeries(1).axes(1).values{1, end};                         
+             
+             BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile...
+                 (obj.outputfreq,maxTerm);
+             outputfreqProfile = ...
+                 BsfrequencyprofileObject.AdjustedIntervalArray;
+           
+            
+             for storing the dataseries objects
+            for i =1:numOfDataSeries
+                InputAdjDataSeries_Temp(i) = ...
+                    BsfrequencyprofileObject.SmallerDataSeriesObject...
+                    (outputfreqProfile,obj.InputAdjDataSeries(1,i));
+            end
+             
+                
+               results = InputAdjDataSeries_Temp(1) ;        
+               
+               for i = 2 : numOfDataSeries
+                   for j = 1 : size(results.dates, 1)
+                       
+                       if strcmp(obj.operation, '+')
+                           results.values{j} = results.values{j} + ...
+                               InputAdjDataSeries_Temp(i).values{j};
+                       elseif strcmp(obj.operation, '-')
+                           results.values{j} =  results.values{j} - ...
+                               InputAdjDataSeries_Temp(i).values{j};
+                       elseif strcmp(obj.operation, '*')
+                           results.values{j} = results.values{j} .* ...
+                               InputAdjDataSeries_Temp(i).values{j};
+                       elseif strcmp(obj.operation, '/')
+                           results.values{j} = results.values{j} ./ ...
+                               InputAdjDataSeries_Temp(i).values{j};
+                       end
+                   end
+               end
+               
+          
+            
+           results.Name = '';
+           results.source ='iMDP';         
+           results.description = 'derived using bootstrap_DataAdj method';
+          
+             
+        end
+
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

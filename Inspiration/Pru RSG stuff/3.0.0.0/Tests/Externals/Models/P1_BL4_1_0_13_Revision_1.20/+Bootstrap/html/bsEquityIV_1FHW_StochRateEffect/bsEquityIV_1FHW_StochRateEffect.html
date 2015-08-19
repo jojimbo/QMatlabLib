@@ -1,0 +1,816 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>EQUITY IMPLIED VOLATILITY</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-27"><meta name="DC.source" content="bsEquityIV_1FHW_StochRateEffect.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>EQUITY IMPLIED VOLATILITY</h1><!--introduction--><p>REMOVE STOCHASTIC INTEREST RATE EFFECT</p><p><b>The main purpose of this class is to remove the effect of stochastic interest rates from an equity implied volatility number given a calibration of the One Factor Hull-White Model or to add the effect of stochastic interest rates to an idiosyncratic volatility number</b></p><p>Supporting documentation is the following: <i>O:\01 Pillar I Risk Measurement\05 Deliverables - RSG\03 Implementation\Industrialisation\Data \Market Data Pack\Equity IV extrap Equity Implied Vol One &amp; Two Factor Hull White V3.docx</i></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">How to Use the Class</a></li><li><a href="#3">Properties</a></li><li><a href="#4">List of Methods</a></li><li><a href="#6">Details of Methods</a></li><li><a href="#7"><tt>1) [GetEquityImpliedVolSurface()]</tt></a></li><li><a href="#9"><tt>2) [GetEquityImpliedVol()]</tt></a></li><li><a href="#11"><tt>3) [GetLimitingEquityImpliedVol()]</tt></a></li><li><a href="#13"><tt>4) [FindEquityVolSurface()]</tt></a></li><li><a href="#15"><tt>5) [FindEquityVol()]</tt></a></li><li><a href="#16">Auxillary Functions</a></li><li><a href="#17"><tt>6) [Integral3()]</tt></a></li><li><a href="#19"><tt>7) [Integral4()]</tt></a></li><li><a href="#21"><tt>8) [auxillaryFunction1]</tt></a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bsEquityIV_1FHW_StochRateEffect
+</pre><h2>How to Use the Class<a name="2"></a></h2><p>There are two ways to use the class:</p><div><ol><li>Given a spot implied volatility, we can remove the effect of stochastic interest rates from the spot implied volatility to give the idiosyncratic volatility using the function <b><tt>[FindEquityVol()]</tt></b>. Function <b><tt>[FindEquityVolSurface()]</tt></b> returns a spot volatility surface.</li><li>Given an idiosyncratic volatility, we can add the effect of stochastic interest rates to it to give an equity implied volatility using the function <b><tt>[GetEquityImpliedVol()]</tt></b>. A surface can be constructed through <b><tt>[GetEquityImpliedVolSurface()]</tt></b>. Function <b><tt>[GetLimitingEquityImpliedVol()]</tt></b> estimates the limiting volatility.</li></ol></div><h2>Properties<a name="3"></a></h2><p>These are global parameters which are available to all methods in this class. They are all single values.</p><p><b><tt>[dblIRMeanReversionSpeed]</tt></b> - Rate <img src="bsEquityIV_1FHW_StochRateEffect_eq87919.png" alt="$\alpha$"> at which the short rate reverts back to mean</p><p><b><tt>[dblIRVolatility]</tt></b> - Interest rate volatility <img src="bsEquityIV_1FHW_StochRateEffect_eq24873.png" alt="$\sigma$"></p><p><b><tt>[dblEquity_IR_Correlation]</tt></b> - Correlation <img src="bsEquityIV_1FHW_StochRateEffect_eq20099.png" alt="$\rho$"> between equity and interest rate</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+
+        dblIRMeanReversionSpeed
+        dblIRVolatility
+        dblEquity_IR_Correlation
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="4"></a></h2><p>This bootstrap class introduces the following methods:</p><p><b><tt>1) [GetEquityImpliedVolSurface()]</tt></b> - Function returns an equity implied volatility surface with "maturity" against "moneyness". Volatility values are calculated using the function <tt>[GetEquityImpliedVol()]</tt></p><p><b><tt>2) [GetEquityImpliedVol()]</tt></b> - Function calculates an implied spot volatility given the parameters of the One Factor Hull-White Model and the idiosyncratic equity volatility <tt>[dblEquityVolatility]</tt></p><p><b><tt>3) [GetLimitingEquityImpliedVol()]</tt></b> - Function calculates a limiting spot equity volatility as time to maturity approaches infinity. The calculated value will equal to the forward equity volatility as time to maturity approaches infinity</p><p><b><tt>4) [FindEquityVolSurface()]</tt></b> - Function returns an idiosyncratic volatility surface with "maturity" against "moneyness". Volatility values are calculated using the function <tt>[FindEquityVol()]</tt></p><p><b><tt>5) [FindEquityVol()]</tt></b> - Function removes the effect of stochastic interest rates from an implied spot volatility and the resulting volatility is called the idiosyncratic volatility</p><p><b><tt>6) [Integral3()]</tt></b> - Function calculates the value of <img src="bsEquityIV_1FHW_StochRateEffect_eq49303.png" alt="$I_3$"> in the "Total Variance" formula. See <tt>[GetEquityImpliedVol()]</tt> for details of the formula</p><p><b><tt>7) [Integral4()]</tt></b> - Function calculates the value of <img src="bsEquityIV_1FHW_StochRateEffect_eq15386.png" alt="$I_4$"> in the "Total Variance" formula. See <tt>[GetEquityImpliedVol()]</tt> for details of the formula</p><p><b><tt>8) [auxillaryFunction1]</tt></b> - Function helps to calculate <img src="bsEquityIV_1FHW_StochRateEffect_eq49303.png" alt="$I_3$"> and <img src="bsEquityIV_1FHW_StochRateEffect_eq15386.png" alt="$I_4$"></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+  methods
+</pre><pre class="codeinput">    <span class="keyword">function</span> obj = bsEquityIV_1FHW_StochRateEffect(IRMeanReversionSpeed,<span class="keyword">...</span>
+      IRVolatility, Equity_IR_Correlation)
+
+       obj.dblIRMeanReversionSpeed  = IRMeanReversionSpeed ;
+       obj.dblIRVolatility =IRVolatility;
+       obj.dblEquity_IR_Correlation =Equity_IR_Correlation;
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>Details of Methods<a name="6"></a></h2><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>1) [GetEquityImpliedVolSurface()]</tt><a name="7"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function returns an equity implied volatility surface with "maturity" against "moneyness". For each maturity and each moneyness, we calculate an implied spot volatility value using the function <tt>[GetEquityImpliedVol()]</tt>.</p><p><b><i>Inputs</i></b></p><p><tt>[dblEquityVolSurface]</tt> - A surface of idiosyncratic volatilites with "maturity" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><tt>[dblTimeToMaturity]</tt> - <img src="bsEquityIV_1FHW_StochRateEffect_eq57315.png" alt="$T$">, time to maturity of the equity option</p><p><i>Data Type</i>: single value</p><p><b><i>Outputs</i></b></p><p>An implied volatility surface with "maturity" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calculation</i></b></p><p>Set up the matrix with the same size and the same row and column titles as the <tt>[dblEquityVolSurface]</tt></p><p>We then calculate the equity implied volality using the function <tt>[GetEquityImpliedVol()]</tt>. See <tt>[GetEquityImpliedVol()]</tt> for calculation details</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> y=GetEquityImpliedVolSurface(obj, dblEquityVolSurface,<span class="keyword">...</span>
+        dblTimeToMaturity)
+
+        assert(size(dblEquityVolSurface,1) == size(dblTimeToMaturity,2));
+
+        y = zeros(size(dblEquityVolSurface));
+
+        <span class="keyword">for</span> i =1 : size(dblEquityVolSurface,1)
+          <span class="keyword">for</span> j =1 : size(dblEquityVolSurface,2)
+             y(i,j) = obj.GetEquityImpliedVol(dblEquityVolSurface(i,j),<span class="keyword">...</span>
+                dblTimeToMaturity(1,i));
+          <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        <span class="keyword">return</span>
+   <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>2) [GetEquityImpliedVol()]</tt><a name="9"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function calculates the equity implied volatility given the parameters of the One Factor Hull-White Model and the idiosyncratic equity volatility <tt>[dblEquityVolatility]</tt></p><p><b><i>Inputs</i></b></p><p><tt>[dblEquityVolatility]</tt> - idiosyncratic spot volatility</p><p><i>Data Type</i>: single value</p><p><tt>[dblTimeToMaturity]</tt> - <img src="bsEquityIV_1FHW_StochRateEffect_eq57315.png" alt="$T$">, time to maturity of the equity option</p><p><i>Data Type</i>: single value</p><p><b><i>Outputs</i></b></p><p>Equity implied spot volatility</p><p><i>Data Type</i>: single value</p><p><b><i>Calculations</i></b></p><p>Equity implied volatility can be estimated using the formula,</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq31954.png" alt="$IV = \sqrt{\frac{Var[ln(\frac{S(T)}{S(0)})]}{T}}$"></p><p>where</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq69511.png" alt="$Var[ln(\frac{S(T)}{S(0)})] = I_4 + 2 \rho \sigma_s I_3 + \sigma_s ^ 2 T$"></p><p>is the measurement of "Total Variance" of the log-return from time <img src="bsEquityIV_1FHW_StochRateEffect_eq12896.png" alt="$0$"> to time <img src="bsEquityIV_1FHW_StochRateEffect_eq57315.png" alt="$T$">, namely <tt>[dblTotalEquityVariance]</tt></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq49303.png" alt="$I_3$"> and <img src="bsEquityIV_1FHW_StochRateEffect_eq15386.png" alt="$I_4$"> are values calculated using the functions <tt>[Integral3()]</tt> and <tt>[Integral4()]</tt></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq93229.png" alt="$\sigma_s$"> is the idiosyncratic equity volatility <tt>[dblEquityVolatility]</tt>, i.e. implied spot volatilities with the effect of stochastic interest rates stripped out.</p><p>See function <tt>[FindEquityVol()]</tt> for details of the "stripping" process.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    <span class="keyword">function</span> y=GetEquityImpliedVol(obj, dblEquityVolatility,<span class="keyword">...</span>
+             dblTimeToMaturity)
+
+       I3 = obj.Integral3(dblTimeToMaturity);
+       I4 = obj.Integral4(dblTimeToMaturity);
+
+       dblTotalEquityVariance = I4 + 2 * obj.dblEquity_IR_Correlation<span class="keyword">...</span>
+               * dblEquityVolatility * I3 + dblEquityVolatility ^ 2 <span class="keyword">...</span>
+               * dblTimeToMaturity ;
+
+       y = sqrt(dblTotalEquityVariance / dblTimeToMaturity) ;
+       <span class="keyword">return</span>
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>3) [GetLimitingEquityImpliedVol()]</tt><a name="11"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function calculates the limiting equity volatility when time to maturity approaches infinity and it equals to the forward volatility over the future period quantity.</p><p><b><i>Inputs</i></b></p><p><tt>[dblEquityVolatility]</tt> - idiosyncratic spot volatility</p><p><i>Data Type</i>: single value</p><p><b><i>Outputs</i></b></p><p>The limiting equity implied spot volatility as time to maturity approaches infinity</p><p><i>Data Type</i>: single value</p><p><b><i>Calculations</i></b></p><p>As <img src="bsEquityIV_1FHW_StochRateEffect_eq36539.png" alt="$T \to \infty$"></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq77072.png" alt="$I_3 \to \frac{\sigma}{\alpha}$"></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq52817.png" alt="$I_4 \to (\frac{\sigma}{\alpha})^2$"></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq04180.png" alt="$IV \to \sqrt{Var[S_\infty]}$"></p><p>where</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq63894.png" alt="$Var[S_\infty] = \lim_{T \to \infty} \\I_4 + 2 \rho \sigma_s \lim_{T \to \infty} \\I_3 + \sigma_s^2$"></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> y = GetLimitingEquityImpliedVol(obj, dblEquityVolatility )
+
+     I3 = (obj.dblIRVolatility / obj.dblIRMeanReversionSpeed) ;
+     I4 = (obj.dblIRVolatility / obj.dblIRMeanReversionSpeed) ^ 2;
+
+     dblAnnulaisedEquityVariance = I4 + 2 * obj.dblEquity_IR_Correlation<span class="keyword">...</span>
+         * dblEquityVolatility * I3 + dblEquityVolatility ^ 2;
+
+     y = sqrt(dblAnnulaisedEquityVariance);
+
+   <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>4) [FindEquityVolSurface()]</tt><a name="13"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Simlar to <tt>[GetEquityImpliedVolSurface()]</tt>, function returns a volatility surface with "maturity" against "moneyness". However, for each maturity and each moneyness, the value is the idiosyncratic volatility that is calculated using the function <tt>[FindEquityVol()]</tt>.</p><p><b><i>Inputs</i></b></p><p><tt>[dblEquityIVSurface]</tt> - a surface of equity implied spot volatilites with "maturity" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><tt>[dblTimeToMaturity]</tt> - <img src="bsEquityIV_1FHW_StochRateEffect_eq57315.png" alt="$T$">, time to maturity of the equity option</p><p><i>Data Type</i>: single value</p><p><b><i>Outputs</i></b></p><p>An idiosyncratic spot volatility surface with "maturity" against "moneyness"</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calculation</i></b></p><p>Set up the matrix with the same size and the same row and column titles as the <tt>[dblEquityIVSurface]</tt></p><p>We then calculate the idiosyncratic Volatility using the function <tt>[FindEquityVol()]</tt>. See <tt>[FindEquityVol()]</tt> for calculation details</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    <span class="keyword">function</span> y = FindEquityVolSurface(obj, dblEquityIVSurface,<span class="keyword">...</span>
+            dblTimeToMaturity)
+
+        assert(size(dblEquityIVSurface,1) == size(dblTimeToMaturity,2));
+
+        y = zeros( size(dblEquityIVSurface));
+
+        <span class="keyword">for</span> i =1 : size(dblEquityIVSurface,1)
+            <span class="keyword">for</span> j =1 : size(dblEquityIVSurface,2)
+                y(i,j) = obj.FindEquityVol(dblEquityIVSurface(i,j), <span class="keyword">...</span>
+                    dblTimeToMaturity(1,i));
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        <span class="keyword">return</span>
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>5) [FindEquityVol()]</tt><a name="15"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function removes the effect of stochastic interest rates from equity implied spot volatilities and calculates idiosyncratic volatilities. This is the reverse process to the function <tt>[GetEquityImpliedVol()]</tt>, where idiosyncratic equity volalities are converted to equity implied spot volatilities.</p><p><b><i>Inputs</i></b></p><p><tt>[dblEquityIVTarget]</tt> - <img src="bsEquityIV_1FHW_StochRateEffect_eq83535.png" alt="$\sigma_{IV}$">, equity implied spot volatility</p><p><i>Data Type</i>: single value</p><p><tt>[dblTimeToMaturity]</tt> - <img src="bsEquityIV_1FHW_StochRateEffect_eq57315.png" alt="$T$">, time to maturity of the equity option</p><p><i>Data Type</i>: single value</p><p><b><i>Outputs</i></b></p><p>An idiosyncratic volatility</p><p><i>Data Type</i>: single value</p><p><b><i>Calculations</i></b></p><p>We have seen in <tt>[GetEquityImpliedVol()]</tt>, an equity implied spot volatility is calculated using the formula</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq69511.png" alt="$Var[ln(\frac{S(T)}{S(0)})] = I_4 + 2 \rho \sigma_s I_3 + \sigma_s ^ 2 T$"></p><p>Here</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq94574.png" alt="$Var[ln(\frac{S(T)}{S(t)})] = \sigma_{IV} ^ 2 T$"></p><p>Substituting into the previous equation and rearranging, we then have a quadratic equation of the idiosyncratic volatily <img src="bsEquityIV_1FHW_StochRateEffect_eq93229.png" alt="$\sigma_s$"></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq78018.png" alt="$T \sigma_s ^ 2 + 2 \rho I_3 \sigma_s + (I_4 - \sigma_{IV} ^ 2 T) = 0$"></p><p>To find the value of <img src="bsEquityIV_1FHW_StochRateEffect_eq93229.png" alt="$\sigma_s$">, we can solve the quadratic equation</p><p>To see if there exists a solution, calculate <img src="bsEquityIV_1FHW_StochRateEffect_eq64646.png" alt="$\Delta = {b^2 - 4ac}$"></p><p>where</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq69672.png" alt="$a = T$"></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq68849.png" alt="$b = 2 \rho I_3$"></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq62859.png" alt="$c = I_4 - \sigma_{IV} ^ 2 T$"></p><p>If <img src="bsEquityIV_1FHW_StochRateEffect_eq40120.png" alt="$\Delta < 0$">,</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq65727.png" alt="$\sigma_s = 0$"></p><p>If <img src="bsEquityIV_1FHW_StochRateEffect_eq90041.png" alt="$\Delta \geq 0$">,</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq22027.png" alt="$\sigma_s = max(\frac{-b \pm \sqrt{\Delta}}{2a})$">, <i>subject to a minimum of zero</i></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> y = FindEquityVol(obj, dblEquityIVTarget , dblTimeToMaturity )
+
+     <span class="comment">% Step 0 initialise</span>
+     I3 = obj.Integral3( dblTimeToMaturity);
+     I4 = obj.Integral4(dblTimeToMaturity);
+     dblTotalEquityVariance = (dblEquityIVTarget ^ 2 * dblTimeToMaturity);
+
+     <span class="comment">% Step 1 calculate solution of the quadratic</span>
+     a = dblTimeToMaturity;
+     b = 2 * (obj.dblEquity_IR_Correlation) * I3;
+     c = (I4 - dblTotalEquityVariance);
+     d = b ^ 2 - 4 * a * c;
+
+     <span class="comment">% If no real solution exist, return zero, else choose the positive</span>
+     <span class="comment">% solution</span>
+     <span class="keyword">if</span> d &lt; 0
+         y = 0; <span class="comment">% Minimum (Lower Bound) equity volatility</span>
+         <span class="keyword">return</span>
+     <span class="keyword">else</span>
+
+         dblSolution1 = max(0, (-b + sqrt(d)) / (2 * a));
+         dblSolution2 = max(0, (-b - sqrt(d)) / (2 * a));
+
+         y = max(dblSolution1, dblSolution2);
+     <span class="keyword">end</span>
+
+   <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>Auxillary Functions<a name="16"></a></h2><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>6) [Integral3()]</tt><a name="17"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function calculates <img src="bsEquityIV_1FHW_StochRateEffect_eq49303.png" alt="$I_3$"> which is substituted into the "Total Variance" formula of <tt>[GetEquityImpliedVol()]</tt></p><p><b><i>Inputs</i></b></p><p><tt>[dblTimeToMaturity]</tt> - <img src="bsEquityIV_1FHW_StochRateEffect_eq57315.png" alt="$T$">, time to maturity of the equity option</p><p><i>Data Type</i>: single value</p><p><b><i>Outputs</i></b></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq49303.png" alt="$I_3$"></p><p><i>Data Type</i>: single value</p><p><b><i>Calculations</i></b></p><p>Let</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq34875.png" alt="$\Sigma(t,T)= \frac{\sigma}{\alpha} (1-e^{-\alpha T})$"></p><p>Integrate <img src="bsEquityIV_1FHW_StochRateEffect_eq52068.png" alt="$\Sigma(t,T)$">, we get</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq31758.png" alt="$I_3= \int_0^T \Sigma (u,T)\,\mathrm{d}u = \frac{\sigma}{\alpha} [T - y(\alpha)]$"></p><p>where <img src="bsEquityIV_1FHW_StochRateEffect_eq73007.png" alt="$y(\alpha)$"> is calculated using the <tt>[auxillaryFunction1]</tt></p><p>See <tt>[auxillaryFunction1]</tt> for details</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> y =Integral3(obj,  dblTimeToMaturity )
+
+       dblTerm1 = -obj.auxillaryFunction1(obj.dblIRMeanReversionSpeed, <span class="keyword">...</span>
+           dblTimeToMaturity);
+
+       y = (obj.dblIRVolatility / obj.dblIRMeanReversionSpeed ) * <span class="keyword">...</span>
+           (dblTimeToMaturity + dblTerm1);
+
+   <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>7) [Integral4()]</tt><a name="19"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Similar to <tt>[Integral3()]</tt>, function calculates <img src="bsEquityIV_1FHW_StochRateEffect_eq15386.png" alt="$I_4$"> which is substituted into the "Total Variance" formula we have seen in <tt>[GetEquityImpliedVol()]</tt></p><p><b><i>Inputs</i></b></p><p><tt>[dblTimeToMaturity]</tt> - <img src="bsEquityIV_1FHW_StochRateEffect_eq57315.png" alt="$T$">, time to maturity of the equity option</p><p><i>Data Type</i>: single value</p><p><b><i>Outputs</i></b></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq15386.png" alt="$I_4$"></p><p><i>Data Type</i>: single value</p><p><b><i>Calculations</i></b></p><p>Let</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq34875.png" alt="$\Sigma(t,T)= \frac{\sigma}{\alpha} (1-e^{-\alpha T})$"></p><p>Integrate <img src="bsEquityIV_1FHW_StochRateEffect_eq32353.png" alt="$\Sigma^2 (t,T)$">, we get</p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq73955.png" alt="$I_4=\int_0^T \Sigma^2 (u,T)\,\mathrm{d}u =\frac{\sigma^2}{\alpha^2} [T - 2 y(\alpha) + y(2 \alpha)]$"></p><p>where <img src="bsEquityIV_1FHW_StochRateEffect_eq73007.png" alt="$y(\alpha)$"> and <img src="bsEquityIV_1FHW_StochRateEffect_eq49029.png" alt="$y(2 \alpha)$"> are calculated using the <tt>[auxillaryFunction1]</tt></p><p>See <tt>[auxillaryFunction1]</tt> for details</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> y = Integral4(obj, dblTimeToMaturity)
+
+      dblTerm1 = -obj.auxillaryFunction1(obj.dblIRMeanReversionSpeed,<span class="keyword">...</span>
+          dblTimeToMaturity);
+      dblTerm2 = obj.auxillaryFunction1(2*(obj.dblIRMeanReversionSpeed),<span class="keyword">...</span>
+          dblTimeToMaturity);
+
+      y = (obj.dblIRVolatility / obj.dblIRMeanReversionSpeed ) ^ 2 * <span class="keyword">...</span>
+         (dblTimeToMaturity + 2 * dblTerm1 + dblTerm2);
+
+   <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>8) [auxillaryFunction1]</tt><a name="21"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function helps to calculate <img src="bsEquityIV_1FHW_StochRateEffect_eq49303.png" alt="$I_3$"> and <img src="bsEquityIV_1FHW_StochRateEffect_eq15386.png" alt="$I_4$"></p><p><b><i>Inputs</i></b></p><p><tt>[dblmeanreversionspeed]</tt> - Rate <img src="bsEquityIV_1FHW_StochRateEffect_eq87919.png" alt="$\alpha$"> at which the short rate reverts back to mean</p><p><i>Data Type</i>: single value</p><p><tt>[dblTimeToMaturity]</tt> - <img src="bsEquityIV_1FHW_StochRateEffect_eq57315.png" alt="$T$">, time to maturity of the equity option</p><p><i>Data Type</i>: single value</p><p><b><i>Outputs</i></b></p><p>The value <img src="bsEquityIV_1FHW_StochRateEffect_eq73007.png" alt="$y(\alpha)$"> that is used in the calculation of <img src="bsEquityIV_1FHW_StochRateEffect_eq49303.png" alt="$I_3$"> and <img src="bsEquityIV_1FHW_StochRateEffect_eq15386.png" alt="$I_4$"></p><p><i>Data Type</i>: single value</p><p><b><i>Calculations</i></b></p><p><img src="bsEquityIV_1FHW_StochRateEffect_eq56010.png" alt="$y(\alpha) = \frac{1}{\alpha} (1-e^{-\alpha T})$"></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+     <span class="keyword">function</span> y =auxillaryFunction1(obj, dblmeanreversionspeed, <span class="keyword">...</span>
+             dblTimeToMaturity )
+
+         y = (1 - exp(-dblmeanreversionspeed * dblTimeToMaturity)) / <span class="keyword">...</span>
+             dblmeanreversionspeed;
+
+     <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% EQUITY IMPLIED VOLATILITY
+% REMOVE STOCHASTIC INTEREST RATE EFFECT
+%
+% *The main purpose of this class is to remove the effect
+% of stochastic interest rates from an equity implied volatility number
+% given a calibration of the One Factor Hull-White Model or to add the effect
+% of stochastic interest rates to an idiosyncratic volatility number*
+%
+% Supporting documentation is the following: 
+% _O:\01 Pillar I Risk Measurement\05 Deliverables - RSG\03 Implementation\Industrialisation\Data
+% \Market Data Pack\Equity IV extrap Equity Implied Vol One & Two Factor
+% Hull White V3.docx_
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bsEquityIV_1FHW_StochRateEffect
+%% How to Use the Class
+% There are two ways to use the class:
+% 
+% # Given a spot implied volatility, we can remove the effect of stochastic interest 
+% rates from the spot implied volatility to give the idiosyncratic volatility 
+% using the function *|[FindEquityVol()]|*. Function *|[FindEquityVolSurface()]|* 
+% returns a spot volatility surface. 
+% # Given an idiosyncratic volatility, we can add the effect
+% of stochastic interest rates to it to give an equity implied
+% volatility using the function *|[GetEquityImpliedVol()]|*. 
+% A surface can be constructed through *|[GetEquityImpliedVolSurface()]|*. 
+% Function *|[GetLimitingEquityImpliedVol()]|* estimates the limiting
+% volatility.
+
+%% Properties
+% These are global parameters which are available to all methods in
+% this class. They are all single values.
+% 
+% *|[dblIRMeanReversionSpeed]|* - Rate $\alpha$ at which the short rate reverts back to mean
+%
+% *|[dblIRVolatility]|* - Interest rate volatility $\sigma$
+%
+% *|[dblEquity_IR_Correlation]|* - Correlation $\rho$ between equity and
+% interest rate 
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    properties
+
+        dblIRMeanReversionSpeed 
+        dblIRVolatility
+        dblEquity_IR_Correlation
+
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+
+%% List of Methods
+% This bootstrap class introduces the following methods:
+%
+% *|1) [GetEquityImpliedVolSurface()]|* - Function returns an equity implied volatility 
+% surface with "maturity" against "moneyness". Volatility values are calculated 
+% using the function |[GetEquityImpliedVol()]|
+%
+% *|2) [GetEquityImpliedVol()]|* - Function calculates an implied spot
+% volatility given the parameters of the One Factor Hull-White Model and 
+% the idiosyncratic equity volatility |[dblEquityVolatility]|
+%
+% *|3) [GetLimitingEquityImpliedVol()]|* - Function calculates a limiting spot
+% equity volatility as time to maturity approaches infinity. The calculated value will equal to 
+% the forward equity volatility as time to maturity approaches infinity
+%
+% *|4) [FindEquityVolSurface()]|* - Function returns an idiosyncratic volatility surface 
+% with "maturity" against "moneyness". Volatility values are calculated 
+% using the function |[FindEquityVol()]|
+%
+% *|5) [FindEquityVol()]|* - Function removes the effect of stochastic interest 
+% rates from an implied spot volatility and the resulting volatility is called the idiosyncratic volatility
+%
+% *|6) [Integral3()]|* - Function calculates the value of $I_3$ in the "Total Variance" formula. 
+% See |[GetEquityImpliedVol()]| for details of the formula
+%
+% *|7) [Integral4()]|* - Function calculates the value of $I_4$ in the "Total Variance" formula. 
+% See |[GetEquityImpliedVol()]| for details of the formula
+%
+% *|8) [auxillaryFunction1]|* - Function helps to calculate $I_3$ and $I_4$
+%
+
+%MATLAB CODE    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  methods     
+    function obj = bsEquityIV_1FHW_StochRateEffect(IRMeanReversionSpeed,... 
+      IRVolatility, Equity_IR_Correlation)
+  
+       obj.dblIRMeanReversionSpeed  = IRMeanReversionSpeed ;
+       obj.dblIRVolatility =IRVolatility;
+       obj.dblEquity_IR_Correlation =Equity_IR_Correlation; 
+       
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+%% Details of Methods
+% _________________________________________________________________________________________
+%
+%% |1) [GetEquityImpliedVolSurface()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function returns an equity implied volatility surface with "maturity" against "moneyness". 
+% For each maturity and each moneyness, we calculate an implied spot
+% volatility value using the function |[GetEquityImpliedVol()]|. 
+%
+% *_Inputs_*
+%
+% |[dblEquityVolSurface]| - A surface of idiosyncratic volatilites with "maturity" against "moneyness"
+% 
+% _Data Type_: 2-dim array
+% 
+% |[dblTimeToMaturity]| - $T$, time to maturity of the equity option
+%
+% _Data Type_: single value
+%
+% *_Outputs_*
+%
+% An implied volatility surface with "maturity" against "moneyness"
+%
+% _Data Type_: 2-dim array
+%
+% *_Calculation_*
+%
+% Set up the matrix with the same size and the same row and column titles as the |[dblEquityVolSurface]|
+% 
+% We then calculate the equity implied volality using
+% the function |[GetEquityImpliedVol()]|.
+% See |[GetEquityImpliedVol()]| for calculation details
+
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   function y=GetEquityImpliedVolSurface(obj, dblEquityVolSurface,...
+        dblTimeToMaturity)
+    
+        assert(size(dblEquityVolSurface,1) == size(dblTimeToMaturity,2));
+
+        y = zeros(size(dblEquityVolSurface));
+
+        for i =1 : size(dblEquityVolSurface,1)
+          for j =1 : size(dblEquityVolSurface,2)
+             y(i,j) = obj.GetEquityImpliedVol(dblEquityVolSurface(i,j),...
+                dblTimeToMaturity(1,i));
+          end
+        end
+        
+        return
+   end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%
+% _________________________________________________________________________________________
+%
+%% |2) [GetEquityImpliedVol()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function calculates the equity implied volatility given the
+% parameters of the One Factor Hull-White Model and the idiosyncratic
+% equity volatility |[dblEquityVolatility]|
+%
+% *_Inputs_*
+%
+% |[dblEquityVolatility]| - idiosyncratic spot volatility
+%
+% _Data Type_: single value
+% 
+% |[dblTimeToMaturity]| - $T$, time to maturity of the equity option
+%
+% _Data Type_: single value
+%
+% *_Outputs_*
+%
+% Equity implied spot volatility
+%
+% _Data Type_: single value
+%
+% *_Calculations_*
+%
+% Equity implied volatility can be estimated using the formula,
+%
+% $IV = \sqrt{\frac{Var[ln(\frac{S(T)}{S(0)})]}{T}}$
+%
+% where
+%
+% $Var[ln(\frac{S(T)}{S(0)})] = I_4 + 2 \rho \sigma_s I_3 +
+% \sigma_s ^ 2 T$ 
+%
+% is the measurement of "Total Variance" of the log-return from time $0$ to time $T$, namely |[dblTotalEquityVariance]| 
+% 
+% $I_3$ and $I_4$ are values calculated using the functions |[Integral3()]| and |[Integral4()]| 
+%
+% $\sigma_s$ is the idiosyncratic equity volatility |[dblEquityVolatility]|, 
+% i.e. implied spot volatilities with the effect of stochastic interest rates stripped out.
+%  
+% See function |[FindEquityVol()]| for details of the "stripping"
+% process.
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    function y=GetEquityImpliedVol(obj, dblEquityVolatility,...
+             dblTimeToMaturity)                             
+
+       I3 = obj.Integral3(dblTimeToMaturity);
+       I4 = obj.Integral4(dblTimeToMaturity);
+
+       dblTotalEquityVariance = I4 + 2 * obj.dblEquity_IR_Correlation...
+               * dblEquityVolatility * I3 + dblEquityVolatility ^ 2 ...
+               * dblTimeToMaturity ;
+
+       y = sqrt(dblTotalEquityVariance / dblTimeToMaturity) ;
+       return
+
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+%%
+% _________________________________________________________________________________________
+%
+%% |3) [GetLimitingEquityImpliedVol()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function calculates the limiting equity volatility when time to maturity approaches infinity 
+% and it equals to the forward volatility over the future period quantity.
+%
+% *_Inputs_*
+%
+% |[dblEquityVolatility]| - idiosyncratic spot volatility
+%
+% _Data Type_: single value
+%
+% *_Outputs_*
+%
+% The limiting equity implied spot volatility as time to
+% maturity approaches infinity
+%
+% _Data Type_: single value
+%
+% *_Calculations_*
+%
+% As $T \to \infty$
+%
+% $I_3 \to \frac{\sigma}{\alpha}$
+%
+% $I_4 \to (\frac{\sigma}{\alpha})^2$
+%
+% $IV \to \sqrt{Var[S_\infty]}$
+%
+% where
+% 
+% $Var[S_\infty] = \lim_{T \to \infty} \\I_4 + 2 \rho \sigma_s \lim_{T
+% \to \infty} \\I_3 + \sigma_s^2$
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+   function y = GetLimitingEquityImpliedVol(obj, dblEquityVolatility )                        
+
+     I3 = (obj.dblIRVolatility / obj.dblIRMeanReversionSpeed) ;
+     I4 = (obj.dblIRVolatility / obj.dblIRMeanReversionSpeed) ^ 2;
+
+     dblAnnulaisedEquityVariance = I4 + 2 * obj.dblEquity_IR_Correlation...
+         * dblEquityVolatility * I3 + dblEquityVolatility ^ 2;
+
+     y = sqrt(dblAnnulaisedEquityVariance);
+
+   end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+        
+%%
+% _________________________________________________________________________________________
+%
+%% |4) [FindEquityVolSurface()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Simlar to |[GetEquityImpliedVolSurface()]|, function returns a volatility
+% surface with "maturity" against "moneyness". 
+% However, for each maturity and each moneyness, the value is the 
+% idiosyncratic volatility that is calculated using 
+% the function |[FindEquityVol()]|. 
+%
+% *_Inputs_*
+%
+% |[dblEquityIVSurface]| - a surface of equity implied spot volatilites with "maturity" against "moneyness"
+%
+% _Data Type_: 2-dim array
+% 
+% |[dblTimeToMaturity]| - $T$, time to maturity of the equity option
+%
+% _Data Type_: single value
+%
+% *_Outputs_*
+%
+% An idiosyncratic spot volatility surface with "maturity" against "moneyness"
+%
+% _Data Type_: 2-dim array
+%
+% *_Calculation_*
+%
+% Set up the matrix with the same size and the same row and column 
+% titles as the |[dblEquityIVSurface]|
+% 
+% We then calculate the idiosyncratic Volatility using the function |[FindEquityVol()]|.
+% See |[FindEquityVol()]| for calculation details
+%
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    function y = FindEquityVolSurface(obj, dblEquityIVSurface,...
+            dblTimeToMaturity)
+
+        assert(size(dblEquityIVSurface,1) == size(dblTimeToMaturity,2));
+
+        y = zeros( size(dblEquityIVSurface));
+
+        for i =1 : size(dblEquityIVSurface,1)
+            for j =1 : size(dblEquityIVSurface,2)
+                y(i,j) = obj.FindEquityVol(dblEquityIVSurface(i,j), ...
+                    dblTimeToMaturity(1,i));
+            end
+        end
+
+        return
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+%%
+% _________________________________________________________________________________________
+%
+%% |5) [FindEquityVol()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function removes the effect of stochastic interest rates from
+% equity implied spot volatilities and calculates idiosyncratic volatilities.
+% This is the reverse process to the function |[GetEquityImpliedVol()]|, 
+% where idiosyncratic equity volalities are converted to equity implied spot volatilities.
+%
+% *_Inputs_*
+%
+% |[dblEquityIVTarget]| - $\sigma_{IV}$, equity implied spot volatility
+%
+% _Data Type_: single value
+% 
+% |[dblTimeToMaturity]| - $T$, time to maturity of the equity option
+%
+% _Data Type_: single value
+%
+% *_Outputs_*
+%
+% An idiosyncratic volatility
+%
+% _Data Type_: single value
+%
+% *_Calculations_*
+%
+% We have seen in |[GetEquityImpliedVol()]|, an equity implied spot volatility
+% is calculated using the formula
+%
+% $Var[ln(\frac{S(T)}{S(0)})] = I_4 + 2 \rho \sigma_s I_3 + \sigma_s ^ 2 T$
+%
+% Here
+%
+% $Var[ln(\frac{S(T)}{S(t)})] = \sigma_{IV} ^ 2 T$
+% 
+% Substituting into the previous equation and rearranging, we then have a quadratic equation of the idiosyncratic volatily $\sigma_s$
+%
+% $T \sigma_s ^ 2 + 2 \rho I_3 \sigma_s + (I_4 - \sigma_{IV} ^ 2 T) = 0$
+%
+% To find the value of $\sigma_s$, we can solve the quadratic equation
+%
+% To see if there exists a solution, calculate $\Delta = {b^2 - 4ac}$
+%
+% where
+%
+% $a = T$
+%
+% $b = 2 \rho I_3$
+%
+% $c = I_4 - \sigma_{IV} ^ 2 T$
+%
+% If $\Delta < 0$,
+%
+% $\sigma_s = 0$
+%
+% If $\Delta \geq 0$,
+%
+% $\sigma_s = max(\frac{-b \pm \sqrt{\Delta}}{2a})$, _subject to a minimum of zero_
+%
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+   function y = FindEquityVol(obj, dblEquityIVTarget , dblTimeToMaturity )
+
+     % Step 0 initialise
+     I3 = obj.Integral3( dblTimeToMaturity);
+     I4 = obj.Integral4(dblTimeToMaturity);
+     dblTotalEquityVariance = (dblEquityIVTarget ^ 2 * dblTimeToMaturity);
+
+     % Step 1 calculate solution of the quadratic
+     a = dblTimeToMaturity;
+     b = 2 * (obj.dblEquity_IR_Correlation) * I3;
+     c = (I4 - dblTotalEquityVariance);
+     d = b ^ 2 - 4 * a * c;
+
+     % If no real solution exist, return zero, else choose the positive
+     % solution
+     if d < 0
+         y = 0; % Minimum (Lower Bound) equity volatility
+         return
+     else
+
+         dblSolution1 = max(0, (-b + sqrt(d)) / (2 * a));
+         dblSolution2 = max(0, (-b - sqrt(d)) / (2 * a));
+
+         y = max(dblSolution1, dblSolution2);                
+     end
+
+   end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+        
+%% Auxillary Functions
+% _________________________________________________________________________________________
+%
+%% |6) [Integral3()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function calculates $I_3$ which is substituted into the "Total
+% Variance" formula of |[GetEquityImpliedVol()]|
+%
+% *_Inputs_*
+%
+% |[dblTimeToMaturity]| - $T$, time to maturity of the equity option
+%
+% _Data Type_: single value
+%
+% *_Outputs_*
+%
+% $I_3$
+%
+% _Data Type_: single value
+%
+% *_Calculations_*
+%
+% Let
+%
+% $\Sigma(t,T)= \frac{\sigma}{\alpha} (1-e^{-\alpha T})$
+%
+% Integrate $\Sigma(t,T)$, we get
+%
+% $I_3= \int_0^T \Sigma (u,T)\,\mathrm{d}u
+% = \frac{\sigma}{\alpha} [T - y(\alpha)]$
+% 
+% where $y(\alpha)$ is calculated using the |[auxillaryFunction1]|
+% 
+% See |[auxillaryFunction1]| for details
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   function y =Integral3(obj,  dblTimeToMaturity )
+
+       dblTerm1 = -obj.auxillaryFunction1(obj.dblIRMeanReversionSpeed, ...
+           dblTimeToMaturity);
+
+       y = (obj.dblIRVolatility / obj.dblIRMeanReversionSpeed ) * ...
+           (dblTimeToMaturity + dblTerm1);
+
+   end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% _________________________________________________________________________________________
+%
+%% |7) [Integral4()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Similar to |[Integral3()]|, function calculates $I_4$ which is substituted into the "Total
+% Variance" formula we have seen in |[GetEquityImpliedVol()]|
+%
+% *_Inputs_*
+%
+% |[dblTimeToMaturity]| - $T$, time to maturity of the equity option
+%
+% _Data Type_: single value
+%
+% *_Outputs_*
+%
+% $I_4$
+%
+% _Data Type_: single value
+%
+% *_Calculations_*
+%
+% Let
+%
+% $\Sigma(t,T)= \frac{\sigma}{\alpha} (1-e^{-\alpha T})$
+%
+% Integrate $\Sigma^2 (t,T)$, we get
+%
+% $I_4=\int_0^T \Sigma^2 (u,T)\,\mathrm{d}u
+% =\frac{\sigma^2}{\alpha^2} [T - 2 y(\alpha) + y(2 \alpha)]$
+% 
+% where $y(\alpha)$ and $y(2 \alpha)$ are calculated using the |[auxillaryFunction1]|
+% 
+% See |[auxillaryFunction1]| for details
+%
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   function y = Integral4(obj, dblTimeToMaturity)
+
+      dblTerm1 = -obj.auxillaryFunction1(obj.dblIRMeanReversionSpeed,...
+          dblTimeToMaturity);
+      dblTerm2 = obj.auxillaryFunction1(2*(obj.dblIRMeanReversionSpeed),...
+          dblTimeToMaturity);
+
+      y = (obj.dblIRVolatility / obj.dblIRMeanReversionSpeed ) ^ 2 * ...
+         (dblTimeToMaturity + 2 * dblTerm1 + dblTerm2);
+
+   end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% _________________________________________________________________________________________
+%
+%% |8) [auxillaryFunction1]|
+%
+% ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+%
+% *_Description_*
+%
+% Function helps to calculate $I_3$ and $I_4$
+%
+% *_Inputs_*
+% 
+% |[dblmeanreversionspeed]| - Rate $\alpha$ at which the short rate reverts back to mean
+%
+% _Data Type_: single value
+%
+% |[dblTimeToMaturity]| - $T$, time to maturity of the equity option
+%
+% _Data Type_: single value
+%
+% *_Outputs_*
+%
+% The value $y(\alpha)$ that is used in the calculation of $I_3$ and $I_4$
+%
+% _Data Type_: single value
+%
+% *_Calculations_*
+%
+% $y(\alpha) = \frac{1}{\alpha} (1-e^{-\alpha T})$
+%
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     function y =auxillaryFunction1(obj, dblmeanreversionspeed, ...
+             dblTimeToMaturity )
+
+         y = (1 - exp(-dblmeanreversionspeed * dblTimeToMaturity)) / ...
+             dblmeanreversionspeed;
+
+     end        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

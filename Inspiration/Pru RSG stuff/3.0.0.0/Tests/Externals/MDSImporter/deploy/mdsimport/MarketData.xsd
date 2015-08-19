@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (x64) (http://www.altova.com) by RiskCare (RiskCare Ltd) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="DataSeriesSet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DataSeries" type="DataSeriesType" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="date" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DataSeriesType">
+		<xs:sequence>
+			<xs:element name="DynamicProperties" type="DynamicPropertiesType" minOccurs="0"/>
+			<xs:element name="Dates">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Date" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="effectiveDate" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:element name="Axis" type="AxisType" maxOccurs="unbounded"/>
+				<xs:element ref="Values" minOccurs="0"/>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="status"/>
+	</xs:complexType>
+	<xs:complexType name="AxesType">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="AxisType">
+		<xs:choice>
+			<xs:element name="Axis" type="AxisType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Values" minOccurs="0"/>
+		</xs:choice>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="ValueType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="string"/>
+			<xs:enumeration value="number"/>
+			<xs:enumeration value="date"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ValuesType">
+		<xs:sequence>
+			<xs:element ref="V" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="V" type="xs:double"/>
+	<xs:complexType name="DataType">
+		<xs:sequence>
+			<xs:element ref="Values"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="ValueType"/>
+	</xs:complexType>
+	<xs:element name="Values" type="ValuesType"/>
+	<xs:complexType name="DynamicPropertiesType">
+		<xs:sequence>
+			<xs:element name="Property" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="name" use="required"/>
+							<xs:attribute name="type" type="ValueType"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,75 @@
+****************
+1. Configuration
+******&&&*******
+
+1)	cd to the iRSG/tests directory and follow the instructions for setting up
+	the tests. This will configure the test for execution.
+
+2)	cd back to this directory and follow the instructions below
+
+	There are no test specific manual setup steps required.
+	
+
+*****************
+2. Test execution
+*****************
+
+Where [ide] is an optional argument and if supplied will launch the Matlab
+IDE. The default (without the argument) will execute Matlab in the shell which
+is less of an overhead
+
+-----
+Linux
+-----
+
+To run a particular test execute:
+
+./runtests.sh [ide] 'NAMEOFTEST'
+
+To run all tests execute:
+
+./runtests.sh [ide]
+
+-------
+Windows 
+-------
+
+To run a particular test execute:
+
+runtests.bat [ide] 'NAMEOFTEST'
+
+To run all tests execute:
+
+runtests.bat [ide]
+
+
+*************************************
+3. [Optional] Market Data Store (MDS)
+*************************************
+
+You should check to see if MDS testing is required
+
+In order to run tests against the Market Data Store (MDS) the data series need 
+to be imported and the application configuration file needs to be modified.
+
+----------------------------------
+RSG Application configuration file
+----------------------------------
+
+Change the following line in the app.config file 
+
+from:
+
+<historicalDataDaos default="XML">
+
+to:
+
+<historicalDataDaos default="MDS">
+
+-----------
+Data import
+-----------
+ 
+The following command will import all data series in ./BoostrapInputs into the MDS:
+ 
+./mds_import.sh

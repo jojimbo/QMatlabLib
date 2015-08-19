@@ -1,0 +1,97 @@
+	
+	Re: RSG v3.0.0.0 functionl test output for inspection  
+	Sam Bailey (70 32154) 
+	to:
+	Jason Mittelmann
+	02/11/12 12:04
+	Cc:
+	Christoforos Nikitas, Edmund.Barnard, Jason Hill, jason.mittelmann, 
+Stephen Hainsworth, Rob Hanrahan
+	Show Details
+
+
+
+History:	This message has been replied to.
+
+
+Hi Jason,
+
+They're actually more different than I'd expect. I assume we're getting a 
+numerical sensitivity issue. I can't really perform the back calc without 
+stepping through it in the debugger.
+
+I think it's unlikely a coding error could give the differences, so I'm 
+happy to accept it for now, and we'll double check the numerical 
+differences when we get the code.
+
+Sam
+
+
+
+
+
+From: Jason Mittelmann/GHO/Prudential
+To: Sam Bailey/GHO/Prudential@Prudential
+Cc: Christoforos Nikitas/GHO/Prudential@Prudential, 
+Edmund.Barnard@prudential.co.uk, Jason Hill/GHO/Prudential@Prudential, 
+jason.mittelmann@riskcare.com, Sam Bailey/GHO/Prudential@Prudential, 
+Stephen Hainsworth/GHO/Prudential@Prudential
+Date: 01/11/12 22:01
+Subject: Re: RSG v3.0.0.0 functionl test output for inspection
+
+
+Hi
+
+The diff report in my earlier email just showed that the Algo binaries 
+differed. See the decomposed binaries below.
+
+I've added an executable 'inspect' to iRSG/Tests/framework/bin. It expects 
+two arguments, a path to the Algo binary and the number of columns
+See  iRSG/Tests/framework/decomposeAlgoBinary for the source.
+
+It can be compiled it for windows if you have cygwin, gcc and make.
+
+
+/data/riskcare/x1200227/sandboxes/trunk/iRSG/Tests/Scripts/FunctionalTests/
+E187/RSGSimulate$: inspect 
+Outputs/Output/AlgoFiles/Test54_v4_tid2_24Oct2012_14_44_29/ST.bin 9
+0,0,17,17,17,17,17,17,2
+1,18,18,18,18,18,18,2
+2,17.8,17.7,17.7,19,19,19,2
+3,18.6,16.9,16.9,17.9,17.9,17.9,2
+4,14.3,15.6,15.6,16.8,16.8,16.8,2
+5,17.5,17.5,17.5,18,18,18,2
+6,16.9,17.1,17.1,17.6,17.6,17.6,2
+7,16.7,16.8,16.8,16.4,16.4,16.4,2
+8,17.1,16.8,16.8,18.4,18.4,18.4,2
+9,17.6,18,18,16.2,16.2,16.2,2
+10,17.7,17.4,17.4,17.2,17.2,17.2,2
+11,18.1,17.6,17.6,17.8,17.8,17.8,17.8
+
+
+/data/riskcare/x1200227/sandboxes/trunk/iRSG/Tests/Scripts/FunctionalTests/
+E187/RSGSimulate$: inspect 
+Outputs/Output/AlgoFiles/Test54_v4_tid3_24Oct2012_14_47_45/ST.bin 9
+0,0,17,17,17,17,17,17,2
+1,18,18,18,18,18,18,2
+2,17.8,17.7,17.7,17.9,17.9,17.9,2
+3,18.6,16.9,16.9,18.1,18.1,18.1,2
+4,14.3,15.6,15.6,15.2,15.2,15.2,2
+5,17.5,17.5,17.5,17.6,17.6,17.6,2
+6,16.9,17.1,17.1,18,18,18,2
+7,16.7,16.8,16.8,17.8,17.8,17.8,2
+8,17.1,16.8,16.8,16.4,16.4,16.4,2
+9,17.6,18,18,17.3,17.3,17.3,2
+10,17.7,17.4,17.4,16.6,16.6,16.6,2
+11,18.1,17.6,17.6,17.8,17.8,17.8,17.8
+
+Regards
+
+Jason
+
+
+
+
+
+
+

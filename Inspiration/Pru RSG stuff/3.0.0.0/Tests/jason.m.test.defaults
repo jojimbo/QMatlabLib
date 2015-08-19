@@ -1,0 +1,26 @@
+% Allowed values are as follows.
+%
+% Case is important as is the space around the equals sign
+
+Pillar1_checkpoint = P1_BL4_1_0_13_Revision_1.20
+
+% The new model checkpoint is the same as P1_BL4_1_0_13_Revision_1.20 except it 
+% includes a +Converter folder and the what-if tests have been updated to fix 
+% scenario references
+
+% This checkpoint is broken - see the readme in iRSG/Tests/Externals
+% Pillar1_checkpoint = BL4_1_0_18_Revision_1.24
+
+IRSG_Baseline_Version = 2.7.0
+
+% Scenario data base connection details
+DEV_DBNAME = RSG01A
+DEV_DBUSERNAME = dev4_rsg_owner
+DEV_DBPASSWORD = dev4_rsg_owner
+
+% Market  data database connection details
+MDS_DBNAME = RSG01A
+MDS_DBUSERNAME = mds1_rsg
+MDS_DBPASSWORD = mds1_rsg
+
+

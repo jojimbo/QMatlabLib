@@ -1,0 +1,12 @@
+<Bootstrap>
+    <Item name="A" from="31/Dec/2009" to="31/Dec/2020"  effectiveDate="30/Nov/2011" >
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+	<Params>
+		<Property name="Test1" type="number">0.0232322</Property>
+		<Property name="Test2" type="number">34223.433323</Property>
+	</Params>
+        <InputData>
+            <DataSeries name="GBP_NYC" from="31/Dec/2009" to="30/Nov/2011" />
+        </InputData>
+    </Item>
+</Bootstrap>

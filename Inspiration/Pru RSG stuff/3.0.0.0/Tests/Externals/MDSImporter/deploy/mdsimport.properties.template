@@ -1,0 +1,5 @@
+mds.SchemaFile=./mdsimport/MarketData.xsd
+mds.MarketDataPath=./mdsimport/testdata/one_dimension
+mds.user={MDS_DBUSERNAME}
+mds.password={MDS_DBPASSWORD}
+mds.url=jdbc:oracle:thin:@axoradev03.hs.pru.com:1521:{MDS_DBNAME}

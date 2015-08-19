@@ -1,0 +1,67 @@
+<DataSeriesSet date="1/Feb/2012" name="EqIVs">
+  <DataSeries name="testcase3_axes_mixed_multiple_dates">
+    <DynamicProperties>
+      <Property name="description" type="string">base*0.5</Property>
+      <Property name="underlying_asset" type="string">testcase3</Property>
+      <Property name="currency" type="string">testcase3</Property>
+      <Property name="strike_type" type="string">spotstrike</Property>
+      <Property name="volatility_measure" type="string">blackIV</Property>
+      <Property name="volatility_type" type="string">spotvol</Property>
+      <Property name="source" type="string">testcase3</Property>
+      <Property name="axis1_scale" type="string">absolute</Property>
+      <Property name="axis2_scale" type="string">absolute</Property>
+      <Property name="units" type="string">percent</Property>
+    </DynamicProperties>
+    <Dates>
+      <Date effectiveDate="28/Dec/2011">28/Dec/2011</Date>
+      <Date effectiveDate="28/Dec/2011">29/Dec/2011</Date>
+      <Date effectiveDate="28/Dec/2011">30/Dec/2011</Date>
+    </Dates>
+    <Axis name="Term" value="6">
+	      <Axis name="Moneyness" value="0.5">
+	        <Values>
+	          <V>16.8</V>
+	          <V>16.8</V>
+	          <V>16.8</V>
+	        </Values>
+	      </Axis>
+	      <Axis name="Moneyness" value="0.6">
+	        <Values>
+	          <V>15.89</V>
+	          <V>16.8</V>
+	          <V>16.8</V>
+	        </Values>
+	      </Axis>
+	      <Axis name="Moneyness" value="0.7">
+	        <Values>
+	          <V>15.22</V>
+	          <V>16.8</V>
+	          <V>16.8</V>
+	        </Values>
+	      </Axis>
+        </Axis>
+    <Axis name="Term" value="8">
+	      <Axis name="Moneyness" value="0.5">
+	        <Values>
+	          <V>15.995</V>
+	          <V>16.8</V>
+	          <V>16.8</V>
+	        </Values>
+	      </Axis>
+	      <Axis name="Moneyness" value="0.6">
+	        <Values>
+	          <V>15.325</V>
+	          <V>16.8</V>
+	          <V>16.8</V>
+	        </Values>
+	      </Axis>
+	      <Axis name="Moneyness" value="0.7">
+	        <Values>
+	          <V>14.83</V>
+	          <V>16.8</V>
+	          <V>16.8</V>
+	        </Values>
+	      </Axis>
+    </Axis>
+  </DataSeries>
+ </DataSeriesSet>

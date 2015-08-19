@@ -1,0 +1,189 @@
+BAS,Historical RatesSPEC,Historical RatesSPEC,Historical Rates,DatePeriods,DatePeriods,0,,FALSE,0,FALSE,@Linear,TRUE,%,simple,actual/365
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,0,0
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,31,1
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,59,2
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,90,3
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,120,4
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,151,5
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,181,6
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,212,7
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,243,8
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,273,9
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,304,10
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,334,11
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,365,12
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,547,13
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,731,14
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,912,15
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,1096,16
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,Projection date,Projection date,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,16
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,runPeriod,runPeriod,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,16
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,scenario_index,scenario_index,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,-1
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,stochastic_indicator,stochastic_indicator,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,-1
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,cashIndex,cashIndex,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_riskDrivers,GBP_riskDrivers,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test2
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test3
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test4
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test5
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test6
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test,GBP_test,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test_asx
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test2,GBP_test2,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test2_asx
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test3,GBP_test3,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test3_asx
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test4,GBP_test4,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test4_asx
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test5,GBP_test5,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test5_asx
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test6,GBP_test6,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test6_asx
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test_asx,GBP_test_asx,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test_asx_det
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test_asx_sto
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test_asx_sto,GBP_test_asx_sto,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1.16
+BAS,Historical RatesSPEC,Historical RatesSPEC,Historical Rates,GBP_test_asx_det,GBP_test_asx_det,0,,FALSE,0,FALSE,@Linear,TRUE,%,simple,actual/365
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,0,1
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,31,2
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,59,3
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,90,4
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,120,5
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,151,6
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,181,7
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,212,8
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,243,9
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,273,10
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,304,11
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,334,12
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,365,13
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,547,14
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,731,15
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,912,16
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,1096,17
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test2_asx,GBP_test2_asx,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test2_asx_det
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test2_asx_sto
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test2_asx_sto,GBP_test2_asx_sto,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,2.33
+BAS,Historical RatesSPEC,Historical RatesSPEC,Historical Rates,GBP_test2_asx_det,GBP_test2_asx_det,0,,FALSE,0,FALSE,@Linear,TRUE,%,simple,actual/365
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,0,1
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,31,2
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,59,3
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,90,4
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,120,5
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,151,6
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,181,7
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,212,8
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,243,9
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,273,10
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,304,11
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,334,12
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,365,13
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,547,14
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,731,15
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,912,16
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,1096,17
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test3_asx,GBP_test3_asx,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test3_asx_det
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test3_asx_sto
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test3_asx_sto,GBP_test3_asx_sto,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,3.49
+BAS,Historical RatesSPEC,Historical RatesSPEC,Historical Rates,GBP_test3_asx_det,GBP_test3_asx_det,0,,FALSE,0,FALSE,@Linear,TRUE,%,simple,actual/365
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,0,1
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,31,2
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,59,3
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,90,4
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,120,5
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,151,6
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,181,7
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,212,8
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,243,9
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,273,10
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,304,11
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,334,12
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,365,13
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,547,14
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,731,15
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,912,16
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,1096,17
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test4_asx,GBP_test4_asx,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test4_asx_det
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test4_asx_sto
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test4_asx_sto,GBP_test4_asx_sto,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,4.66
+BAS,Historical RatesSPEC,Historical RatesSPEC,Historical Rates,GBP_test4_asx_det,GBP_test4_asx_det,0,,FALSE,0,FALSE,@Linear,TRUE,%,simple,actual/365
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,0,1
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,31,2
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,59,3
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,90,4
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,120,5
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,151,6
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,181,7
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,212,8
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,243,9
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,273,10
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,304,11
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,334,12
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,365,13
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,547,14
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,731,15
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,912,16
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,1096,17
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test5_asx,GBP_test5_asx,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test5_asx_det
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test5_asx_sto
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test5_asx_sto,GBP_test5_asx_sto,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,5.82
+BAS,Historical RatesSPEC,Historical RatesSPEC,Historical Rates,GBP_test5_asx_det,GBP_test5_asx_det,0,,FALSE,0,FALSE,@Linear,TRUE,%,simple,actual/365
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,0,1
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,31,2
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,59,3
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,90,4
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,120,5
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,151,6
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,181,7
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,212,8
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,243,9
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,273,10
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,304,11
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,334,12
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,365,13
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,547,14
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,731,15
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,912,16
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,1096,17
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test6_asx,GBP_test6_asx,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,@sum
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test6_asx_det
+rm_ro,Index CurveSPEC : Procedure Parameter,Procedure Parameter,Index CurveSPEC,GBP_test6_asx_sto
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_test6_asx_sto,GBP_test6_asx_sto,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,6.99
+BAS,Historical RatesSPEC,Historical RatesSPEC,Historical Rates,GBP_test6_asx_det,GBP_test6_asx_det,0,,FALSE,0,FALSE,@Linear,TRUE,%,simple,actual/365
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,0,1
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,31,2
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,59,3
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,90,4
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,120,5
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,151,6
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,181,7
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,212,8
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,243,9
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,273,10
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,304,11
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,334,12
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,365,13
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,547,14
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,731,15
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,912,16
+rm_ro,Historical RatesSPEC : Historical Rate Surface,Historical Rate Surface,Historical RatesSPEC,1096,17
+BAS,FX ConverterSPEC,FX ConverterSPEC,FX Converter,FX_Converter
+rm_ro,FX ConverterSPEC : FXConverter,FXConverter,FX ConverterSPEC,FX_GBP/GBP,GBP,GBP,1
+BAS,Index CurveSPEC,Index CurveSPEC,Index Curve,GBP_Cash_default_sto,GBP_Cash_default_sto,0,,0,TRUE,0,@Sliding Axis 1,@Constant,@Linear,%,simple,actual/365,
+rm_ro,Index CurveSPEC : Generic Index Surface,Generic Index Surface,Index CurveSPEC,0,0,1

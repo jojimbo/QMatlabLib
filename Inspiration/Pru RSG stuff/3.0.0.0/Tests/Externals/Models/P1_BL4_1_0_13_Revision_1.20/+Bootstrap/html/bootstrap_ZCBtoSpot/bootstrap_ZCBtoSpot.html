@@ -1,0 +1,361 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Zero Coupon Bond to Spot Rate</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-04-03"><meta name="DC.source" content="bootstrap_ZCBtoSpot.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Zero Coupon Bond to Spot Rate</h1><!--introduction--><p><b>The class returns spot rates from zero coupon bond prices.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">How to Use the Class</a></li><li><a href="#3">Properties</a></li><li><a href="#5">List of Methods</a></li><li><a href="#8">Details of Methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_ZCBtoSpot &lt; prursg.Bootstrap.BaseBootstrapAlgorithm
+</pre><h2>How to Use the Class<a name="2"></a></h2><p>Given an input zero coupon bond data series we calculate a spot rate series for a certain compounding frequncy, <img src="bootstrap_ZCBtoSpot_eq85998.png" alt="$f$">, with output frequency given by <b><tt>[outputfreq]</tt></b>.</p><h2>Properties<a name="3"></a></h2><p><b>Input Data Series</b></p><p><b><tt>[ZeroCouponBondPrices]</tt></b> - The price of a zero coupon bond, <img src="bootstrap_ZCBtoSpot_eq03177.png" alt="$P_{t,T}$">, at time, <img src="bootstrap_ZCBtoSpot_eq21444.png" alt="$t=0$">, which pays 1 at maturity, <img src="bootstrap_ZCBtoSpot_eq46221.png" alt="$t=T$">.</p><pre>Data Type: data series</pre><p><b>Input Parameters</b></p><p><b><tt>[outputfreq]</tt></b> - A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data Type: string</pre><p><b><tt>[compounding]</tt></b> - Defines the way that the output yield curve is compounded, e.g. "annually" or "continuously".</p><pre>Data Type: string</pre><p><b><tt>[compoundingfrequency]</tt></b> - Defines the annual frequency, <img src="bootstrap_ZCBtoSpot_eq85998.png" alt="$f$">, at which the output yield curve is compounded e.g. "2" for semi-annually.</p><pre>Data Type: double</pre><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+
+      <span class="comment">% Data Series</span>
+        ZeroCouponBondPrices = [];
+
+      <span class="comment">% Parameters</span>
+        outputfreq = [];
+        compounding = [];
+        compoundingfrequency= [];
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="5"></a></h2><p>The class introduces one method:</p><p><b><tt>[bootstrap_ZCBtoSpot ()]</tt></b> - Function returns a data series of spot rates calculated using a given compounding frequency to an output frequency profile.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput"><span class="comment">% Constructor</span>
+
+       <span class="keyword">function</span> obj = bootstrap_ZCBtoSpot ()
+           obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">
+ans = 
+
+  Bootstrap.bootstrap_ZCBtoSpot handle
+  Package: Bootstrap
+
+  Properties:
+    ZeroCouponBondPrices: []
+              outputfreq: []
+             compounding: []
+    compoundingfrequency: []
+
+
+</pre><h2>Details of Methods<a name="8"></a></h2><p><b><i>Description</i></b></p><p>Function returns a data series of spot rates calculated using a given compounding frequency, <b><tt>[compoundingfrequency]</tt></b>, to an output frequency profile given by <b><tt>[outputfreq]</tt></b>.</p><p><b><i>Inputs</i></b></p><p><b><tt>[ZeroCouponBondPrices]</tt></b> - The price of a zero coupon bond, <img src="bootstrap_ZCBtoSpot_eq03177.png" alt="$P_{t,T}$">, at time, <img src="bootstrap_ZCBtoSpot_eq21444.png" alt="$t=0$">, which pays 1 at maturity, <img src="bootstrap_ZCBtoSpot_eq46221.png" alt="$t=T$">.</p><pre>Data Type: data series</pre><p><b><tt>[outputfreq]</tt></b> - A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data Type: string</pre><p><b><tt>[compounding]</tt></b> - Defines the way that the output yield curve is compounded, e.g. "annually" or "continuously".</p><pre>Data Type: string</pre><p><b><tt>[compoundingfrequency]</tt></b> - Defines the annual frequency, <img src="bootstrap_ZCBtoSpot_eq85998.png" alt="$f$">, at which the output yield curve is compounded e.g. "2" for semi-annually.</p><pre>Data Type: double</pre><p><b><i>Outputs</i></b></p><p>A yield curve of spot rates in accordance with the output frequency profile.</p><p><b><i>Calculations</i></b></p><p>Sort and clone the input data.</p><p>The next step is to identify and set up the output frequency profile which specifies the frequency of outputs e.g. annually or monthly etc.</p><p>Depending whether we have continuous or discrete compounding the spot rates are calculate using:</p><p>i) Continuous Compounding</p><p><img src="bootstrap_ZCBtoSpot_eq68881.png" alt="$$ S_{t,T} = -\frac{ln(P_{t,T})}{T-t} $$"></p><p>where</p><p><img src="bootstrap_ZCBtoSpot_eq93135.png" alt="$S_{t,T}$"> : Spot Rate at time, <img src="bootstrap_ZCBtoSpot_eq07064.png" alt="$t$">, paying at maturity, <img src="bootstrap_ZCBtoSpot_eq46221.png" alt="$t=T$">.</p><p><img src="bootstrap_ZCBtoSpot_eq03177.png" alt="$P_{t,T}$"> : The price of a zero coupon bond at time, <img src="bootstrap_ZCBtoSpot_eq07064.png" alt="$t$">, which pays 1 at maturity, <img src="bootstrap_ZCBtoSpot_eq46221.png" alt="$t=T$">.</p><p>or</p><p>ii) Annual Compounding</p><p><img src="bootstrap_ZCBtoSpot_eq37154.png" alt="$$ S_{t,T} = ({P_{t,T}}^{\frac{-1}{(T-t).f}}-1).f $$"></p><p>with</p><p><img src="bootstrap_ZCBtoSpot_eq85998.png" alt="$f$"> : Annual compounding frequency.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+    <span class="comment">% Methods</span>
+
+        <span class="keyword">function</span> results = Bootstrap(obj, DataSeriesIn)
+
+
+            newSortDataSeries=Bootstrap.BsSort();
+
+            obj.ZeroCouponBondPrices =newSortDataSeries.SortDataSeries<span class="keyword">...</span>
+                (DataSeriesIn(1).Clone);
+
+
+             maxTerm = obj.ZeroCouponBondPrices(1).axes(1).values{1, end};
+             BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile<span class="keyword">...</span>
+                 (obj.outputfreq,maxTerm);
+             outputfreqProfile = <span class="keyword">...</span>
+                 BsfrequencyprofileObject.AdjustedIntervalArray;
+
+
+             ZCBPrices_Temp = <span class="keyword">...</span>
+                 BsfrequencyprofileObject.SmallerDataSeriesObject<span class="keyword">...</span>
+                 (outputfreqProfile,obj.ZeroCouponBondPrices);
+
+
+               results = ZCBPrices_Temp ;
+               <span class="keyword">for</span> i = 1: size(results.dates,1)
+                   Maturity =cell2mat(ZCBPrices_Temp.axes(1).values);
+                   BondPrice = results.values{i};
+
+                   <span class="keyword">if</span> strcmp(obj.compounding, <span class="string">'cont'</span>)
+                        results.values{i} = -log(BondPrice) ./ Maturity;
+                    <span class="keyword">elseif</span> strcmp(obj.compounding, <span class="string">'ann'</span>)
+                        results.values{i} = (BondPrice .^(-1./ <span class="keyword">...</span>
+                            (obj.compoundingfrequency.*Maturity)) -1).*<span class="keyword">...</span>
+                            obj.compoundingfrequency;
+                   <span class="keyword">end</span>
+
+               <span class="keyword">end</span>
+
+
+               results.Name = <span class="string">''</span>;
+               results.source =<span class="string">'iMDP'</span>;
+               results.ticker= <span class="string">'na'</span>;
+
+               results.description = <span class="string">'derived ZCBtoSpot method'</span>;
+               results.ratetype = <span class="string">'spot'</span>;
+               results.compounding =obj.compounding;
+               results.compoundingfrequency= num2str<span class="keyword">...</span>
+                   (obj.compoundingfrequency);
+               results.daycount =<span class="string">'na'</span>;
+               results.units =<span class="string">'absolute'</span>;
+        <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Zero Coupon Bond to Spot Rate
+% 
+% *The class returns spot rates from zero coupon bond prices.*
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_ZCBtoSpot < prursg.Bootstrap.BaseBootstrapAlgorithm   
+%% How to Use the Class
+%
+% Given an input zero coupon bond data series we calculate a spot rate
+% series for a certain compounding frequncy, $f$, with output frequency given by *|[outputfreq]|*.
+
+%% Properties
+% *Input Data Series*  
+%
+% *|[ZeroCouponBondPrices]|* - The price of a zero coupon bond, $P_{t,T}$,
+% at time, $t=0$, which pays 1 at maturity, $t=T$.
+%
+%  Data Type: data series 
+%
+% *Input Parameters* 
+%
+% *|[outputfreq]|* - A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data Type: string 
+%
+% *|[compounding]|* - Defines the way that the output yield curve is 
+% compounded, e.g. "annually" or "continuously".
+%
+%  Data Type: string
+%
+% *|[compoundingfrequency]|* - Defines the annual frequency, $f$, at which 
+% the output yield curve is compounded e.g. "2" for semi-annually.
+%
+%  Data Type: double
+
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    properties
+  
+      % Data Series         
+        ZeroCouponBondPrices = [];  
+        
+      % Parameters 
+        outputfreq = []; 
+        compounding = []; 
+        compoundingfrequency= []; 
+        
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% List of Methods
+% The class introduces one method:
+%
+% *|[bootstrap_ZCBtoSpot ()]|* - Function returns a data series of spot rates
+% calculated using a given compounding frequency to an output frequency
+% profile.
+%
+
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    methods
+       
+% Constructor
+    
+       function obj = bootstrap_ZCBtoSpot ()
+           obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%% Details of Methods
+%
+% *_Description_*
+%
+% Function returns a data series of spot rates calculated using a given 
+% compounding frequency, *|[compoundingfrequency]|*, to an output frequency 
+% profile given by *|[outputfreq]|*.
+%
+% *_Inputs_*
+%
+% *|[ZeroCouponBondPrices]|* - The price of a zero coupon bond, $P_{t,T}$,
+% at time, $t=0$, which pays 1 at maturity, $t=T$.
+%
+%  Data Type: data series 
+%
+% *|[outputfreq]|* - A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data Type: string 
+%
+% *|[compounding]|* - Defines the way that the output yield curve is 
+% compounded, e.g. "annually" or "continuously".
+%
+%  Data Type: string
+%
+% *|[compoundingfrequency]|* - Defines the annual frequency, $f$, at which 
+% the output yield curve is compounded e.g. "2" for semi-annually.
+%
+%  Data Type: double
+%
+% *_Outputs_*
+%
+% A yield curve of spot rates in accordance with the output frequency
+% profile.
+%
+% *_Calculations_*
+%
+% Sort and clone the input data.
+%
+% The next step is to identify and set up the output frequency profile which specifies the
+% frequency of outputs e.g. annually or monthly etc.
+%
+% Depending whether we have continuous or discrete compounding the spot rates are calculate
+% using:
+%%
+% i) Continuous Compounding 
+%
+% $$ S_{t,T} = -\frac{ln(P_{t,T})}{T-t} $$
+%
+% where
+%
+% $S_{t,T}$ : Spot Rate at time, $t$, paying at maturity, $t=T$.
+%
+% $P_{t,T}$ : The price of a zero coupon bond at time, $t$, which pays 1 at maturity, $t=T$.
+%
+% or
+%
+% ii) Annual Compounding
+%
+% $$ S_{t,T} = ({P_{t,T}}^{\frac{-1}{(T-t).f}}-1).f $$    
+%
+% with
+%
+% $f$ : Annual compounding frequency.   
+%% 
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      
+    % Methods
+    
+        function results = Bootstrap(obj, DataSeriesIn)
+            
+                         
+            newSortDataSeries=Bootstrap.BsSort(); 
+            
+            obj.ZeroCouponBondPrices =newSortDataSeries.SortDataSeries...
+                (DataSeriesIn(1).Clone);  
+            
+                      
+             maxTerm = obj.ZeroCouponBondPrices(1).axes(1).values{1, end}; 
+             BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile...
+                 (obj.outputfreq,maxTerm);
+             outputfreqProfile = ...
+                 BsfrequencyprofileObject.AdjustedIntervalArray;
+           
+           
+             ZCBPrices_Temp = ...
+                 BsfrequencyprofileObject.SmallerDataSeriesObject...
+                 (outputfreqProfile,obj.ZeroCouponBondPrices);
+           
+                
+               results = ZCBPrices_Temp ;        
+               for i = 1: size(results.dates,1)  
+                   Maturity =cell2mat(ZCBPrices_Temp.axes(1).values);
+                   BondPrice = results.values{i};
+
+                   if strcmp(obj.compounding, 'cont')      
+                        results.values{i} = -log(BondPrice) ./ Maturity;
+                    elseif strcmp(obj.compounding, 'ann')      
+                        results.values{i} = (BondPrice .^(-1./ ...
+                            (obj.compoundingfrequency.*Maturity)) -1).*...
+                            obj.compoundingfrequency; 
+                   end   
+
+               end
+              
+               
+               results.Name = '';
+               results.source ='iMDP';
+               results.ticker= 'na';
+               
+               results.description = 'derived ZCBtoSpot method';
+               results.ratetype = 'spot';
+               results.compounding =obj.compounding;
+               results.compoundingfrequency= num2str...
+                   (obj.compoundingfrequency);
+               results.daycount ='na';
+               results.units ='absolute'; 
+        end
+        
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

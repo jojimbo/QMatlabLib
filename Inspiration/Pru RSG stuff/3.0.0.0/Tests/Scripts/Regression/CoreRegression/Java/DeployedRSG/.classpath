@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Source/Lib/mds.jar"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Source/Lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Source/Lib/poi-3.7/poi-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Source/Lib/poi-3.7/poi-ooxml-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Source/Lib/poi-3.7/poi-ooxml-schemas-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Source/Lib/poi-3.7/ooxml-lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Source/Lib/poi-3.7/ooxml-lib/geronimo-stax-api_1.0_spec-1.0.jar"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Source/Lib/poi-3.7/ooxml-lib/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Source/RSGSimulate/src/RSGSimulate.jar"/>
+	<classpathentry kind="lib" path="/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Tests/framework/Java/JTestUtil/generated/JavaBuilder/src/JTestUtility.jar"/>
+	<classpathentry kind="lib" path="/apps/MATLAB/R2010bSP1/toolbox/javabuilder/jar/javabuilder.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3.8.1"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

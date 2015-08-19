@@ -1,0 +1,368 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Forward Rate to Zero Coupon Bond</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-05-29"><meta name="DC.source" content="bootstrap_FwdtoZCB.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Forward Rate to Zero Coupon Bond</h1><!--introduction--><p>The class returns zero coupon bond prices from forward rates.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">How to Use the Class</a></li><li><a href="#3">Properties</a></li><li><a href="#5">List of Methods</a></li><li><a href="#8">Details of Methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_FwdtoZCB &lt; prursg.Bootstrap.BaseBootstrapAlgorithm
+</pre><h2>How to Use the Class<a name="2"></a></h2><p>For a data series of forward rates we calculate zero coupon bond prices with a specific output frequency profile.</p><h2>Properties<a name="3"></a></h2><p><b>Input Data Series</b></p><p><b><tt>[InputFwdRates]</tt></b> - Forward rates, <img src="bootstrap_FwdtoZCB_eq91546.png" alt="$F(T, T')$">, between time, <img src="bootstrap_FwdtoZCB_eq57315.png" alt="$T$"> and <img src="bootstrap_FwdtoZCB_eq42810.png" alt="$T'$">, with term, <img src="bootstrap_FwdtoZCB_eq35407.png" alt="$T'-T$">.</p><pre>Data Type: data series</pre><p><b>Input Parameters</b></p><p><b><tt>[outputfreq]</tt></b> - A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data Type: string</pre><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+    properties
+
+      <span class="comment">% Data Series</span>
+        InputFwdRates = [];
+
+      <span class="comment">% Parameters</span>
+        outputfreq = [];
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="5"></a></h2><p>The class introduces one method:</p><p><b><tt>bootstrap_FwdtoZCB ()</tt></b> - Function returns zero coupon bond prices from an input of forward rates to a given output frequency profile.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+
+       <span class="keyword">function</span> obj = bootstrap_FwdtoZCB ()
+           obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">
+ans = 
+
+  Bootstrap.bootstrap_FwdtoZCB handle
+  Package: Bootstrap
+
+  Properties:
+    InputFwdRates: []
+       outputfreq: []
+
+
+</pre><h2>Details of Methods<a name="8"></a></h2><p><b><i>Inputs</i></b></p><p><b><tt>[InputFwdRates]</tt></b> - Forward rates, <img src="bootstrap_FwdtoZCB_eq91546.png" alt="$F(T, T')$">, between time, <img src="bootstrap_FwdtoZCB_eq57315.png" alt="$T$"> and <img src="bootstrap_FwdtoZCB_eq42810.png" alt="$T'$">, with term, <img src="bootstrap_FwdtoZCB_eq35407.png" alt="$T'-T$">.</p><pre>Data Type: data series</pre><p><b><tt>[outputfreq]</tt></b> - A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data Type: string</pre><p><b><i>Outputs</i></b></p><p>Zero coupon bonds in accordance with the output frequency profile.</p><p><b><i>Calculations</i></b></p><p>Sort and clone the input data.</p><p>Depending whether we have continuous or discrete compounding the zero coupon bond prices are calculated using:</p><p>i) Continuous Compounding</p><p><img src="bootstrap_FwdtoZCB_eq96135.png" alt="$$ B(t,T) = \prod^T_{i-1}exp\Big[\big(T_{i-1}-T_{i}\big)F(T_{i-1}, T_i)\Big] $$"></p><p>where</p><p><img src="bootstrap_FwdtoZCB_eq73735.png" alt="$B(t,T)$"> : The price of a zero coupon bond at time, <img src="bootstrap_FwdtoZCB_eq07064.png" alt="$t$">, which pays 1 at maturity, <img src="bootstrap_FwdtoZCB_eq46221.png" alt="$t=T$">.</p><p><img src="bootstrap_FwdtoZCB_eq85086.png" alt="$F(T_{i-1}, T_i)$"> : Forward rate between time, <img src="bootstrap_FwdtoZCB_eq06387.png" alt="$T_{i-1}$"> and <img src="bootstrap_FwdtoZCB_eq24859.png" alt="$T_i$">.</p><p>or</p><p>ii) Annual Compounding</p><p><img src="bootstrap_FwdtoZCB_eq77066.png" alt="$$ B(t,T) = \prod_{i=1}^T\Big(1+\frac{F(T_{i-1}, T_i)}{f}\Big)^{(T_{i-1}-T_i)f} $$"></p><p>with</p><p><img src="bootstrap_FwdtoZCB_eq85998.png" alt="$f$"> : Compounding annual frequency.</p><p>The next step is to identify and set up the output frequency profile which specifies the frequency of outputs e.g. annually or monthly etc.</p><p>Finally the data series properties are updated.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+        <span class="keyword">function</span> results = Bootstrap(obj, DataSeriesIn)
+
+
+
+            newSortDataSeries=Bootstrap.BsSort();
+
+            obj.InputFwdRates =newSortDataSeries.SortDataSeries<span class="keyword">...</span>
+                (DataSeriesIn(1).Clone);
+
+            freq = obj.InputFwdRates.compoundingfrequency;
+
+
+             results = obj.InputFwdRates ;
+
+             <span class="keyword">for</span> i = 1: size(results.dates, 1)
+                 numberofpoints = size(results.values{i},2);
+                 Maturity =cell2mat(obj.InputFwdRates.axes(1).values);
+
+                 <span class="keyword">if</span> strcmp(obj.InputFwdRates.compounding, <span class="string">'cont'</span>)
+                     results.values{i}(1) = <span class="keyword">...</span>
+                         exp (- obj.InputFwdRates.values{i}(1) .*<span class="keyword">...</span>
+                         Maturity(1));
+                     <span class="keyword">for</span> j = 2:numberofpoints
+                         results.values{i}(j) = <span class="keyword">...</span>
+                             results.values{i}(j-1) .* exp <span class="keyword">...</span>
+                             (obj.InputFwdRates.values{i}(j-1) .*<span class="keyword">...</span>
+                             (Maturity(j-1) - Maturity(j)));
+                     <span class="keyword">end</span>
+                 <span class="keyword">elseif</span> strcmp(obj.InputFwdRates.compounding , <span class="string">'ann'</span>)
+                     results.values{i}(1) = (1 + <span class="keyword">...</span>
+                         obj.InputFwdRates.values{i}(1)/freq).^<span class="keyword">...</span>
+                         (-Maturity(1)*freq);
+                     <span class="keyword">for</span> j = 2:numberofpoints
+                         results.values{i}(j) = results.values{i}(j-1).*<span class="keyword">...</span>
+                             (1 + obj.InputFwdRates.values{i}(j)/freq).^<span class="keyword">...</span>
+                             ((Maturity(j-1) - Maturity(j))*freq);
+                     <span class="keyword">end</span>
+                 <span class="keyword">end</span>
+
+
+             <span class="keyword">end</span>
+
+
+             maxTerm = obj.InputFwdRates(1).axes(1).values{1, end};
+             BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile<span class="keyword">...</span>
+                 (obj.outputfreq,maxTerm);
+             outputfreqProfile =<span class="keyword">...</span>
+                 BsfrequencyprofileObject.AdjustedIntervalArray;
+
+
+             results = BsfrequencyprofileObject.SmallerDataSeriesObject<span class="keyword">...</span>
+                 (outputfreqProfile,results);
+
+
+
+               results.Name = <span class="string">''</span>;
+               results.source =<span class="string">'iMDP'</span>;
+               results.ticker= <span class="string">'na'</span>;
+
+               results.description = <span class="string">'derived ZCBtoZCB method'</span>;
+               results.ratetype = <span class="string">'zcb'</span>;
+               results.compounding =<span class="string">'na'</span>;
+               results.compoundingfrequency=  <span class="string">'na'</span>;
+               results.daycount =<span class="string">'na'</span>;
+               results.units =<span class="string">'absolute'</span>;
+
+
+        <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Forward Rate to Zero Coupon Bond
+% 
+% The class returns zero coupon bond prices from forward rates.
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_FwdtoZCB < prursg.Bootstrap.BaseBootstrapAlgorithm
+%% How to Use the Class
+% For a data series of forward rates we calculate zero coupon bond prices
+% with a specific output frequency profile.
+%
+
+%% Properties
+% *Input Data Series*
+%
+% *|[InputFwdRates]|* - Forward rates, $F(T, T')$, between time, $T$
+% and $T'$, with term, $T'-T$.
+%
+%  Data Type: data series
+%
+% *Input Parameters*
+% 
+% *|[outputfreq]|* - A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data Type: string 
+
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    properties
+      
+      % Data Series         
+        InputFwdRates = [];    
+  
+      % Parameters 
+        outputfreq = []; 
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% List of Methods
+%
+% The class introduces one method:
+%
+% *|bootstrap_FwdtoZCB ()|* - Function returns zero coupon bond prices from
+% an input of forward rates to a given output frequency profile.
+%
+
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods
+        
+    
+    % Constructor
+    
+       function obj = bootstrap_FwdtoZCB ()
+           obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       end              
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of Methods
+% 
+% *_Inputs_*
+%
+% *|[InputFwdRates]|* - Forward rates, $F(T, T')$, between time, $T$
+% and $T'$, with term, $T'-T$.
+%
+%  Data Type: data series
+% 
+% *|[outputfreq]|* - A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data Type: string 
+%
+% *_Outputs_*
+% 
+% Zero coupon bonds in accordance with the output frequency profile.
+%
+% *_Calculations_* 
+%
+% Sort and clone the input data.
+%
+% Depending whether we have continuous or discrete compounding the 
+% zero coupon bond prices are calculated using:
+%%
+% i) Continuous Compounding 
+%
+% $$ B(t,T) = \prod^T_{i-1}exp\Big[\big(T_{i-1}-T_{i}\big)F(T_{i-1}, T_i)\Big] $$
+%
+% where
+%
+% $B(t,T)$ : The price of a zero coupon bond at time, $t$, which pays 1 
+% at maturity, $t=T$.
+%
+% $F(T_{i-1}, T_i)$ : Forward rate between time, $T_{i-1}$ and $T_i$.  
+%
+% or
+%
+% ii) Annual Compounding
+%
+% $$ B(t,T) = \prod_{i=1}^T\Big(1+\frac{F(T_{i-1}, T_i)}{f}\Big)^{(T_{i-1}-T_i)f} $$ 
+%
+% with
+%
+% $f$ : Compounding annual frequency.   
+%
+% The next step is to identify and set up the output frequency profile which specifies the
+% frequency of outputs e.g. annually or monthly etc.
+%
+% Finally the data series properties are updated.
+%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function results = Bootstrap(obj, DataSeriesIn)            
+            
+              
+            
+            newSortDataSeries=Bootstrap.BsSort(); 
+            
+            obj.InputFwdRates =newSortDataSeries.SortDataSeries...
+                (DataSeriesIn(1).Clone);  
+           
+            freq = obj.InputFwdRates.compoundingfrequency;
+            
+            
+             results = obj.InputFwdRates ;        
+             
+             for i = 1: size(results.dates, 1)
+                 numberofpoints = size(results.values{i},2);
+                 Maturity =cell2mat(obj.InputFwdRates.axes(1).values);
+                 
+                 if strcmp(obj.InputFwdRates.compounding, 'cont')
+                     results.values{i}(1) = ...
+                         exp (- obj.InputFwdRates.values{i}(1) .*...
+                         Maturity(1));
+                     for j = 2:numberofpoints
+                         results.values{i}(j) = ...
+                             results.values{i}(j-1) .* exp ...
+                             (obj.InputFwdRates.values{i}(j-1) .*...
+                             (Maturity(j-1) - Maturity(j)));
+                     end
+                 elseif strcmp(obj.InputFwdRates.compounding , 'ann')
+                     results.values{i}(1) = (1 + ...
+                         obj.InputFwdRates.values{i}(1)/freq).^...
+                         (-Maturity(1)*freq);
+                     for j = 2:numberofpoints
+                         results.values{i}(j) = results.values{i}(j-1).*...
+                             (1 + obj.InputFwdRates.values{i}(j)/freq).^...
+                             ((Maturity(j-1) - Maturity(j))*freq);
+                     end
+                 end
+                 
+                 
+             end
+            
+                 
+             maxTerm = obj.InputFwdRates(1).axes(1).values{1, end}; 
+             BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile...
+                 (obj.outputfreq,maxTerm);
+             outputfreqProfile =...
+                 BsfrequencyprofileObject.AdjustedIntervalArray;
+           
+            
+             results = BsfrequencyprofileObject.SmallerDataSeriesObject...
+                 (outputfreqProfile,results);
+            
+             
+             
+               results.Name = '';
+               results.source ='iMDP';
+               results.ticker= 'na';
+               
+               results.description = 'derived ZCBtoZCB method';
+               results.ratetype = 'zcb';
+               results.compounding ='na';
+               results.compoundingfrequency=  'na';
+               results.daycount ='na';
+               results.units ='absolute'; 
+                        
+               
+        end
+                  
+        
+
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

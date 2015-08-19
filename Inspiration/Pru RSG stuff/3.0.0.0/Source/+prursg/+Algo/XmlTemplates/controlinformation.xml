@@ -1,0 +1,16 @@
+<RISKFACTOR NAME="stochastic_indicator" ATTRIBUTE="" SCENARIOTYPE="absolute">
+  <PROPERTIES ENTRIES="1">
+   <PROPERTY NAME="FactorGroup" TYPE="string" VALUE="aux_values"/>
+  </PROPERTIES>
+  <AXISLIST ENTRIES="2">
+   <AXIS COUNT="0" NAME="Term" SYMBOL="T" TYPE="int">
+    <AXISVALUES ENTRIES="1">0</AXISVALUES>
+   </AXIS>
+   <AXIS COUNT="1" NAME="Time" SYMBOL="Z" TYPE="double">
+    <AXISVALUES ENTRIES="1">0</AXISVALUES>
+   </AXIS>
+  </AXISLIST>
+  <VALUELIST ENTRIES="1">
+   <VALUE COUNT="1" NAME="value" TYPE="double"/>
+  </VALUELIST>
+ </RISKFACTOR>

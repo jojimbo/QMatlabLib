@@ -1,0 +1,9 @@
+<Bootstrap>
+    <Item name="Item1" bootstrap="true" calibrate="false" description="monthly NoAdjusted ZCBs " effectiveDate="30/Dec/2011">
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="ds1" from="30/Nov/2009" to="30/Nov/2009" frequency="d" dateOfMonth="" holidayCalendar="" missingDataTreatmentRule=""/>
+            <DataSeries name="ds2" from="30/Nov/2009" to="30/Nov/2009" frequency="d" dateOfMonth="" holidayCalendar="" missingDataTreatmentRule=""/>
+        </InputData>
+    </Item>
+</Bootstrap>

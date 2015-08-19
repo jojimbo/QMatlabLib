@@ -1,0 +1,2 @@
+-Xmx14196m
+-Djava.security.egd=file:///dev/urandom

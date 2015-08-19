@@ -1,0 +1,394 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Zero Coupon Bond to Forward Rate</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-27"><meta name="DC.source" content="bootstrap_ZCBtoFwd.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Zero Coupon Bond to Forward Rate</h1><!--introduction--><p><b>The class converts zero coupon bond prices to forward rates.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">How to Use the Class</a></li><li><a href="#3">Properties</a></li><li><a href="#5">List of Methods</a></li><li><a href="#8">Details of Methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_ZCBtoFwd &lt; prursg.Bootstrap.BaseBootstrapAlgorithm
+</pre><h2>How to Use the Class<a name="2"></a></h2><p>Given  an input zero coupon bond data series we calculate a forward rate series with the output frequency given by <b><tt>[outputfreq]</tt></b>.</p><h2>Properties<a name="3"></a></h2><p><b>Input Data Series</b></p><p><b><tt>[ZeroCouponBondPrices]</tt></b> - The price of a zero coupon bond, <img src="bootstrap_ZCBtoFwd_eq03177.png" alt="$P_{t,T}$">, at time, <img src="bootstrap_ZCBtoFwd_eq21444.png" alt="$t=0$">, which pays 1 at maturity, <img src="bootstrap_ZCBtoFwd_eq46221.png" alt="$t=T$">.</p><pre>Data Type: data series</pre><p><b>Input Parameters</b></p><p><b><tt>[outputfreq]</tt></b> - A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data Type: string</pre><p><b><tt>[compounding]</tt></b> - Defines the way that the output yield curve is compounded, e.g. "annually" or "continuously".</p><pre>Data Type: string</pre><p><b><tt>[compoundingfrequency]</tt></b> - Defines the annual frequency, <img src="bootstrap_ZCBtoFwd_eq85998.png" alt="$f$">, at which the output yield curve is compounded e.g. "2" for semi-annually.</p><pre>Data Type: double</pre><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+
+      <span class="comment">% Data Series</span>
+        ZeroCouponBondPrices = [];
+
+      <span class="comment">% Parameters</span>
+
+        outputfreq = [];
+        compounding = [];
+        compoundingfrequency= [];
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="5"></a></h2><p>The class introduces one method:</p><p><b><tt>bootstrap_ZCBtoFwd ()</tt></b> - Function returns forward rates to a given output frequency profile from input zero coupon bond prices using a specified compounding frequency.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+
+       <span class="keyword">function</span> obj = bootstrap_ZCBtoFwd ()
+          obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       <span class="keyword">end</span>
+
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">
+ans = 
+
+  Bootstrap.bootstrap_ZCBtoFwd handle
+  Package: Bootstrap
+
+  Properties:
+    ZeroCouponBondPrices: []
+              outputfreq: []
+             compounding: []
+    compoundingfrequency: []
+
+
+</pre><h2>Details of Methods<a name="8"></a></h2><p><b><i>Description</i></b></p><p>Function returns forward rates to a given output frequency profile, <b><tt>[outputfreq]</tt></b>,  from input zero coupon bond prices, <b><tt>[ZeroCouponBondPrices]</tt></b>,  using a specified compounding frequency, <b><tt>[compoundingfrequency]</tt></b>.</p><p><b><i>Inputs</i></b></p><p><b><tt>[ZeroCouponBondPrices]</tt></b> - The price of a zero coupon bond, <img src="bootstrap_ZCBtoFwd_eq03177.png" alt="$P_{t,T}$">, at time, <img src="bootstrap_ZCBtoFwd_eq21444.png" alt="$t=0$">, which pays 1 at maturity, <img src="bootstrap_ZCBtoFwd_eq46221.png" alt="$t=T$">.</p><pre>Data Type: data series</pre><p><b><tt>[outputfreq]</tt></b> - A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data Type: string</pre><p><b><tt>[compounding]</tt></b> - Defines the way that the output yield curve is compounded, e.g. "annually" or "continuously".</p><pre>Data Type: string</pre><p><b><tt>[compoundingfrequency]</tt></b> - Defines the annual frequency, <img src="bootstrap_ZCBtoFwd_eq85998.png" alt="$f$"> at which the output yield curve is compounded e.g. "2" for semi-annually.</p><pre>Data Type: double</pre><p><b><i>Outputs</i></b></p><p>A yield curve of forward rates in accordance with the output frequency profile.</p><p><b><i>Calculations</i></b></p><p>Firstly we sort and clone data.</p><p>The next step is to identify and set up the output frequency profile which specifies the frequency of outputs e.g. annually or monthly etc. The zero coupon bond input is then matched to the output frequency profile.</p><p>Depending whether we have continuous or annual compounding the forward rates are calculated using:</p><p>i) Continuous Compounding</p><p><img src="bootstrap_ZCBtoFwd_eq36416.png" alt="$$ F_{mn} = \frac{ln\left(\frac{P_{t,m}}{P_{t,n}}\right)}{n-m} $$"></p><p>where</p><p><img src="bootstrap_ZCBtoFwd_eq10726.png" alt="$F_{mn}$"> : Forward rate between time, <img src="bootstrap_ZCBtoFwd_eq81831.png" alt="$m$"> and <img src="bootstrap_ZCBtoFwd_eq25947.png" alt="$n$"> where <img src="bootstrap_ZCBtoFwd_eq77661.png" alt="$m<n$">.</p><p><img src="bootstrap_ZCBtoFwd_eq58190.png" alt="$P_{t,m}$"> : The price of a zero coupon bond at time, <img src="bootstrap_ZCBtoFwd_eq07064.png" alt="$t$">, which pays 1 at maturity, <img src="bootstrap_ZCBtoFwd_eq98789.png" alt="$t=m$">.</p><p>or</p><p>ii) Discrete Compounding</p><p><img src="bootstrap_ZCBtoFwd_eq96545.png" alt="$$ F_{mn} = \left[\left(\frac{P_{t,m}}{P_{t,n}}\right)^{1/(n-m).f}-1\right].f $$"></p><p>with</p><p><img src="bootstrap_ZCBtoFwd_eq85998.png" alt="$f$"> : Annual compounding frequency.</p><p>Finally data series properties are updated.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+    <span class="comment">%Methods</span>
+
+        <span class="keyword">function</span> results = Bootstrap(obj, DataSeriesIn)
+
+
+            newSortDataSeries=Bootstrap.BsSort();
+
+            obj.ZeroCouponBondPrices =newSortDataSeries.SortDataSeries<span class="keyword">...</span>
+                (DataSeriesIn(1).Clone);
+
+
+             maxTerm = obj.ZeroCouponBondPrices(1).axes(1).values{1, end};
+             BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile<span class="keyword">...</span>
+                 (obj.outputfreq,maxTerm);
+             outputfreqProfile = <span class="keyword">...</span>
+                 BsfrequencyprofileObject.AdjustedIntervalArray;
+
+
+             ZCBPrices_Temp = <span class="keyword">...</span>
+                 BsfrequencyprofileObject.SmallerDataSeriesObject<span class="keyword">...</span>
+                 (outputfreqProfile,obj.ZeroCouponBondPrices);
+
+
+               results = ZCBPrices_Temp ;
+
+               <span class="keyword">for</span> i = 1: size(results.dates, 1)
+
+
+
+                   BondPrice1 = <span class="keyword">...</span>
+                       [1 ,ZCBPrices_Temp.values{i}(1, 1 :end -1)];
+                   BondPrice2 = ZCBPrices_Temp.values{i}   ;
+                   Maturity2 =cell2mat(ZCBPrices_Temp.axes(1).values);
+                   Maturity1 =[0 ,Maturity2(1,  1 :end -1)];
+
+                   <span class="keyword">if</span> strcmp(obj.compounding, <span class="string">'cont'</span>)
+                       results.values{i} =log(BondPrice1 ./BondPrice2)./<span class="keyword">...</span>
+                           (Maturity2-Maturity1) ;
+                   <span class="keyword">elseif</span> strcmp(obj.compounding , <span class="string">'ann'</span>)
+                       results.values{i} =((BondPrice1 ./BondPrice2).^<span class="keyword">...</span>
+                           (1./ (obj.compoundingfrequency.*<span class="keyword">...</span>
+                           (Maturity2-Maturity1))) -1).*<span class="keyword">...</span>
+                           obj.compoundingfrequency;
+                   <span class="keyword">end</span>
+
+               <span class="keyword">end</span>
+
+
+
+               results.Name = <span class="string">''</span>;
+               results.source =<span class="string">'iMDP'</span>;
+               results.ticker= <span class="string">'na'</span>;
+               results.description = <span class="string">'derived ZCBtoFwd method'</span>;
+               results.ratetype = <span class="string">'fwd'</span>;
+               results.compounding =obj.compounding;
+               results.compoundingfrequency=  num2str<span class="keyword">...</span>
+                   (obj.compoundingfrequency);
+               results.daycount =<span class="string">'na'</span>;
+               results.units =<span class="string">'absolute'</span>;
+
+        <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Zero Coupon Bond to Forward Rate
+% 
+% *The class converts zero coupon bond prices to forward rates.*
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_ZCBtoFwd < prursg.Bootstrap.BaseBootstrapAlgorithm
+%% How to Use the Class
+%
+% Given  an input zero coupon bond data series we calculate a forward rate
+% series with the output frequency given by *|[outputfreq]|*.
+
+%% Properties
+% *Input Data Series*  
+%
+% *|[ZeroCouponBondPrices]|* - The price of a zero coupon bond, $P_{t,T}$,
+% at time, $t=0$, which pays 1 at maturity, $t=T$.
+%
+%  Data Type: data series 
+%
+% *Input Parameters* 
+%
+% *|[outputfreq]|* - A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data Type: string 
+%
+% *|[compounding]|* - Defines the way that the output yield curve is 
+% compounded, e.g. "annually" or "continuously".
+%
+%  Data Type: string
+%
+% *|[compoundingfrequency]|* - Defines the annual frequency, $f$, at which 
+% the output yield curve is compounded e.g. "2" for semi-annually.
+%
+%  Data Type: double
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    properties
+       
+      % Data Series         
+        ZeroCouponBondPrices = [];    
+
+      % Parameters 
+       
+        outputfreq = []; 
+        compounding = []; 
+        compoundingfrequency= []; 
+        
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% List of Methods
+% The class introduces one method:
+% 
+% *|bootstrap_ZCBtoFwd ()|* - Function returns forward rates to a given output frequency profile from input
+% zero coupon bond prices using a specified compounding frequency.
+%
+
+%%
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods
+        
+    % Constructor
+    
+       function obj = bootstrap_ZCBtoFwd ()
+          obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       end
+                  
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of Methods
+%
+% *_Description_*
+%
+% Function returns forward rates to a given output frequency profile, *|[outputfreq]|*,  from input
+% zero coupon bond prices, *|[ZeroCouponBondPrices]|*,  using a specified 
+% compounding frequency, *|[compoundingfrequency]|*.
+% 
+% *_Inputs_*
+%
+% *|[ZeroCouponBondPrices]|* - The price of a zero coupon bond, $P_{t,T}$,
+% at time, $t=0$, which pays 1 at maturity, $t=T$.
+%
+%  Data Type: data series  
+%
+% *|[outputfreq]|* - A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data Type: string 
+%
+% *|[compounding]|* - Defines the way that the output yield curve is 
+% compounded, e.g. "annually" or "continuously".
+%
+%  Data Type: string
+%
+% *|[compoundingfrequency]|* - Defines the annual frequency, $f$ at which 
+% the output yield curve is compounded e.g. "2" for semi-annually.
+%
+%  Data Type: double
+%
+% *_Outputs_*
+%
+% A yield curve of forward rates in accordance with the output frequency
+% profile.
+%
+% *_Calculations_*
+%
+% Firstly we sort and clone data.
+%
+% The next step is to identify and set up the output frequency profile which specifies the
+% frequency of outputs e.g. annually or monthly etc.
+% The zero coupon bond input is then matched to the output frequency profile.
+%
+% Depending whether we have continuous or annual compounding the forward rates
+% are calculated using: 
+% 
+%%
+% i) Continuous Compounding 
+%
+% $$ F_{mn} = \frac{ln\left(\frac{P_{t,m}}{P_{t,n}}\right)}{n-m} $$
+%
+% where
+%
+% $F_{mn}$ : Forward rate between time, $m$ and $n$ where $m<n$.
+%
+% $P_{t,m}$ : The price of a zero coupon bond at time, $t$, which pays 1 
+% at maturity, $t=m$.
+%
+% or
+%
+% ii) Discrete Compounding
+%
+% $$ F_{mn} = \left[\left(\frac{P_{t,m}}{P_{t,n}}\right)^{1/(n-m).f}-1\right].f $$    
+%
+% with
+%
+% $f$ : Annual compounding frequency.   
+%
+% Finally data series properties are updated.
+%
+%% 
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    %Methods
+
+        function results = Bootstrap(obj, DataSeriesIn)
+            
+                        
+            newSortDataSeries=Bootstrap.BsSort(); 
+            
+            obj.ZeroCouponBondPrices =newSortDataSeries.SortDataSeries...
+                (DataSeriesIn(1).Clone);
+               
+                      
+             maxTerm = obj.ZeroCouponBondPrices(1).axes(1).values{1, end}; 
+             BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile...
+                 (obj.outputfreq,maxTerm);
+             outputfreqProfile = ...
+                 BsfrequencyprofileObject.AdjustedIntervalArray;
+           
+            
+             ZCBPrices_Temp = ...
+                 BsfrequencyprofileObject.SmallerDataSeriesObject...
+                 (outputfreqProfile,obj.ZeroCouponBondPrices);
+            
+                            
+               results = ZCBPrices_Temp ;        
+                                          
+               for i = 1: size(results.dates, 1)
+                   
+                  
+                   
+                   BondPrice1 = ...
+                       [1 ,ZCBPrices_Temp.values{i}(1, 1 :end -1)];
+                   BondPrice2 = ZCBPrices_Temp.values{i}   ;
+                   Maturity2 =cell2mat(ZCBPrices_Temp.axes(1).values);
+                   Maturity1 =[0 ,Maturity2(1,  1 :end -1)];
+                   
+                   if strcmp(obj.compounding, 'cont')
+                       results.values{i} =log(BondPrice1 ./BondPrice2)./...
+                           (Maturity2-Maturity1) ;
+                   elseif strcmp(obj.compounding , 'ann')
+                       results.values{i} =((BondPrice1 ./BondPrice2).^...
+                           (1./ (obj.compoundingfrequency.*...
+                           (Maturity2-Maturity1))) -1).*...
+                           obj.compoundingfrequency;
+                   end
+                
+               end
+               
+              
+               
+               results.Name = '';
+               results.source ='iMDP';
+               results.ticker= 'na';
+               results.description = 'derived ZCBtoFwd method';
+               results.ratetype = 'fwd';
+               results.compounding =obj.compounding;
+               results.compoundingfrequency=  num2str...
+                   (obj.compoundingfrequency);
+               results.daycount ='na';
+               results.units ='absolute';
+             
+        end
+                  
+        
+
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   

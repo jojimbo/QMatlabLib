@@ -1,0 +1,68 @@
+<DataSeriesSet name="TC5_3D" date="21/Sep/2010">
+<DataSeries name="TC5_3D">
+<DynamicProperties>
+<Property name="Currency" type="string">GBP</Property>
+<Property name="ratetype" type="string">swap</Property>
+<Property name="compounding" type="string">ann</Property>
+<Property name="compoundingfrequency" type="number">2</Property>
+<Property name="daycount" type="number">365</Property>
+<Property name="units" type="string">percent</Property>
+</DynamicProperties>
+<Dates>
+
+<Date effectiveDate="25/Nov/2010">20/Sep/2010</Date>
+</Dates>
+<Axis name="term" value="1">
+    <Axis name="strike" value="A">
+        <Axis name="maturity" value="10">
+            <Values>
+                <V>110</V>
+            </Values>
+        </Axis>
+        <Axis name="maturity" value="20">
+            <Values>
+                <V>120</V>
+            </Values>
+        </Axis>
+    </Axis>
+    <Axis name="strike" value="B">
+        <Axis name="maturity" value="10">
+            <Values>
+                <V>1100</V>
+            </Values>
+        </Axis>
+        <Axis name="maturity" value="20">
+            <Values>
+                <V>1200</V>
+            </Values>
+        </Axis>
+    </Axis>
+</Axis>
+<Axis name="term" value="5">
+    <Axis name="strike" value="A">
+        <Axis name="maturity" value="10">
+            <Values>
+                <V>510</V>
+            </Values>
+        </Axis>
+        <Axis name="maturity" value="20">
+            <Values>
+                <V>520</V>
+            </Values>
+        </Axis>
+    </Axis>
+    <Axis name="strike" value="B">
+        <Axis name="maturity" value="10">
+            <Values>
+                <V>5100</V>
+            </Values>
+        </Axis>
+        <Axis name="maturity" value="20">
+            <Values>
+                <V>5200</V>
+            </Values>
+        </Axis>
+    </Axis>
+</Axis>
+</DataSeries>
+</DataSeriesSet>

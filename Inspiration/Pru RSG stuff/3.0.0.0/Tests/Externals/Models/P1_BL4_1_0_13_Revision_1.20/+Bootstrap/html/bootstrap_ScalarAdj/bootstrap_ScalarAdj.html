@@ -1,0 +1,331 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Scalar Adjustment</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-27"><meta name="DC.source" content="bootstrap_ScalarAdj.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Scalar Adjustment</h1><!--introduction--><p><b>The class allows the user to make simple, scalar, global adjustments to a data series.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">How to Use the Class</a></li><li><a href="#3">Properties</a></li><li><a href="#5">List of Methods</a></li><li><a href="#8">Details of Methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_ScalarAdj &lt; prursg.Bootstrap.BaseBootstrapAlgorithm
+</pre><h2>How to Use the Class<a name="2"></a></h2><p>Given an input data series we globally adjust the values by <b><tt>[scalaradj]</tt></b> using the operation given in <b><tt>[operation]</tt></b>.</p><h2>Properties<a name="3"></a></h2><p><b>Input Data Series</b></p><p><b><tt>[InputDataSeries]</tt></b> - Data series to be adjusted.</p><pre>Data Type: data series</pre><p><b>Input Parameters</b></p><p><b><tt>[scalaradj]</tt></b> - The numerical amount to adjust by.</p><pre>Data Type: double</pre><p><b><tt>[outputfreq]</tt></b> - A string that lists the number of monthly, quarterly, semi-annual and annual intervals.</p><pre>Data Type: string</pre><p><b><tt>[operation]</tt></b> - Operation used to make the adjustment; "+", "-", "*" or "/".</p><pre>Data Type: string</pre><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+
+      <span class="comment">% Data Series</span>
+        InputDataSeries  = [];
+
+
+      <span class="comment">% Parameters</span>
+        scalaradj ;
+        outputfreq ;
+        operation ;
+
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="5"></a></h2><p>This class introduces one method:</p><p><b><tt>[bootstrap_ScalarAdj ()]</tt></b> - Function returns an adjusted data series by a applying a global operation, specified in <b><tt>[operation]</tt></b>, of magnitude <b><tt>[scalaradj]</tt></b>.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+
+        <span class="keyword">function</span> obj = bootstrap_ScalarAdj ()
+                obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+        <span class="keyword">end</span>
+
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">
+ans = 
+
+  Bootstrap.bootstrap_ScalarAdj handle
+  Package: Bootstrap
+
+  Properties:
+    InputDataSeries: []
+          scalaradj: []
+         outputfreq: []
+          operation: []
+
+
+</pre><h2>Details of Methods<a name="8"></a></h2><p><b><i>Description</i></b></p><p>Function returns an adjusted data series by acting globally on the <b><tt>[InputDataSeries]</tt></b> by the quantity <b><tt>[scalaradj]</tt></b> using the operation specified in, <b><tt>[operation]</tt></b>.</p><p><b><i>Inputs</i></b></p><p><b><tt>[InputDataSeries]</tt></b> - Data series to be adjusted.</p><pre>Type: data series</pre><p><b><tt>[scalaradj]</tt></b> - The numerical amount to adjust by.</p><pre>Type: double</pre><p><b><tt>[outputfreq]</tt></b> - Time series used to produce a frequency profile.</p><pre>Type: string</pre><p><b><tt>[operation]</tt></b> - Operation used to make the adjustment; "+", "-", "*" or "/".</p><pre>Type: string</pre><p><b><i>Outputs</i></b></p><p>Adjusted version of original data series.</p><p><b><i>Calculations</i></b></p><p>Sort and clone the input data.</p><p>Identify and set up the output frequency profile which specifies the frequency of outputs e.g. annually or monthly etc.</p><p>Apply the scalar adjustment to the input data series using the operation specified in <b><tt>[operation]</tt></b>.</p><p>Update data series properties.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+        <span class="keyword">function</span> results = Bootstrap(obj, DataSeriesIn)
+
+
+
+
+             newSortDataSeries=Bootstrap.BsSort();
+             obj.InputDataSeries = newSortDataSeries.SortDataSeries<span class="keyword">...</span>
+                 (DataSeriesIn.Clone);
+
+
+
+            maxTerm = obj.InputDataSeries.axes(1).values{1, end};
+            BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile<span class="keyword">...</span>
+                (obj.outputfreq,maxTerm);
+            outputfreqProfile = <span class="keyword">...</span>
+                BsfrequencyprofileObject.AdjustedIntervalArray;
+
+
+            InputDataSeries_Temp = <span class="keyword">...</span>
+                BsfrequencyprofileObject.SmallerDataSeriesObject<span class="keyword">...</span>
+                (outputfreqProfile,obj.InputDataSeries(1,1));
+
+
+            results = InputDataSeries_Temp;
+
+            <span class="keyword">for</span> i = 1 : size(results.dates, 1)
+                <span class="keyword">if</span> strcmp(obj.operation, <span class="string">'+'</span>)
+                    results.values{i} = results.values{i} + obj.scalaradj;
+                <span class="keyword">elseif</span> strcmp(obj.operation, <span class="string">'-'</span>)
+                    results.values{i} = results.values{i}- obj.scalaradj;
+                <span class="keyword">elseif</span> strcmp(obj.operation, <span class="string">'*'</span>)
+                    results.values{i} = results.values{i} .* obj.scalaradj;
+                <span class="keyword">elseif</span> strcmp(obj.operation, <span class="string">'/'</span>)
+
+                    results.values{i} = obj.scalaradj ./ results.values{i};
+
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+
+           results.Name = <span class="string">''</span>;
+           results.source =<span class="string">'iMDP'</span>;
+           results.description = <span class="string">'derived using bootstrap_DataAdj method'</span>;
+
+
+        <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Scalar Adjustment
+% 
+% *The class allows the user to make simple, scalar, global adjustments to a data
+% series.*
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_ScalarAdj < prursg.Bootstrap.BaseBootstrapAlgorithm   
+%% How to Use the Class
+%
+% Given an input data series we globally adjust the values by *|[scalaradj]|* using the operation given in *|[operation]|*.
+
+%% Properties
+% *Input Data Series*
+%
+% *|[InputDataSeries]|* - Data series to be adjusted.
+%
+%  Data Type: data series
+%
+% *Input Parameters*
+% 
+% *|[scalaradj]|* - The numerical amount to adjust by.
+%
+%  Data Type: double
+%
+% *|[outputfreq]|* - A string that lists the number of monthly, quarterly, 
+% semi-annual and annual intervals.
+%
+%  Data Type: string 
+%
+% *|[operation]|* - Operation used to make the adjustment; "+", "-", "*"
+% or "/".
+%
+%  Data Type: string
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    properties
+      
+      % Data Series            
+        InputDataSeries  = [];  
+
+      
+      % Parameters 
+        scalaradj ;
+        outputfreq ; 
+        operation ; 
+        
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% List of Methods
+% This class introduces one method:
+%
+% *|[bootstrap_ScalarAdj ()]|* - Function returns an adjusted data series
+% by a applying a global operation, specified in *|[operation]|*, of magnitude *|[scalaradj]|*.
+%
+
+%%
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    methods
+        
+    % Constructor
+    
+        function obj = bootstrap_ScalarAdj ()
+                obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+        end
+                  
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of Methods
+%
+% *_Description_*
+%
+% Function returns an adjusted data series by acting globally on the *|[InputDataSeries]|* by the quantity 
+% *|[scalaradj]|* using the operation specified in, *|[operation]|*. 
+% 
+% *_Inputs_*
+%
+% *|[InputDataSeries]|* - Data series to be adjusted.
+%
+%  Type: data series
+% 
+% *|[scalaradj]|* - The numerical amount to adjust by.
+%
+%  Type: double
+%
+% *|[outputfreq]|* - Time series used to produce a frequency profile.
+%
+%  Type: string 
+%
+% *|[operation]|* - Operation used to make the adjustment; "+", "-", "*"
+% or "/".
+%
+%  Type: string
+%
+% *_Outputs_*
+%
+% Adjusted version of original data series.
+%
+% *_Calculations_*
+%
+% Sort and clone the input data.
+%
+% Identify and set up the output frequency profile which specifies the
+% frequency of outputs e.g. annually or monthly etc.
+%
+% Apply the scalar adjustment to the input data series using the operation 
+% specified in *|[operation]|*.  
+%
+% Update data series properties.
+%% 
+%MATLAB Code     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         
+        function results = Bootstrap(obj, DataSeriesIn)
+
+           
+                       
+                         
+             newSortDataSeries=Bootstrap.BsSort();
+             obj.InputDataSeries = newSortDataSeries.SortDataSeries...
+                 (DataSeriesIn.Clone);
+                          
+            
+                         
+            maxTerm = obj.InputDataSeries.axes(1).values{1, end};       
+            BsfrequencyprofileObject =Bootstrap.Bsfrequencyprofile...
+                (obj.outputfreq,maxTerm);
+            outputfreqProfile = ...
+                BsfrequencyprofileObject.AdjustedIntervalArray;
+
+            
+            InputDataSeries_Temp = ...
+                BsfrequencyprofileObject.SmallerDataSeriesObject...
+                (outputfreqProfile,obj.InputDataSeries(1,1));
+            
+
+            results = InputDataSeries_Temp;
+
+            for i = 1 : size(results.dates, 1)
+                if strcmp(obj.operation, '+')
+                    results.values{i} = results.values{i} + obj.scalaradj;
+                elseif strcmp(obj.operation, '-')
+                    results.values{i} = results.values{i}- obj.scalaradj;
+                elseif strcmp(obj.operation, '*')
+                    results.values{i} = results.values{i} .* obj.scalaradj;
+                elseif strcmp(obj.operation, '/')
+                   
+                    results.values{i} = obj.scalaradj ./ results.values{i};
+                 
+                end
+            end
+
+           
+           results.Name = '';
+           results.source ='iMDP';         
+           results.description = 'derived using bootstrap_DataAdj method';
+           
+            
+        end
+
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

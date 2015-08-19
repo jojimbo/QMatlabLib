@@ -1,0 +1,751 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Black Price and Black Implied Volatility</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-04-16"><meta name="DC.source" content="bsBlackPrice.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Black Price and Black Implied Volatility</h1><!--introduction--><p><b>The class returns the Black price and the Black implied volatility of swap options.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">How to Use the Class</a></li><li><a href="#4">Properties</a></li><li><a href="#6">List of Methods</a></li><li><a href="#9">Details of Methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bsBlackPrice
+</pre><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>How to Use the Class<a name="3"></a></h2><p>There are three ways to use this class:</p><div><ol><li>To calculate the Black price of a European option, using <b><tt>[bsBlackPrice()]</tt></b>.</li><li>To calculate the implied volatility with the Black model using <b><tt>[BlackImpVol()]</tt></b>.</li><li>To calculate the first derivative of the Black price with respect to the volatility using <b><tt>[BlackLambda()]</tt></b>.</li></ol></div><h2>Properties<a name="4"></a></h2><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="6"></a></h2><p>The class introduces three methods:</p><p><b><tt>1)[bsBlackPrice()]</tt></b> - Function returns the option price, <img src="bsBlackPrice_eq83174.png" alt="$C_{Black}(t)$"> or <img src="bsBlackPrice_eq81673.png" alt="$P_{Black}(t)$">, which expires at time, <img src="bsBlackPrice_eq57315.png" alt="$T$">, using the Black pricing model.</p><p><b><tt>2)[BlackImpVol()]</tt></b> - Function returns a Black implied volatility, <img src="bsBlackPrice_eq83535.png" alt="$\sigma_{IV}$">, for a given market option price.</p><p><b><tt>3)[BlackLambda()]</tt></b> - Function returns the first derivative of an option price, <img src="bsBlackPrice_eq63970.png" alt="$C_{Black}$"> or <img src="bsBlackPrice_eq69733.png" alt="$P_{Black}$">, with respect to the volatility, <img src="bsBlackPrice_eq13041.png" alt="$\frac{\partial C_{Black}}{\partial\sigma}$">.</p><pre class="codeinput"><span class="comment">%MATLAB Code</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+        <span class="keyword">function</span>  obj = bsBlackPrice()
+
+        <span class="keyword">end</span>
+
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">
+ans = 
+
+  Bootstrap.bsBlackPrice with no properties.
+  Package: Bootstrap
+
+
+</pre><h2>Details of Methods<a name="9"></a></h2><p><b>1) <tt>[bsBlackPrice()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns the price of a European option, expiring at time, <img src="bsBlackPrice_eq57315.png" alt="$T$">, using the Black pricing model. The type of option i.e "put" or "call" is specified by <b><tt>[OptionType]</tt></b>.</p><p><b><i>Inputs</i></b></p><p><b><tt>[Forward]</tt></b> - <img src="bsBlackPrice_eq72668.png" alt="$F(t)$">, delivery price in a forward contract that causes the contract to be worth zero at the current time, <img src="bsBlackPrice_eq07064.png" alt="$t$">.</p><pre>Data Type : double</pre><p><b><tt>[Strike]</tt></b> - <img src="bsBlackPrice_eq14888.png" alt="$K$">, price at which the asset may be bought or sold in the option contract.</p><pre>Data Type : double</pre><p><b><tt>[Maturity]</tt></b> - <img src="bsBlackPrice_eq57315.png" alt="$T$">, time at which the option expires.</p><pre>Data Type : double</pre><p><b><tt>[Volatility]</tt></b> - <img src="bsBlackPrice_eq24873.png" alt="$\sigma$">, volatility of the asset underlying the option.</p><pre>Data Type : double</pre><p><b><tt>[DiscountFactor]</tt></b> - <img src="bsBlackPrice_eq30404.png" alt="$D= e^{-r\tau}$">, where <img src="bsBlackPrice_eq25861.png" alt="$r$"> is the risk free interest rate and <img src="bsBlackPrice_eq42994.png" alt="$\tau=T-t$"> is the time to maturity.</p><pre>Data Type : double</pre><p><b><tt>[OptionType]</tt></b> - Specifies the type of option i.e. "put or "call".</p><pre>Data Type : string</pre><p><b><i>Outputs</i></b></p><p>Black price of a put or call option.</p><pre>Data type : double</pre><p><b><i>Calculations</i></b></p><p>The Black price is calculated using the following for Call and Put options:</p><p>i) Call</p><p><img src="bsBlackPrice_eq17049.png" alt="$$ C_{Black}(t) = D\big[F(t)N(d_1)-KN(d_2)\big] $$"></p><p>ii) Put</p><p><img src="bsBlackPrice_eq58703.png" alt="$$ P_{Black}(t) = D\big[KN(-d_2)-F(t)N(-d_1)\big] $$"></p><p><img src="bsBlackPrice_eq87411.png" alt="$$ d_1=\frac{ln\left(\frac{F(t)}{K}\right)+\frac{\sigma^2\tau}{2}}{\sigma\sqrt{\tau}} $$"></p><p><img src="bsBlackPrice_eq95557.png" alt="$$ d_2=\frac{ln\left(\frac{F(t)}{K}\right)-\frac{\sigma^2\tau}{2}}{\sigma\sqrt{\tau}}=d_1-\sigma\sqrt{\tau} $$"></p><p>Where,</p><p><img src="bsBlackPrice_eq83174.png" alt="$C_{Black}(t)$"> : Call option price.</p><p><img src="bsBlackPrice_eq81673.png" alt="$P_{Black}(t)$"> : Put option price.</p><p><img src="bsBlackPrice_eq72668.png" alt="$F(t)$"> : Forward Price at current time, <img src="bsBlackPrice_eq07064.png" alt="$t$">.</p><p><img src="bsBlackPrice_eq57315.png" alt="$T$"> : Maturity of the option.</p><p><img src="bsBlackPrice_eq89224.png" alt="$\tau$"> : Time until maturity, <img src="bsBlackPrice_eq17149.png" alt="$\tau= T-t$">.</p><p><img src="bsBlackPrice_eq01366.png" alt="$D=e^{-r\tau}$"> : Discount factor, with the risk free interest rate, <img src="bsBlackPrice_eq25861.png" alt="$r$"> and the time to maturity, <img src="bsBlackPrice_eq42994.png" alt="$\tau=T-t$">.</p><p><img src="bsBlackPrice_eq14888.png" alt="$K$"> : Strike Price.</p><p><img src="bsBlackPrice_eq24873.png" alt="$\sigma$"> : Volatility of the underlying asset.</p><p><img src="bsBlackPrice_eq80068.png" alt="$N\left(x\right)$"> : Cumulative probability distribution function for a standardised normal distribution.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="comment">% Other Methods</span>
+
+    <span class="keyword">function</span>  y=BlackPrice(obj, Forward , Strike , Maturity , <span class="keyword">...</span>
+            Volatility , DiscountFactor, OptionType )
+
+
+        D1 = (log(Forward / Strike) + Volatility ^ 2 * Maturity / 2) /<span class="keyword">...</span>
+            (Volatility * Maturity ^ 0.5);
+        D2 = D1 - Volatility * Maturity ^ 0.5;
+
+        <span class="keyword">switch</span> lower(OptionType)
+            <span class="keyword">case</span>  <span class="string">'put'</span>
+            ND1 = normcdf(-D1);
+            ND2 = normcdf(-D2);
+            PayOff = Strike * ND2 - Forward * ND1;
+            <span class="keyword">case</span> <span class="string">'call'</span>
+            ND1 = normcdf(D1);
+            ND2 = normcdf(D2);
+            PayOff = Forward * ND1 - Strike * ND2;
+        <span class="keyword">end</span>
+
+        y = DiscountFactor * PayOff;
+
+        <span class="keyword">return</span>
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><b>2) <tt>[BlackImpVol()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns a Black implied volatility, <img src="bsBlackPrice_eq83535.png" alt="$\sigma_{IV}$">, for a given market option price, using a root finding method.</p><p>Initially the Newton Raphson method is used. This method converges quadratically but cannot guarantee convergence.</p><p>If the Newton-Raphson method fails we use the more robust Bisection method which is slower but guaranteed to converge.</p><p><b><i>Inputs</i></b></p><p><b><tt>[Forward]</tt></b> - <img src="bsBlackPrice_eq72668.png" alt="$F(t)$">, delivery price in a forward contract that causes the contract to be worth zero at the current time, <img src="bsBlackPrice_eq07064.png" alt="$t$">.</p><pre>Data Type : double</pre><p><b><tt>[Strike]</tt></b> - <img src="bsBlackPrice_eq14888.png" alt="$K$">, price at which the asset may be bought or sold in the option contract.</p><pre>Data Type : double</pre><p><b><tt>[Maturity]</tt></b> - <img src="bsBlackPrice_eq57315.png" alt="$T$">, time at which the option expires.</p><pre>Data Type : double</pre><p><b><tt>[DiscountFactor]</tt></b> - <img src="bsBlackPrice_eq30404.png" alt="$D= e^{-r\tau}$">, where <img src="bsBlackPrice_eq25861.png" alt="$r$"> is the risk free interest rate and <img src="bsBlackPrice_eq42994.png" alt="$\tau=T-t$"> is the time to maturity.</p><pre>Data Type : double</pre><p><b><tt>[OptionType]</tt></b> - Specifies the type of option i.e. "put or "call".</p><pre>Data Type : string</pre><p><b><tt>[OptionPrice]</tt></b> - <img src="bsBlackPrice_eq01615.png" alt="$C_{Market}$"> or <img src="bsBlackPrice_eq48845.png" alt="$P_{Market}$">, empirical, 'market' price of the call or put option, respectively.</p><pre>Data Type : double</pre><p><b><i>Outputs</i></b></p><p>Implied volatilty which gives the market option price when inserted into <b><tt>[bsBlackPrice()]</tt></b>.</p><pre>Data type : double</pre><p><b><i>Calculations</i></b></p><p><b>i)</b> In order for our root finding methods to converge, to approximate the implied volatility, <img src="bsBlackPrice_eq83535.png" alt="$\sigma_{IV}$">, our starting value of <img src="bsBlackPrice_eq83535.png" alt="$\sigma_{IV}$"> should give Black prices within feasible ranges. For put and call options these ranges are:</p><p><img src="bsBlackPrice_eq89653.png" alt="$$K&gt;P_{Black}&gt;0)$$"></p><p>&amp;</p><p><img src="bsBlackPrice_eq98903.png" alt="$$F(t)&gt;C_{Black}<Max(0,F(t)-K)$$"></p><p>If our initial values are not within the feasible ranges then an implied volatility of zero is returned.</p><p><b>ii)</b> If we have inital values that are feasible, then we take the given empirical 'market' option price and calculate the implied volatility, <img src="bsBlackPrice_eq83535.png" alt="$\sigma_{IV}$">, by approximating the root of:</p><p><img src="bsBlackPrice_eq46973.png" alt="$C_{Market}-C_{Black}$"></p><p>or</p><p><img src="bsBlackPrice_eq52771.png" alt="$P_{Market}-P_{Black}$"></p><p>using the Newton-Raphson method.</p><p>To do this we repeat the iterative equation:</p><p><img src="bsBlackPrice_eq04742.png" alt="$$ \sigma_{IV,\,n+1} =\sigma_{IV,\,n} - \frac{C_{Black}(\sigma_{IV,\,n})-C_{Market}}{\lambda(\sigma_{IV,\,n})} $$"></p><p><img src="bsBlackPrice_eq42208.png" alt="$$ \sigma_{IV,\,n+1} =\sigma_{IV,\,n} - \frac{P_{Black}(\sigma_{IV,\,n})-P_{Market}}{\lambda(\sigma_{IV,\,n})} $$"></p><p>Where,</p><p><img src="bsBlackPrice_eq30286.png" alt="$\sigma_{IV,\,n}$"> : approximation to the implied volatility from the <img src="bsBlackPrice_eq25947.png" alt="$n$"> th iteration of the equation above.</p><p><img src="bsBlackPrice_eq52798.png" alt="$C(\sigma_{IV,\,n})$"> : option price derived using the approximation to the implied volatility from the <img src="bsBlackPrice_eq25947.png" alt="$n$"> th iteration.</p><p><img src="bsBlackPrice_eq01615.png" alt="$C_{Market}$"> : empirical option price.</p><p><img src="bsBlackPrice_eq63095.png" alt="$\lambda(\sigma_{IV,\,n})$"> : first derivative of the option price derived using the approximation to the implied volatility from the <img src="bsBlackPrice_eq25947.png" alt="$n$"> th iteration. This is calculated using <b><tt>[BlackLambda()]</tt></b></p><p>The Newton-Raphson converges quadratically but is not guaranteed to converge. If we do not achieve an implied volatility which reproduces the market value of the option to within a given tolerance we try the Bisection method which is slower but guarantees convergence.</p><p><b>iii)</b> If the Newton-Raphson method did not converge we use the Bisection method.</p><p>Again we attempt to find the root of</p><p><img src="bsBlackPrice_eq46973.png" alt="$C_{Market}-C_{Black}$"></p><p>or</p><p><img src="bsBlackPrice_eq52771.png" alt="$P_{Market}-P_{Black}$"></p><p>We start with a range of <img src="bsBlackPrice_eq83535.png" alt="$\sigma_{IV}$"> s that we are confident contains the root of the expression above and bisect that range. Depending which side of the midpoint the root lies we halve our range using the midpoint as the new upper or lower bound.</p><p>We repeat this method until we know where the root lies to within a certain tolerance.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+    <span class="comment">% Calculate Black's LogNormal parameter using a root finding excercise</span>
+
+    <span class="keyword">function</span>  y = BlackImpVol(obj, OptionPrice,Forward , Strike ,<span class="keyword">...</span>
+            Maturity , DiscountFactor, OptionType )
+
+
+
+        Impvol_min = 0;
+        Impvol_max = 3;
+
+        Impvol = 0.2;
+        Toler = 0.00001 ;
+        LambdaMin = 0.0001;
+        MaxNumberOfNRIterations = 100;
+        MaxNumberOfBSIterations = 100;
+
+        <span class="comment">% Check that price is within feasible range</span>
+        <span class="keyword">switch</span> lower(OptionType)
+            <span class="keyword">case</span>  <span class="string">'put'</span>
+                Price_min = 0;
+                Price_max = DiscountFactor * Strike;
+            <span class="keyword">case</span> <span class="string">'call'</span>
+                Price_min = DiscountFactor * max(Forward - Strike, 0); <span class="comment">% Intrinsic Value of a Call Option</span>
+                Price_max = DiscountFactor * Forward;
+        <span class="keyword">end</span>
+
+        Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , <span class="keyword">...</span>
+            DiscountFactor, OptionType )  ;
+
+        <span class="comment">% Estimate Implied Volatility</span>
+        <span class="keyword">if</span> (OptionPrice &gt;= Price_min &amp;&amp; OptionPrice &lt;= Price_max) &amp;&amp; <span class="keyword">...</span>
+                (OptionPrice &gt; 0)
+
+            Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , <span class="keyword">...</span>
+                DiscountFactor, OptionType )  ;
+            Lambda =obj.BlackLambda(Forward , Strike , Maturity , Impvol , <span class="keyword">...</span>
+                DiscountFactor );
+            IterationCount = 0;
+
+            <span class="keyword">while</span> (abs(Val - OptionPrice) &gt; Toler) &amp;&amp; (IterationCount &lt;= <span class="keyword">...</span>
+                    MaxNumberOfNRIterations) <span class="keyword">...</span>
+                    &amp;&amp; (Impvol &gt; 0) &amp;&amp; (Impvol &lt; Impvol_max)
+                Lambda = max(LambdaMin, Lambda);
+                Impvol = Impvol - (Val - OptionPrice) / Lambda;
+                Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , <span class="keyword">...</span>
+                    DiscountFactor, OptionType )  ;
+                Lambda =obj.BlackLambda(Forward , Strike , Maturity , Impvol , <span class="keyword">...</span>
+                    DiscountFactor );
+                IterationCount = IterationCount + 1;
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> (abs(Val - OptionPrice) &lt; Toler)
+                y = Impvol;
+                <span class="keyword">return</span>
+            <span class="keyword">end</span>
+
+
+            <span class="comment">% Try Bisection Method</span>
+
+            IterationCount = 0;
+            Impvol_a = Impvol_min;
+            Impvol_b = Impvol_max;
+            Impvol = (Impvol_a + Impvol_b) / 2;
+            Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , <span class="keyword">...</span>
+                DiscountFactor, OptionType )  ;
+
+            <span class="keyword">while</span> (abs(Val - OptionPrice) &gt; Toler) &amp;&amp; (IterationCount &lt;= <span class="keyword">...</span>
+                    MaxNumberOfBSIterations)
+
+                <span class="keyword">if</span> (Val - OptionPrice) &gt; 0
+                    <span class="comment">% Decrease the upper bound of our search interval</span>
+                    Impvol_b = Impvol;
+                <span class="keyword">else</span>
+                    <span class="comment">% Increase the Lower bound of our search interval</span>
+                    Impvol_a = Impvol;
+                <span class="keyword">end</span>
+
+                Impvol = (Impvol_a + Impvol_b) / 2;
+                Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , <span class="keyword">...</span>
+                    DiscountFactor, OptionType )  ;
+                IterationCount = IterationCount + 1;
+            <span class="keyword">end</span>
+
+        <span class="keyword">end</span>
+
+
+
+        <span class="keyword">if</span> (abs(Val - OptionPrice) &lt; Toler)
+            y = Impvol;
+            <span class="keyword">return</span>
+        <span class="keyword">else</span>
+            y = 0;
+            <span class="keyword">return</span>
+        <span class="keyword">end</span>
+
+
+
+    <span class="keyword">end</span>
+
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><b>3) <tt>[BlackLambda()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns the first derivative of an option price, <img src="bsBlackPrice_eq63970.png" alt="$C_{Black}$"> or <img src="bsBlackPrice_eq69733.png" alt="$P_{Black}$">, with respect to the volatility, <img src="bsBlackPrice_eq13041.png" alt="$\frac{\partial C_{Black}}{\partial\sigma}$">.</p><p><b><i>Inputs</i></b></p><p><b><tt>[Forward]</tt></b> - <img src="bsBlackPrice_eq72668.png" alt="$F(t)$">, delivery price in a forward contract that causes the contract to be worth zero at the current time, <img src="bsBlackPrice_eq07064.png" alt="$t$">.</p><pre>Data Type : double</pre><p><b><tt>[Strike]</tt></b> - <img src="bsBlackPrice_eq14888.png" alt="$K$">, price at which the asset may be bought or sold in the option contract.</p><pre>Data Type : double</pre><p><b><tt>[Maturity]</tt></b> - <img src="bsBlackPrice_eq57315.png" alt="$T$">, time at which the option expires.</p><pre>Data Type : double</pre><p><b><tt>[Volatility]</tt></b> - <img src="bsBlackPrice_eq24873.png" alt="$\sigma$">, volatility of the asset underlying the option.</p><pre>Data Type : double</pre><p><b><tt>[DiscountFactor]</tt></b> - <img src="bsBlackPrice_eq30404.png" alt="$D= e^{-r\tau}$">, where <img src="bsBlackPrice_eq25861.png" alt="$r$"> is the risk free interest rate and <img src="bsBlackPrice_eq42994.png" alt="$\tau=T-t$"> is the time to maturity.</p><pre>Data Type : double</pre><p><b><i>Outputs</i></b></p><p>Function returns the first derivative of the Black price with respect to volatility, <img src="bsBlackPrice_eq13041.png" alt="$\frac{\partial C_{Black}}{\partial\sigma}$">.</p><pre>Data type : double</pre><p><b><i>Calculations</i></b></p><p>To calculate the first derivative of the Black price with respect to volatility we use the formula below,</p><p><img src="bsBlackPrice_eq30938.png" alt="$$\frac{\partial C_{Black}}{\partial\sigma}&#xA;=\frac{\partial P_{Black}}{\partial\sigma}&#xA;=\sqrt{\frac{\tau}{2\pi}}DF(t)e^{-d_1^2/2} $$"></p><p>where,</p><p><img src="bsBlackPrice_eq87411.png" alt="$$ d_1=\frac{ln\left(\frac{F(t)}{K}\right)+\frac{\sigma^2\tau}{2}}{\sigma\sqrt{\tau}} $$"></p><p>with,</p><p><img src="bsBlackPrice_eq83174.png" alt="$C_{Black}(t)$"> : Call option price.</p><p><img src="bsBlackPrice_eq81673.png" alt="$P_{Black}(t)$"> : Put option price.</p><p><img src="bsBlackPrice_eq72668.png" alt="$F(t)$"> : Forward Price at current time, <img src="bsBlackPrice_eq07064.png" alt="$t$">.</p><p><img src="bsBlackPrice_eq89224.png" alt="$\tau$"> : Time until maturity, <img src="bsBlackPrice_eq17149.png" alt="$\tau= T-t$">.</p><p><img src="bsBlackPrice_eq01366.png" alt="$D=e^{-r\tau}$"> : Discount factor, with the risk free interest rate, <img src="bsBlackPrice_eq25861.png" alt="$r$"> and the time to maturity, <img src="bsBlackPrice_eq42994.png" alt="$\tau=T-t$">.</p><p><img src="bsBlackPrice_eq14888.png" alt="$K$"> : Strike Price.</p><p><img src="bsBlackPrice_eq24873.png" alt="$\sigma$"> : Volatility of the underlying asset.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+     <span class="comment">% Calculate the derivative of the black formula with respect to</span>
+     <span class="comment">% volatility</span>
+
+     <span class="keyword">function</span>  y=BlackLambda(obj, Forward , Strike , Maturity , Volatility , <span class="keyword">...</span>
+                                                 DiscountFactor )
+
+
+         D1 = (log(Forward / Strike) + Volatility ^ 2 * Maturity / 2) / <span class="keyword">...</span>
+             (Volatility * Maturity ^ 0.5);
+
+         y = DiscountFactor * (Forward * sqrt(Maturity) * <span class="keyword">...</span>
+             (1 / (sqrt(2 * pi))) * exp((-1 * D1 ^ 2) / 2));
+
+     <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Black Price and Black Implied Volatility
+%
+% *The class returns the Black price and the Black implied volatility of
+% swap options.*
+%
+%%
+%MATLAB Code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bsBlackPrice
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% How to Use the Class
+% There are three ways to use this class:
+%
+% # To calculate the Black price of a European option, using 
+% *|[bsBlackPrice()]|*.
+% # To calculate the implied volatility with the
+% Black model using *|[BlackImpVol()]|*.
+% # To calculate the first derivative of the Black price with respect
+% to the volatility using *|[BlackLambda()]|*.
+%
+%
+%% Properties
+%
+% 
+
+%%
+%MATLAB Code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+    properties
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%% List of Methods
+% The class introduces three methods:
+%
+% *|1)[bsBlackPrice()]|* - Function returns the option price, $C_{Black}(t)$
+% or $P_{Black}(t)$, which expires at time, $T$, using the Black pricing 
+% model. 
+%
+% *|2)[BlackImpVol()]|* - Function returns a Black implied volatility,
+% $\sigma_{IV}$, for a given market option price.
+%
+% *|3)[BlackLambda()]|* - Function returns the first derivative of an option 
+% price, $C_{Black}$ or $P_{Black}$, with respect to the volatility,
+% $\frac{\partial C_{Black}}{\partial\sigma}$.
+%
+%%
+%MATLAB Code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+    methods
+
+    
+    % Constructor
+        function  obj = bsBlackPrice()
+        
+        end
+        
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of Methods
+%
+% 
+% *1) |[bsBlackPrice()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns the price of a European option, expiring at time, $T$, 
+% using the Black pricing model. The type of option i.e "put" or "call" is
+% specified by *|[OptionType]|*.
+%
+% *_Inputs_*
+%
+% *|[Forward]|* - $F(t)$, delivery price in a forward contract that causes the
+% contract to be worth zero at the current time, $t$.
+%
+%  Data Type : double
+%
+% *|[Strike]|* - $K$, price at which the asset may be bought or sold in the
+% option contract.
+%
+%  Data Type : double
+%
+% *|[Maturity]|* - $T$, time at which the option expires.
+%
+%  Data Type : double
+%
+% *|[Volatility]|* - $\sigma$, volatility of the asset underlying the
+% option.
+%
+%  Data Type : double
+%
+% *|[DiscountFactor]|* - $D= e^{-r\tau}$, where $r$ is the risk free interest
+% rate and $\tau=T-t$ is the time to maturity.
+%
+%  Data Type : double
+%
+% *|[OptionType]|* - Specifies the type of option i.e. "put or "call".
+%
+%  Data Type : string
+% 
+% *_Outputs_*
+%
+% Black price of a put or call option.
+%
+%  Data type : double
+%
+% *_Calculations_*
+%
+% The Black price is calculated using the following for Call and Put
+% options:
+%
+% i) Call
+%
+% $$ C_{Black}(t) = D\big[F(t)N(d_1)-KN(d_2)\big] $$
+%
+% ii) Put
+%
+% $$ P_{Black}(t) = D\big[KN(-d_2)-F(t)N(-d_1)\big] $$
+%
+% $$ d_1=\frac{ln\left(\frac{F(t)}{K}\right)+\frac{\sigma^2\tau}{2}}{\sigma\sqrt{\tau}} $$
+% 
+% $$ d_2=\frac{ln\left(\frac{F(t)}{K}\right)-\frac{\sigma^2\tau}{2}}{\sigma\sqrt{\tau}}=d_1-\sigma\sqrt{\tau} $$
+%
+% Where,
+%
+% $C_{Black}(t)$ : Call option price.
+%
+% $P_{Black}(t)$ : Put option price.
+%
+% $F(t)$ : Forward Price at current time, $t$.
+%
+% $T$ : Maturity of the option.
+%
+% $\tau$ : Time until maturity, $\tau= T-t$.
+%
+% $D=e^{-r\tau}$ : Discount factor, with the risk free interest rate, $r$
+% and the time to maturity, $\tau=T-t$.
+%
+% $K$ : Strike Price.
+%
+% $\sigma$ : Volatility of the underlying asset.
+%
+% $N\left(x\right)$ : Cumulative probability distribution function for a 
+% standardised normal distribution.
+%
+
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Other Methods   
+        
+    function  y=BlackPrice(obj, Forward , Strike , Maturity , ...
+            Volatility , DiscountFactor, OptionType )
+        
+        
+        D1 = (log(Forward / Strike) + Volatility ^ 2 * Maturity / 2) /...
+            (Volatility * Maturity ^ 0.5);
+        D2 = D1 - Volatility * Maturity ^ 0.5;
+        
+        switch lower(OptionType)        
+            case  'put'        
+            ND1 = normcdf(-D1);
+            ND2 = normcdf(-D2);
+            PayOff = Strike * ND2 - Forward * ND1;
+            case 'call'
+            ND1 = normcdf(D1);
+            ND2 = normcdf(D2);
+            PayOff = Forward * ND1 - Strike * ND2;
+        end
+        
+        y = DiscountFactor * PayOff;
+        
+        return
+    end   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%%
+% *2) |[BlackImpVol()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns a Black implied volatility, $\sigma_{IV}$, for a given
+% market option price, using a root finding method.
+%
+% Initially the Newton Raphson method is used. This method converges
+% quadratically but cannot guarantee convergence.
+%
+% If the Newton-Raphson method fails we use the more robust Bisection
+% method which is slower but guaranteed to converge.
+% 
+% *_Inputs_*
+%
+% *|[Forward]|* - $F(t)$, delivery price in a forward contract that causes the
+% contract to be worth zero at the current time, $t$.
+%
+%  Data Type : double
+%
+% *|[Strike]|* - $K$, price at which the asset may be bought or sold in the
+% option contract.
+%
+%  Data Type : double
+%
+% *|[Maturity]|* - $T$, time at which the option expires.
+%
+%  Data Type : double
+%
+% *|[DiscountFactor]|* - $D= e^{-r\tau}$, where $r$ is the risk free interest
+% rate and $\tau=T-t$ is the time to maturity.
+%
+%  Data Type : double
+%
+% *|[OptionType]|* - Specifies the type of option i.e. "put or "call".
+%
+%  Data Type : string
+%
+% *|[OptionPrice]|* - $C_{Market}$ or $P_{Market}$, empirical, 'market' price of the 
+% call or put option, respectively.
+%
+%  Data Type : double
+%
+% *_Outputs_*
+%
+% Implied volatilty which gives the market option price when inserted into
+% *|[bsBlackPrice()]|*.
+%
+%  Data type : double
+%
+% *_Calculations_*
+%
+% *i)* In order for our root finding methods to converge, to approximate the
+% implied volatility, $\sigma_{IV}$, our starting value of $\sigma_{IV}$
+% should give Black prices within feasible ranges. For put and call options
+% these ranges are:
+%
+% $$K>P_{Black}>0)$$
+%
+% &
+%
+% $$F(t)>C_{Black}<Max(0,F(t)-K)$$
+%
+% If our initial values are not within the feasible ranges then an implied
+% volatility of zero is returned.
+%
+% *ii)* If we have inital values that are feasible, then we take the given 
+% empirical 'market' option price and calculate the implied volatility, 
+% $\sigma_{IV}$, by approximating the root of:
+% 
+% $C_{Market}-C_{Black}$
+%
+% or 
+%
+% $P_{Market}-P_{Black}$ 
+%
+% using the Newton-Raphson method.
+%
+% To do this we repeat the iterative equation:
+%
+% $$ \sigma_{IV,\,n+1} =\sigma_{IV,\,n} - \frac{C_{Black}(\sigma_{IV,\,n})-C_{Market}}{\lambda(\sigma_{IV,\,n})} $$
+%
+% $$ \sigma_{IV,\,n+1} =\sigma_{IV,\,n} - \frac{P_{Black}(\sigma_{IV,\,n})-P_{Market}}{\lambda(\sigma_{IV,\,n})} $$
+%
+% Where,
+%
+% $\sigma_{IV,\,n}$ : approximation to the implied volatility from the
+% $n$ th iteration of the equation above.
+%
+% $C(\sigma_{IV,\,n})$ : option price derived using the approximation to 
+% the implied volatility from the $n$ th iteration.
+%
+% $C_{Market}$ : empirical option price.
+%
+% $\lambda(\sigma_{IV,\,n})$ : first derivative of the option price derived using 
+% the approximation to the implied volatility from the $n$ th iteration.
+% This is calculated using *|[BlackLambda()]|* 
+%
+% The Newton-Raphson converges quadratically but is not guaranteed to converge.
+% If we do not achieve an implied volatility which reproduces the market 
+% value of the option to within a given tolerance we try the Bisection method 
+% which is slower but guarantees convergence.
+%
+% *iii)* If the Newton-Raphson method did not converge we use the Bisection
+% method.
+%
+% Again we attempt to find the root of 
+% 
+% $C_{Market}-C_{Black}$
+%
+% or 
+%
+% $P_{Market}-P_{Black}$ 
+%
+% We start with a range of $\sigma_{IV}$ s that we are confident contains
+% the root of the expression above and bisect that range. Depending 
+% which side of the midpoint the root lies we halve our range using the 
+% midpoint as the new upper or lower bound.
+% 
+% We repeat this method until we know where the root lies to within a certain
+% tolerance.
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+  
+    % Calculate Black's LogNormal parameter using a root finding excercise
+    
+    function  y = BlackImpVol(obj, OptionPrice,Forward , Strike ,...
+            Maturity , DiscountFactor, OptionType )
+        
+        
+        
+        Impvol_min = 0;
+        Impvol_max = 3;
+        
+        Impvol = 0.2;
+        Toler = 0.00001 ;
+        LambdaMin = 0.0001;
+        MaxNumberOfNRIterations = 100;
+        MaxNumberOfBSIterations = 100;
+        
+        % Check that price is within feasible range
+        switch lower(OptionType)
+            case  'put'
+                Price_min = 0;
+                Price_max = DiscountFactor * Strike;
+            case 'call'
+                Price_min = DiscountFactor * max(Forward - Strike, 0); % Intrinsic Value of a Call Option
+                Price_max = DiscountFactor * Forward;
+        end
+        
+        Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , ...
+            DiscountFactor, OptionType )  ;
+        
+        % Estimate Implied Volatility
+        if (OptionPrice >= Price_min && OptionPrice <= Price_max) && ...
+                (OptionPrice > 0)
+            
+            Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , ...
+                DiscountFactor, OptionType )  ;
+            Lambda =obj.BlackLambda(Forward , Strike , Maturity , Impvol , ...
+                DiscountFactor );
+            IterationCount = 0;
+            
+            while (abs(Val - OptionPrice) > Toler) && (IterationCount <= ...
+                    MaxNumberOfNRIterations) ...
+                    && (Impvol > 0) && (Impvol < Impvol_max)
+                Lambda = max(LambdaMin, Lambda);
+                Impvol = Impvol - (Val - OptionPrice) / Lambda;
+                Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , ...
+                    DiscountFactor, OptionType )  ;
+                Lambda =obj.BlackLambda(Forward , Strike , Maturity , Impvol , ...
+                    DiscountFactor );
+                IterationCount = IterationCount + 1;
+            end
+            
+            if (abs(Val - OptionPrice) < Toler)
+                y = Impvol;
+                return
+            end
+            
+            
+            % Try Bisection Method
+            
+            IterationCount = 0;
+            Impvol_a = Impvol_min;
+            Impvol_b = Impvol_max;
+            Impvol = (Impvol_a + Impvol_b) / 2;
+            Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , ...
+                DiscountFactor, OptionType )  ;
+            
+            while (abs(Val - OptionPrice) > Toler) && (IterationCount <= ...
+                    MaxNumberOfBSIterations)
+                
+                if (Val - OptionPrice) > 0
+                    % Decrease the upper bound of our search interval
+                    Impvol_b = Impvol;
+                else
+                    % Increase the Lower bound of our search interval
+                    Impvol_a = Impvol;
+                end
+                
+                Impvol = (Impvol_a + Impvol_b) / 2;
+                Val =obj.BlackPrice(Forward , Strike , Maturity , Impvol , ...
+                    DiscountFactor, OptionType )  ;
+                IterationCount = IterationCount + 1;
+            end
+            
+        end
+        
+       
+        
+        if (abs(Val - OptionPrice) < Toler)
+            y = Impvol;
+            return
+        else
+            y = 0;
+            return
+        end
+        
+        
+        
+    end
+    
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% *3) |[BlackLambda()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns the first derivative of an option 
+% price, $C_{Black}$ or $P_{Black}$, with respect to the volatility,
+% $\frac{\partial C_{Black}}{\partial\sigma}$.
+%
+% *_Inputs_*
+% 
+% *|[Forward]|* - $F(t)$, delivery price in a forward contract that causes the
+% contract to be worth zero at the current time, $t$.
+%
+%  Data Type : double
+%
+% *|[Strike]|* - $K$, price at which the asset may be bought or sold in the
+% option contract.
+%
+%  Data Type : double
+%
+% *|[Maturity]|* - $T$, time at which the option expires.
+%
+%  Data Type : double
+%
+% *|[Volatility]|* - $\sigma$, volatility of the asset underlying the
+% option.
+%
+%  Data Type : double
+%
+% *|[DiscountFactor]|* - $D= e^{-r\tau}$, where $r$ is the risk free interest
+% rate and $\tau=T-t$ is the time to maturity.
+%
+%  Data Type : double
+%
+% *_Outputs_*
+%
+% Function returns the first derivative of the Black price with respect to 
+% volatility, $\frac{\partial C_{Black}}{\partial\sigma}$.
+%
+%  Data type : double
+%
+% *_Calculations_*
+%
+% To calculate the first derivative of the Black price with respect to 
+% volatility we use the formula below,
+%
+% $$\frac{\partial C_{Black}}{\partial\sigma}
+% =\frac{\partial P_{Black}}{\partial\sigma}
+% =\sqrt{\frac{\tau}{2\pi}}DF(t)e^{-d_1^2/2} $$
+%
+% where,
+%
+% $$ d_1=\frac{ln\left(\frac{F(t)}{K}\right)+\frac{\sigma^2\tau}{2}}{\sigma\sqrt{\tau}} $$
+%
+% with, 
+%
+% $C_{Black}(t)$ : Call option price.
+%
+% $P_{Black}(t)$ : Put option price.
+%
+% $F(t)$ : Forward Price at current time, $t$.
+%
+% $\tau$ : Time until maturity, $\tau= T-t$.
+%
+% $D=e^{-r\tau}$ : Discount factor, with the risk free interest rate, $r$
+% and the time to maturity, $\tau=T-t$.
+%
+% $K$ : Strike Price.
+%
+% $\sigma$ : Volatility of the underlying asset.
+%
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+     % Calculate the derivative of the black formula with respect to
+     % volatility
+    
+     function  y=BlackLambda(obj, Forward , Strike , Maturity , Volatility , ...
+                                                 DiscountFactor )
+         
+         
+         D1 = (log(Forward / Strike) + Volatility ^ 2 * Maturity / 2) / ...
+             (Volatility * Maturity ^ 0.5);
+         
+         y = DiscountFactor * (Forward * sqrt(Maturity) * ...
+             (1 / (sqrt(2 * pi))) * exp((-1 * D1 ^ 2) / 2));
+         
+     end
+    
+    
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

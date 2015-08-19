@@ -1,0 +1,8 @@
+<Bootstrap>
+    <Item name="C" description="" effectiveDate="02/Jan/2040">
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="GBP_EQUITYVOL_ASX" from="02/Jan/2000" to="02/Jan/2030"/>
+        </InputData>
+    </Item>
+</Bootstrap>

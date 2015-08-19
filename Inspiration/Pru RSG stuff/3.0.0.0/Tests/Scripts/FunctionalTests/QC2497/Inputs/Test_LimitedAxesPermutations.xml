@@ -1,0 +1,45 @@
+<DataSeriesSet name="LimitedAxesPermutations" date="21/Sep/2010">
+<DataSeries name="LimitedAxesPermutations">
+<DynamicProperties>
+<Property name="Currency" type="string">GBP</Property>
+<Property name="ratetype" type="string">swap</Property>
+<Property name="compounding" type="string">ann</Property>
+<Property name="compoundingfrequency" type="number">2</Property>
+<Property name="daycount" type="number">365</Property>
+<Property name="units" type="string">percent</Property>
+</DynamicProperties>
+<Dates>
+<Date effectiveDate="25/Nov/2010">22/Sep/2010</Date>
+<Date effectiveDate="25/Nov/2010">21/Sep/2010</Date>
+<Date effectiveDate="25/Nov/2010">20/Sep/2010</Date>
+</Dates>
+<Axis name="term" value="2">
+    <Axis name="tenor" value="5">
+        <Values>
+            <V>1.1</V>
+            <V>2.1</V>
+            <V>3.1</V>
+        </Values>
+    </Axis>
+    <Axis name="tenor" value="10">
+        <Values>
+            <V>10.1</V>
+            <V>20.1</V>
+            <V>30.1</V>
+        </Values>
+    </Axis>
+</Axis>
+
+<Axis name="term" value="1">
+    <Axis name="tenor" value="10">
+        <Values>
+            <V>1.2</V>
+            <V>2.2</V>
+            <V>3.2</V>
+        </Values>
+    </Axis>
+    
+</Axis>
+
+</DataSeries>
+</DataSeriesSet>

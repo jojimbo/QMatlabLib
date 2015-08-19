@@ -1,0 +1,23 @@
+All paths provided below use the MKS folder structure.
+
+********* Set Up Information for QC3223 ********* 
+
+- Navigate to folder ???/Tests/FunctionalTests/QC3223 
+
+- Open the app.config file and ensure the following:
+	- The RSGRoot folder points to a RSG source folder.
+	
+	- The ModelsFolder folder points to ???/Tests/RSGModels/ folder.	  
+
+
+- Add RSG source folder to the matlab search path.
+- Add RSGModels folder to the matlab search path.
+- Add the xunit folder and its subfolders to path. The xunit folder can be found under [RSG Source Folder]/xunit
+
+- Execute the following command:
+    runtests
+
+*Note that the test script clears down the database prior to its execution.
+
+*************************************************
+

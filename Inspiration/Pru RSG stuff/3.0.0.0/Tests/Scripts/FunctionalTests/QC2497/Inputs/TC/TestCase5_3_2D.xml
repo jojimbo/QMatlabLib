@@ -1,0 +1,33 @@
+<DataSeriesSet name="TestCase5_3" date="21/Sep/2010">
+<DataSeries name="TC5_2D">
+<DynamicProperties>
+<Property name="Currency" type="string">GBP</Property>
+<Property name="ratetype" type="string">swap</Property>
+<Property name="compounding" type="string">ann</Property>
+<Property name="compoundingfrequency" type="number">2</Property>
+<Property name="daycount" type="number">365</Property>
+<Property name="units" type="string">percent</Property>
+</DynamicProperties>
+<Dates>
+<Date effectiveDate="20/Nov/2010">20/Sep/2010</Date>
+<Date effectiveDate="21/Nov/2010">20/Sep/2010</Date>
+<Date effectiveDate="25/Nov/2010">20/Sep/2010</Date>
+</Dates>
+<Axis name="term" value="110">
+    <Axis name="strike" value="A">
+        <Values>
+            <V>1</V>
+            <V>2</V>
+            <V>3</V>
+        </Values>
+    </Axis>
+    <Axis name="strike" value="B">
+        <Values>
+            <V>10</V>
+            <V>20</V>
+            <V>30</V>
+        </Values>
+    </Axis>
+</Axis>
+</DataSeries>
+</DataSeriesSet>

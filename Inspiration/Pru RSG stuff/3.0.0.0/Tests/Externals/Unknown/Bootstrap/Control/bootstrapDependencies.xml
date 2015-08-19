@@ -1,0 +1,40 @@
+<Bootstrap>
+    <Item name="A" >
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="B" />
+            <DataSeries name="GBP_NYC" />
+        </InputData>
+    </Item>
+    <Item name="B" bootstrap="false">
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="C" />
+        </InputData>        
+    </Item>
+    <Item name="C" bootstrap="true">
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="D" />
+            <DataSeries name="GBP_NYC" />
+        </InputData>        
+    </Item>
+    <Item name="D" >
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="GBP_NYC" />
+        </InputData>
+    </Item>
+    <Item name="E" >
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="GBP_NYC" />
+        </InputData>
+    </Item>
+    <Item name="F" >
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="GBP_NYC" />
+        </InputData>        
+    </Item>
+</Bootstrap>

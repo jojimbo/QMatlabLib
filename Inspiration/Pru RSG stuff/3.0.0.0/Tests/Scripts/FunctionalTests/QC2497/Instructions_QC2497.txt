@@ -1,0 +1,31 @@
+All paths provided below use the MKS folder structure.
+
+********* Set Up Information for QC2497 ********* 
+
+- Navigate to folder PruRSG/iRSG/Tests/FunctionalTests/QC2497 
+
+- Open the app.config file and ensure the following:
+	- The RSGRoot folder points to PruRSG/iRSG/Source/
+	- The InputFolderPath folder points to PruRSG/iRSG/Tests/FunctionalTests/QC2497/Inputs/
+	- The OutputFolderPath folder points to a folder where all outputs will be saved. This is a user defined folder.
+	- The ModelsFolder folder points to PruRSG/iRSG/Source/prursg/Source/Tests/RSGModels/
+
+- Add the xunit folder and its subfolders to path. The xunit folder can be found under PruRSG/iRSG/xunit
+
+- Update addpath statements in each test cases to reflect the RSG root folder correctly.
+
+- Execute each individual test using the following syntax:
+	Test_QC2497_FR01, for running test FR01
+
+*Note that to test the MDS functionality you will need to update the app.config with the following:
+- Update the <historicalDataDaos default="DB"> element and set the default to "DB"
+- Make sure that an entry with <dbSetting key="MDS" exists under the <connectionStrings> element.
+- To generate XML output files when using the MDS, set the AllowWriteMarketData to false. 
+    The generated files can be used to be compared against generated files using the file system.
+
+*************************************************
+
+
+
+
+

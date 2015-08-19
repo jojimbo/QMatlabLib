@@ -1,0 +1,1 @@
+Add the contents of this folder to the +prursg folder as a package, i.e. +Model, in order to test/use RSG.

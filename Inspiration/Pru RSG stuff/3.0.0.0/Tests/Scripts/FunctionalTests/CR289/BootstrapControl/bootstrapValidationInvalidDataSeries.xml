@@ -1,0 +1,18 @@
+<BootstrapValidation>
+	<ValidationReport effectiveDate="30/Nov/2011" frequency="d" toDate="21/Sep/2010" description="InvalidDataSeries" reportTemplate="InvalidDataSeries" fromDate="20/Sep/2010" reportName="InvalidDataSeries" multiDateReports="Y" format="DOC" validationAlgorithm="invalidDataSeriesAlgorithm">
+		<InputDataSets>
+			<DataSet name="RowDataSet">
+				<DataSeries name="InvalidDS1"/>
+				<DataSeries name="InvalidDS2"/>
+			</DataSet>
+			<DataSet name="BootstrappedDataSet">
+				<DataSeries name="InvalidDS1"/>
+				<DataSeries name="InvalidDS2"/>
+			</DataSet>
+		</InputDataSets>
+		<Params>
+			<Property name="desc" type="string">theDesc2</Property>
+			<Property name="amount" type="double">5202500.36</Property>
+		</Params>
+	</ValidationReport>
+</BootstrapValidation>

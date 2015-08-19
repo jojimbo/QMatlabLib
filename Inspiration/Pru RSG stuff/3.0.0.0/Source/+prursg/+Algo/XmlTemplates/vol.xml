@@ -1,0 +1,17 @@
+<RISKFACTOR NAME="GBP_equityvol_asx_sto" ATTRIBUTE="" SCENARIOTYPE="absolute">
+  <PROPERTIES ENTRIES="2">
+   <PROPERTY NAME="FactorGroup" TYPE="string" VALUE="aux_values"/>
+   <PROPERTY NAME="Name" TYPE="string" VALUE="USD_FX_default_sto"/>
+  </PROPERTIES>
+  <AXISLIST ENTRIES="2">
+   <AXIS COUNT="0" NAME="Moneyness" SYMBOL="M" TYPE="double">
+    <AXISVALUES ENTRIES="3">0.7,1,1.3</AXISVALUES>
+   </AXIS>
+   <AXIS COUNT="1" NAME="Option Term" SYMBOL="O" TYPE="int">
+    <AXISVALUES ENTRIES="3">365,1095,1825</AXISVALUES>
+   </AXIS>
+  </AXISLIST>
+  <VALUELIST ENTRIES="1">
+   <VALUE COUNT="1" NAME="value" TYPE="double"/>
+  </VALUELIST>
+ </RISKFACTOR>

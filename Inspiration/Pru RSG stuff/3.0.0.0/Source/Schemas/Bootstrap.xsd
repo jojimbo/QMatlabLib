@@ -1,0 +1,78 @@
+<!-- edited with XMLSpy v2011 sp1 (x64) (http://www.altova.com) by CNikitas (RiskCare Ltd) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="ValueType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="string"/>
+			<xs:enumeration value="number"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DynamicPropertiesType">
+		<xs:sequence>
+			<xs:element name="Property" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="name" type="xs:string" use="required"/>
+							<xs:attribute name="type" type="ValueType"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Bootstrap">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Item" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="BootstrapAlgorithm" type="xs:string"/>
+							<xs:element name="InputData" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="DataSeries" type="DataSeriesRefType" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Params" type="DynamicPropertiesType" minOccurs="0"/>
+						</xs:sequence>
+						<xs:attribute name="name" type="xs:string" use="required"/>
+						<xs:attribute name="effectiveDate" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="^\d{2}/(((J|j)(A|a)(N|n))|((F|f)(E|e)(B|b))|((M|m)(A|a)(R|r))|((A|a)(P|p)(R|r))|((M|m)(A|a)(Y|y))|((J|j)(U|u)(N|n))|((J|j)(U|u)(L|l))|((A|a)(U|u)(G|g))|((S|s)(E|e)(P|p))|((O|o)(C|c)(T|t))|((N|n)(O|o)(V|v))|((D|d)(E|e)(C|c)))/\d{4}$"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="description"/>
+						<xs:attribute name="calibrate" type="xs:boolean"/>
+						<xs:attribute name="bootstrap" type="xs:boolean"/>
+						<xs:attribute name="validate"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DataSeriesRefType">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="from" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="^\d{2}/(((J|j)(A|a)(N|n))|((F|f)(E|e)(B|b))|((M|m)(A|a)(R|r))|((A|a)(P|p)(R|r))|((M|m)(A|a)(Y|y))|((J|j)(U|u)(N|n))|((J|j)(U|u)(L|l))|((A|a)(U|u)(G|g))|((S|s)(E|e)(P|p))|((O|o)(C|c)(T|t))|((N|n)(O|o)(V|v))|((D|d)(E|e)(C|c)))/\d{4}$"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="to" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="^\d{2}/(((J|j)(A|a)(N|n))|((F|f)(E|e)(B|b))|((M|m)(A|a)(R|r))|((A|a)(P|p)(R|r))|((M|m)(A|a)(Y|y))|((J|j)(U|u)(N|n))|((J|j)(U|u)(L|l))|((A|a)(U|u)(G|g))|((S|s)(E|e)(P|p))|((O|o)(C|c)(T|t))|((N|n)(O|o)(V|v))|((D|d)(E|e)(C|c)))/\d{4}$"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="frequency"/>
+		<xs:attribute name="dateOfMonth"/>
+		<xs:attribute name="holidayCalendar"/>
+		<xs:attribute name="missingDataTreatmentRule"/>
+	</xs:complexType>
+	<xs:element name="DataSeriesName" type="DataSeriesRefType"/>
+</xs:schema>

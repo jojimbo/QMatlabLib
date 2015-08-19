@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (x64) (http://www.altova.com) by CNikitas (RiskCare Ltd) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="PruRSG">
+		<xs:complexType>
+            <xs:all>
+                <xs:element ref="run_parameters"/>
+                <xs:element ref="dependency_model_set"/>
+                <xs:element ref="risk_driver_set"/>
+                <xs:element ref="base_set"/>
+                <xs:element ref="what_if_sets"/>
+                <xs:element ref="user_defined_sets"/>
+                <xs:element ref="validation"/>
+            </xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="run_parameters">
+		<xs:complexType>
+            <xs:sequence><xs:choice maxOccurs="unbounded">
+                <xs:element ref="num_simulations"/>
+                <xs:element ref="scenario_set_type"/>
+                <xs:element ref="rng_type" minOccurs="0"/>
+                <xs:element ref="run_date"/>
+                <xs:element ref="timestamp" minOccurs="0"/>
+                <xs:element ref="num_risks"/>
+                <xs:element ref="basecurrency"/>
+                <xs:element ref="simtimestepinmonths"/>
+                <xs:element ref="is_in_memory" minOccurs="0"/>
+            </xs:choice></xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="num_simulations" type="xs:string"/>
+	<xs:element name="scenario_set_type">
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element name="scenario_type_key" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rng_type" type="xs:string"/>
+	<xs:element name="run_date" type="xs:string"/>
+	<xs:element name="timestamp" type="xs:string"/>
+	<xs:element name="num_risks" type="xs:string"/>
+	<xs:element name="basecurrency" type="xs:string"/>
+	<xs:element name="simtimestepinmonths" type="xs:string"/>
+	<xs:element name="is_in_memory" type="xs:string"/>
+	
+	<xs:element name="dependency_model_set">
+		<xs:complexType>
+            <xs:sequence><xs:choice maxOccurs="unbounded">
+                <xs:element ref="dependency_model_name" minOccurs="0"/>
+                <xs:element ref="degrees_of_freedom" minOccurs="0"/>
+                <xs:element ref="correlation_matrix" minOccurs="0"/>
+            </xs:choice></xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dependency_model_name" type="xs:string"/>
+	<xs:element name="degrees_of_freedom" type="xs:string"/>
+	<xs:element name="correlation_matrix">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="correl_row" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="correl_row">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ce" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ce" type="xs:string"/>
+	<xs:element name="risk_driver_set">
+		<xs:complexType>
+           <xs:sequence><xs:choice maxOccurs="unbounded">
+                <xs:element ref="calib_set_name"/>
+                <xs:element ref="risk" maxOccurs="unbounded"/>
+                <xs:element ref="risk_univ_name"/>
+           </xs:choice></xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="calib_set_name" type="xs:string"/>
+	<xs:element name="risk">
+		<xs:complexType>
+            <xs:all>
+                <xs:element ref="name"/>
+                <xs:element ref="currency"/>
+                <xs:element ref="risk_family"/>
+                <xs:element ref="pru_type"/>
+                <xs:element ref="algo_type"/>
+                <xs:element ref="pru_group"/>
+                <xs:element ref="rng_type" minOccurs="0"/>
+                <xs:element ref="rng_properties" minOccurs="0"/>
+                <xs:element ref="risk_calibration_set" minOccurs="0"/>
+                <xs:element ref="model_precedents" minOccurs="0"/>
+                <xs:element ref="riskOptions"/>
+            </xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="name" type="xs:string"/>
+	<xs:element name="currency" type="xs:string"/>
+	<xs:element name="risk_family" type="xs:string"/>
+	<xs:element name="pru_type" type="xs:string"/>
+	<xs:element name="algo_type" type="xs:string"/>
+	<xs:element name="pru_group" type="xs:string"/>
+    <xs:element name="riskOptions" abstract="true"/>
+	<xs:element name="risk_group" type="xs:string" substitutionGroup="riskOptions"/>
+	<xs:element name="risk_groups" substitutionGroup="riskOptions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="group" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="group">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="shredname" type="xs:string" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="risk_calibration_set">
+		<xs:complexType>
+            <xs:all>
+                <xs:element ref="model_name"/>
+                <xs:element ref="calibration_sources"/>
+                <xs:element ref="calibration_source_start"/>
+                <xs:element ref="calibration_source_end"/>
+                <xs:element ref="calibration_targets"/>
+                <xs:element ref="model_params"/>
+            </xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="model_name" type="xs:string"/>
+	<xs:element name="calibration_sources">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="calibration_source" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="calibration_source" type="xs:string"/>
+	<xs:element name="calibration_source_start">
+		<xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string"/>
+            </xs:simpleContent>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="calibration_source_end">
+		<xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string"/>
+            </xs:simpleContent>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="calibration_targets">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="calibration_target" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="calibration_target">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="percentile" type="xs:string" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="model_params">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:any namespace="##any" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rng_properties">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="property" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="property">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="type" type="xs:string" use="required"/>
+					<xs:attribute name="name" type="xs:string" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="model_precedents">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:any namespace="##any" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="risk_univ_name" type="xs:string"/>
+	<xs:element name="axes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="axis" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="axis">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="values">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="v" type="valuesType"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="base_set">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="scenario_set" type="base_scenario_set" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="base_scenario_set">
+        <xs:sequence><xs:choice maxOccurs="unbounded">
+            <xs:element ref="scenario" maxOccurs="unbounded"/>
+            <xs:element ref="sess_date"/>
+            <xs:element ref="run_date"/>
+            <xs:element ref="calc_date"/>
+        </xs:choice></xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="scenario_set">
+		<xs:complexType>
+            <xs:sequence><xs:choice maxOccurs="unbounded">
+                <xs:element ref="scenario" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="shock_base_scenario"/>
+                <xs:element ref="sess_date"/>
+                <xs:element ref="run_date"/>
+                <xs:element ref="calc_date"/>
+            </xs:choice></xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="scenario">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="risk" type="scenarioRiskType" maxOccurs="unbounded"/>
+			</xs:choice>
+			<xs:attributeGroup ref="scenarioAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sess_date" type="xs:string"/>
+	<xs:element name="calc_date" type="xs:string"/>
+	<xs:element name="what_if_sets">
+		<xs:complexType>
+            <xs:all>
+                <xs:element name="base_set" minOccurs="0"/>
+                <xs:element ref="scenario_set" minOccurs="0"/>
+            </xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="user_defined_sets">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="scenario_set" type="base_scenario_set" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="validation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="validation_rules"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="validation_rules" type="xs:string"/>
+	<xs:element name="shock_base_scenario">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="risk" type="shockBaseScenarioRiskType"/>
+			</xs:choice>
+			<xs:attributeGroup ref="scenarioAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="scenarioAttributes">
+		<xs:attribute name="scen_step" type="xs:string" use="required"/>
+		<xs:attribute name="number" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="date" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+	<xs:complexType name="valuesType" mixed="true">
+		<xs:choice maxOccurs="unbounded">
+			<xs:any namespace="##any" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+		<xs:anyAttribute namespace="##any" processContents="skip"/>
+	</xs:complexType>
+	<xs:complexType name="scenarioRiskType">
+		<xs:sequence>
+			<xs:element name="axes" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="axis" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:attribute name="name" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="values" maxOccurs="1">
+				<xs:complexType>
+					<xs:choice maxOccurs="unbounded">
+						<xs:element name="v" type="valuesType"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="shockBaseScenarioRiskType">
+		<xs:sequence>
+			<xs:element name="axes" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="axis" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:attribute name="name" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="shift_coefficients" maxOccurs="1">
+				<xs:complexType>
+					<xs:choice maxOccurs="unbounded">
+						<xs:element name="v" type="valuesType"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="stretch_coefficients" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="m" minOccurs="1" maxOccurs="unbounded">
+							<xs:complexType mixed="true">
+								<xs:choice maxOccurs="unbounded">
+									<xs:any namespace="##any" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:choice>
+								<xs:attribute name="multshock" type="xs:string" use="required"/>
+								<xs:anyAttribute namespace="##any" processContents="skip"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="manual_shift_coefficients" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="v" minOccurs="1" maxOccurs="unbounded">
+							<xs:complexType mixed="true">
+								<xs:choice maxOccurs="unbounded">
+									<xs:any namespace="##any" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:choice>
+								<xs:attribute name="multshock" type="xs:string" use="required"/>
+								<xs:anyAttribute namespace="##any" processContents="skip"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="floor_coefficients" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:choice maxOccurs="unbounded">
+						<xs:element name="v" type="valuesType"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+</xs:schema>

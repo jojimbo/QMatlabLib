@@ -1,0 +1,12 @@
+llwsolv109/jason/sandboxes/trunk/Tests/framework/Java$ ./testutil.sh GetConfigValue 'RSGRoot' 
+
+/apps/MCR/R2010bSP1/v7141/runtime/glnxa64:/apps/MCR/R2010bSP1/v714/sys/os/glnxa64:/apps/MCR/R2010bSP1/v7141/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/apps/MCR/R2010bSP1/v7141/sys/java/jre/glnxa64/jre/lib/amd64/native_server:/apps/MCR/R2010bSP1/v7141/sys/java/jre/glnxa64/jre/lib/amd64:/apps/MATLAB/R2010bSP1/runtime/glnxa64:/apps/MATLAB/R2010bSP1/sys/os/glnxa64:/apps/MATLAB/R2010bSP1/bin/glnxa64:/apps/MATLAB/R2010bSP1/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/apps/MATLAB/R2010bSP1/sys/java/jre/glnxa64/jre/lib/amd64/server:/apps/MATLAB/R2010bSP1/sys/java/jre/glnxa64/jre/lib/amd64
+Using jdbc driver from JTestUtility/Lib/ojdbc6.jar
+
+RSG returned 1 elements.
+
+Class: class com.mathworks.toolbox.javabuilder.MWCharArray
+MWArray: 2 dimensions [1,75], 75 elements
+/nfs/lldnfs01v/matlab/code/llwsolv109/jason/sandboxes/trunk/Tests/../Source
+
+-----------------

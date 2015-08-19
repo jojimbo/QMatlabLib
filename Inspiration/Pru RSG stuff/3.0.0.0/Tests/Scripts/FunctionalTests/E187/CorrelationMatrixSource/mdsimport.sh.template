@@ -1,0 +1,4 @@
+importDir='{RSG_CWD}/Inputs/DataSeries'
+
+$(cd {IRSG_TESTS}/Externals/MDSImporter/deploy; ./run_mdsimport.sh $importDir)
+

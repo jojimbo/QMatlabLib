@@ -1,0 +1,699 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>EQUITY IMPLIED VOLATILITY</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-27"><meta name="DC.source" content="bootstrap_equityIV.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>EQUITY IMPLIED VOLATILITY</h1><!--introduction--><p><b>The main purpose of the class is to convert raw market equity volatilities into volatilities with desired maturities, strikes, volatility types and strike bases, which can then be used as initial values for the RSG/ESG engine</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">How to Use the Class</a></li><li><a href="#3">Properties</a></li><li><a href="#4">List of Methods</a></li><li><a href="#6">Details of Methods</a></li><li><a href="#7"><tt>1) [Bootstrap()]</tt></a></li><li><a href="#9"><tt>2) [Calibrate()]</tt></a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_equityIV &lt; prursg.Bootstrap.BaseBootstrapAlgorithm
+</pre><h2>How to Use the Class<a name="2"></a></h2><p>This class inherits the properties and methods from the parent class <tt>[BaseBootstrapAlgorithm]</tt>.</p><p>It contains two methods, one is <tt>[Bootstrap]</tt> and the other is <tt>[Calibrate]</tt>.</p><p>New properties have been defined and the default method <tt>[Bootstrap]</tt> has been overwritten.</p><p>The re-defined <tt>[Bootstrap]</tt> method links together the three Equity Implied Volatility bootstrap steps, namely, <tt>[bsEquityStrikeBasis]</tt>, <tt>[bsEquityIV_StochRateEffect]</tt> and <tt>[bsEquityVolExtrapolation]</tt>.</p><p>Input a raw market volatility surface and a set Forward Index Prices into <tt>[Bootstrap]</tt>. Bootstrap method then returns a new volatility surface with the specified maturities, strikes, volatility type and strike basis.</p><p>Method <tt>[Calibrate]</tt> calibrates parameters which are then used in bootstrap methods. We have not created a calibrate method.</p><h2>Properties<a name="3"></a></h2><p>These are global parameters which are available to all methods in this class. They are all single values.</p><p><b><tt>[newDataSeriesObject]</tt></b> - initial set-up of the bootstrap object</p><p><b><tt>[Methods]</tt></b> - bootstrap method</p><p><b><tt>[outputfreq]</tt></b> - a string that lists the number of monthly, quarterly, semi-annual, and annual output intervals</p><p><b><tt>[ouputfrequencyprofile]</tt></b> - determines the output frequency of the DataSeriesObject</p><p><b><tt>[Moneyness]</tt></b> - measured as a percentage of option price</p><p><b><tt>[LTEquityAMean]</tt></b> - <img src="bootstrap_equityIV_eq52646.png" alt="$\mu_A$">, the arithmatic mean return in the long term</p><p><b><tt>[LTEquityAStdDev]</tt></b> -  <img src="bootstrap_equityIV_eq09589.png" alt="$\sigma_A$">, the arithmatic volatility in the long term</p><p><b><tt>[ExpDecayFactor]</tt></b> - <img src="bootstrap_equityIV_eq86607.png" alt="$k$">, represents the speed with which the standard deviation of returns reverts to its long term level. It controls the exponential decay from the last liquid point to the long-term target</p><p><b><tt>[llpMaturity]</tt></b> - <img src="bootstrap_equityIV_eq20220.png" alt="$T_{LLP}$"> maximum maturity at which equity volatility is liquid</p><p><b><tt>[llpminStrike]</tt></b> - minimum moneyness at which equity volatility is liquid</p><p><b><tt>[llpmaxStrike]</tt></b> - maximum moneyness at which equity volatility is liquid</p><p><b><tt>[IRMeanReversionSpeed]</tt></b> - rate <img src="bootstrap_equityIV_eq87919.png" alt="$\alpha$"> at which the short rate reverts back to mean</p><p><b><tt>[IRVolatility]</tt></b> - interest rate volatility <img src="bootstrap_equityIV_eq12538.png" alt="$\sigma_{IR}$"></p><p><b><tt>[Equity_IR_Correlation]</tt></b> - correlation <img src="bootstrap_equityIV_eq20099.png" alt="$\rho$"> between equity and interest rate</p><p><b><tt>[ProxyMethod]</tt></b> - method to apply a proxy, e.g. "linear"</p><p><b><tt>[ProxyCurrency]</tt></b> - currency to which the proxy method is applied to</p><p><b><tt>[ProxyParam1]</tt></b> - parameter used in the proxy calculation</p><p><b><tt>[ProxyParam2]</tt></b> - parameter used in the proxy calculation</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+
+        newDataSeriesObject
+        Methods
+
+        outputfreq
+        ouputfrequencyprofile
+        <span class="comment">% Strike Moneyness Levels</span>
+        Moneyness
+         <span class="comment">% Equity Return Parameters</span>
+        LTEquityAMean
+        LTEquityAStdDev
+        ExpDecayFactor
+        <span class="comment">% Liquidity Points</span>
+        llpMaturity
+        llpminStrike
+        llpmaxStrike
+         <span class="comment">% Interet Rate Parameters</span>
+        IRMeanReversionSpeed
+        IRVolatility
+        Equity_IR_Correlation
+        <span class="comment">% Equity IV method</span>
+        EquityIVMethod
+        StrikeMethod
+       <span class="comment">% Proxy Methods</span>
+        ProxyMethod
+        ProxyCurrency
+        ProxyParam1
+        ProxyParam2
+        <span class="comment">% Start &amp; End Points</span>
+        startterm
+        endterm
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="4"></a></h2><p>This bootstrap class introduces the following methods:</p><p><b><tt>1) [Bootstrap()]</tt></b> - Function transforms a raw market volatility surface into a surface with the specified maturities, strikes, volatility type and strike basis.</p><p><b><tt>2) [Calibrate()]</tt></b> - Function calibrates parameters which are then used in bootstrap methods</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">       <span class="keyword">function</span> obj = bootstrap_equityIV ()
+         obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>Details of Methods<a name="6"></a></h2><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>1) [Bootstrap()]</tt><a name="7"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function links together the three Equity Implied Volatility bootstrap steps, namely, <tt>[bsEquityStrikeBasis]</tt>, <tt>[bsEquityIV_StochRateEffect]</tt> and <tt>[bsEquityVolExtrapolation]</tt>.</p><p>It converts a raw market equity volatility surface into a surface with pre-defined maturity and strike profiles and in the required volatility type and on the required strike basis.</p><p><b><i>Inputs</i></b></p><p><tt>[DataSeriesIn]</tt> - The first data series is assumed to be the volatility surface and the second is assumed to be the forward index prices.</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Outputs</i></b></p><p><tt>[results]</tt> - The resulting volatility surface after extrapolation</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calculation</i></b></p><p>STEP 0: Set-up the problem. Dataseries objects are reference type objects, therefore we will take a local copy</p><p>STEP 1: Create Extrapolation Object</p><p>STEP 2: Initialise Data. Turn DataSeries values into absolute values. Identify whether to apply truncation to the volatility surface</p><p>STEP 3: Apply proxy adjustments if the input volatility <img src="bootstrap_equityIV_eq65939.png" alt="$Vol_{input}$"> is a proxy. E.g. if the proxy rule is "linear", proxy parameters are <img src="bootstrap_equityIV_eq28925.png" alt="$p_1$"> and <img src="bootstrap_equityIV_eq40866.png" alt="$p_2$">, then the volatility after proxy <img src="bootstrap_equityIV_eq19302.png" alt="$Vol_{proxy}$"> is,</p><p><img src="bootstrap_equityIV_eq22571.png" alt="$Vol_{proxy} = p_1 + p_2 \times Vol_{input}$"></p><p>STEP 4: Sort volatility surface by strike then maturity. Check the name of each axis and assign data appropriately</p><p>STEP 5: Convert forward volatilities to spot volatilities, if necessary, using the function <tt>[CreateSpotVolSurfaceFromFwdVolSurface()]</tt> in the class <tt>[bsEquityForwardVolExtrapolation]</tt></p><p>STEP 6: Transform current strike basis to forward strike basis, if necessary, using the function <tt>[CreateNewIVMatrix()]</tt> in the class <tt>[bsEquityStrikeBasis]</tt></p><p>STEP 7: This is the main calculation step. It calls the function <tt>[CreateExtrapolatedSurface()]</tt> in the class <tt>[bsEquityForwardVolExtrapolation]</tt> to apply interpolation and extrapolations to the raw volatility surface. That gives us a spot volatility surface on forward strike basis with the required output maturity and strike profiles.</p><p>If the output volatility type is "fwdvol", it calls the function <tt>[CreateFwdVolSurfaceFromSpotVolSurface()]</tt> again to convert the surface into a forward volatility surface.</p><p>If the output strike type is "fwdstrike", it calls the function <tt>[CreateNewIVMatrix()]</tt> again to convert the surface into a volatility surface on a forward strike basis</p><p>STEP 8: Update Data-Series axis &amp; properties axis</p><p>STEP 9: Assign DataSeries object to <tt>[results]</tt></p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+ <span class="keyword">function</span> results = Bootstrap(obj,DataSeriesIn)
+
+<span class="comment">%Step 0: Set-Up Problem</span>
+   numOfDataSeries = size(DataSeriesIn,2);
+   inumberOfDates =  size(DataSeriesIn(1).dates,1);
+
+   obj.ouputfrequencyprofile = Bootstrap.Bsfrequencyprofile <span class="keyword">...</span>
+       (obj.outputfreq, obj.endterm).AdjustedIntervalArray';
+   newSortDataSeries=Bootstrap.BsSort();
+
+   obj.newDataSeriesObject = newSortDataSeries.SortDataSeries<span class="keyword">...</span>
+       (DataSeriesIn(1).Clone);
+   <span class="keyword">for</span> i =2 : numOfDataSeries
+       obj.newDataSeriesObject = [obj.newDataSeriesObject <span class="keyword">...</span>
+           newSortDataSeries.SortDataSeries(DataSeriesIn(i).Clone)];
+   <span class="keyword">end</span>
+
+
+<span class="comment">%STEP 1: Create Extrapolation Object</span>
+   newEquityVolextrap = Bootstrap.bsEquityForwardVolExtrapolation <span class="keyword">...</span>
+      (obj.LTEquityAMean, obj.LTEquityAStdDev, obj.ExpDecayFactor, <span class="keyword">...</span>
+       obj.llpMaturity, obj.llpminStrike, obj.llpmaxStrike, <span class="keyword">...</span>
+       obj.IRMeanReversionSpeed, obj.IRVolatility, <span class="keyword">...</span>
+       obj.Equity_IR_Correlation);
+
+   newobject = Bootstrap.bootstrap_ZCBtoSwapRate;
+   NewStrikeMoneyness = newobject.createArrayfromCSVstring(obj.Moneyness);
+
+
+<span class="comment">%STEP 2 Initialise Data</span>
+<span class="comment">%      obj.newDataSeriesObject = DataSeriesIn(1).Clone();</span>
+   Methodindices = find(obj.EquityIVMethod == <span class="string">'_'</span>);
+   obj.Methods = { obj.EquityIVMethod(1 : Methodindices(1) -1), <span class="keyword">...</span>
+       obj.EquityIVMethod((Methodindices(1)+1) : Methodindices(2) -1), <span class="keyword">...</span>
+       obj.EquityIVMethod((Methodindices(2)+1) : end)};
+
+   <span class="keyword">for</span> j=1:numOfDataSeries
+       <span class="keyword">if</span> strcmp(lower(obj.newDataSeriesObject(j).units) , <span class="string">'percent'</span>)
+           <span class="keyword">for</span> i=1:inumberOfDates
+               obj.newDataSeriesObject(j).values{i,1} = <span class="keyword">...</span>
+                   obj.newDataSeriesObject(j).values{i,1} ./ 100;
+           <span class="keyword">end</span>
+       <span class="keyword">end</span>
+   <span class="keyword">end</span>
+
+   <span class="keyword">if</span> strcmp(lower(obj.StrikeMethod) , <span class="string">'truncate'</span>)
+       obj.StrikeMethod =<span class="string">'true'</span>;
+   <span class="keyword">else</span>
+       obj.StrikeMethod =<span class="string">'false'</span>;
+   <span class="keyword">end</span>
+
+<span class="comment">%STEP 3 Apply Proxy Adjustments</span>
+   <span class="keyword">if</span> strcmp(lower(obj.ProxyMethod) , <span class="string">'linear'</span>)
+       <span class="keyword">for</span> i=1:  inumberOfDates
+          obj.newDataSeriesObject(1).values{i,1}= obj.ProxyParam1 + <span class="keyword">...</span>
+              obj.ProxyParam2 .* obj.newDataSeriesObject(1).values{i,1};
+       <span class="keyword">end</span>
+   <span class="keyword">end</span>
+
+<span class="comment">%STEP 4  Sort volatility surface by strike then maturity</span>
+   <span class="keyword">if</span> strcmp(DataSeriesIn(1).axes(1).title, <span class="string">'Moneyness'</span>) &amp;&amp; <span class="keyword">...</span>
+           strcmp(DataSeriesIn(1).axes(2).title, <span class="string">'Term'</span>)
+
+    OptionStrikes = cell2mat(obj.newDataSeriesObject(1).axes(1).values);
+    OptionMaturities = cell2mat(obj.newDataSeriesObject(1).axes(2).values);
+    VolatilitySurface = cell(inumberOfDates, 1);
+
+      <span class="keyword">for</span> i=1:inumberOfDates
+        VolatilitySurface{i,1} = obj.newDataSeriesObject(1).values{i,1}';
+      <span class="keyword">end</span>
+
+   <span class="keyword">elseif</span> strcmp(DataSeriesIn(1).axes(1).title, <span class="string">'Term'</span>) &amp;&amp; <span class="keyword">...</span>
+           strcmp(DataSeriesIn(1).axes(2).title, <span class="string">'Moneyness'</span>)
+    OptionStrikes = cell2mat(obj.newDataSeriesObject(1).axes(2).values);
+    OptionMaturities = cell2mat(obj.newDataSeriesObject(1).axes(1).values);
+    VolatilitySurface = cell(inumberOfDates, 1);
+
+      <span class="keyword">for</span> i=1:inumberOfDates
+        VolatilitySurface{i,1} = obj.newDataSeriesObject(1).values{i,1};
+      <span class="keyword">end</span>
+
+   <span class="keyword">else</span>
+   assert( <span class="string">'Axis Titles of the input data do not match predefined values'</span>);
+
+   <span class="keyword">end</span>
+
+<span class="comment">%STEP 5: Convert Forward Vols to Spot vols if necessary</span>
+   <span class="keyword">if</span> strcmp( DataSeriesIn(1).volatility_type , <span class="string">'fwdvols'</span>)
+       <span class="keyword">for</span> i=1:inumberOfDates
+           VolatilitySurface{i,1}=CreateSpotVolSurfaceFromFwdVolSurface<span class="keyword">...</span>
+               (VolatilitySurface{i,1}, OptionMaturities);
+       <span class="keyword">end</span>
+   <span class="keyword">end</span>
+
+<span class="comment">%STEP 6: Forward Strike Adjustment if necessary</span>
+   <span class="keyword">if</span> strcmp( obj.newDataSeriesObject(1).strike_type, <span class="string">'spotstrike'</span>) &amp;&amp; <span class="keyword">...</span>
+           (numOfDataSeries &gt; 1);
+       ForwardIndexMaturities= cell2mat(obj.newDataSeriesObject(2). <span class="keyword">...</span>
+           axes(1).values);
+
+       <span class="keyword">for</span> i=1: inumberOfDates
+          ForwardIndexPrices = obj.newDataSeriesObject(2).values{i,1};
+          newForwardStrikeBasis = Bootstrap.bsEquityStrikeBasis <span class="keyword">...</span>
+             (VolatilitySurface{i,1}, OptionMaturities, OptionStrikes,<span class="keyword">...</span>
+              ForwardIndexPrices, ForwardIndexMaturities, OptionStrikes);
+          VolatilitySurface{i,1}=newForwardStrikeBasis.CreateNewIVMatrix<span class="keyword">...</span>
+             (<span class="string">'fwdstrike'</span>,obj.StrikeMethod);
+       <span class="keyword">end</span>
+
+   <span class="keyword">end</span>
+
+<span class="comment">%Step 7: Calculate values</span>
+   <span class="keyword">for</span> i=1:  inumberOfDates
+      newsurface = newEquityVolextrap.CreateExtrapolatedSurface <span class="keyword">...</span>
+          (VolatilitySurface{i,1}, OptionMaturities, OptionStrikes, <span class="keyword">...</span>
+          obj.ouputfrequencyprofile, NewStrikeMoneyness, obj.StrikeMethod);
+
+     <span class="keyword">if</span>  strcmp(obj.Methods{1}, <span class="string">'spotstrike'</span>) &amp;&amp; (numOfDataSeries &gt; 1);
+         <span class="comment">% Convert Forward Strike Surface to Spot Strike Surface</span>
+         newForwardStrikeBasis = Bootstrap.bsEquityStrikeBasis <span class="keyword">...</span>
+             (newsurface, obj.ouputfrequencyprofile, NewStrikeMoneyness,<span class="keyword">...</span>
+             ForwardIndexPrices,ForwardIndexMaturities,NewStrikeMoneyness);
+         newsurface = newForwardStrikeBasis.CreateNewIVMatrix <span class="keyword">...</span>
+             (<span class="string">'spotstrike'</span>,obj.StrikeMethod);
+     <span class="keyword">end</span>
+
+     <span class="keyword">if</span>  strcmp(obj.Methods{3} , <span class="string">'fwdvol'</span>)
+         <span class="comment">% Convert spot vols to fwd vols</span>
+         newsurface = newEquityVolextrap. <span class="keyword">...</span>
+             CreateFwdVolSurfaceFromSpotVolSurface(newsurface, <span class="keyword">...</span>
+             obj.ouputfrequencyprofile);
+     <span class="keyword">end</span>
+
+     <span class="keyword">if</span> strcmp(DataSeriesIn(1).axes(1).title , <span class="string">'Moneyness'</span>) &amp;&amp; <span class="keyword">...</span>
+             strcmp( DataSeriesIn(1).axes(2).title, <span class="string">'Term'</span>)
+         obj.newDataSeriesObject(1).values{i,1} = newsurface';
+     <span class="keyword">else</span>
+         obj.newDataSeriesObject(1).values{i,1} = newsurface;
+     <span class="keyword">end</span>
+
+   <span class="keyword">end</span>
+
+<span class="comment">%Step 8 :: Update Data-Series Axis &amp; Properties Axis</span>
+   <span class="keyword">if</span> strcmp( DataSeriesIn(1).axes(1).title , <span class="string">'Moneyness'</span>) &amp;&amp; <span class="keyword">...</span>
+           strcmp( DataSeriesIn(1).axes(2).title , <span class="string">'Term'</span>)
+        obj.newDataSeriesObject(1).axes(1).values = <span class="keyword">...</span>
+            num2cell(NewStrikeMoneyness);
+        obj.newDataSeriesObject(1).axes(2).values = <span class="keyword">...</span>
+            num2cell(obj.ouputfrequencyprofile);
+   <span class="keyword">else</span>
+        obj.newDataSeriesObject(1).axes(2).values = <span class="keyword">...</span>
+            num2cell(NewStrikeMoneyness);
+        obj.newDataSeriesObject(1).axes(1).values = <span class="keyword">...</span>
+            num2cell(obj.ouputfrequencyprofile);
+   <span class="keyword">end</span>
+
+   obj.newDataSeriesObject(1).Name = <span class="string">''</span>;
+   obj.newDataSeriesObject(1).description = <span class="keyword">...</span>
+       <span class="string">'Derived using the iMDP Forward Vol Extrapolation Method'</span>;
+   obj.newDataSeriesObject(1).strike_type = obj.Methods{1};
+   obj.newDataSeriesObject(1).volatility_measure =obj.Methods{2};
+   obj.newDataSeriesObject(1).volatility_type = obj.Methods{3};
+   obj.newDataSeriesObject(1).source = <span class="string">'iMDP'</span>;
+   obj.newDataSeriesObject(1).units =<span class="string">'absolute'</span>;
+
+<span class="comment">%Step 9: Assign DataSeries Object to Results</span>
+   results =obj.newDataSeriesObject(1);
+
+ <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>2) [Calibrate()]</tt><a name="9"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function calibrates parameters which are then used in bootstrap methods</p><p>See class <tt>[BaseBootstrapAlgorithm]</tt> for details</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+      <span class="keyword">function</span> Calibrate(obj, DataSeriesIn, ParametersIn)
+
+      <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% EQUITY IMPLIED VOLATILITY  
+%
+% *The main purpose of the class is to convert raw market equity volatilities 
+% into volatilities with desired maturities, strikes, volatility types and
+% strike bases, which can then be used as initial values for the RSG/ESG engine*
+%
+
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_equityIV < prursg.Bootstrap.BaseBootstrapAlgorithm    
+%% How to Use the Class
+%
+% This class inherits the properties and methods from the parent class |[BaseBootstrapAlgorithm]|.
+%
+% It contains two methods, one is |[Bootstrap]| and the other is |[Calibrate]|.
+%
+% New properties have been defined and the default method |[Bootstrap]| has been
+% overwritten.
+%
+% The re-defined |[Bootstrap]| method links together the three Equity Implied Volatility 
+% bootstrap steps, namely, |[bsEquityStrikeBasis]|, |[bsEquityIV_StochRateEffect]| 
+% and |[bsEquityVolExtrapolation]|. 
+%
+% Input a raw market volatility surface and a set Forward Index Prices into |[Bootstrap]|.
+% Bootstrap method then returns a new volatility surface with the specified
+% maturities, strikes, volatility type and strike basis.
+%
+% Method |[Calibrate]| calibrates parameters which are then used in
+% bootstrap methods. 
+% We have not created a calibrate method.
+%
+
+%% Properties
+% These are global parameters which are available to all methods in
+% this class. They are all single values.
+% 
+% *|[newDataSeriesObject]|* - initial set-up of the bootstrap object
+%
+% *|[Methods]|* - bootstrap method
+%
+% *|[outputfreq]|* - a string that lists the number of monthly, quarterly,
+% semi-annual, and annual output intervals
+%
+% *|[ouputfrequencyprofile]|* - determines the output frequency of the
+% DataSeriesObject
+%
+% *|[Moneyness]|* - measured as a percentage of option price
+%
+% *|[LTEquityAMean]|* - $\mu_A$, the arithmatic mean return in the long term
+%
+% *|[LTEquityAStdDev]|* -  $\sigma_A$, the arithmatic volatility in the long term
+%
+% *|[ExpDecayFactor]|* - $k$, represents the speed with which the standard 
+% deviation of returns reverts to its long term level. It controls the exponential 
+% decay from the last liquid point to the long-term target
+%
+% *|[llpMaturity]|* - $T_{LLP}$ maximum maturity at which equity volatility is liquid 
+%
+% *|[llpminStrike]|* - minimum moneyness at which equity volatility is liquid
+%
+% *|[llpmaxStrike]|* - maximum moneyness at which equity volatility is liquid 
+%
+% *|[IRMeanReversionSpeed]|* - rate $\alpha$ at which the short rate reverts back to mean 
+%
+% *|[IRVolatility]|* - interest rate volatility $\sigma_{IR}$
+%
+% *|[Equity_IR_Correlation]|* - correlation $\rho$ between equity and
+% interest rate
+% 
+% *|[ProxyMethod]|* - method to apply a proxy, e.g. "linear" 
+%
+% *|[ProxyCurrency]|* - currency to which the proxy method is applied to
+%
+% *|[ProxyParam1]|* - parameter used in the proxy calculation
+%
+% *|[ProxyParam2]|* - parameter used in the proxy calculation
+%
+%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+    properties
+        
+        newDataSeriesObject
+        Methods
+        
+        outputfreq
+        ouputfrequencyprofile
+        % Strike Moneyness Levels
+        Moneyness
+         % Equity Return Parameters
+        LTEquityAMean
+        LTEquityAStdDev
+        ExpDecayFactor
+        % Liquidity Points
+        llpMaturity
+        llpminStrike
+        llpmaxStrike
+         % Interet Rate Parameters
+        IRMeanReversionSpeed
+        IRVolatility        
+        Equity_IR_Correlation
+        % Equity IV method
+        EquityIVMethod
+        StrikeMethod
+       % Proxy Methods
+        ProxyMethod
+        ProxyCurrency        
+        ProxyParam1
+        ProxyParam2
+        % Start & End Points
+        startterm
+        endterm                                        
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% List of Methods
+% This bootstrap class introduces the following methods:
+%
+% *|1) [Bootstrap()]|* - Function transforms a raw market volatility surface 
+% into a surface with the specified maturities, strikes, volatility type and strike basis.   
+%
+% *|2) [Calibrate()]|* - Function calibrates parameters which are then used in
+% bootstrap methods
+%
+       
+%MATLAB CODE    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods
+       function obj = bootstrap_equityIV ()
+         obj = obj@prursg.Bootstrap.BaseBootstrapAlgorithm();
+       end 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+%% Details of Methods
+% _________________________________________________________________________________________
+%
+%% |1) [Bootstrap()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function links together the three Equity Implied Volatility bootstrap
+% steps, namely, |[bsEquityStrikeBasis]|, |[bsEquityIV_StochRateEffect]| 
+% and |[bsEquityVolExtrapolation]|. 
+%
+% It converts a raw market equity volatility surface into a surface with
+% pre-defined maturity and strike profiles and in the required volatility type and on 
+% the required strike basis.
+%
+% *_Inputs_*
+%
+% |[DataSeriesIn]| - The first data series is assumed to be the volatility surface
+% and the second is assumed to be the forward index prices.          
+% 
+% _Data Type_: 2-dim array
+% 
+% *_Outputs_*
+%
+% |[results]| - The resulting volatility surface after extrapolation
+%
+% _Data Type_: 2-dim array
+%
+% *_Calculation_*
+%
+% STEP 0: Set-up the problem. Dataseries objects are reference type objects, 
+% therefore we will take a local copy
+%
+% STEP 1: Create Extrapolation Object
+%
+% STEP 2: Initialise Data. Turn DataSeries values into absolute values.
+% Identify whether to apply truncation to the volatility surface
+%
+% STEP 3: Apply proxy adjustments if the input volatility $Vol_{input}$ is a proxy.
+% E.g. if the proxy rule is "linear", proxy parameters are $p_1$ and $p_2$, 
+% then the volatility after proxy $Vol_{proxy}$ is,
+% 
+% $Vol_{proxy} = p_1 + p_2 \times Vol_{input}$
+% 
+% STEP 4: Sort volatility surface by strike then maturity. Check the name of each axis and assign data appropriately
+%
+% STEP 5: Convert forward volatilities to spot volatilities, if necessary,
+% using the function |[CreateSpotVolSurfaceFromFwdVolSurface()]| in the class
+% |[bsEquityForwardVolExtrapolation]|
+%
+% STEP 6: Transform current strike basis to forward strike basis, if
+% necessary, using the function |[CreateNewIVMatrix()]| in the class
+% |[bsEquityStrikeBasis]|
+%
+% STEP 7: This is the main calculation step. 
+% It calls the function |[CreateExtrapolatedSurface()]| in the class 
+% |[bsEquityForwardVolExtrapolation]| to apply interpolation and extrapolations
+% to the raw volatility surface. 
+% That gives us a spot volatility surface on forward strike basis with the 
+% required output maturity and strike profiles.
+%
+% If the output volatility type is "fwdvol", it calls the function
+% |[CreateFwdVolSurfaceFromSpotVolSurface()]| again to convert the surface into
+% a forward volatility surface.
+%
+% If the output strike type is "fwdstrike", it calls the function 
+% |[CreateNewIVMatrix()]| again to convert the surface into a volatility surface
+% on a forward strike basis
+%
+% STEP 8: Update Data-Series axis & properties axis
+%
+% STEP 9: Assign DataSeries object to |[results]|
+%
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+ function results = Bootstrap(obj,DataSeriesIn)                    
+       
+%Step 0: Set-Up Problem         
+   numOfDataSeries = size(DataSeriesIn,2);
+   inumberOfDates =  size(DataSeriesIn(1).dates,1);
+
+   obj.ouputfrequencyprofile = Bootstrap.Bsfrequencyprofile ...
+       (obj.outputfreq, obj.endterm).AdjustedIntervalArray';     
+   newSortDataSeries=Bootstrap.BsSort();  
+
+   obj.newDataSeriesObject = newSortDataSeries.SortDataSeries...
+       (DataSeriesIn(1).Clone);
+   for i =2 : numOfDataSeries
+       obj.newDataSeriesObject = [obj.newDataSeriesObject ...
+           newSortDataSeries.SortDataSeries(DataSeriesIn(i).Clone)];
+   end
+   
+   
+%STEP 1: Create Extrapolation Object
+   newEquityVolextrap = Bootstrap.bsEquityForwardVolExtrapolation ...
+      (obj.LTEquityAMean, obj.LTEquityAStdDev, obj.ExpDecayFactor, ...
+       obj.llpMaturity, obj.llpminStrike, obj.llpmaxStrike, ... 
+       obj.IRMeanReversionSpeed, obj.IRVolatility, ...
+       obj.Equity_IR_Correlation);
+
+   newobject = Bootstrap.bootstrap_ZCBtoSwapRate;
+   NewStrikeMoneyness = newobject.createArrayfromCSVstring(obj.Moneyness);
+
+
+%STEP 2 Initialise Data
+%      obj.newDataSeriesObject = DataSeriesIn(1).Clone();
+   Methodindices = find(obj.EquityIVMethod == '_');
+   obj.Methods = { obj.EquityIVMethod(1 : Methodindices(1) -1), ...
+       obj.EquityIVMethod((Methodindices(1)+1) : Methodindices(2) -1), ...
+       obj.EquityIVMethod((Methodindices(2)+1) : end)};
+ 
+   for j=1:numOfDataSeries
+       if strcmp(lower(obj.newDataSeriesObject(j).units) , 'percent')
+           for i=1:inumberOfDates
+               obj.newDataSeriesObject(j).values{i,1} = ...
+                   obj.newDataSeriesObject(j).values{i,1} ./ 100;
+           end
+       end
+   end                
+
+   if strcmp(lower(obj.StrikeMethod) , 'truncate') 
+       obj.StrikeMethod ='true';
+   else
+       obj.StrikeMethod ='false';
+   end     
+
+%STEP 3 Apply Proxy Adjustments          
+   if strcmp(lower(obj.ProxyMethod) , 'linear') 
+       for i=1:  inumberOfDates
+          obj.newDataSeriesObject(1).values{i,1}= obj.ProxyParam1 + ...
+              obj.ProxyParam2 .* obj.newDataSeriesObject(1).values{i,1};        
+       end
+   end     
+
+%STEP 4  Sort volatility surface by strike then maturity    
+   if strcmp(DataSeriesIn(1).axes(1).title, 'Moneyness') && ...
+           strcmp(DataSeriesIn(1).axes(2).title, 'Term')
+
+    OptionStrikes = cell2mat(obj.newDataSeriesObject(1).axes(1).values);  
+    OptionMaturities = cell2mat(obj.newDataSeriesObject(1).axes(2).values);
+    VolatilitySurface = cell(inumberOfDates, 1);
+
+      for i=1:inumberOfDates
+        VolatilitySurface{i,1} = obj.newDataSeriesObject(1).values{i,1}';
+      end
+
+   elseif strcmp(DataSeriesIn(1).axes(1).title, 'Term') && ...
+           strcmp(DataSeriesIn(1).axes(2).title, 'Moneyness')
+    OptionStrikes = cell2mat(obj.newDataSeriesObject(1).axes(2).values);  
+    OptionMaturities = cell2mat(obj.newDataSeriesObject(1).axes(1).values);
+    VolatilitySurface = cell(inumberOfDates, 1); 
+
+      for i=1:inumberOfDates
+        VolatilitySurface{i,1} = obj.newDataSeriesObject(1).values{i,1};
+      end
+      
+   else    
+   assert( 'Axis Titles of the input data do not match predefined values');
+   
+   end   
+
+%STEP 5: Convert Forward Vols to Spot vols if necessary
+   if strcmp( DataSeriesIn(1).volatility_type , 'fwdvols')
+       for i=1:inumberOfDates
+           VolatilitySurface{i,1}=CreateSpotVolSurfaceFromFwdVolSurface...
+               (VolatilitySurface{i,1}, OptionMaturities);
+       end
+   end
+
+%STEP 6: Forward Strike Adjustment if necessary
+   if strcmp( obj.newDataSeriesObject(1).strike_type, 'spotstrike') && ...
+           (numOfDataSeries > 1);
+       ForwardIndexMaturities= cell2mat(obj.newDataSeriesObject(2). ...
+           axes(1).values);
+       
+       for i=1: inumberOfDates
+          ForwardIndexPrices = obj.newDataSeriesObject(2).values{i,1};
+          newForwardStrikeBasis = Bootstrap.bsEquityStrikeBasis ...
+             (VolatilitySurface{i,1}, OptionMaturities, OptionStrikes,...
+              ForwardIndexPrices, ForwardIndexMaturities, OptionStrikes);
+          VolatilitySurface{i,1}=newForwardStrikeBasis.CreateNewIVMatrix...
+             ('fwdstrike',obj.StrikeMethod);
+       end
+       
+   end  
+           
+%Step 7: Calculate values              
+   for i=1:  inumberOfDates
+      newsurface = newEquityVolextrap.CreateExtrapolatedSurface ...
+          (VolatilitySurface{i,1}, OptionMaturities, OptionStrikes, ...
+          obj.ouputfrequencyprofile, NewStrikeMoneyness, obj.StrikeMethod);  
+
+     if  strcmp(obj.Methods{1}, 'spotstrike') && (numOfDataSeries > 1);
+         % Convert Forward Strike Surface to Spot Strike Surface
+         newForwardStrikeBasis = Bootstrap.bsEquityStrikeBasis ...
+             (newsurface, obj.ouputfrequencyprofile, NewStrikeMoneyness,...
+             ForwardIndexPrices,ForwardIndexMaturities,NewStrikeMoneyness);
+         newsurface = newForwardStrikeBasis.CreateNewIVMatrix ...
+             ('spotstrike',obj.StrikeMethod);
+     end
+
+     if  strcmp(obj.Methods{3} , 'fwdvol')
+         % Convert spot vols to fwd vols
+         newsurface = newEquityVolextrap. ...
+             CreateFwdVolSurfaceFromSpotVolSurface(newsurface, ...
+             obj.ouputfrequencyprofile);
+     end   
+
+     if strcmp(DataSeriesIn(1).axes(1).title , 'Moneyness') && ...
+             strcmp( DataSeriesIn(1).axes(2).title, 'Term')
+         obj.newDataSeriesObject(1).values{i,1} = newsurface';
+     else
+         obj.newDataSeriesObject(1).values{i,1} = newsurface;
+     end
+     
+   end   
+
+%Step 8 :: Update Data-Series Axis & Properties Axis   
+   if strcmp( DataSeriesIn(1).axes(1).title , 'Moneyness') && ...
+           strcmp( DataSeriesIn(1).axes(2).title , 'Term')      
+        obj.newDataSeriesObject(1).axes(1).values = ...
+            num2cell(NewStrikeMoneyness); 
+        obj.newDataSeriesObject(1).axes(2).values = ...
+            num2cell(obj.ouputfrequencyprofile);                          
+   else
+        obj.newDataSeriesObject(1).axes(2).values = ...
+            num2cell(NewStrikeMoneyness); 
+        obj.newDataSeriesObject(1).axes(1).values = ...
+            num2cell(obj.ouputfrequencyprofile);     
+   end  
+ 
+   obj.newDataSeriesObject(1).Name = '';
+   obj.newDataSeriesObject(1).description = ...
+       'Derived using the iMDP Forward Vol Extrapolation Method';                     
+   obj.newDataSeriesObject(1).strike_type = obj.Methods{1};
+   obj.newDataSeriesObject(1).volatility_measure =obj.Methods{2};
+   obj.newDataSeriesObject(1).volatility_type = obj.Methods{3};
+   obj.newDataSeriesObject(1).source = 'iMDP';
+   obj.newDataSeriesObject(1).units ='absolute';                     
+
+%Step 9: Assign DataSeries Object to Results          
+   results =obj.newDataSeriesObject(1);
+
+ end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% _________________________________________________________________________________________
+%
+%% |2) [Calibrate()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function calibrates parameters which are then used in bootstrap methods 
+%
+% See class |[BaseBootstrapAlgorithm]| for details
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      function Calibrate(obj, DataSeriesIn, ParametersIn)
+          
+      end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    end
+
+end
+
+
+##### SOURCE END #####
+--></body></html>

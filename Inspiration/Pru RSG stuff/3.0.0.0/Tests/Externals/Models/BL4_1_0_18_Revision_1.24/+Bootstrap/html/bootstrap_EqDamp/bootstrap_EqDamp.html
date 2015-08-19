@@ -1,0 +1,352 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Equity Dampener</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-05-31"><meta name="DC.source" content="bootstrap_EqDamp.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Equity Dampener</h1><!--introduction--><p><b>The class returns a symmetric adjustment parameter for the equity charge (currently, only applicable for the standard formula). The equity dampener is designed to prevent/reduce procyclical behaviour such that insurance companies are forced to sell their equities in a downturn leading to further market falls</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">How to use the class</a></li><li><a href="#4">Properties</a></li><li><a href="#6">List of Methods</a></li><li><a href="#9">Details of methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_EqDamp &lt; handle
+</pre><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>How to use the class<a name="3"></a></h2><p>There is one way to use this class:</p><div><ol><li>To produce a symmetric adjustment parameter used to prevent/reduce procyclical behaviour.</li></ol></div><h2>Properties<a name="4"></a></h2><p><b><tt>[EqLevel]</tt></b> : Equity level data series.</p><pre>Data type : double array</pre><p><b><tt>[AvgPeriod]</tt></b> : The period (in years) for which the mean equity level is taken.</p><pre>Data type : double</pre><p><b><tt>[Adj]</tt></b> : Base rate assumption.</p><pre>Data type : double</pre><p><b><tt>[Proportion]</tt></b> : Proportionality constant.</p><pre>Data type : double</pre><p><b><tt>[DayConvention]</tt></b> : The number of working days per calendar year, used to adjust for data only being available on week days.</p><pre>Data type : double</pre><p><b><tt>[UpperBound]</tt></b> : The upper bound of acceptable values of the symmetric adjustment parameter.</p><pre>Data type : double</pre><p><b><tt>[LowerBound]</tt></b> : The lower bound of acceptable values of the symmetric adjustment parameter.</p><pre>Data type : double</pre><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+     properties
+
+         <span class="comment">% Data Series</span>
+         EqLevel = [];
+
+
+         <span class="comment">% Parameters</span>
+
+         AvgPeriod = [];
+         Adj = [];
+         Proportion = [];
+         DayConvention = [];
+         UpperBound = [];
+         LowerBound = [];
+
+     <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="6"></a></h2><p>The class introduces one new method:</p><p><b><tt>1)[bootstrap_EqDamp()]</tt></b> - Function returns a symmetric adjustment parameter used to compensate for cyclical behaviour in the equity capital charge.</p><pre class="codeinput"><span class="comment">%MATLBAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+
+       <span class="keyword">function</span> obj = bootstrap_EqDamp ()
+
+       <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">
+ans = 
+
+  Bootstrap.bootstrap_EqDamp handle
+  Package: Bootstrap
+
+  Properties:
+          EqLevel: []
+        AvgPeriod: []
+              Adj: []
+       Proportion: []
+    DayConvention: []
+       UpperBound: []
+       LowerBound: []
+
+
+</pre><h2>Details of methods<a name="9"></a></h2><p><b>1) <tt>[bootstrap_EqDamp()]</tt></b></p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns a symmetric adjustment parameter used to compensate for cyclical behaviour in the equity capital charge.</p><p><b><i>Inputs</i></b></p><p><b><tt>[EqLevel]</tt></b> : Equity level data series.</p><pre>Data type : double array</pre><p><b><tt>[AvgPeriod]</tt></b> : The period (in years) for which the mean equity level is taken.</p><pre>Data type : double</pre><p><b><tt>[Adj]</tt></b> : Base rate assumption.</p><pre>Data type : double</pre><p><b><tt>[Proportion]</tt></b> : Proportionality constant.</p><pre>Data type : double</pre><p><b><tt>[DayConvention]</tt></b> : The number of working days per calendar year, used to adjust for data only being available on week days.</p><pre>Data type : double</pre><p><b><tt>[UpperBound]</tt></b> : The upper bound of acceptable values of the symmetric adjustment parameter.</p><pre>Data type : double</pre><p><b><tt>[LowerBound]</tt></b> : The lower bound of acceptable values of the symmetric adjustment parameter.</p><pre>Data type : double</pre><p><b><i>Outputs</i></b></p><p>A symmetric adjustment parameter used to compensate for cyclical behaviour in the equity capital charge.</p><p><b><i>Calculations</i></b></p><p>The function calculates the symmetric adjustment parameter using the formula below:</p><p><img src="bootstrap_EqDamp_eq44423.png" alt="$$ S=Max\left[Min\left[P\left(\frac{CI-AI}{AI} - BR\right), UB\right], LB\right]$$"></p><p>with,</p><p><img src="bootstrap_EqDamp_eq09091.png" alt="$CI$"> : Latest equity level.</p><p><img src="bootstrap_EqDamp_eq70142.png" alt="$AI$"> : Mean equity level.</p><p><img src="bootstrap_EqDamp_eq80771.png" alt="$BR$"> : Base return assumption.</p><p><img src="bootstrap_EqDamp_eq86892.png" alt="$P$"> : Proportionality constant.</p><p><img src="bootstrap_EqDamp_eq10604.png" alt="$UB$"> : Upper bound</p><p><img src="bootstrap_EqDamp_eq75963.png" alt="$LB$"> : Lower bound</p><p>If the symmetric adjustment parameter is outside the upper or lower bound imposed on it , the upper or lower bound value is returned instead.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+
+    <span class="comment">% Find Symmetrical Adjustment (SA) Value</span>
+
+        <span class="keyword">function</span> results = bs(obj, DataSeriesIn, ParametersIn)
+
+            obj.EqLevel = DataSeriesIn;
+
+            obj.AvgPeriod = ParametersIn{1};
+            obj.Adj = ParametersIn{2};
+            obj.Proportion = ParametersIn{3};
+            obj.DayConvention = ParametersIn{4};
+            obj.UpperBound = ParametersIn{5};
+            obj.LowerBound = ParametersIn{6};
+
+            results = obj.EqLevel; <span class="comment">% set up results structure</span>
+
+            AvgDays = obj.AvgPeriod*obj.DayConvention;
+            AI = mean(cat(1,obj.EqLevel.values{1:AvgDays}));
+            CI = obj.EqLevel.values{1};
+
+            SA = min(max(obj.Proportion * ((CI - AI) / AI - obj.Adj),<span class="keyword">...</span>
+                obj.LowerBound), obj.UpperBound);
+
+            results.values = num2cell(SA);
+            results.dates = obj.EqLevel.dates(1);
+        <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Equity Dampener
+% *The class returns a symmetric adjustment parameter for the equity charge 
+% (currently, only applicable for the standard formula). The equity 
+% dampener is designed to prevent/reduce procyclical behaviour such that 
+% insurance companies are forced to sell their equities in a downturn 
+% leading to further market falls*
+%
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_EqDamp < handle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% How to use the class     
+% There is one way to use this class:
+%
+% # To produce a symmetric adjustment parameter used to prevent/reduce
+% procyclical behaviour.
+%
+%% Properties
+%
+%
+% *|[EqLevel]|* : Equity level data series.
+%
+%  Data type : double array
+%
+% *|[AvgPeriod]|* : The period (in years) for which the mean equity level
+% is taken.
+%
+%  Data type : double
+%
+% *|[Adj]|* : Base rate assumption.
+%
+%  Data type : double
+%
+% *|[Proportion]|* : Proportionality constant.
+%
+%  Data type : double
+%
+% *|[DayConvention]|* : The number of working days per calendar year, used
+% to adjust for data only being available on week days.
+%
+%  Data type : double
+%
+% *|[UpperBound]|* : The upper bound of acceptable values of the symmetric
+% adjustment parameter.
+%
+%  Data type : double
+%
+% *|[LowerBound]|* : The lower bound of acceptable values of the symmetric
+% adjustment parameter.
+%
+%  Data type : double
+%         
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     properties
+         
+         % Data Series
+         EqLevel = [];
+         
+         
+         % Parameters
+         
+         AvgPeriod = [];
+         Adj = [];
+         Proportion = [];
+         DayConvention = [];
+         UpperBound = [];
+         LowerBound = [];
+         
+     end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%% List of Methods
+% The class introduces one new method:
+%
+% *|1)[bootstrap_EqDamp()]|* - Function returns a symmetric adjustment 
+% parameter used to compensate for cyclical behaviour in the equity capital 
+% charge.
+%
+%%
+%MATLBAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods
+        
+    % Constructor
+    
+       function obj = bootstrap_EqDamp ()
+           
+       end
+       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of methods
+%
+% *1) |[bootstrap_EqDamp()]|*
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns a symmetric adjustment parameter used to compensate for 
+% cyclical behaviour in the equity capital charge.
+%
+% *_Inputs_*
+%
+% *|[EqLevel]|* : Equity level data series.
+%
+%  Data type : double array
+%
+% *|[AvgPeriod]|* : The period (in years) for which the mean equity level
+% is taken.
+%
+%  Data type : double
+%
+% *|[Adj]|* : Base rate assumption.
+%
+%  Data type : double
+%
+% *|[Proportion]|* : Proportionality constant.
+%
+%  Data type : double
+%
+% *|[DayConvention]|* : The number of working days per calendar year, used
+% to adjust for data only being available on week days.
+%
+%  Data type : double
+%
+% *|[UpperBound]|* : The upper bound of acceptable values of the symmetric
+% adjustment parameter.
+%
+%  Data type : double
+%
+% *|[LowerBound]|* : The lower bound of acceptable values of the symmetric
+% adjustment parameter.
+%
+%  Data type : double
+%
+% *_Outputs_*
+%
+% A symmetric adjustment parameter used to compensate for 
+% cyclical behaviour in the equity capital charge.
+%
+% *_Calculations_*
+%
+% The function calculates the symmetric adjustment parameter using the
+% formula below:
+%
+% $$ S=Max\left[Min\left[P\left(\frac{CI-AI}{AI} - BR\right), UB\right], LB\right]$$
+%
+% with,
+%
+% $CI$ : Latest equity level.
+%
+% $AI$ : Mean equity level.
+%
+% $BR$ : Base return assumption.
+%
+% $P$ : Proportionality constant.
+%
+% $UB$ : Upper bound
+%
+% $LB$ : Lower bound
+%
+% If the symmetric adjustment parameter is outside the upper or lower bound
+% imposed on it , the upper or lower bound value is returned instead.
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+    % Find Symmetrical Adjustment (SA) Value
+    
+        function results = bs(obj, DataSeriesIn, ParametersIn)
+            
+            obj.EqLevel = DataSeriesIn;
+            
+            obj.AvgPeriod = ParametersIn{1};
+            obj.Adj = ParametersIn{2};
+            obj.Proportion = ParametersIn{3};
+            obj.DayConvention = ParametersIn{4};
+            obj.UpperBound = ParametersIn{5};
+            obj.LowerBound = ParametersIn{6};
+            
+            results = obj.EqLevel; % set up results structure
+            
+            AvgDays = obj.AvgPeriod*obj.DayConvention;
+            AI = mean(cat(1,obj.EqLevel.values{1:AvgDays}));
+            CI = obj.EqLevel.values{1};
+            
+            SA = min(max(obj.Proportion * ((CI - AI) / AI - obj.Adj),...
+                obj.LowerBound), obj.UpperBound);           
+            
+            results.values = num2cell(SA);
+            results.dates = obj.EqLevel.dates(1);
+        end 
+
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

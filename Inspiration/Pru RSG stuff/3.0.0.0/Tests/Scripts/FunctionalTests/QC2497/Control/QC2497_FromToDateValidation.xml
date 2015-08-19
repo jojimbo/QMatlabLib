@@ -1,0 +1,9 @@
+<Bootstrap>
+    <Item name="FromToDateValidation" bootstrap="true" calibrate="false" description="monthly NoAdjusted ZCBs " effectiveDate="30/Nov/2011">
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="GBP_NYC_1984" from="30/Nov/2009" to="30/Nov/2009" frequency="d" dateOfMonth="" holidayCalendar="" missingDataTreatmentRule=""/>
+            <DataSeries name="GBP_NYC_358" from="30/Dec/2009" to="30/Nov/2009" frequency="d" dateOfMonth="" holidayCalendar="" missingDataTreatmentRule=""/>
+        </InputData>
+    </Item>
+</Bootstrap>

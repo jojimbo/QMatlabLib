@@ -1,0 +1,8 @@
+<Bootstrap>
+    <Item name="SIV_EndDec11_out" description="Swaption Implied Volatility End Dec 2011" effectiveDate="02/Jan/2040">
+        <BootstrapAlgorithm>BsNyc</BootstrapAlgorithm>
+        <InputData>
+            <DataSeries name="EUR_EUSVxy_Bb_SwapIV_fwdstrike_blackIV_spotvol" from="02/Jan/2000" to="02/Jan/2030"/>
+        </InputData>
+    </Item>
+</Bootstrap>

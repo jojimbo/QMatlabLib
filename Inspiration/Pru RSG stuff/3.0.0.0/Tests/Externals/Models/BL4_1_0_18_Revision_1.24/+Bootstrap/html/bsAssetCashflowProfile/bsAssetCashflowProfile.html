@@ -1,0 +1,471 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Asset Cashflow Profile</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-05-30"><meta name="DC.source" content="bsAssetCashflowProfile.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Asset Cashflow Profile</h1><!--introduction--><p><b>The class returns an asset price and an associated profile of cashflow timings and cashflow values for a given set of asset prices or rates. The class allows the user to choose a mixture of different rate or asset types as inputs.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">How to use the class</a></li><li><a href="#4">Properties</a></li><li><a href="#6">List of methods</a></li><li><a href="#9">Details of methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bsAssetCashflowProfile &lt; handle
+</pre><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>How to use the class<a name="3"></a></h2><p>There is one way to use this class:</p><div><ol><li>To produce an asset price and an associated profile of cashflow timings and values for a given set of asset prices or rates.</li></ol></div><h2>Properties<a name="4"></a></h2><p><b><tt>[dblMaturityTolerance]</tt></b> : Tolerance for deciding whether maturities are divisible by the compounding period.</p><pre>Data type : double</pre><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+       dblMaturityTolerance  = 1/52;
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of methods<a name="6"></a></h2><p>The class introduces one new method:</p><p><b><tt>1)[bsAssetCashflowProfile()]</tt></b> - Function returns an asset price and an associated profile of cashflow timings and values for various given sets of asset prices or rates.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+        <span class="keyword">function</span> obj = bsAssetCashflowProfile ()
+
+        <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>Details of methods<a name="9"></a></h2><p><b>1) <tt>[bsAssetCashflowProfile()]</tt></b></p><p>""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><i>Description</i></b></p><p>Function returns asset prices, cashflow maturities and cashflows values from an input of various asset types, values or rates.</p><p><b><i>Inputs</i></b></p><p><b><tt>[dblRawAssetValuesOrRates]</tt></b> : Net present value of the raw assets or their rate.</p><pre>Data type : double</pre><p><b><tt>[dblRawMaturities]</tt></b> : Maturities of the raw assets.</p><pre>Data type : double</pre><p><b><tt>[sRateTypes]</tt></b> : Specifies the input asset type; 'ZCB', 'Spot' or 'Swap'</p><pre>Data type : string</pre><p><b><tt>[compounding]</tt></b> : Specifies whether compounding is continuous ('cont') or annual ('ann').</p><pre>Data type : string</pre><p><b><tt>[compoundingfrequency]</tt></b> : Defines the annual frequency, <img src="bsAssetCashflowProfile_eq85998.png" alt="$f$">, at which the output yield curve is compounded e.g. "2" for semi-annually.</p><pre>Data type : double</pre><p><b><tt>[units]</tt></b> : Specifies if the input data is quoted as percent or not.</p><pre>Data type : string</pre><p><b><i>Outputs</i></b></p><p><b><tt>[dblAssetPrices]</tt></b> : The net present value of the given assets.</p><pre>Data type : double array</pre><p><b><tt>[dblCashflowMaturities]</tt></b> : The timings of each of the cashflows corresponding to a particular asset.</p><pre>Data type : double array</pre><p><b><tt>[dblCashflows]</tt></b> : The value of each cashflow corresponding to a particular asset at the time it is paid.</p><pre>Data type : double array</pre><p><b><i>Calculations</i></b></p><p>The function returns asset prices and cashflow porfiles for ZCBs, spots and swaps via different calculations.</p><p><b>ZCB</b>. The outputs here are straight forward. The cashflows are all <img src="bsAssetCashflowProfile_eq80350.png" alt="$1$"> and the maturities and asset prices are the same as those input.</p><p><b>Spot</b>. As with ZCBs, cashflows are all <img src="bsAssetCashflowProfile_eq80350.png" alt="$1$"> and the maturities are the same as the inputs. The asset value calculation depends on whether the compounding is continuous or annual.</p><p>For continuous compounding the asset values are found using the expression:</p><p><img src="bsAssetCashflowProfile_eq82657.png" alt="$$ B(t,T) = \exp\left[-S(t,T)T\right] $$"></p><p>For annual compounding the asset values are found using the expression:</p><p><img src="bsAssetCashflowProfile_eq83356.png" alt="$$ B(t,T) = \left(1+\frac{S(t,T)}{f}\right)^{-fT} $$"></p><p>With,</p><p><img src="bsAssetCashflowProfile_eq98902.png" alt="$S(t,T)$"> : Spot Rate at time, <img src="bsAssetCashflowProfile_eq07064.png" alt="$t$">, paying at maturity, <img src="bsAssetCashflowProfile_eq46221.png" alt="$t=T$">.</p><p><img src="bsAssetCashflowProfile_eq73735.png" alt="$B(t,T)$"> : The price of a zero coupon bond at time, <img src="bsAssetCashflowProfile_eq07064.png" alt="$t$">, which pays 1 at maturity, <img src="bsAssetCashflowProfile_eq46221.png" alt="$t=T$">.</p><p><img src="bsAssetCashflowProfile_eq57315.png" alt="$T$"> : Asset maturity.</p><p><img src="bsAssetCashflowProfile_eq85998.png" alt="$f$"> : Compounding frequency (per annum)</p><p><b>Swap</b>. The swap rates are assumed to be the par rates of the market discount curve. Therefore the net present value of the fixed leg is equal to <img src="bsAssetCashflowProfile_eq80350.png" alt="$1$">. For this reason we set the swap asset values to <img src="bsAssetCashflowProfile_eq80350.png" alt="$1$">. The cashflow maturities are set to be a series with a value at the end of every compounding period until the asset maturity from the raw data. However, if the maturity from the raw data is not divisible by the compounding period and the remainder is more than <b><tt>MaturityTolerance</tt></b>) then the first cashflow maturity is the remainder followed by regular maturities at intervals of the compounding period.</p><p>The cashflow values are found using the expression below:</p><p><img src="bsAssetCashflowProfile_eq86569.png" alt="$$ V_{Cashflow}=\frac{V_{Raw}}{f}+1 $$"></p><p>With,</p><p><img src="bsAssetCashflowProfile_eq32987.png" alt="$V_{Cashflow}$"> : Value of cashflow</p><p><img src="bsAssetCashflowProfile_eq81062.png" alt="$V_{Raw}$"> : Raw value of asset.</p><p><img src="bsAssetCashflowProfile_eq85998.png" alt="$f$"> : Compounding frequency (per annum)</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+<span class="comment">% methods and functions</span>
+
+        <span class="keyword">function</span> [ dblAssetPrices,dblCashflowMaturities, dblCashflows] = <span class="keyword">...</span>
+                assetcashflowprofiles(obj,dblRawAssetValuesOrRates,<span class="keyword">...</span>
+                dblRawMaturities, sRateTypes ,compounding,<span class="keyword">...</span>
+                compoundingfrequency,units)
+
+               iNumberofAssetPrices =size(dblRawAssetValuesOrRates, 1) ;
+               dblAssetPrices =zeros(iNumberofAssetPrices, 1) ;
+
+               dblCashflows = cell(iNumberofAssetPrices ,1)  ;
+               <span class="comment">% Create a cell array of cashflows profiles for each asset</span>
+               dblCashflowMaturities = cell(iNumberofAssetPrices ,1)  ;
+               <span class="comment">% Create a cell array of cashflow matrurity</span>
+               <span class="comment">% profiles for each asset</span>
+
+
+               <span class="keyword">for</span> i = 1 : iNumberofAssetPrices
+
+                    <span class="comment">% Adjust data into absolute amount/values</span>
+                   <span class="keyword">if</span> strcmp(units(i, :), <span class="string">'percent'</span>)
+                       dblRawAssetValuesOrRates(i,1) = <span class="keyword">...</span>
+                           (dblRawAssetValuesOrRates(i,1)./ 100);
+                   <span class="keyword">else</span>
+
+                   <span class="keyword">end</span>
+
+                   <span class="keyword">if</span> strcmp(lower(sRateTypes(i, :)), <span class="string">'zcb'</span>)
+                       <span class="comment">% This is the most straightforward case</span>
+                       dblAssetPrices(i,1) = dblRawAssetValuesOrRates(i,1);
+                       <span class="comment">% Cashflow timings</span>
+                       dblCashflowMaturities{i ,1} = dblRawMaturities(i,1);
+                       <span class="comment">% Cashflow amounts</span>
+                       dblCashflows{i ,1} = 1 ;
+
+                   <span class="keyword">elseif</span> strcmp(lower(sRateTypes(i, :)), <span class="string">'spot'</span>)
+
+                       <span class="comment">% Cashflow timings</span>
+                       dblCashflowMaturities{i ,1} = dblRawMaturities(i,1);
+                       <span class="comment">% Cashflow amounts</span>
+                       dblCashflows{i ,1} = 1 ;
+
+
+                       <span class="keyword">if</span> strcmp(compounding(i, :), <span class="string">'ann'</span>)
+                           dblAssetPrices(i,1) = ( 1 + <span class="keyword">...</span>
+                               dblRawAssetValuesOrRates(i,1)/<span class="keyword">...</span>
+                               compoundingfrequency(i,1)) ^<span class="keyword">...</span>
+                               (- compoundingfrequency(i,1)*<span class="keyword">...</span>
+                               dblRawMaturities(i,1));
+                       <span class="keyword">elseif</span> strcmp(compounding(i, :), <span class="string">'cont'</span>)
+                           dblAssetPrices(i,1) = exp<span class="keyword">...</span>
+                               (- dblRawAssetValuesOrRates(i,1)*<span class="keyword">...</span>
+                               dblRawMaturities(i,1));
+                       <span class="keyword">end</span>
+
+                   <span class="keyword">elseif</span> strcmp(lower(sRateTypes(i, :)), <span class="string">'swap'</span>) || <span class="keyword">...</span>
+                           strcmp(lower(sRateTypes(i, :)), <span class="string">'par'</span>)
+
+                        dblAssetPrices(i,1) = 1;
+
+                        <span class="comment">% Count the number of cashflows</span>
+                       remainder = mod(dblRawMaturities(i,1), <span class="keyword">...</span>
+                           (1/compoundingfrequency(i,1)));
+
+                       dblCashflowMaturities{i ,1} = <span class="keyword">...</span>
+                           (1/compoundingfrequency(i,1):1/<span class="keyword">...</span>
+                           compoundingfrequency(i,1):dblRawMaturities(i,1));
+
+                       <span class="keyword">if</span> remainder &lt; obj.dblMaturityTolerance
+                           dblRawMaturities(i,1)= dblRawMaturities(i,1) -<span class="keyword">...</span>
+                               remainder ;
+
+                           iNumberofCashflows  = <span class="keyword">...</span>
+                               compoundingfrequency(i,1)*<span class="keyword">...</span>
+                               dblRawMaturities(i,1) ;
+
+                       <span class="keyword">else</span>
+                           iNumberofCashflows  = <span class="keyword">...</span>
+                               floor(compoundingfrequency(i,1)*<span class="keyword">...</span>
+                               dblRawMaturities(i,1))+1 ;
+
+                           dblCashflowMaturities{i ,1} =<span class="keyword">...</span>
+                               [remainder (dblCashflowMaturities{i ,1} +<span class="keyword">...</span>
+                               remainder)] ;
+
+                       <span class="keyword">end</span>
+
+                         iNumberofCashflows  = round(iNumberofCashflows );
+
+                       <span class="comment">% Cashflow amounts</span>
+                       dblCashflowTemp = (dblRawAssetValuesOrRates(i,1)./<span class="keyword">...</span>
+                           compoundingfrequency(i,1)).*<span class="keyword">...</span>
+                           ones(1,iNumberofCashflows);
+                       dblCashflowTemp( 1, iNumberofCashflows) = <span class="keyword">...</span>
+                           dblCashflowTemp( 1, iNumberofCashflows) +1 ;
+                       dblCashflows{i ,1} = dblCashflowTemp ;
+                       <span class="comment">% Create Cell Array of cashflow values</span>
+                   <span class="keyword">end</span>
+
+               <span class="keyword">end</span>
+
+        <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Asset Cashflow Profile
+% *The class returns an asset price and an associated profile of
+% cashflow timings and cashflow values for a given set of asset prices or
+% rates. The class allows the user to choose a mixture of different rate or
+% asset types as inputs.*
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bsAssetCashflowProfile < handle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% How to use the class
+% There is one way to use this class:
+%
+% # To produce an asset price and an associated profile of cashflow timings
+% and values for a given set of asset prices or rates.
+%
+%
+%
+%
+%% Properties
+%
+% *|[dblMaturityTolerance]|* : Tolerance for deciding whether maturities are 
+% divisible by the compounding period. 
+%
+%  Data type : double
+%
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    properties
+       dblMaturityTolerance  = 1/52;  
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% List of methods
+% The class introduces one new method:
+%
+% *|1)[bsAssetCashflowProfile()]|* - Function returns an asset price and an
+% associated profile of cashflow timings and values for various given sets
+% of asset prices or rates.
+%
+%
+%
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods
+    % Constructor
+        function obj = bsAssetCashflowProfile ()
+        
+        end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of methods
+%
+% *1) |[bsAssetCashflowProfile()]|*
+%
+% """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%
+% *_Description_*
+%
+% Function returns asset prices, cashflow maturities and cashflows values 
+% from an input of various asset types, values or rates. 
+%
+% *_Inputs_*
+%
+% *|[dblRawAssetValuesOrRates]|* : Net present value of the raw assets or
+% their rate.
+%
+%  Data type : double
+%
+% *|[dblRawMaturities]|* : Maturities of the raw assets.
+%
+%  Data type : double
+%
+% *|[sRateTypes]|* : Specifies the input asset type; 'ZCB', 'Spot' or 'Swap'
+%
+%  Data type : string
+%
+% *|[compounding]|* : Specifies whether compounding is continuous ('cont')
+% or annual ('ann').
+%
+%  Data type : string
+%
+% *|[compoundingfrequency]|* : Defines the annual frequency, $f$, at which 
+% the output yield curve is compounded e.g. "2" for semi-annually.
+%
+%  Data type : double
+%
+% *|[units]|* : Specifies if the input data is quoted as percent or not. 
+%
+%  Data type : string
+% 
+%
+% *_Outputs_*
+%
+% *|[dblAssetPrices]|* : The net present value of the given assets.
+%
+%  Data type : double array
+%
+% *|[dblCashflowMaturities]|* : The timings of each of the cashflows
+% corresponding to a particular asset.
+%
+%  Data type : double array
+%
+% *|[dblCashflows]|* : The value of each cashflow corresponding to a
+% particular asset at the time it is paid.
+%
+%  Data type : double array
+%
+% *_Calculations_*
+%
+% The function returns asset prices and cashflow porfiles for ZCBs, spots 
+% and swaps via different calculations.
+%
+% *ZCB*. The outputs here are straight forward. The cashflows are all $1$
+% and the maturities and asset prices are the same as those input.
+%
+% *Spot*. As with ZCBs, cashflows are all $1$ and the maturities are the
+% same as the inputs. The asset value calculation depends on whether the
+% compounding is continuous or annual.
+%
+% For continuous compounding the asset values are found using the
+% expression:
+%
+% $$ B(t,T) = \exp\left[-S(t,T)T\right] $$ 
+%
+% For annual compounding the asset values are found using the
+% expression:
+%
+% $$ B(t,T) = \left(1+\frac{S(t,T)}{f}\right)^{-fT} $$ 
+%
+% With,
+%
+% $S(t,T)$ : Spot Rate at time, $t$, paying at maturity, $t=T$.
+%
+% $B(t,T)$ : The price of a zero coupon bond at time, $t$, which pays 1 at
+% maturity, $t=T$.
+%
+% $T$ : Asset maturity.
+%
+% $f$ : Compounding frequency (per annum)
+%
+% *Swap*. The swap rates are assumed to be the par rates of the market 
+% discount curve. Therefore the net present value of the fixed leg is equal
+% to $1$. For this reason we set the swap asset values to $1$. 
+% The cashflow maturities are set to be a series with a value at the end of
+% every compounding period until the asset maturity from the raw data. 
+% However, if the maturity from the raw data is not divisible by the 
+% compounding period and the remainder is more than *|MaturityTolerance|*)
+% then the first cashflow maturity is the remainder followed by regular
+% maturities at intervals of the compounding period.
+%
+% The cashflow values are found using the expression below:
+%
+% $$ V_{Cashflow}=\frac{V_{Raw}}{f}+1 $$
+%
+% With,
+%
+% $V_{Cashflow}$ : Value of cashflow
+%
+% $V_{Raw}$ : Raw value of asset.
+%
+% $f$ : Compounding frequency (per annum)
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% methods and functions
+        
+        function [ dblAssetPrices,dblCashflowMaturities, dblCashflows] = ...
+                assetcashflowprofiles(obj,dblRawAssetValuesOrRates,...
+                dblRawMaturities, sRateTypes ,compounding,...
+                compoundingfrequency,units) 
+                               
+               iNumberofAssetPrices =size(dblRawAssetValuesOrRates, 1) ;  
+               dblAssetPrices =zeros(iNumberofAssetPrices, 1) ;             
+                          
+               dblCashflows = cell(iNumberofAssetPrices ,1)  ; 
+               % Create a cell array of cashflows profiles for each asset
+               dblCashflowMaturities = cell(iNumberofAssetPrices ,1)  ; 
+               % Create a cell array of cashflow matrurity 
+               % profiles for each asset               
+                            
+               
+               for i = 1 : iNumberofAssetPrices                   
+                   
+                    % Adjust data into absolute amount/values
+                   if strcmp(units(i, :), 'percent')
+                       dblRawAssetValuesOrRates(i,1) = ...
+                           (dblRawAssetValuesOrRates(i,1)./ 100);
+                   else
+                     
+                   end    
+                                      
+                   if strcmp(lower(sRateTypes(i, :)), 'zcb')
+                       % This is the most straightforward case
+                       dblAssetPrices(i,1) = dblRawAssetValuesOrRates(i,1);
+                       % Cashflow timings
+                       dblCashflowMaturities{i ,1} = dblRawMaturities(i,1);
+                       % Cashflow amounts
+                       dblCashflows{i ,1} = 1 ;
+                       
+                   elseif strcmp(lower(sRateTypes(i, :)), 'spot')
+                       
+                       % Cashflow timings
+                       dblCashflowMaturities{i ,1} = dblRawMaturities(i,1);
+                       % Cashflow amounts
+                       dblCashflows{i ,1} = 1 ;
+                       
+                       
+                       if strcmp(compounding(i, :), 'ann')
+                           dblAssetPrices(i,1) = ( 1 + ...
+                               dblRawAssetValuesOrRates(i,1)/...
+                               compoundingfrequency(i,1)) ^...
+                               (- compoundingfrequency(i,1)*...
+                               dblRawMaturities(i,1));
+                       elseif strcmp(compounding(i, :), 'cont')
+                           dblAssetPrices(i,1) = exp...
+                               (- dblRawAssetValuesOrRates(i,1)*...
+                               dblRawMaturities(i,1));
+                       end
+                       
+                   elseif strcmp(lower(sRateTypes(i, :)), 'swap') || ...
+                           strcmp(lower(sRateTypes(i, :)), 'par')
+                       
+                        dblAssetPrices(i,1) = 1; 
+                       
+                        % Count the number of cashflows 
+                       remainder = mod(dblRawMaturities(i,1), ...
+                           (1/compoundingfrequency(i,1)));
+                      
+                       dblCashflowMaturities{i ,1} = ...
+                           (1/compoundingfrequency(i,1):1/...
+                           compoundingfrequency(i,1):dblRawMaturities(i,1));                       
+                      
+                       if remainder < obj.dblMaturityTolerance 
+                           dblRawMaturities(i,1)= dblRawMaturities(i,1) -...
+                               remainder ;
+                         
+                           iNumberofCashflows  = ...
+                               compoundingfrequency(i,1)*...
+                               dblRawMaturities(i,1) ;  
+                         
+                       else
+                           iNumberofCashflows  = ...
+                               floor(compoundingfrequency(i,1)*...
+                               dblRawMaturities(i,1))+1 ;
+                          
+                           dblCashflowMaturities{i ,1} =...
+                               [remainder (dblCashflowMaturities{i ,1} +...
+                               remainder)] ;
+                         
+                       end
+                            
+                         iNumberofCashflows  = round(iNumberofCashflows );
+                       
+                       % Cashflow amounts
+                       dblCashflowTemp = (dblRawAssetValuesOrRates(i,1)./...
+                           compoundingfrequency(i,1)).*...
+                           ones(1,iNumberofCashflows);
+                       dblCashflowTemp( 1, iNumberofCashflows) = ...
+                           dblCashflowTemp( 1, iNumberofCashflows) +1 ;
+                       dblCashflows{i ,1} = dblCashflowTemp ;
+                       % Create Cell Array of cashflow values                                              
+                   end
+                   
+               end
+    
+        end
+     
+    end
+end
+
+
+##### SOURCE END #####
+--></body></html>

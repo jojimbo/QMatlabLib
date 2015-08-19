@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment-project>
+  <configuration target="target.java.package" target-name="Java Package" name="RSGSimulate" location="/nfs/lldnfs01v/matlab/code/llwsolv108/chris/trunk/Source" file="/nfs/lldnfs01v/matlab/code/llwsolv108/chris/trunk/Source/RSGSimulate.prj" build-checksum="869517374">
+    <param.project.name>/nfs/lldnfs01v/matlab/code/llwsolv108/chris/trunk/Source/RSGSimulate.prj</param.project.name>
+    <param.target.type>Java Package</param.target.type>
+    <param.appname>RSGSimulate</param.appname>
+    <param.intermediate>${PROJECT_ROOT}/RSGSimulate/src</param.intermediate>
+    <param.output>${PROJECT_ROOT}/RSGSimulate/distrib</param.output>
+    <param.embed.ctf>true</param.embed.ctf>
+    <param.tbx_on_path>
+      <item>all</item>
+    </param.tbx_on_path>
+    <param.warnings>
+      <warning.fullpath>on</warning.fullpath>
+      <warning.duplicate>on</warning.duplicate>
+      <warning.option.ignored>on</warning.option.ignored>
+      <warning.libname>on</warning.libname>
+      <warning.demo>on</warning.demo>
+    </param.warnings>
+    <param.share.mcr>false</param.share.mcr>
+    <unset>
+      <param.project.name />
+      <param.target.type />
+      <param.appname />
+      <param.intermediate />
+      <param.output />
+      <param.embed.ctf />
+      <param.tbx_on_path />
+      <param.warnings />
+      <param.share.mcr />
+    </unset>
+    <fileset.classes>
+      <entity.package name="">
+        <entity.class name="RSGSimulate">
+          <file>${PROJECT_ROOT}/RSGBootstrap.m</file>
+          <file>${PROJECT_ROOT}/RSGBootstrapCalibrate.m</file>
+          <file>${PROJECT_ROOT}/RSGBootstrapValidate.m</file>
+          <file>${PROJECT_ROOT}/RSGCalibrate.m</file>
+          <file>${PROJECT_ROOT}/RSGMakeAlgoFiles.m</file>
+          <file>${PROJECT_ROOT}/RSGMakePruFiles.m</file>
+          <file>${PROJECT_ROOT}/RSGRunCS.m</file>
+          <file>${PROJECT_ROOT}/RSGSimulate.m</file>
+          <file>${PROJECT_ROOT}/RSGValidate.m</file>
+        </entity.class>
+      </entity.package>
+    </fileset.classes>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}/+Bootstrap</file>
+      <file>${PROJECT_ROOT}/+BootstrapValidation</file>
+      <file>${PROJECT_ROOT}/+Converter</file>
+      <file>${PROJECT_ROOT}/+Model</file>
+      <file>${PROJECT_ROOT}/+prursg/+Aggregator</file>
+      <file>${PROJECT_ROOT}/+prursg/+Algo</file>
+      <file>${PROJECT_ROOT}/+prursg/+Bootstrap</file>
+      <file>${PROJECT_ROOT}/+prursg/+BootstrapValidation</file>
+      <file>${PROJECT_ROOT}/+prursg/+Configuration</file>
+      <file>${PROJECT_ROOT}/+prursg/+Db</file>
+      <file>${PROJECT_ROOT}/+prursg/+Engine</file>
+      <file>${PROJECT_ROOT}/+prursg/+HistoricalDAO</file>
+      <file>${PROJECT_ROOT}/+prursg/+Test</file>
+      <file>${PROJECT_ROOT}/+prursg/+Util</file>
+      <file>${PROJECT_ROOT}/+prursg/+Xml</file>
+      <file>${PROJECT_ROOT}/mlproxy</file>
+    </fileset.resources>
+    <fileset.package />
+    <build-deliverables>
+      <file name="doc" location="${PROJECT_ROOT}/RSGSimulate/distrib">/nfs/lldnfs01v/matlab/code/llwsolv108/chris/trunk/Source/RSGSimulate/distrib/doc</file>
+      <file name="RSGSimulate.jar" location="${PROJECT_ROOT}/RSGSimulate/distrib">/nfs/lldnfs01v/matlab/code/llwsolv108/chris/trunk/Source/RSGSimulate/distrib/RSGSimulate.jar</file>
+      <file name="readme.txt" location="${PROJECT_ROOT}/RSGSimulate/distrib">/nfs/lldnfs01v/matlab/code/llwsolv108/chris/trunk/Source/RSGSimulate/distrib/readme.txt</file>
+    </build-deliverables>
+    <matlab>
+      <root>/apps/MATLAB/R2010bSP1</root>
+      <path>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/general</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/ops</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/lang</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/elmat</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/randfun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/elfun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/specfun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/matfun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/datafun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/polyfun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/funfun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/sparfun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/scribe</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/graph2d</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/graph3d</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/specgraph</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/graphics</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/uitools</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/strfun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/imagesci</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/iofun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/audiovideo</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/timefun</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/datatypes</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/verctrl</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/codetools</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/helptools</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/demos</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/timeseries</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/hds</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/guide</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/plottools</directory>
+        <directory>${MATLAB_ROOT}/toolbox/local</directory>
+        <directory>${MATLAB_ROOT}/toolbox/matlab/datamanager</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/simulink</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/instrument</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/testmeaslib/general</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/comparisons</directory>
+        <directory>${MATLAB_ROOT}/toolbox/database/database</directory>
+        <directory>${MATLAB_ROOT}/toolbox/database/dbdemos</directory>
+        <directory>${MATLAB_ROOT}/toolbox/database/vqb</directory>
+        <directory>${MATLAB_ROOT}/toolbox/stats/stats</directory>
+        <directory>${MATLAB_ROOT}/toolbox/stats/statsdemos</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/optimlib</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/statslib</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/rptgen</directory>
+        <directory>${MATLAB_ROOT}/toolbox/optim/optim</directory>
+        <directory>${MATLAB_ROOT}/toolbox/optim/optimdemos</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/testmeaslib/graphics</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/controllib/graphics</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/distcomp</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/user</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/mpi</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/pctdemos</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/parallel</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/parallel/lapack</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/parallel/util</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/lang</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/cluster</directory>
+        <directory>${MATLAB_ROOT}/toolbox/distcomp/gpu</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/asynciolib</directory>
+        <directory>${MATLAB_ROOT}/toolbox/javabuilder/javabuilder</directory>
+        <directory>${MATLAB_ROOT}/toolbox/javabuilder/javabuilderdemos</directory>
+        <directory>${MATLAB_ROOT}/toolbox/compiler</directory>
+        <directory>${MATLAB_ROOT}/toolbox/compiler/compilerdemos</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/controllib/general</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/eml/eml</directory>
+        <directory>${MATLAB_ROOT}/toolbox/shared/dastudio</directory>
+        <directory>${MATLAB_ROOT}/toolbox/rptgen/xmlcomp</directory>
+        <directory>${MATLAB_ROOT}/toolbox/rptgen/rptgen</directory>
+        <directory>${MATLAB_ROOT}/toolbox/rptgen/rptgendemos</directory>
+        <directory>${MATLAB_ROOT}/toolbox/rptgen/rptgenv1</directory>
+      </path>
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>false</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>true</linux>
+      <solaris>false</solaris>
+      <osver>2.6.18-238.9.1.el5</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>glnxa64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
+

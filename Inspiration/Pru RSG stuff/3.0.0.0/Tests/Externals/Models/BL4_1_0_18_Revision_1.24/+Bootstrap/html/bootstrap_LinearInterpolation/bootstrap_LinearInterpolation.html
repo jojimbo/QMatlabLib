@@ -1,0 +1,433 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Linear Interpolation</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-05-29"><meta name="DC.source" content="bootstrap_LinearInterpolation.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Linear Interpolation</h1><!--introduction--><p><b>The class returns a set of interpolated values. These values are produced by extrapolating and interpolating an input data series.</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">How to use the class</a></li><li><a href="#4">Properties</a></li><li><a href="#6">List of methods</a></li><li><a href="#9">Details of methods</a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bootstrap_LinearInterpolation
+</pre><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>How to use the class<a name="3"></a></h2><p>There are two ways to use this class:</p><div><ol><li>To produce a one dimensional set of linearly interpolated values from an input data series.</li><li>To produce a two dimensional set of bilinearly interpolated values from an input data series.</li></ol></div><h2>Properties<a name="4"></a></h2><p><b><tt>[numofDims]</tt></b> : The number of dimensions of the input data.</p><p>Data type : double</p><p><b><tt>[numofAxes]</tt></b> : The number of axes used in the input data object. Note that this may differ from the number of dimensions.</p><p>Data type : double</p><p><b><tt>[truncate]</tt></b> : Either 'true' or 'false'; specifies whether points outside the range of the raw data grid should be truncated to the boundaries of the raw data ('true') or found using extrapolation ('false').</p><p>Data type : string</p><p><b><tt>[newDataSeriesObject]</tt></b> : A new data series object, set up to store results.</p><p>Data type : -</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+    properties
+        numofDims
+        numofAxes
+        truncate
+        newDataSeriesObject
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of methods<a name="6"></a></h2><p>The class introduces one new method:</p><p><b>1) <tt>[bootstrap_LinearInterplation()]</tt></b> : The class returns a set of linearly interpolated values produced by extrapolating and interpolating from an input data series.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    methods
+</pre><pre class="codeinput">    <span class="comment">% Constructor</span>
+
+       <span class="keyword">function</span> obj = bootstrap_LinearInterpolation ()
+
+       <span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeoutput">
+ans = 
+
+  Bootstrap.bootstrap_LinearInterpolation
+  Package: Bootstrap
+
+  Properties:
+              numofDims: []
+              numofAxes: []
+               truncate: []
+    newDataSeriesObject: []
+
+
+</pre><h2>Details of methods<a name="9"></a></h2><p><b>1) <tt>[bootstrap_LinearInterpolation()]</tt></b> : The class returns a ZCB yield curve. The yield curve is produced by extrapolating and interpolating raw market yield curve data.</p><p>"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""</p><p><b><tt><i>Description</i></tt></b></p><p>The class returns a set of interpolated values produced by extrapolating and interpolating from a one or two dimensional input data series.</p><p><b><tt><i>Inputs</i></tt></b></p><p><b><tt>DataSeriesIn</tt></b> : Contains the raw data series to be used in the interpolation procedure.</p><pre>Data type : mix of doubles and strings</pre><p><b><tt>ParametersIn</tt></b> : Contains the points to be found via interpolation and the <b><tt>truncate</tt></b> property.</p><pre>DAta type : string array</pre><p><b><tt><i>Outputs</i></tt></b></p><p>A set of interpolated values produced by extrapolating and interpolating from a one or two dimensional input data series.</p><p><b><tt><i>Calculations</i></tt></b></p><p>After identifying certain characteristics of <b><tt>DataSeriesIn</tt></b> and <b><tt>ParametersIn</tt></b> and setting up <b><tt>newDataSeriesObject</tt></b> to store the results, the interpolation calculation takes place.</p><p>Depending on whether the number of dimensions in use is one or two, the function <b><tt>LinearArray()</tt></b> or <b><tt>BiLinearMatrix()</tt></b> is called to find the values wanted using either linear or bilinear interpolation respectively.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="comment">% Other Methods</span>
+
+      <span class="keyword">function</span> results = bs(obj, DataSeriesIn, ParametersIn)
+</pre><pre class="codeinput">       <span class="comment">% Step 1  :: Set-Up Problem</span>
+           obj.numofDims   = length(size(DataSeriesIn.values{1,1}));
+           obj.numofAxes  = size(DataSeriesIn.axes,2);
+           obj.truncate = ParametersIn{1};
+           newLinearInterp = prursg.Bootstrap.bsLinearInterpolation();
+           inumberOfDates =  size(DataSeriesIn(1),1);
+
+
+       <span class="comment">% Step 2 ::    Create new data series object</span>
+
+           obj.newDataSeriesObject = prursg.Engine.DataSeries_DynamicV3();
+           obj.newDataSeriesObject.dates = DataSeriesIn.dates;
+           obj.newDataSeriesObject.values = cell( inumberOfDates, 1);
+
+
+       <span class="comment">% Step 3 :: Calculate values</span>
+
+       <span class="keyword">switch</span> obj.numofDims
+           <span class="keyword">case</span> 1
+
+               <span class="comment">% Data series object  :: This is an object is created so that</span>
+               <span class="comment">% we can use the createArrayfromCSVstring function</span>
+                newobject = prursg.Bootstrap.bootstrap_ZCBtoSwapRate;
+                obj.newDataSeriesObject.axes(1).values = <span class="keyword">...</span>
+                    newobject.createArrayfromCSVstring(ParametersIn{2});
+                obj.newDataSeriesObject.axes(1).title = <span class="keyword">...</span>
+                    DataSeriesIn.axes(1).title;
+                <span class="keyword">if</span> obj.numofAxes == 2
+                   obj.newDataSeriesObject.axes(2).values = <span class="keyword">...</span>
+                       DataSeriesIn.axes(2).values;
+                   obj.newDataSeriesObject.axes(2).title = <span class="keyword">...</span>
+                       DataSeriesIn.axes(2).title;
+                <span class="keyword">end</span>
+
+                 <span class="comment">% Calculation</span>
+               x = obj.newDataSeriesObject.axes(1).values ;
+               X =  DataSeriesIn.axes(1).values;
+
+               <span class="keyword">for</span> i=1:  inumberOfDates
+                   Y=DataSeriesIn.values{i,1};
+                   <span class="comment">% Linear interpolation in one dimesion</span>
+                   obj.newDataSeriesObject.values{i,1} = <span class="keyword">...</span>
+                       newLinearInterp.LinearArray(x ,X ,Y ,obj.truncate);
+
+               <span class="keyword">end</span>
+
+           <span class="keyword">case</span> 2
+
+
+               <span class="comment">% Data series object  :: This is object is created so that</span>
+               <span class="comment">% we can use the createArrayfromCSVstring function</span>
+                newobject = prursg.Bootstrap.bootstrap_ZCBtoSwapRate;
+
+               obj.newDataSeriesObject.axes(1).values = <span class="keyword">...</span>
+                   newobject.createArrayfromCSVstring(ParametersIn{2});
+               obj.newDataSeriesObject.axes(2).values= <span class="keyword">...</span>
+                   newobject.createArrayfromCSVstring(ParametersIn{3});
+               obj.newDataSeriesObject.axes(1).title = <span class="keyword">...</span>
+                   DataSeriesIn.axes(1).title;
+               obj.newDataSeriesObject.axes(2).title = <span class="keyword">...</span>
+                   DataSeriesIn.axes(2).title;
+               <span class="keyword">if</span> obj.numofAxes == 3
+                   obj.newDataSeriesObject.axes(3).values = <span class="keyword">...</span>
+                       DataSeriesIn.axes(3).values;
+                   obj.newDataSeriesObject.axes(3).title = <span class="keyword">...</span>
+                       DataSeriesIn.axes(3).title;
+                <span class="keyword">end</span>
+
+
+               <span class="comment">% Calculation</span>
+               x = obj.newDataSeriesObject.axes(1).values ;
+               y = obj.newDataSeriesObject.axes(2).values ;
+               X =  DataSeriesIn.axes(1).values;
+               Y =  DataSeriesIn.axes(2).values;
+               <span class="keyword">for</span> i=1:  inumberOfDates
+                   Grid =DataSeriesIn.values{i,1};
+                   <span class="comment">% Linear interpolation in two dimesions</span>
+                   obj.newDataSeriesObject.values{i,1} = <span class="keyword">...</span>
+                       newLinearInterp.BiLinearMatrix(x ,y ,X ,Y ,Grid, <span class="keyword">...</span>
+                       obj.truncate );
+               <span class="keyword">end</span>
+           <span class="keyword">case</span> 3
+               <span class="comment">% Linear interpolation in three dimesions</span>
+
+           <span class="keyword">otherwise</span>
+               disp([<span class="string">'Invalid Dimension of '</span> num2str(obj.dimensionofData )])
+       <span class="keyword">end</span>
+</pre><pre class="codeinput">       <span class="comment">%''''''''''''''''''''''''''''''''''''''''''%</span>
+       <span class="comment">% Step 4 ::    Output Data series</span>
+
+         results = obj.newDataSeriesObject;
+
+        <span class="comment">%''''''''''''''''''''''''''''''''''''''''''%</span>
+</pre><pre class="codeinput">      <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Linear Interpolation
+% *The class returns a set of interpolated values. These values are 
+% produced by extrapolating and interpolating an input data series.*
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bootstrap_LinearInterpolation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% How to use the class
+% There are two ways to use this class:
+%
+% # To produce a one dimensional set of linearly interpolated values from  
+% an input data series.
+% # To produce a two dimensional set of bilinearly interpolated values from
+% an input data series.
+%
+%
+%% Properties
+%
+% *|[numofDims]|* : The number of dimensions of the input data.
+%
+% Data type : double
+%
+% *|[numofAxes]|* : The number of axes used in the input data object. 
+% Note that this may differ from the number of dimensions.
+%
+% Data type : double
+% 
+% *|[truncate]|* : Either 'true' or 'false'; specifies whether points
+% outside the range of the raw data grid should be truncated to the 
+% boundaries of the raw data ('true') or found using extrapolation 
+% ('false').
+%
+% Data type : string
+%
+% *|[newDataSeriesObject]|* : A new data series object, set up to store
+% results.
+% 
+% Data type : -
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    properties
+        numofDims 
+        numofAxes  
+        truncate 
+        newDataSeriesObject
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% List of methods
+% The class introduces one new method:
+%
+% *1) |[bootstrap_LinearInterplation()]|* : The class returns a set of 
+% linearly interpolated values produced by extrapolating and interpolating
+% from an input data series.
+%
+%
+%
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods
+    
+    % Constructor
+    
+       function obj = bootstrap_LinearInterpolation ()
+         
+       end                  
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of methods    
+%
+% *1) |[bootstrap_LinearInterpolation()]|* : The class returns a ZCB yield 
+% curve. The yield curve is produced by extrapolating and interpolating raw
+% market yield curve data.
+%
+% """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+% 
+% *|_Description_|*
+%
+% The class returns a set of interpolated values produced by extrapolating
+% and interpolating from a one or two dimensional input data series.
+%
+% *|_Inputs_|*
+%
+% *|DataSeriesIn|* : Contains the raw data series to be used in the
+% interpolation procedure.
+%
+%  Data type : mix of doubles and strings
+%
+% *|ParametersIn|* : Contains the points to be found via interpolation and
+% the *|truncate|* property.
+%
+%  DAta type : string array
+%
+% *|_Outputs_|*
+% 
+% A set of interpolated values produced by extrapolating and interpolating 
+% from a one or two dimensional input data series.
+% 
+% *|_Calculations_|*
+%
+% After identifying certain characteristics of *|DataSeriesIn|* and
+% *|ParametersIn|* and setting up *|newDataSeriesObject|* to store the
+% results, the interpolation calculation takes place.
+%
+% Depending on whether the number of dimensions in use is one or two, the function
+% *|LinearArray()|* or *|BiLinearMatrix()|* is called to find the values 
+% wanted using either linear or bilinear interpolation respectively.
+%
+% 
+%
+%
+%% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Other Methods
+    
+      function results = bs(obj, DataSeriesIn, ParametersIn)                    
+              
+       % Step 1  :: Set-Up Problem     
+           obj.numofDims   = length(size(DataSeriesIn.values{1,1}));
+           obj.numofAxes  = size(DataSeriesIn.axes,2);
+           obj.truncate = ParametersIn{1};
+           newLinearInterp = prursg.Bootstrap.bsLinearInterpolation();
+           inumberOfDates =  size(DataSeriesIn(1),1);            
+         
+       
+       % Step 2 ::    Create new data series object
+       
+           obj.newDataSeriesObject = prursg.Engine.DataSeries_DynamicV3();        
+           obj.newDataSeriesObject.dates = DataSeriesIn.dates;   
+           obj.newDataSeriesObject.values = cell( inumberOfDates, 1);            
+       
+       
+       % Step 3 :: Calculate values
+          
+       switch obj.numofDims
+           case 1
+              
+               % Data series object  :: This is an object is created so that
+               % we can use the createArrayfromCSVstring function
+                newobject = prursg.Bootstrap.bootstrap_ZCBtoSwapRate;               
+                obj.newDataSeriesObject.axes(1).values = ...
+                    newobject.createArrayfromCSVstring(ParametersIn{2}); 
+                obj.newDataSeriesObject.axes(1).title = ...
+                    DataSeriesIn.axes(1).title;
+                if obj.numofAxes == 2
+                   obj.newDataSeriesObject.axes(2).values = ...
+                       DataSeriesIn.axes(2).values; 
+                   obj.newDataSeriesObject.axes(2).title = ...
+                       DataSeriesIn.axes(2).title; 
+                end   
+                
+                 % Calculation
+               x = obj.newDataSeriesObject.axes(1).values ;              
+               X =  DataSeriesIn.axes(1).values;
+              
+               for i=1:  inumberOfDates
+                   Y=DataSeriesIn.values{i,1};
+                   % Linear interpolation in one dimesion
+                   obj.newDataSeriesObject.values{i,1} = ...
+                       newLinearInterp.LinearArray(x ,X ,Y ,obj.truncate);
+                  
+               end
+                
+           case 2
+               
+               
+               % Data series object  :: This is object is created so that
+               % we can use the createArrayfromCSVstring function
+                newobject = prursg.Bootstrap.bootstrap_ZCBtoSwapRate;
+               
+               obj.newDataSeriesObject.axes(1).values = ...
+                   newobject.createArrayfromCSVstring(ParametersIn{2}); 
+               obj.newDataSeriesObject.axes(2).values= ...
+                   newobject.createArrayfromCSVstring(ParametersIn{3});               
+               obj.newDataSeriesObject.axes(1).title = ...
+                   DataSeriesIn.axes(1).title;
+               obj.newDataSeriesObject.axes(2).title = ...
+                   DataSeriesIn.axes(2).title;
+               if obj.numofAxes == 3
+                   obj.newDataSeriesObject.axes(3).values = ...
+                       DataSeriesIn.axes(3).values; 
+                   obj.newDataSeriesObject.axes(3).title = ...
+                       DataSeriesIn.axes(3).title; 
+                end  
+               
+               
+               % Calculation
+               x = obj.newDataSeriesObject.axes(1).values ;
+               y = obj.newDataSeriesObject.axes(2).values ;
+               X =  DataSeriesIn.axes(1).values;
+               Y =  DataSeriesIn.axes(2).values;
+               for i=1:  inumberOfDates
+                   Grid =DataSeriesIn.values{i,1};
+                   % Linear interpolation in two dimesions
+                   obj.newDataSeriesObject.values{i,1} = ...
+                       newLinearInterp.BiLinearMatrix(x ,y ,X ,Y ,Grid, ...
+                       obj.truncate );
+               end
+           case 3
+               % Linear interpolation in three dimesions
+               
+           otherwise
+               disp(['Invalid Dimension of ' num2str(obj.dimensionofData )])
+       end
+       
+       %%
+       %''''''''''''''''''''''''''''''''''''''''''%
+       % Step 4 ::    Output Data series
+            
+         results = obj.newDataSeriesObject;
+       
+        %''''''''''''''''''''''''''''''''''''''''''%
+        %%
+      end
+    
+    end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>

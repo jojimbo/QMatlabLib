@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="11.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>650</x>
+      <y>270</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>
+STOCHASTIC_SCENARIO_VALUE
+--
+*ssv_scenario_id : integer           FK   PK*
+*ssv_risk_factor_id : integer       FK   PK*
+*output_number : integer            PK*
+*monte_carlo_number : integer  PK*
+ssv_value : binary_double
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>10</x>
+      <y>40</y>
+      <w>240</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>
+RSG_JOB
+--
+*rsg_job_id : integer                 PK*
+job_start : date
+job_end : date
+basecurrency : varchar2(3)
+num_simulations : integer
+xml_model_file : blob
+retain_flag : varchar2(1) default 'N'
+persist_until : date
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>220</x>
+      <y>60</y>
+      <w>380</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>30;30;360;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>580</x>
+      <y>40</y>
+      <w>280</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>
+SCENARIO_SET
+--
+*scenario_set_id : integer                    PK*
+ss_rsg_job_id : integer                          FK
+scenario_set_name : varchar2(255)      NK
+scenario_set_type : varchar2(255)
+scenario_type_key : integer
+sess_date : date
+number_of_chunks : integer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>280</x>
+      <y>430</y>
+      <w>260</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>
+RISK_FACTOR
+--
+*risk_factor_id : integer                   PK*
+risk_factor_name : varchar2(255)     NK
+risk_factor_currency : varchar2(3)
+risk_family : varchar2(255)
+pru_type : varchar2(255)
+algo_type : varchar2(255)
+pru_group : varchar2(255)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>750</x>
+      <y>170</y>
+      <w>330</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>310;30;310;50;30;50;30;100</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>510</x>
+      <y>360</y>
+      <w>270</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>30;100;250;100;250;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>920</x>
+      <y>270</y>
+      <w>270</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>DETERMINISTIC_SCENARIO_VALUE
+--
+*dsv_scenario_id : integer         FK     PK*
+*dsv_risk_factor_id : integer     FK     PK*
+*output_number : integer                    PK*
+dsv_value : binary_double
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>960</x>
+      <y>40</y>
+      <w>210</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>
+SCENARIO
+--
+*scenario_id : integer          PK*
+s_scenario_set_id : integer   FK
+scen_name : varchar2(255)
+scen_step : integer
+scen_date : date
+scen_number : integer
+is_stochastic : varchar2(1) (bool)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>830</x>
+      <y>60</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>30;30;130;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1030</x>
+      <y>170</y>
+      <w>50</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>30;30;30;100</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>10</x>
+      <y>220</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>AXIS_VALUE
+--
+*av_axis_id : integer       FK    PK*
+*av_number : integer               PK*
+av_value : binary_double
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>330</x>
+      <y>220</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>AXIS
+--
+*axis_id                                       PK*
+axis_scenario_set_id : integer    FK
+axis_risk_factor_id : integer        FK
+axis_name : varchar2(255)
+axis_number : integer
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>220</x>
+      <y>200</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>110;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>410</x>
+      <y>120</y>
+      <w>190</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>170;30;30;30;30;100</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>400</x>
+      <y>310</y>
+      <w>50</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>30;120;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>510</x>
+      <y>360</y>
+      <w>580</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>30;100;560;100;560;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>600</x>
+      <y>490</y>
+      <w>250</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>VALIDATION_SCHEDULE
+--
+*vs_scenario_set_id : integer  FK PK*
+*line_number : integer                    PK*
+ruleset_name : varchar2(255)
+validation_item : varchar2(255)
+validation_measure : varchar2(255)
+validation_value : binary_double
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>590</x>
+      <y>160</y>
+      <w>150</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes>
+    <additional_attributes>130;30;130;60;30;60;30;330</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Text</type>
+    <coordinates>
+      <x>40</x>
+      <y>400</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>PK - primary key
+FK - foreign key
+NK - natural key</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

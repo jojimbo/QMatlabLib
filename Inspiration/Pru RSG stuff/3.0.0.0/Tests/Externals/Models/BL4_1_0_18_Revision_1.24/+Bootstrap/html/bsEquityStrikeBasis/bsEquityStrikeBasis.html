@@ -1,0 +1,436 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>EQUITY IMPLIED VOLATILITY</title><meta name="generator" content="MATLAB 7.11.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-27"><meta name="DC.source" content="bsEquityStrikeBasis.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>EQUITY IMPLIED VOLATILITY</h1><!--introduction--><p>CHANGE EQUITY STRIKE BASIS</p><p><b>The main purpose of the class is to transform an equity volatility surface from one basis to another. Allowable basis are spot strikes and forward strikes</b></p><p>Note we assume that all time variables are in increasing order</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">How to Use the Class</a></li><li><a href="#3">Properties</a></li><li><a href="#4">List of Methods</a></li><li><a href="#6">Details of Methods</a></li><li><a href="#7"><tt>1) [CreateNewIVMatrix()]</tt></a></li><li><a href="#9"><tt>2) [CreateStrikeMatrix()]</tt></a></li><li><a href="#11"><tt>3) [FindIndexPrices()]</tt></a></li></ul></div><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="keyword">classdef</span> bsEquityStrikeBasis
+</pre><h2>How to Use the Class<a name="2"></a></h2><p><b>Step 1</b>: The fuction <tt>[FindIndexPrices()]</tt> returns an 1-dim array of forward index prices against the option maturities</p><p><b>Step 2</b>: The function <tt>[CreateStrikeMatrix()]</tt> then allows us to transform a spot strike basis to a forward strike basis by multiplying the spot strikes by the forward index prices; or to transform a forward strike basis to a spot strike basis by dividing the forward strikes by the forward index prices</p><p><b>Step 3</b>: To find equity implied volatilities on the new strike basis, we use a bi-linear-interpolation approximation in <tt>[CreateNewIVMatrix()]</tt></p><h2>Properties<a name="3"></a></h2><p>These are global parameters which are available to all methods in this class.</p><p><b><tt>[IVs]</tt></b> - implied volatilities</p><p><i>Data Type</i>: 2-dim array</p><p><b><tt>[OptionMat]</tt></b> - option maturities</p><p><i>Data Type</i>: 1-dim array</p><p><b><tt>[CurrStrikesMoney]</tt></b> - current option strike moneyness</p><p><i>Data Type</i>: 1-dim array</p><p><b><tt>[NewStrikesMoney]</tt></b> - new option strike moneyness</p><p><i>Data Type</i>: 1-dim array</p><p><b><tt>[FwdPrices]</tt></b> - forward index prices</p><p><i>Data Type</i>: 1-dim array</p><p><b><tt>[FwdMat]</tt></b> - forward index maturities</p><p><i>Data Type</i>: 1-dim array</p><p><b><tt>[Tolerance]</tt></b> - permissible limit of variation, <img src="bsEquityStrikeBasis_eq29302.png" alt="$0.00001$"></p><p><i>Data Type</i>: single value</p><p><b><tt>[NumofMat]</tt></b> - number of option maturities</p><p><i>Data Type</i>: single value</p><p><b><tt>[NumofCurrStrikes]</tt></b> - number of current option strike moneyness</p><p><i>Data Type</i>: single value</p><p><b><tt>[NumofNewStrikes]</tt></b> - number of new option strike moneyness</p><p><i>Data Type</i>: single value</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+    properties
+        IVs
+        OptionMat
+        CurrStrikesMoney
+        NewStrikesMoney
+        FwdPrices
+        FwdMat
+        Tolerance = 0.00001;
+        NumofMat
+        NumofCurrStrikes
+        NumofNewStrikes
+    <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>List of Methods<a name="4"></a></h2><p>This bootstrap class introduces the following methods:</p><p><b><tt>1) [CreateNewIVMatrix()]</tt></b> - Function transforms an existing implied volatility matrix into a new implied volatility matrix using linear-interpolation</p><p><b><tt>2) [CreateStrikeMatrix()]</tt></b> - Function transforms a spot strike basis to a forward strike basis and vice-versa</p><p><b><tt>3) [FindIndexPrices()]</tt></b> - Function calculates forward index prices which are used to transform between different strike bases</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+methods
+</pre><pre class="codeinput">   <span class="keyword">function</span> obj = bsEquityStrikeBasis(ImpliedVolatilities, <span class="keyword">...</span>
+           OptionMaturities, CurrStrikeMoneyness, ForwardIndexPrices, <span class="keyword">...</span>
+           ForwardIndexMaturities, NewStrikeMoneyness)
+
+         obj.IVs = ImpliedVolatilities ;
+         obj.OptionMat = OptionMaturities;
+         obj.CurrStrikesMoney =CurrStrikeMoneyness;
+         obj.NewStrikesMoney =NewStrikeMoneyness;
+         obj.FwdPrices =ForwardIndexPrices;
+         obj.FwdMat =ForwardIndexMaturities;
+
+         obj.NumofMat = size(OptionMaturities,2);
+         obj.NumofCurrStrikes =size(CurrStrikeMoneyness,2);
+         obj.NumofNewStrikes =size(NewStrikeMoneyness,2);
+
+   <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><h2>Details of Methods<a name="6"></a></h2><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>1) [CreateNewIVMatrix()]</tt><a name="7"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function transforms an existing implied volatility matrix into a new implied volatility matrix using linear-interpolation. The function also provides a "truncation" choice whereby the user can choose to limit the calculated volatility matrix to be within the bounds of the input implied volatility. Truncation option helps prevent the calculated implied volatility from becoming unreasonably small or large as a consequence of using the crude linear interpolation method.</p><p><b><i>Inputs</i></b></p><p><tt>[newStrikeType]</tt> - new option strike type: 'forwardstrike' or 'spotstrike'</p><p><i>Data Type</i>: string</p><p><tt>[Truncate]</tt> - whether to truncate the volatility matrix: 'True' or 'False'</p><p><i>Data Type</i>: string</p><p><b><i>Outputs</i></b></p><p><tt>[CreateNewIVMatrixReturn]</tt> - An implied volatility matrix with "maturity" against "moneyness" on a new strike basis</p><p><i>Data Type</i>: 2-dim array</p><p><b><i>Calculation</i></b></p><p>To apply the linear-interpolation method, we call the function <tt>[LinearMatrix()]</tt> in the class <tt>[bsLinearInterpolation()]</tt>.</p><p>The inputs for the function <tt>[LinearMatrix()]</tt> inlcude: a matrix of current strikes and a matrix of new strikes, both obtained from the function <tt>[CreateStrikeMatrix()]</tt>, and an existing implied volatility matrix.</p><p>See <tt>[LinearMatrix()]</tt> for details of the linear-interpolation technique.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> CreateNewIVMatrixReturn = CreateNewIVMatrix(obj,newStrikeType,Truncate)
+
+      [CurrStrikes,NewStrikes] = obj.CreateStrikeMatrix(newStrikeType);
+      newLinearInterp = Bootstrap.bsLinearInterpolation();
+
+      CreateNewIVMatrixReturn = newLinearInterp.LinearMatrix(NewStrikes,CurrStrikes,<span class="keyword">...</span>
+          obj.IVs,Truncate);
+
+   <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>2) [CreateStrikeMatrix()]</tt><a name="9"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function transforms a 2-dim matrix of spot strikes with "maturity" against "moneyness" to a 2-dim matrix of forward strikes with the same "maturity" against the same "moneyness" and vice-versa.</p><p>Note that we express strikes as % of initial equity price.</p><p><b><i>Inputs</i></b></p><p><tt>[newStrikeType]</tt> - new option strike type: 'forwardstrike' or 'spotstrike'</p><p><i>Data Type</i>: string</p><p><b><i>Outputs</i></b></p><p><tt>[CurrStrikes, NewStrikes]</tt> - An array of two 2-dim matrices with "maturity" against "moneyness". One is of current strikes, the other of new strikes.</p><p><i>Data Type</i>: an array of two 2-dim arrays</p><p><b><i>Calculation</i></b></p><p>Step 1: Create a matrix of current strikes by repeating the "moneyness" row for each maturity, i.e. given a moneyness, the strikes stay constant as the maturity increases.</p><p>Step 2: Find an 1-dim array of forward index prices with the same maturities as the options'. See <tt>[FindIndexPrices()]</tt> for details of calculation.</p><p>Step 3: Set up a new matrix of the same size as the matrix of current strikes. To find the new strike values, depending on the <tt>[newStrikeType]</tt>, if "forwardstrike", we scalar multiply the current strikes by the forward index prices from <i>Step 2</i>; if "spotstrike", we scalar divide the current strikes by the forward index prices.</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+ <span class="keyword">function</span> [CurrStrikes, NewStrikes] = CreateStrikeMatrix(obj,newStrikeType)
+
+    CurrStrikes = repmat(obj.CurrStrikesMoney,obj.NumofMat,1) ;
+    NewStrikes = zeros (obj.NumofMat, obj.NumofNewStrikes);
+
+    IndexPrices = obj.FindIndexPrices() ;
+
+    <span class="keyword">if</span> strcmp(lower(newStrikeType), <span class="string">'spotstrike'</span>)
+
+        NewStrikes  = ( 1 ./IndexPrices)' * obj.NewStrikesMoney ;
+
+    <span class="keyword">else</span> strcmp(lower(newStrikeType), <span class="string">'forwardstrike'</span>)
+
+        NewStrikes  = IndexPrices'  * obj.NewStrikesMoney ;
+    <span class="keyword">end</span>
+
+
+ <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><p><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i><i>_</i>__</p><h2><tt>3) [FindIndexPrices()]</tt><a name="11"></a></h2><p>'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''</p><p><b><i>Description</i></b></p><p>Function looks up the forward index prices with the same maturities as the options'</p><p><b><i>Inputs</i></b></p><p>None</p><p><b><i>Outputs</i></b></p><p><tt>[FindIndexPricesValues]</tt> - forward index prices with the same maturities as the options'</p><p><i>Data Type</i>: 1-dim array</p><p><b><i>Calculation</i></b></p><p>We use linear interpolation (with truncation) to find either an exact or approximate forward index price</p><pre class="codeinput"><span class="comment">%MATLAB CODE</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+   <span class="keyword">function</span> FindIndexPricesValues = FindIndexPrices(obj)
+
+      newLinearInterp = Bootstrap.bsLinearInterpolation();
+      FindIndexPricesValues = newLinearInterp.LinearArray(obj.OptionMat,<span class="keyword">...</span>
+          obj.FwdMat, obj.FwdPrices, <span class="string">'true'</span>);
+
+   <span class="keyword">end</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><pre class="codeinput">  <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.11.1<br></p></div><!--
+##### SOURCE BEGIN #####
+%% EQUITY IMPLIED VOLATILITY
+% CHANGE EQUITY STRIKE BASIS
+%
+% *The main purpose of the class is to transform an equity volatility surface from one basis
+% to another. Allowable basis are spot strikes and forward strikes*
+%
+% Note we assume that all time variables are in increasing order
+%%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+classdef bsEquityStrikeBasis
+%% How to Use the Class 
+% *Step 1*: The fuction |[FindIndexPrices()]| returns an 1-dim array of 
+% forward index prices against the option maturities
+% 
+% *Step 2*: The function |[CreateStrikeMatrix()]| then allows us to transform
+% a spot strike basis to a forward strike basis by multiplying the spot strikes 
+% by the forward index prices; or to transform a forward strike basis
+% to a spot strike basis by dividing the forward strikes by the forward
+% index prices
+% 
+% *Step 3*: To find equity implied volatilities on the new strike basis, we
+% use a bi-linear-interpolation approximation in |[CreateNewIVMatrix()]|
+%
+%% Properties
+% These are global parameters which are available to all methods in
+% this class. 
+% 
+% *|[IVs]|* - implied volatilities
+%
+% _Data Type_: 2-dim array
+%
+% *|[OptionMat]|* - option maturities
+%
+% _Data Type_: 1-dim array
+%
+% *|[CurrStrikesMoney]|* - current option strike moneyness
+%
+% _Data Type_: 1-dim array
+%
+% *|[NewStrikesMoney]|* - new option strike moneyness
+%
+% _Data Type_: 1-dim array
+%
+% *|[FwdPrices]|* - forward index prices
+%
+% _Data Type_: 1-dim array
+%
+% *|[FwdMat]|* - forward index maturities
+%
+% _Data Type_: 1-dim array
+%
+% *|[Tolerance]|* - permissible limit of variation, $0.00001$
+%
+% _Data Type_: single value
+%
+% *|[NumofMat]|* - number of option maturities
+%
+% _Data Type_: single value
+%
+% *|[NumofCurrStrikes]|* - number of current option strike moneyness
+%
+% _Data Type_: single value
+%
+% *|[NumofNewStrikes]|* - number of new option strike moneyness
+%
+% _Data Type_: single value
+%
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    properties
+        IVs
+        OptionMat
+        CurrStrikesMoney
+        NewStrikesMoney
+        FwdPrices
+        FwdMat
+        Tolerance = 0.00001; 
+        NumofMat
+        NumofCurrStrikes
+        NumofNewStrikes 
+    end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% List of Methods
+% This bootstrap class introduces the following methods:
+%
+% *|1) [CreateNewIVMatrix()]|* - Function transforms an existing implied volatility
+% matrix into a new implied volatility matrix using linear-interpolation
+%
+% *|2) [CreateStrikeMatrix()]|* - Function transforms a spot strike basis to 
+% a forward strike basis and vice-versa
+%
+% *|3) [FindIndexPrices()]|* - Function calculates forward index prices
+% which are used to transform between different strike bases
+%
+
+
+
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+methods
+   function obj = bsEquityStrikeBasis(ImpliedVolatilities, ...
+           OptionMaturities, CurrStrikeMoneyness, ForwardIndexPrices, ...
+           ForwardIndexMaturities, NewStrikeMoneyness)
+
+         obj.IVs = ImpliedVolatilities ;                        
+         obj.OptionMat = OptionMaturities;     
+         obj.CurrStrikesMoney =CurrStrikeMoneyness;
+         obj.NewStrikesMoney =NewStrikeMoneyness;
+         obj.FwdPrices =ForwardIndexPrices;
+         obj.FwdMat =ForwardIndexMaturities;
+
+         obj.NumofMat = size(OptionMaturities,2);
+         obj.NumofCurrStrikes =size(CurrStrikeMoneyness,2);
+         obj.NumofNewStrikes =size(NewStrikeMoneyness,2);
+
+   end    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Details of Methods
+% _________________________________________________________________________________________
+%
+%% |1) [CreateNewIVMatrix()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function transforms an existing implied volatility matrix into a new implied
+% volatility matrix using linear-interpolation. 
+% The function also provides a "truncation" choice whereby the user can choose 
+% to limit the calculated volatility matrix to be within the bounds of the
+% input implied volatility. Truncation option helps prevent the calculated
+% implied volatility from becoming unreasonably small or large as a
+% consequence of using the crude linear interpolation method.
+%
+% *_Inputs_*
+%
+% |[newStrikeType]| - new option strike type: 'forwardstrike' or 'spotstrike'
+% 
+% _Data Type_: string
+% 
+% |[Truncate]| - whether to truncate the volatility matrix: 'True' or 'False'
+%
+% _Data Type_: string
+%
+% *_Outputs_*
+%
+% |[CreateNewIVMatrixReturn]| - An implied volatility matrix with "maturity" against "moneyness"
+% on a new strike basis
+%
+% _Data Type_: 2-dim array
+%
+% *_Calculation_*
+%  
+% To apply the linear-interpolation method, we call the function |[LinearMatrix()]| 
+% in the class |[bsLinearInterpolation()]|.
+%
+% The inputs for the function |[LinearMatrix()]| inlcude: a matrix of current
+% strikes and a matrix of new strikes, both obtained from the function |[CreateStrikeMatrix()]|,
+% and an existing implied volatility matrix.
+%
+% See |[LinearMatrix()]| for details of the linear-interpolation technique.
+%
+  
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%         
+   function CreateNewIVMatrixReturn = CreateNewIVMatrix(obj,newStrikeType,Truncate) 
+
+      [CurrStrikes,NewStrikes] = obj.CreateStrikeMatrix(newStrikeType);
+      newLinearInterp = Bootstrap.bsLinearInterpolation();
+
+      CreateNewIVMatrixReturn = newLinearInterp.LinearMatrix(NewStrikes,CurrStrikes,...
+          obj.IVs,Truncate);            
+
+   end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% _________________________________________________________________________________________
+%
+%% |2) [CreateStrikeMatrix()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function transforms a 2-dim matrix of spot strikes with "maturity" against "moneyness" 
+% to a 2-dim matrix of forward strikes with the same "maturity" against the same "moneyness"
+% and vice-versa. 
+%
+% Note that we express strikes as % of initial equity price.  
+%
+% *_Inputs_*
+%
+% |[newStrikeType]| - new option strike type: 'forwardstrike' or 'spotstrike'
+% 
+% _Data Type_: string
+%
+% *_Outputs_*
+%
+% |[CurrStrikes, NewStrikes]| - An array of two 2-dim matrices with
+% "maturity" against "moneyness". One is of current strikes, the other of
+% new strikes.
+%
+% _Data Type_: an array of two 2-dim arrays
+%
+% *_Calculation_*
+%
+% Step 1: Create a matrix of current strikes by repeating the "moneyness" row for
+% each maturity, i.e. given a moneyness, the strikes stay constant as the maturity
+% increases.
+%
+% Step 2: Find an 1-dim array of forward index prices with the same maturities as the options'.
+% See |[FindIndexPrices()]| for details of calculation.
+%
+% Step 3: Set up a new matrix of the same size as the matrix of current strikes. 
+% To find the new strike values, depending on the |[newStrikeType]|, if "forwardstrike", 
+% we scalar multiply the current strikes by the forward index prices from _Step 2_;
+% if "spotstrike", we scalar divide the current strikes by the forward index prices. 
+% 
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ function [CurrStrikes, NewStrikes] = CreateStrikeMatrix(obj,newStrikeType)  
+
+    CurrStrikes = repmat(obj.CurrStrikesMoney,obj.NumofMat,1) ;
+    NewStrikes = zeros (obj.NumofMat, obj.NumofNewStrikes);
+    
+    IndexPrices = obj.FindIndexPrices() ;
+    
+    if strcmp(lower(newStrikeType), 'spotstrike')
+        
+        NewStrikes  = ( 1 ./IndexPrices)' * obj.NewStrikesMoney ;
+        
+    else strcmp(lower(newStrikeType), 'forwardstrike')
+        
+        NewStrikes  = IndexPrices'  * obj.NewStrikesMoney ;
+    end
+
+
+ end    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% _________________________________________________________________________________________
+%
+%% |3) [FindIndexPrices()]|
+%
+% '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+%
+% *_Description_*
+%
+% Function looks up the forward index prices with the same maturities as the options' 
+%
+% *_Inputs_*
+%
+% None
+%
+% *_Outputs_*
+%
+% |[FindIndexPricesValues]| - forward index prices with the same maturities as the options'
+%
+% _Data Type_: 1-dim array
+%
+% *_Calculation_*
+%
+% We use linear interpolation (with truncation) to find either an exact or
+% approximate forward index price
+% 
+%
+%MATLAB CODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   function FindIndexPricesValues = FindIndexPrices(obj)      
+
+      newLinearInterp = Bootstrap.bsLinearInterpolation();
+      FindIndexPricesValues = newLinearInterp.LinearArray(obj.OptionMat,...
+          obj.FwdMat, obj.FwdPrices, 'true');
+
+   end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+  end
+    
+end
+
+
+##### SOURCE END #####
+--></body></html>
